@@ -1,0 +1,1044 @@
+{
+  "topics": [
+    {
+      "id": "machine-learning-fundamentals",
+      "name": "Machine Learning Fundamentals",
+      "cards": [
+        {
+          "title": "What's the trade-off between bias and variance?",
+          "content": "**Q: What's the trade-off between bias and variance?**\n\nIf our model is too simple and has very few parameters then it may have high bias and low variance. On the other hand if our model has large number of parameters then it’s going to have high variance and low bias. So we need to find the right/good balance without overfitting and underfitting the data."
+        },
+        {
+          "title": "Explain over- and under-fitting and how to combat them?",
+          "content": "**Q: Explain over- and under-fitting and how to combat them?**\n\n[[Answer]](https://towardsdatascience.com/overfitting-vs-underfitting-a-complete-example-d05dd7e19765)\n\nML models learn a relationship between inputs (called training features) and outputs (called labels). After fitting on a training dataset, the model's performance on a held-out test set must be evaluated to determine how well it generalizes to unseen data.\n\nModern ML models have trainable parameters that are learned to build this input-output relationship. The more parameters a model has, the more complex a relationship it can learn between inputs and targets.\n\nUnderfitting occurs when the flexibility of a model is not sufficient to capture the underlying pattern in a training dataset. Overfitting, on the other hand, occurs when a model is too flexible and effectively memorizes the training data.\n\nAn example of underfitting is estimating a second-order polynomial (quadratic function) with a first-order polynomial (a simple line). Similarly, estimating a line with a tenth-order polynomial would be an example of overfitting."
+        },
+        {
+          "title": "What is regularization, why do we use it, and give some examples of common methods?",
+          "content": "**Q: What is regularization, why do we use it, and give some examples of common methods?**\n\nRegularization is a technique that discourages learning a more complex or flexible model to combat overfitting.\nExamples\n  - Ridge (L2 norm)\n  - Lasso (L1 norm)\nThe obvious *disadvantage* of **ridge** (L2) regression is model interpretability. It shrinks the coefficients for the least important predictors close to zero, but never makes them exactly zero. In other words, the *final model includes all predictors*, although some may have very little influence. In the case of **lasso** (L1) regularization, the penalty can force some coefficient estimates to be *exactly equal* to zero when the tuning parameter λ is sufficiently large. Therefore, lasso also performs variable selection and yields sparse models."
+        },
+        {
+          "title": "Can you explain the differences between supervised, unsupervised, and reinforcement learning?",
+          "content": "**Q: Can you explain the differences between supervised, unsupervised, and reinforcement learning?**\n\nIn supervised learning, we train a model to learn the relationship between input data and output data. We need to have labeled data to be able to do supervised learning.\n\nWith unsupervised learning, we only have unlabeled data. The model learns a representation of the data. Unsupervised learning is frequently used to initialize the parameters of the model when we have a lot of unlabeled data and a small fraction of labeled data. We first train an unsupervised model and, after that, we use the weights of the model to train a supervised model.\n\nIn reinforcement learning, the model has some input data and a reward depending on the output of the model. The model learns a policy that maximizes the reward. Reinforcement learning has been applied successfully to strategic games such as Go and even classic Atari video games."
+        },
+        {
+          "title": "What’s the difference between a generative and discriminative model?",
+          "content": "**Q: What’s the difference between a generative and discriminative model?**\n\nA generative model will learn categories of data while a discriminative model will simply learn the distinction between different categories of data. Discriminative models will generally outperform generative models on classification tasks."
+        },
+        {
+          "title": "Instance-Based Versus Model-Based Learning.",
+          "content": "**Q: Instance-Based Versus Model-Based Learning.**\n\n- **Instance-based Learning**: The system learns the examples by heart, then generalizes to new cases using a similarity measure.\n\n - **Model-based Learning**: Another way to generalize from a set of examples is to build a model of these examples, then use that model to make predictions. This is called model-based learning."
+        },
+        {
+          "title": "What is Turing test?",
+          "content": "**Q: What is Turing test?**\n\nThe Turing test is a method to test the machine’s ability to match the human level intelligence. A machine is used to challenge the human intelligence that when it passes the test, it is considered as intelligent. Yet a machine could be viewed as intelligent without sufficiently knowing about people to mimic a human."
+        }
+      ]
+    },
+    {
+      "id": "algorithms-and-ensembles",
+      "name": "Algorithms and Ensembles",
+      "cards": [
+        {
+          "title": "Why do ensembles typically have higher scores than individual models?",
+          "content": "**Q: Why do ensembles typically have higher scores than individual models?**\n\nAn ensemble is the combination of multiple models to create a single prediction. The key idea for making better predictions is that the models should make different errors. That way the errors of one model will be compensated by the right guesses of the other models and thus the score of the ensemble will be higher.\n\nWe need diverse models for creating an ensemble. Diversity can be achieved by:\n - Using different ML algorithms. For example, you can combine logistic regression, k-nearest neighbors, and decision trees.\n - Using different subsets of the data for training. This is called bagging.\n - Giving a different weight to each of the samples of the training set. If this is done iteratively, weighting the samples according to the errors of the ensemble, it’s called boosting.\nMany winning solutions to data science competitions are ensembles. However, in real-life machine learning projects, engineers need to find a balance between execution time and accuracy."
+        },
+        {
+          "title": "What's the difference between boosting and bagging?",
+          "content": "**Q: What's the difference between boosting and bagging?**\n\nBoosting and bagging are similar, in that they are both ensembling techniques, where a number of weak learners (classifiers/regressors that are barely better than guessing) combine (through averaging or max vote) to create a strong learner that can make accurate predictions. Bagging means that you take bootstrap samples (with replacement) of your data set and each sample trains a (potentially) weak learner. Boosting, on the other hand, uses all data to train each learner, but instances that were misclassified by the previous learners are given more weight so that subsequent learners give more focus to them during training."
+        },
+        {
+          "title": "Explain Linear Regression, Logistic Regression, Decision Tree and Random Forest?",
+          "content": "**Q: Explain Linear Regression, Logistic Regression, Decision Tree and Random Forest?**\n\n- Linear Regression: It predicts a continuous output based on input features, assuming a linear relationship between them. Example: Predicting house prices based on features like size, location, and number of bedrooms.\n- Logistic Regression: It is used for binary classification, estimating the probability of an event occurring. Example: Predicting whether a customer will churn based on their behavior.\n- Decision Tree: Hierarchical tree-like structure for classification and regression tasks, dividing data based on feature values. Example: Predicting whether a loan applicant is high, medium, or low risk based on income, credit score, and other factors."
+        }
+      ]
+    },
+    {
+      "id": "data-preprocessing-and-feature-engineering",
+      "name": "Data Preprocessing and Feature Engineering",
+      "cards": [
+        {
+          "title": "What is data normalization and why do we need it?",
+          "content": "**Q: What is data normalization and why do we need it?**\n\nData normalization is very important preprocessing step, used to rescale values to fit in a specific range to assure better convergence during backpropagation. In general, it boils down to subtracting the mean of each data point and dividing by its standard deviation. If we don't do this then some of the features (those with high magnitude) will be weighted more in the cost function (if a higher-magnitude feature changes by 1%, then that change is pretty big, but for smaller features it's quite insignificant). The data normalization makes all features weighted equally."
+        },
+        {
+          "title": "What is an imbalanced dataset? Can you list some ways to deal with it?",
+          "content": "**Q: What is an imbalanced dataset? Can you list some ways to deal with it?**\n\nAn imbalanced dataset is one that has different proportions of target categories. For example, a dataset with medical images where we have to detect some illness will typically have many more negative samples than positive samples—say, 98% of images are without the illness and 2% of images are with the illness.\n\nThere are different options to deal with imbalanced datasets:\n - Oversampling or undersampling. Instead of sampling with a uniform distribution from the training dataset, we can use other distributions so the model sees a more balanced dataset.\n - Data augmentation. We can add data in the less frequent categories by modifying existing data in a controlled way. In the example dataset, we could flip the images with illnesses, or add noise to copies of the images in such a way that the illness remains visible.\n - Using appropriate metrics. In the example dataset, if we had a model that always made negative predictions, it would achieve an accuracy of 98%. There are other metrics such as precision, recall, and F-score that describe the accuracy of the model better when using an imbalanced dataset."
+        },
+        {
+          "title": "What is data augmentation? Can you give some examples?",
+          "content": "**Q: What is data augmentation? Can you give some examples?**\n\nData augmentation is a technique for synthesizing new data by modifying existing data in such a way that the target is not changed, or it is changed in a known way.\n\nComputer vision is one of fields where data augmentation is very useful. There are many modifications that we can do to images:\n - Resize\n - Horizontal or vertical flip\n - Rotate\n - Add noise\n - Deform\n - Modify colors\nEach problem needs a customized data augmentation pipeline. For example, on OCR, doing flips will change the text and won’t be beneficial; however, resizes and small rotations may help."
+        },
+        {
+          "title": "When to use a Label Encoding vs. One Hot Encoding?",
+          "content": "**Q: When to use a Label Encoding vs. One Hot Encoding?**\n\nThis question generally depends on your dataset and the model which you wish to apply. But still, a few points to note before choosing the right encoding technique for your model:\n\nWe apply One-Hot Encoding when:\n\n- The categorical feature is not ordinal (like the countries above)\n- The number of categorical features is less so one-hot encoding can be effectively applied\n\nWe apply Label Encoding when:\n\n- The categorical feature is ordinal (like Jr. kg, Sr. kg, Primary school, high school)\n- The number of categories is quite large as one-hot encoding can lead to high memory consumption"
+        }
+      ]
+    },
+    {
+      "id": "optimization-and-training",
+      "name": "Optimization and Training",
+      "cards": [
+        {
+          "title": "What is gradient descent?",
+          "content": "**Q: What is gradient descent?**\n\n[[Answer]](https://machinelearningmastery.com/gradient-descent-for-machine-learning/)\n\nGradient descent is an optimization algorithm used to find the values of parameters (coefficients) of a function (f) that minimizes a cost function (cost).\n\nIt does this iteratively by calculating the gradient of the cost function and updating the parameters in the direction that reduces the error on the next iteration.\n\nGradient descent is best used when the parameters cannot be calculated analytically (e.g. using linear algebra) and must be searched for by an optimization algorithm."
+        },
+        {
+          "title": "What is cost function?",
+          "content": "**Q: What is cost function?**\n\nCost function is a scalar function that quantifies the error factor of the Neural Network. Lower the cost function better the Neural network. Eg: MNIST Data set to classify the image, input image is digit 2 and the Neural network wrongly predicts it to be 3"
+        },
+        {
+          "title": "Define Learning Rate.",
+          "content": "**Q: Define Learning Rate.**\n\nLearning rate is a hyper-parameter that controls how much we are adjusting the weights of our network with respect the loss gradient. [src]"
+        },
+        {
+          "title": "What is Momentum (w.r.t NN optimization)?",
+          "content": "**Q: What is Momentum (w.r.t NN optimization)?**\n\nMomentum lets the optimization algorithm remembers its last step, and adds some proportion of it to the current step. This way, even if the algorithm is stuck in a flat region, or a small local minimum, it can get out and continue towards the true minimum."
+        },
+        {
+          "title": "What is the difference between Batch Gradient Descent and Stochastic Gradient Descent?",
+          "content": "**Q: What is the difference between Batch Gradient Descent and Stochastic Gradient Descent?**\n\nBatch gradient descent computes the gradient using the whole dataset. This is great for convex, or relatively smooth error manifolds. In this case, we move somewhat directly towards an optimum solution, either local or global. Additionally, batch gradient descent, given an annealed learning rate, will eventually find the minimum located in it's basin of attraction.\n\nStochastic gradient descent (SGD) computes the gradient using a single sample. SGD works well (Not well, I suppose, but better than batch gradient descent) for error manifolds that have lots of local maxima/minima. In this case, the somewhat noisier gradient calculated using the reduced number of samples tends to jerk the model out of local minima into a region that hopefully is more optimal."
+        },
+        {
+          "title": "Epoch vs. Batch vs. Iteration.",
+          "content": "**Q: Epoch vs. Batch vs. Iteration.**\n\n- **Epoch**: one forward pass and one backward pass of **all** the training examples  \n - **Batch**: examples processed together in one pass (forward and backward)  \n - **Iteration**: number of training examples / Batch size"
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-and-neural-networks",
+      "name": "Deep Learning and Neural Networks",
+      "cards": [
+        {
+          "title": "How does a neural network work?",
+          "content": "**Q: How does a neural network work?**\n\nA neural network is a function approximator that learns transformations between inputs and outputs by propagating information through layers of neurons. At its simplest, a neural network computes `y = f(Wx + b)`, where `W` contains the weights, `b` contains the biases, and `f` is a nonlinear activation function. The weights and biases are learned during training through backpropagation."
+        },
+        {
+          "title": "Why is ReLU better and more often used than Sigmoid in Neural Networks?",
+          "content": "**Q: Why is ReLU better and more often used than Sigmoid in Neural Networks?**\n\n* Computation Efficiency:\n  As ReLU is a simple threshold the forward and backward path will be faster.\n* Reduced Likelihood of Vanishing Gradient:\n  Gradient of ReLU is 1 for positive values and 0 for negative values while Sigmoid activation saturates (gradients close to 0) quickly with slightly higher or lower inputs leading to vanishing gradients.\n* Sparsity:\n  Sparsity happens when the input of ReLU is negative. This means fewer neurons are firing ( sparse activation ) and the network is lighter. \n\n[[src1]](https://medium.com/the-theory-of-everything/understanding-activation-functions-in-neural-networks-9491262884e0) [[src2]](https://stats.stackexchange.com/questions/126238/what-are-the-advantages-of-relu-over-sigmoid-function-in-deep-neural-networks)"
+        },
+        {
+          "title": "List different activation neurons or functions.",
+          "content": "**Q: List different activation neurons or functions.**\n\n- Linear Neuron\n - Binary Threshold Neuron\n - Stochastic Binary Neuron\n - Sigmoid Neuron\n - Tanh function\n - Rectified Linear Unit (ReLU)"
+        },
+        {
+          "title": "What is vanishing gradient?",
+          "content": "**Q: What is vanishing gradient?**\n\nAs we add more and more hidden layers, back propagation becomes less and less useful in passing information to the lower layers. In effect, as information is passed back, the gradients begin to vanish and become small relative to the weights of the networks."
+        },
+        {
+          "title": "What are dropouts?",
+          "content": "**Q: What are dropouts?**\n\nDropout is a simple way to prevent a neural network from overfitting. It is the dropping out of some of the units in a neural network. It is similar to the natural reproduction process, where the nature produces offsprings by combining distinct genes (dropping out others) rather than strengthening the co-adapting of them."
+        },
+        {
+          "title": "What is batch normalization and why does it work?",
+          "content": "**Q: What is batch normalization and why does it work?**\n\nTraining Deep Neural Networks is complicated by the fact that the distribution of each layer's inputs changes during training, as the parameters of the previous layers change. The idea is then to normalize the inputs of each layer in such a way that they have a mean output activation of zero and standard deviation of one. This is done for each individual mini-batch at each layer i.e compute the mean and variance of that mini-batch alone, then normalize. This is analogous to how the inputs to networks are standardized. How does this help? We know that normalizing the inputs to a network helps it learn. But a network is just a series of layers, where the output of one layer becomes the input to the next. That means we can think of any layer in a neural network as the first layer of a smaller subsequent network. Thought of as a series of neural networks feeding into each other, we normalize the output of one layer before applying the activation function, and then feed it into the following layer (sub-network)."
+        },
+        {
+          "title": "What is the significance of Residual Networks?",
+          "content": "**Q: What is the significance of Residual Networks?**\n\nThe main thing that residual connections did was allow for direct feature access from previous layers. This makes information propagation throughout the network much easier. One very interesting paper about this shows how using local skip connections gives the network a type of ensemble multi-path structure, giving features multiple paths to propagate throughout the network."
+        },
+        {
+          "title": "Define LSTM.",
+          "content": "**Q: Define LSTM.**\n\nLong Short Term Memory – are explicitly designed to address the long term dependency problem, by maintaining a state what to remember and what to forget."
+        },
+        {
+          "title": "List the key components of LSTM.",
+          "content": "**Q: List the key components of LSTM.**\n\n- Gates (forget, Memory, update & Read)\n - tanh(x) (values between -1 to 1)\n - Sigmoid(x) (values between 0 to 1)"
+        },
+        {
+          "title": "List the variants of RNN.",
+          "content": "**Q: List the variants of RNN.**\n\n- LSTM: Long Short Term Memory\n - GRU: Gated Recurrent Unit\n - End to End Network\n - Memory Network"
+        },
+        {
+          "title": "What is the basic difference between LSTM and Transformers?",
+          "content": "**Q: What is the basic difference between LSTM and Transformers?**\n\nLSTMs (Long Short Term Memory) models consist of RNN cells designed to store and manipulate information across time steps more efficiently. In contrast, Transformer models contain a stack of encoder and decoder layers, each consisting of self attention and feed-forward neural network components."
+        },
+        {
+          "title": "What is Autoencoder, name few applications.",
+          "content": "**Q: What is Autoencoder, name few applications.**\n\nAuto encoder is basically used to learn a compressed form of given data. Few applications include\n - Data denoising\n - Dimensionality reduction\n - Image reconstruction\n - Image colorization"
+        }
+      ]
+    },
+    {
+      "id": "computer-vision",
+      "name": "Computer Vision",
+      "cards": [
+        {
+          "title": "Describe how convolution works. What about if your inputs are grayscale vs RGB imagery? What determines the shape of the next layer?",
+          "content": "**Q: Describe how convolution works. What about if your inputs are grayscale vs RGB imagery? What determines the shape of the next layer?**\n\nIn a convolutional neural network (CNN), the convolution operation is applied to the input image using a small matrix called a kernel or filter. The kernel slides over the image in small steps, called strides, and performs element-wise multiplications with the corresponding elements of the image and then sums up the results. The output of this operation is called a feature map.\n\nWhen the input is RGB(or more than 3 channels) the sliding window will be a sliding cube. The shape of the next layer is determined by Kernel size, number of kernels, stride, padding, and dilation.\n\n[[src1]](https://dev.to/sandeepbalachandran/machine-learning-convolution-with-color-images-2p41)[[src2]](https://stackoverflow.com/questions/70231487/output-dimensions-of-convolution-in-pytorch)"
+        },
+        {
+          "title": "Why do we use convolutions for images rather than just FC layers?",
+          "content": "**Q: Why do we use convolutions for images rather than just FC layers?**\n\nFirstly, convolutions preserve, encode, and actually use the spatial information from the image. If we used only FC layers we would have no relative spatial information. Secondly, Convolutional Neural Networks (CNNs) have a partially built-in translation in-variance, since each convolution kernel acts as its own filter/feature detector."
+        },
+        {
+          "title": "What makes CNNs translation invariant?",
+          "content": "**Q: What makes CNNs translation invariant?**\n\nAs explained above, each convolution kernel acts as its own filter/feature detector. So let's say you're doing object detection, it doesn't matter where in the image the object is since we're going to apply the convolution in a sliding window fashion across the entire image anyways."
+        },
+        {
+          "title": "Why do we have max-pooling in classification CNNs?",
+          "content": "**Q: Why do we have max-pooling in classification CNNs?**\n\nMax-pooling in a CNN allows you to reduce computation since your feature maps are smaller after the pooling. You don't lose too much semantic information since you're taking the maximum activation. There's also a theory that max-pooling contributes a bit to giving CNNs more translation in-variance. Check out this great video from Andrew Ng on the benefits of max-pooling."
+        },
+        {
+          "title": "Given stride S and kernel sizes for each layer of a (1-dimensional) CNN, create a function to compute the receptive field of a particular node in the network. This is just finding how many input nodes actually connect through to a neuron in a CNN.",
+          "content": "**Q: Given stride S and kernel sizes for each layer of a (1-dimensional) CNN, create a function to compute the receptive field of a particular node in the network. This is just finding how many input nodes actually connect through to a neuron in a CNN.**\n\nThe receptive field is a defined portion of space within an input that will be used during an operation to generate an output.\n\nConsidering a CNN filter of size k, the receptive field of a peculiar layer is only the number of input used by the filter, in this case k, multiplied by the dimension of the input that is not being reduced by the convolutional filter a. This results in a receptive field of k*a.\n\nMore visually, in the case of an image of size 32x32x3, with a CNN with a filter size of 5x5, the corresponding receptive field will be the filter size, 5 multiplied by the depth of the input volume (the RGB colors) which is the color dimension. This thus gives us a receptive field of dimension 5x5x3."
+        },
+        {
+          "title": "Why would you use many small convolutional kernels such as 3x3 rather than a few large ones?",
+          "content": "**Q: Why would you use many small convolutional kernels such as 3x3 rather than a few large ones?**\n\nThis is very well explained in the VGGNet paper. There are 2 reasons: First, you can use several smaller kernels rather than few large ones to get the same receptive field and capture more spatial context, but with the smaller kernels you are using less parameters and computations. Secondly, because with smaller kernels you will be using more filters, you'll be able to use more activation functions and thus have a more discriminative mapping function being learned by your CNN."
+        },
+        {
+          "title": "Why do segmentation CNNs typically have an encoder-decoder style / structure?",
+          "content": "**Q: Why do segmentation CNNs typically have an encoder-decoder style / structure?**\n\nThe encoder CNN can basically be thought of as a feature extraction network, while the decoder uses that information to predict the image segments by \"decoding\" the features and upscaling to the original image size."
+        },
+        {
+          "title": "Implement non maximal suppression as efficiently as you can.",
+          "content": "**Q: Implement non maximal suppression as efficiently as you can.**\n\nNon-Maximum Suppression (NMS) is a technique used to eliminate multiple detections of the same object in a given image.\nTo solve that first sort bounding boxes based on their scores(N LogN). Starting with the box with the highest score, remove boxes whose overlapping metric(IoU) is greater than a certain threshold.(N^2)\n\nTo optimize this solution you can use special data structures to query for overlapping boxes such as R-tree or KD-tree. (N LogN)"
+        },
+        {
+          "title": "How would you remove outliers when trying to estimate a flat plane from noisy samples?",
+          "content": "**Q: How would you remove outliers when trying to estimate a flat plane from noisy samples?**\n\nRandom sample consensus (RANSAC) is an iterative method to estimate parameters of a mathematical model from a set of observed data that contains outliers, when outliers are to be accorded no influence on the values of the estimates."
+        },
+        {
+          "title": "How does CBIR work?",
+          "content": "**Q: How does CBIR work?**\n\n[[Answer]](https://en.wikipedia.org/wiki/Content-based_image_retrieval)\nContent-based image retrieval is the concept of using images to gather metadata on their content. Compared to the current image retrieval approach based on the keywords associated to the images, this technique generates its metadata from computer vision techniques to extract the relevant information that will be used during the querying step. Many approaches are possible from feature detection to retrieve keywords to the usage of CNN to extract dense features that will be associated to a known distribution of keywords. \n\nWith this last approach, we care less about what is shown on the image but more about the similarity between the metadata generated by a known image and a list of known label and or tags projected into this metadata space."
+        },
+        {
+          "title": "Talk me through how you would create a 3D model of an object from imagery and depth sensor measurements taken at all angles around the object.",
+          "content": "**Q: Talk me through how you would create a 3D model of an object from imagery and depth sensor measurements taken at all angles around the object.**\n\nThere are two popular methods for 3D reconstruction:\n* Structure from Motion (SfM) \n\n* Multi-View Stereo (MVS) \n\nSfM is better suited for creating models of large scenes while MVS is better suited for creating models of small objects."
+        },
+        {
+          "title": "What are RCNNs?",
+          "content": "**Q: What are RCNNs?**\n\nRecurrent Convolutional model is a model that is specially designed to make predictions using a sequence of images (more commonly also know as video). These models are used in object detection tasks in computer vision. The RCNN approach combines both region proposal techniques and convolutional neural networks (CNNs) to identify and locate objects within an image."
+        }
+      ]
+    },
+    {
+      "id": "dimensionality-reduction",
+      "name": "Dimensionality Reduction",
+      "cards": [
+        {
+          "title": "How do you combat the curse of dimensionality?",
+          "content": "**Q: How do you combat the curse of dimensionality?**\n\nThe curse of dimensionality refers to the problems that can occur when working with high-dimensional data. Different features may capture the same information, add little value to a model, or make the problem unnecessarily complex. Common ways to address it include reducing the dimensions of the input space through:\n\n- Feature Selection(manual or via statistical methods)\n - Principal Component Analysis (PCA)\n - Multidimensional Scaling\n - Locally linear embedding"
+        },
+        {
+          "title": "Explain Principal Component Analysis (PCA)?",
+          "content": "**Q: Explain Principal Component Analysis (PCA)?**\n\n[[Answer]](https://towardsdatascience.com/a-one-stop-shop-for-principal-component-analysis-5582fb7e0a9c)\n\nPrincipal Component Analysis (PCA) is a dimensionality reduction technique used in machine learning to reduce the number of features in a dataset while retaining as much information as possible. It works by identifying the directions (principal components) in which the data varies the most, and projecting the data onto a lower-dimensional subspace along these directions."
+        },
+        {
+          "title": "What is the difference between LDA and PCA for dimensionality reduction?",
+          "content": "**Q: What is the difference between LDA and PCA for dimensionality reduction?**\n\nBoth LDA and PCA are linear transformation techniques: LDA is a supervised whereas PCA is unsupervised – PCA ignores class labels.\n\nWe can picture PCA as a technique that finds the directions of maximal variance. In contrast to PCA, LDA attempts to find a feature subspace that maximizes class separability."
+        },
+        {
+          "title": "What is t-SNE?",
+          "content": "**Q: What is t-SNE?**\n\nt-Distributed Stochastic Neighbor Embedding (t-SNE) is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. In simpler terms, t-SNE gives you a feel or intuition of how the data is arranged in a high-dimensional space."
+        },
+        {
+          "title": "What is the difference between t-SNE and PCA for dimensionality reduction?",
+          "content": "**Q: What is the difference between t-SNE and PCA for dimensionality reduction?**\n\nThe first thing to note is that PCA was developed in 1933 while t-SNE was developed in 2008. A lot has changed in the world of data science since 1933 mainly in the realm of compute and size of data. Second, PCA is a linear dimension reduction technique that seeks to maximize variance and preserves large pairwise distances. In other words, things that are different end up far apart. This can lead to poor visualization especially when dealing with non-linear manifold structures. Think of a manifold structure as any geometric shape like: cylinder, ball, curve, etc.\n\nt-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance."
+        },
+        {
+          "title": "What is UMAP?",
+          "content": "**Q: What is UMAP?**\n\nUMAP (Uniform Manifold Approximation and Projection) is a novel manifold learning technique for dimension reduction. UMAP is constructed from a theoretical framework based in Riemannian geometry and algebraic topology. The result is a practical scalable algorithm that applies to real world data."
+        },
+        {
+          "title": "What is the difference between t-SNE and UMAP for dimensionality reduction?",
+          "content": "**Q: What is the difference between t-SNE and UMAP for dimensionality reduction?**\n\nThe biggest difference between the output of UMAP when compared with t-SNE is this balance between local and global structure - UMAP is often better at preserving global structure in the final projection. This means that the inter-cluster relations are potentially more meaningful than in t-SNE. However, it's important to note that, because UMAP and t-SNE both necessarily warp the high-dimensional shape of the data when projecting to lower dimensions, any given axis or distance in lower dimensions still isn’t directly interpretable in the way of techniques such as PCA."
+        }
+      ]
+    },
+    {
+      "id": "model-evaluation-and-validation",
+      "name": "Model Evaluation and Validation",
+      "cards": [
+        {
+          "title": "Why do we need a validation set and test set? What is the difference between them?",
+          "content": "**Q: Why do we need a validation set and test set? What is the difference between them?**\n\nWhen training a model, we divide the available data into three separate sets:\n\n - The training dataset is used for fitting the model’s parameters. However, the accuracy that we achieve on the training set is not reliable for predicting if the model will be accurate on new samples.\n - The validation dataset is used to measure how well the model does on examples that weren’t part of the training dataset. The metrics computed on the validation data can be used to tune the hyperparameters of the model. However, every time we evaluate the validation data and we make decisions based on those scores, we are leaking information from the validation data into our model. The more evaluations, the more information is leaked. So we can end up overfitting to the validation data, and once again the validation score won’t be reliable for predicting the behaviour of the model in the real world.\n - The test dataset is used to measure how well the model does on previously unseen examples. It should only be used once we have tuned the parameters using the validation set."
+        },
+        {
+          "title": "Why do we need a validation set and test set? What is the difference between them? (cont.)",
+          "content": "So if we omit the test set and only use a validation set, the validation score won’t be a good estimate of the generalization of the model."
+        },
+        {
+          "title": "What is stratified cross-validation and when should we use it?",
+          "content": "**Q: What is stratified cross-validation and when should we use it?**\n\nCross-validation is a technique for dividing data between training and validation sets. On typical cross-validation this split is done randomly. But in stratified cross-validation, the split preserves the ratio of the categories on both the training and validation datasets.\n\nFor example, if we have a dataset with 10% of category A and 90% of category B, and we use stratified cross-validation, we will have the same proportions in training and validation. In contrast, if we use simple cross-validation, in the worst case we may find that there are no samples of category A in the validation set.\n\nStratified cross-validation may be applied in the following scenarios:\n\n - On a dataset with multiple categories. The smaller the dataset and the more imbalanced the categories, the more important it will be to use stratified cross-validation.\n - On a dataset with data of different distributions. For example, in a dataset for autonomous driving, we may have images taken during the day and at night. If we do not ensure that both types are present in training and validation, we will have generalization problems."
+        },
+        {
+          "title": "Given that we want to evaluate the performance of 'n' different machine learning models on the same data, why would the following splitting mechanism be incorrect?",
+          "content": "**Q: Given that we want to evaluate the performance of 'n' different machine learning models on the same data, why would the following splitting mechanism be incorrect?**\n\n```python\ndef get_splits():\n    df = pd.DataFrame(...)\n    rnd = np.random.rand(len(df))\n    train = df[ rnd < 0.8 ]\n    valid = df[ rnd >= 0.8 & rnd < 0.9 ]\n    test = df[ rnd >= 0.9 ]\n\n    return train, valid, test\n\n#Model 1\n\nfrom sklearn.tree import DecisionTreeClassifier\ntrain, valid, test = get_splits()\n...\n\n#Model 2"
+        },
+        {
+          "title": "Given that we want to evaluate the performance of 'n' different machine learning models on the same data, why would the following splitting mechanism be incorrect? (cont.)",
+          "content": "from sklearn.linear_model import LogisticRegression\ntrain, valid, test = get_splits()\n...\n```\nThe rand() function orders the data differently each time it is run, so if we run the splitting mechanism again, the 80% of the rows we get will be different from the ones we got the first time it was run. This presents an issue as we need to compare the performance of our models on the same test set. In order to ensure reproducible and consistent sampling we would have to set the random seed in advance or store the data once it is split. Alternatively, we could simply set the 'random_state' parameter in sklearn's train_test_split() function in order to get the same train, validation and test sets across different executions."
+        },
+        {
+          "title": "What is Precision?",
+          "content": "**Q: What is Precision?**\n\nPrecision (also called positive predictive value) is the fraction of relevant instances among the retrieved instances  \nPrecision = true positive / (true positive + false positive)"
+        },
+        {
+          "title": "What is Recall?",
+          "content": "**Q: What is Recall?**\n\nRecall (also known as sensitivity) is the fraction of relevant instances that have been retrieved over the total amount of relevant instances.\nRecall = true positive / (true positive + false negative)"
+        },
+        {
+          "title": "Define F1-score.",
+          "content": "**Q: Define F1-score.**\n\nIt is the weighted average of precision and recall. It considers both false positive and false negative into account. It is used to measure the model’s performance.  \nF1-Score = 2 * (precision * recall) / (precision + recall)"
+        },
+        {
+          "title": "Explain how a ROC curve works.",
+          "content": "**Q: Explain how a ROC curve works.**\n\nThe ROC curve is a graphical representation of the contrast between true positive rates and the false positive rate at various thresholds. It’s often used as a proxy for the trade-off between the sensitivity of the model (true positives) vs the fall-out or the probability it will trigger a false alarm (false positives)."
+        }
+      ]
+    },
+    {
+      "id": "probability-and-statistics",
+      "name": "Probability and Statistics",
+      "cards": [
+        {
+          "title": "What’s the difference between Type I and Type II error?",
+          "content": "**Q: What’s the difference between Type I and Type II error?**\n\nType I error is a false positive, while Type II error is a false negative. Briefly stated, Type I error means claiming something has happened when it hasn’t, while Type II error means that you claim nothing is happening when in fact something is.\nA clever way to think about this is to think of Type I error as telling a man he is pregnant, while Type II error means you tell a pregnant woman she isn’t carrying a baby."
+        },
+        {
+          "title": "How Random Number Generator Works, e.g. rand() function in python works?",
+          "content": "**Q: How Random Number Generator Works, e.g. rand() function in python works?**\n\nIt generates a pseudo random number based on the seed and there are some famous algorithm, please see below link for further information on this."
+        },
+        {
+          "title": "What is the difference between Bayesian vs frequentist statistics?",
+          "content": "**Q: What is the difference between Bayesian vs frequentist statistics?**\n\nFrequentist statistics is a framework that focuses on estimating population parameters using sample statistics, and providing point estimates and confidence intervals.\n\nBayesian statistics, on the other hand, is a framework that uses prior knowledge and information to update beliefs about a parameter or hypothesis, and provides probability distributions for parameters.\n\nThe main difference is that Bayesian statistics incorporates prior knowledge and beliefs into the analysis, while frequentist statistics doesn't."
+        }
+      ]
+    },
+    {
+      "id": "coding-and-implementation",
+      "name": "Coding and Implementation",
+      "cards": [
+        {
+          "title": "Implement a sparse matrix class in C++.",
+          "content": "**Q: Implement a sparse matrix class in C++.**\n\n[[Answer]](https://www.geeksforgeeks.org/sparse-matrix-representation/)"
+        },
+        {
+          "title": "Create a function to compute an integral image, and create another function to get area sums from the integral image.",
+          "content": "**Q: Create a function to compute an integral image, and create another function to get area sums from the integral image.**\n\n[[Answer]](https://www.geeksforgeeks.org/submatrix-sum-queries/)"
+        },
+        {
+          "title": "Implement SQRT(const double & x) without using any special functions, just fundamental arithmetic.",
+          "content": "**Q: Implement SQRT(const double & x) without using any special functions, just fundamental arithmetic.**\n\nThe taylor series can be used for this step by providing an approximation of sqrt(x):\n\n[[Answer]](https://math.stackexchange.com/questions/732540/taylor-series-of-sqrt1x-using-sigma-notation)"
+        },
+        {
+          "title": "Reverse a bitstring.",
+          "content": "**Q: Reverse a bitstring.**\n\nIf you are using python3 :\n\n```python\ndata = b'\\xAD\\xDE\\xDE\\xC0'\nmy_data = bytearray(data)\nmy_data.reverse()\n```"
+        },
+        {
+          "title": "Reverse a linked list in place.",
+          "content": "**Q: Reverse a linked list in place.**\n\n[[Answer]](https://www.geeksforgeeks.org/reverse-a-linked-list/)"
+        }
+      ]
+    },
+    {
+      "id": "supervised-machine-learning",
+      "name": "Supervised machine learning",
+      "cards": [
+        {
+          "title": "What is supervised machine learning?",
+          "content": "**Q: What is supervised machine learning?**\n\nSupervised learning is a type of machine learning in which our algorithms are trained using well-labeled training data, and machines predict the output based on that data. Labeled data indicates that the input data has already been tagged with the appropriate output. Basically, it is the task of learning a function that maps the input set and returns an output. Some of its examples are: Linear Regression, Logistic Regression, KNN, etc.\n\nk-Nearest Neighbors(KNN):Looking at the k closest labeled data points"
+        }
+      ]
+    },
+    {
+      "id": "linear-regression",
+      "name": "Linear regression",
+      "cards": [
+        {
+          "title": "What is regression? Which models can you use to solve a regression problem?",
+          "content": "**Q: What is regression? Which models can you use to solve a regression problem?**\n\nRegression is a part of supervised ML. Regression models investigate the relationship between a dependent (target) and independent variable (s) (predictor).\nHere are some common regression models\n\n- *Linear Regression* establishes a linear relationship between target and predictor (s). It predicts a numeric value and has a shape of a straight line.\n- *Polynomial Regression* has a regression equation with the power of independent variable more than 1. It is a curve that fits into the data points.\n- *Ridge Regression* helps when predictors are highly correlated (multicollinearity problem). It penalizes the squares of regression coefficients but doesn’t allow the coefficients to reach zeros (uses L2 regularization).\n- *Lasso Regression* penalizes the absolute values of regression coefficients and allows some of the coefficients to reach absolute zero (thereby allowing feature selection)."
+        },
+        {
+          "title": "What is linear regression? When do we use it?",
+          "content": "**Q: What is linear regression? When do we use it?**\n\nLinear regression is a model that assumes a linear relationship between the input variables (X) and the single output variable (y).\n\nWith a simple equation:\n\n```\ny = B0 + B1*x1 + ... + Bn * xN\n```\n\nB is regression coefficients, x values are the independent (explanatory) variables  and y is dependent variable.\n\nThe case of one explanatory variable is called simple linear regression. For more than one explanatory variable, the process is called multiple linear regression.\n\nSimple linear regression:\n\n```\ny = B0 + B1*x1\n```\n\nMultiple linear regression:\n\n```\ny = B0 + B1*x1 + ... + Bn * xN\n```"
+        },
+        {
+          "title": "What are the main assumptions of linear regression?",
+          "content": "**Q: What are the main assumptions of linear regression?**\n\nThere are several assumptions of linear regression. If any of them is violated, model predictions and interpretation may be worthless or misleading."
+        },
+        {
+          "title": "What are the main assumptions of linear regression? (cont.)",
+          "content": "1. **Linear relationship** between features and target variable.\n2. **Additivity** means that the effect of changes in one of the features on the target variable does not depend on values of other features. For example, a model for predicting revenue of a company has two features - the number of items _a_ sold and the number of items _b_ sold. When company sells more items _a_ the revenue increases and this is independent of the number of items _b_ sold. But, if customers who buy _a_ stop buying _b_, the additivity assumption is violated.\n3. Features are not correlated (no **collinearity**) since it can be difficult to separate out the individual effects of collinear features on the target variable.\n4. Errors are independently and identically normally distributed (y<sub>i</sub> = B0 + B1*x1<sub>i</sub> + ... + error<sub>i</sub>):\n   1. No correlation between errors (consecutive errors in the case of time series data).\n   2. Constant variance of errors - **homoscedasticity**. For example, in case of time series, seasonal patterns can increase errors in seasons with higher activity.\n   3. Errors are normally distributed, otherwise some features will have more influence on the target variable than to others. If the error distribution is significantly non-normal, confidence intervals may be too wide or too narrow."
+        },
+        {
+          "title": "What’s the normal distribution? Why do we care about it?",
+          "content": "**Q: What’s the normal distribution? Why do we care about it?**\n\nThe normal distribution is a continuous probability distribution whose probability density function takes the following formula:\n\nwhere μ is the mean and σ is the standard deviation of the distribution.\n\nThe normal distribution derives its importance from the **Central Limit Theorem**, which states that if we draw a large enough number of samples, their mean will follow a normal distribution regardless of the initial distribution of the sample, i.e **the distribution of the mean of the samples is normal**. It is important that each sample is independent from the other.\n\nThis is powerful because it helps us study processes whose population distribution is unknown to us."
+        },
+        {
+          "title": "How do we check if a variable follows the normal distribution?",
+          "content": "**Q: How do we check if a variable follows the normal distribution?**\n\n1. Plot a histogram out of the sampled data. If you can fit the bell-shaped \"normal\" curve to the histogram, then the hypothesis that the underlying random variable follows the normal distribution can not be rejected.\n2. Check Skewness and Kurtosis of the sampled data. Skewness = 0 and kurtosis = 3 are typical for a normal distribution, so the farther away they are from these values, the more non-normal the distribution.\n3. Use Kolmogorov-Smirnov or/and Shapiro-Wilk tests for normality. They take into account both Skewness and Kurtosis simultaneously.\n4. Check for Quantile-Quantile plot. It is a scatterplot created by plotting two sets of quantiles against one another. Normal Q-Q plot place the data points in a roughly straight line."
+        },
+        {
+          "title": "What if we want to build a model for predicting prices? Are prices distributed normally? Do we need to do any pre-processing for prices?",
+          "content": "**Q: What if we want to build a model for predicting prices? Are prices distributed normally? Do we need to do any pre-processing for prices?**\n\nData is not normal. Specially, real-world datasets or uncleaned datasets always have certain skewness. Same goes for the price prediction. Price of houses or any other thing under consideration depends on a number of factors. So, there's a great chance of presence of some skewed values i.e outliers if we talk in data science terms. \n\nYes, you may need to do pre-processing. Most probably, you will need to remove the outliers to make your distribution near-to-normal."
+        },
+        {
+          "title": "What methods for solving linear regression do you know?",
+          "content": "**Q: What methods for solving linear regression do you know?**\n\nTo solve linear regression, you need to find the coefficients $`\\beta`$ which minimize the sum of squared errors.\n\nMatrix Algebra method: Let's say you have `X`, a matrix of features, and `y`, a vector with the values you want to predict. After going through the matrix algebra and minimization problem, you get this solution: $`\\beta = (X^{T}X)^{-1}X^{T}y`$. \n\nBut solving this requires you to find an inverse, which can be time-consuming, if not impossible. Luckily, there are methods like Singular Value Decomposition (SVD) or QR Decomposition that can reliably calculate this part $`(X^{T}X)^{-1}X^{T}`$ (called the pseudo-inverse) without actually needing to find an inverse. The popular python ML library `sklearn` uses SVD to solve least squares.\n\nAlternative method: Gradient Descent. See explanation below."
+        },
+        {
+          "title": "What is gradient descent? How does it work?",
+          "content": "**Q: What is gradient descent? How does it work?**\n\nGradient descent is an algorithm that uses calculus concept of gradient to try and reach local or global minima. It works by taking the negative of the gradient in a point of a given function, and updating that point repeatedly using the calculated negative gradient, until the algorithm reaches a local or global minimum, which will cause future iterations of the algorithm to return values that are equal or too close to the current point. It is widely used in machine learning applications."
+        },
+        {
+          "title": "What is the normal equation?",
+          "content": "**Q: What is the normal equation?**\n\nNormal equations are equations obtained by setting equal to zero the partial derivatives of the sum of squared errors (least squares); normal equations allow one to estimate the parameters of a multiple linear regression."
+        },
+        {
+          "title": "What is SGD  —  stochastic gradient descent? What’s the difference with the usual gradient descent?",
+          "content": "**Q: What is SGD  —  stochastic gradient descent? What’s the difference with the usual gradient descent?**\n\nIn both gradient descent (GD) and stochastic gradient descent (SGD), you update a set of parameters in an iterative manner to minimize an error function.\n\nThe difference lies in how the gradient of the loss function is estimated. In the usual GD, you have to run through ALL the samples in your training set in order to estimate the gradient and do a single update for a parameter in a particular iteration. In SGD, on the other hand, you use ONLY ONE or SUBSET of training sample from your training set to estimate the gradient and do the update for a parameter in a particular iteration. If you use SUBSET, it is called Minibatch Stochastic gradient Descent."
+        },
+        {
+          "title": "Which metrics for evaluating regression models do you know?",
+          "content": "**Q: Which metrics for evaluating regression models do you know?**\n\n1. Mean Squared Error(MSE)\n2. Root Mean Squared Error(RMSE)\n3. Mean Absolute Error(MAE)\n4. R² or Coefficient of Determination\n5. Adjusted R²"
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "name": "Validation",
+      "cards": [
+        {
+          "title": "What is overfitting?",
+          "content": "**Q: What is overfitting?**\n\nWhen your model perform very well on your training set but can't generalize the test set, because it adjusted a lot to the training set."
+        },
+        {
+          "title": "How to validate your models?",
+          "content": "**Q: How to validate your models?**\n\nOne of the most common approaches is splitting data into train, validation and test parts.\nModels are trained on train data, hyperparameters (for example early stopping) are selected based on the validation data, the final measurement is done on test dataset.\nAnother approach is cross-validation: split dataset into K folds and each time train models on training folds and measure the performance on the validation folds.\nAlso you could combine these approaches: make a test/holdout dataset and do cross-validation on the rest of the data. The final quality is measured on test dataset."
+        },
+        {
+          "title": "Why do we need to split our data into three parts: train, validation, and test?",
+          "content": "**Q: Why do we need to split our data into three parts: train, validation, and test?**\n\nThe training set is used to fit the model, i.e. to train the model with the data. The validation set is then used to provide an unbiased evaluation of a model while fine-tuning hyperparameters. This improves the generalization of the model. Finally, a test data set which the model has never \"seen\" before should be used for the final evaluation of the model. This allows for an unbiased evaluation of the model. The evaluation should never be performed on the same data that is used for training. Otherwise the model performance would not be representative."
+        },
+        {
+          "title": "Can you explain how cross-validation works?",
+          "content": "**Q: Can you explain how cross-validation works?**\n\nCross-validation is the process to separate your total training set into two subsets: training and validation set, and evaluate your model to choose the hyperparameters. But you do this process iteratively, selecting different training and validation set, in order to reduce the bias that you would have by selecting only one validation set."
+        },
+        {
+          "title": "What is K-fold cross-validation?",
+          "content": "**Q: What is K-fold cross-validation?**\n\nK fold cross validation is a method of cross validation where we select a hyperparameter k. The dataset is now divided into k parts. Now, we take the 1st part as validation set and remaining k-1 as training set. Then we take the 2nd part as validation set and remaining k-1 parts as training set. Like this, each part is used as validation set once and the remaining k-1 parts are taken together and used as training set.\nIt should not be used in a time series data."
+        },
+        {
+          "title": "How do we choose K in K-fold cross-validation? What’s your favorite K?",
+          "content": "**Q: How do we choose K in K-fold cross-validation? What’s your favorite K?**\n\nThere are two things to consider while deciding K: the number of models we get and the size of validation set. We do not want the number of models to be too less, like 2 or 3. At least 4 models give a less biased decision on the metrics. On the other hand, we would want the dataset to be at least 20-25% of the entire data. So that at least a ratio of 3:1 between training and validation set is maintained. \n\nI tend to use 4 for small datasets and 5 for large ones as K."
+        }
+      ]
+    },
+    {
+      "id": "classification",
+      "name": "Classification",
+      "cards": [
+        {
+          "title": "What is classification? Which models would you use to solve a classification problem?",
+          "content": "**Q: What is classification? Which models would you use to solve a classification problem?**\n\nClassification problems are problems in which our prediction space is discrete, i.e. there is a finite number of values the output variable can be. Some models which can be used to solve classification problems are: logistic regression, decision tree, random forests, multi-layer perceptron, one-vs-all, amongst others."
+        },
+        {
+          "title": "What is logistic regression? When do we need to use it?",
+          "content": "**Q: What is logistic regression? When do we need to use it?**\n\nLogistic regression is a Machine Learning algorithm that is used for binary classification. You should use logistic regression when your Y variable takes only two values, e.g. True and False, \"spam\" and \"not spam\", \"churn\" and \"not churn\" and so on. The variable is said to be a \"binary\" or \"dichotomous\"."
+        },
+        {
+          "title": "Is logistic regression a linear model? Why?",
+          "content": "**Q: Is logistic regression a linear model? Why?**\n\nYes, Logistic Regression is considered a generalized linear model because the outcome always depends on the sum of the inputs and parameters. Or in other words, the output cannot depend on the product (or quotient, etc.) of its parameters."
+        },
+        {
+          "title": "What is sigmoid? What does it do?",
+          "content": "**Q: What is sigmoid? What does it do?**\n\nA sigmoid function is a type of activation function, and more specifically defined as a squashing function. Squashing functions limit the output to a range between 0 and 1, making these functions useful in the prediction of probabilities.\n\nSigmod(x) = 1/(1+e^{-x})"
+        },
+        {
+          "title": "How do we evaluate classification models?",
+          "content": "**Q: How do we evaluate classification models?**\n\nDepending on the classification problem, we can use the following evaluation metrics:\n\n1. Accuracy\n2. Precision\n3. Recall\n4. F1 Score\n5. Logistic loss (also known as Cross-entropy loss)\n6. Jaccard similarity coefficient score"
+        },
+        {
+          "title": "What is accuracy?",
+          "content": "**Q: What is accuracy?**\n\nAccuracy is a metric for evaluating classification models. It is calculated by dividing the number of correct predictions by the number of total predictions."
+        },
+        {
+          "title": "Is accuracy always a good metric?",
+          "content": "**Q: Is accuracy always a good metric?**\n\nAccuracy is not a good performance metric when there is imbalance in the dataset. For example, in binary classification with 95% of A class and 5% of B class, a constant prediction of A class would have an accuracy of 95%. In case of imbalance dataset, we need to choose Precision, recall, or F1 Score depending on the problem we are trying to solve."
+        },
+        {
+          "title": "What is the confusion table? What are the cells in this table?",
+          "content": "**Q: What is the confusion table? What are the cells in this table?**\n\nConfusion table (or confusion matrix) shows how many True positives (TP), True Negative (TN), False Positive (FP) and False Negative (FN) model has made.\n\n||                |     Actual   |        Actual |\n|:---:|   :---:        |     :---:    |:---:          |\n||                | Positive (1) | Negative (0)  |\n|Predicted|   Positive (1) | TP           | FP            |\n|Predicted|   Negative (0) | FN           | TN            |\n\n* True Positives (TP): When the actual class of the observation is 1 (True) and the prediction is 1 (True)\n* True Negative (TN): When the actual class of the observation is 0 (False) and the prediction is 0 (False)\n* False Positive (FP): When the actual class of the observation is 0 (False) and the prediction is 1 (True)\n* False Negative (FN): When the actual class of the observation is 1 (True) and the prediction is 0 (False)\n\nMost of the performance metrics for classification models are based on the values of the confusion matrix."
+        },
+        {
+          "title": "What are precision, recall, and F1-score?",
+          "content": "**Q: What are precision, recall, and F1-score?**\n\n* Precision and recall are classification evaluation metrics:\n* P = TP / (TP + FP) and R = TP / (TP + FN).\n* Where TP is true positives, FP is false positives and FN is false negatives\n* In both cases the score of 1 is the best: we get no false positives or false negatives and only true positives.\n* F1 is a combination of both precision and recall in one score (harmonic mean):\n* F1 = 2 * PR / (P + R).\n* Max F score is 1 and min is 0, with 1 being the best."
+        },
+        {
+          "title": "Precision-recall trade-off",
+          "content": "**Q: Precision-recall trade-off**\n\nTradeoff means increasing one parameter would lead to decreasing of other. Precision-recall tradeoff occur due to increasing one of the parameter(precision or recall) while keeping the model same. \n\nIn an ideal scenario where there is a perfectly separable data, both precision and recall can get maximum value of 1.0. But in most of the practical situations, there is noise in the dataset and the dataset is not perfectly separable. There might be some points of positive class closer to the negative class and vice versa. In such cases, shifting the decision boundary can either increase the precision or recall but not both. Increasing one parameter leads to decreasing of the other."
+        },
+        {
+          "title": "What is the ROC curve? When to use it?",
+          "content": "**Q: What is the ROC curve? When to use it?**\n\nROC stands for *Receiver Operating Characteristics*. The diagrammatic representation that shows the contrast between true positive rate vs false positive rate. It is used when we need to predict the probability of the binary outcome."
+        },
+        {
+          "title": "What is AUC (AU ROC)? When to use it?",
+          "content": "**Q: What is AUC (AU ROC)? When to use it?**\n\nAUC stands for *Area Under the ROC Curve*. ROC is a probability curve and AUC represents degree or measure of separability. It's used when we need to value how much model is capable of distinguishing between classes.  The value is between 0 and 1, the higher the better."
+        }
+      ]
+    },
+    {
+      "id": "regularization-2",
+      "name": "Regularization",
+      "cards": [
+        {
+          "title": "What happens to our linear regression model if we have three columns in our data: x, y, z  —  and z is a sum of x and y?",
+          "content": "**Q: What happens to our linear regression model if we have three columns in our data: x, y, z  —  and z is a sum of x and y?**\n\nWe would not be able to perform the regression. Because z is linearly dependent on x and y so when performing the regression $`{X}^{T}{X}`$ would be a singular (not invertible) matrix."
+        },
+        {
+          "title": "What happens to our linear regression model if the column z in the data is a sum of columns x and y and some random noise?",
+          "content": "**Q: What happens to our linear regression model if the column z in the data is a sum of columns x and y and some random noise?**\n\nIt creates a situation known as multicollinearity. Multicollinearity occurs when two or more independent variables in a regression model are highly correlated, leading to issues in the estimation of the regression coefficients. The issue arises because the variables X and Y will be highly correlated, making it difficult for the model to distinguish the individual effects of X and Y on the dependent variable Z. To address it, feature selection, PCA or regularization techniques (L2) may be used."
+        },
+        {
+          "title": "What is regularization? Why do we need it?",
+          "content": "**Q: What is regularization? Why do we need it?**\n\nRegularization is used to reduce overfitting in machine learning models. It helps the models to generalize well and make them robust to outliers and noise in the data."
+        },
+        {
+          "title": "Which regularization techniques do you know?",
+          "content": "**Q: Which regularization techniques do you know?**\n\nThere are mainly two types of regularization,\n1. L1 Regularization (Lasso regularization) - Adds the sum of absolute values of the coefficients to the cost function. $`\\lambda\\sum_{i=1}^{n} \\left | w_i \\right |`$\n2. L2 Regularization (Ridge regularization) - Adds the sum of squares of coefficients to the cost function. $`\\lambda\\sum_{i=1}^{n} {w_{i}}^{2}`$\n\n* Where $`\\lambda`$ determines the amount of regularization."
+        },
+        {
+          "title": "What kind of regularization techniques are applicable to linear models?",
+          "content": "**Q: What kind of regularization techniques are applicable to linear models?**\n\nAIC/BIC, Ridge regression, Lasso, Elastic Net, Basis pursuit denoising, Rudin–Osher–Fatemi model (TV), Potts model, RLAD,\nDantzig Selector,SLOPE"
+        },
+        {
+          "title": "How does L2 regularization look like in a linear model?",
+          "content": "**Q: How does L2 regularization look like in a linear model?**\n\nL2 regularization adds a penalty term to our cost function which is equal to the sum of squares of models coefficients multiplied by a lambda hyperparameter. This technique makes sure that the coefficients are close to zero and is widely used in cases when we have a lot of features that might correlate with each other."
+        },
+        {
+          "title": "How do we select the right regularization parameters?",
+          "content": "**Q: How do we select the right regularization parameters?**\n\nRegularization parameters can be chosen using a grid search, for example https://scikit-learn.org/stable/modules/linear_model.html has one formula for the implementing for regularization, alpha in the formula mentioned can be found by doing a RandomSearch or a GridSearch on a set of values and selecting the alpha which gives the least cross validation or validation error."
+        },
+        {
+          "title": "What’s the effect of L2 regularization on the weights of a linear model?",
+          "content": "**Q: What’s the effect of L2 regularization on the weights of a linear model?**\n\nL2 regularization penalizes larger weights more severely (due to the squared penalty term), which encourages weight values to decay toward zero."
+        },
+        {
+          "title": "How L1 regularization looks like in a linear model?",
+          "content": "**Q: How L1 regularization looks like in a linear model?**\n\nL1 regularization adds a penalty term to our cost function which is equal to the sum of modules of models coefficients multiplied by a lambda hyperparameter. For example, cost function with L1 regularization will look like: $`\\sum_{i=0}^{N} (y_i - \\sum_{j=0}^{M} x_{ij} * w_j)+\\lambda\\sum_{j=0}^{M} \\left | w_j \\right |`$"
+        },
+        {
+          "title": "What’s the difference between L2 and L1 regularization?",
+          "content": "**Q: What’s the difference between L2 and L1 regularization?**\n\n- Penalty terms: L1 regularization uses the sum of the absolute values of the weights, while L2 regularization uses the sum of the weights squared.\n- Feature selection: L1 performs feature selection by reducing the coefficients of some predictors to 0, while L2 does not.\n- Computational efficiency: L2 has an analytical solution, while L1 does not.\n- Multicollinearity: L2 addresses multicollinearity by constraining the coefficient norm."
+        },
+        {
+          "title": "Can we have both L1 and L2 regularization components in a linear model?",
+          "content": "**Q: Can we have both L1 and L2 regularization components in a linear model?**\n\nYes, elastic net regularization combines L1 and L2 regularization."
+        },
+        {
+          "title": "What’s the interpretation of the bias term in linear models?",
+          "content": "**Q: What’s the interpretation of the bias term in linear models?**\n\nBias is simply, a difference between predicted value and actual/true value. It can be interpreted as the distance from the average prediction and true value i.e. true value minus mean(predictions). But dont get confused between accuracy and bias."
+        }
+      ]
+    },
+    {
+      "id": "feature-selection",
+      "name": "Feature selection",
+      "cards": [
+        {
+          "title": "What is feature selection? Why do we need it?",
+          "content": "**Q: What is feature selection? Why do we need it?**\n\nFeature Selection is a method used to select the relevant features for the model to train on. We need feature selection to remove the irrelevant features which leads the model to under-perform."
+        },
+        {
+          "title": "Is feature selection important for linear models?",
+          "content": "**Q: Is feature selection important for linear models?**\n\nYes, It is. It can make model performance better through selecting the most importance features and remove irrelevant features in order to make a prediction and it can also avoid overfitting, underfitting and bias-variance tradeoff."
+        },
+        {
+          "title": "Which feature selection techniques do you know?",
+          "content": "**Q: Which feature selection techniques do you know?**\n\nHere are some of the feature selections:\n- Principal Component Analysis\n- Neighborhood Component Analysis\n- ReliefF Algorithm"
+        },
+        {
+          "title": "Can we use L1 regularization for feature selection?",
+          "content": "**Q: Can we use L1 regularization for feature selection?**\n\nYes, because the nature of L1 regularization will lead to sparse coefficients of features. Feature selection can be done by keeping only features with non-zero coefficients."
+        },
+        {
+          "title": "Can we use L2 regularization for feature selection?",
+          "content": "**Q: Can we use L2 regularization for feature selection?**\n\nNo, Because L2 regularization does not make the weights zero but only makes them very very small. L2 regularization can be used to solve multicollinearity since it stabilizes the model."
+        }
+      ]
+    },
+    {
+      "id": "decision-trees",
+      "name": "Decision trees",
+      "cards": [
+        {
+          "title": "What are the decision trees?",
+          "content": "**Q: What are the decision trees?**\n\nThis is a type of supervised learning algorithm that is mostly used for classification problems. Surprisingly, it works for both categorical and continuous dependent variables. \n\nIn this algorithm, we split the population into two or more homogeneous sets. This is done based on most significant attributes/ independent variables to make as distinct groups as possible.\n\nA decision tree is a flowchart-like tree structure, where each internal node (non-leaf node) denotes a test on an attribute, each branch represents an outcome of the test, and each leaf node (or terminal node) holds a value for the target variable.\n\nVarious techniques : like Gini, Information Gain, Chi-square, entropy."
+        },
+        {
+          "title": "How do we train decision trees?",
+          "content": "**Q: How do we train decision trees?**\n\n1. Start at the root node.\n2. For each variable X, find the set S_1 that minimizes the sum of the node impurities in the two child nodes and choose the split {X*,S*} that gives the minimum over all X and S.\n3. If a stopping criterion is reached, exit. Otherwise, apply step 2 to each child node in turn."
+        },
+        {
+          "title": "What are the main parameters of the decision tree model?",
+          "content": "**Q: What are the main parameters of the decision tree model?**\n\n* maximum tree depth\n* minimum samples per leaf node\n* impurity criterion"
+        },
+        {
+          "title": "How do we handle categorical variables in decision trees?",
+          "content": "**Q: How do we handle categorical variables in decision trees?**\n\nSome decision tree algorithms can handle categorical variables out of the box, others cannot. However, we can transform categorical variables, e.g. with a binary or a one-hot encoder."
+        },
+        {
+          "title": "What are the benefits of a single decision tree compared to more complex models?",
+          "content": "**Q: What are the benefits of a single decision tree compared to more complex models?**\n\n* easy to implement\n* fast training\n* fast inference\n* good explainability"
+        },
+        {
+          "title": "How can we know which features are more important for the decision tree model?",
+          "content": "**Q: How can we know which features are more important for the decision tree model?**\n\nOften, we want to find a split such that it minimizes the sum of the node impurities. The impurity criterion is a parameter of decision trees. Popular methods to measure the impurity are the Gini impurity and the entropy describing the information gain."
+        }
+      ]
+    },
+    {
+      "id": "random-forest-2",
+      "name": "Random forest",
+      "cards": [
+        {
+          "title": "What is random forest?",
+          "content": "**Q: What is random forest?**\n\nRandom Forest is a machine learning method for regression and classification which is composed of many decision trees. Random Forest belongs to a larger class of ML algorithms called ensemble methods (in other words, it involves the combination of several models to solve a single prediction problem)."
+        },
+        {
+          "title": "Why do we need randomization in random forest?",
+          "content": "**Q: Why do we need randomization in random forest?**\n\nRandom forest in an extension of the **bagging** algorithm which takes *random data samples from the training dataset* (with replacement), trains several models and averages predictions. In addition to that, each time a split in a tree is considered, random forest takes a *random sample of m features from full set of n features* (without replacement) and uses this subset of features as candidates for the split (for example, `m = sqrt(n)`).\n\nTraining decision trees on random data samples from the training dataset *reduces variance*. Sampling features for each split in a decision tree *decorrelates trees*."
+        },
+        {
+          "title": "What are the main parameters of the random forest model?",
+          "content": "**Q: What are the main parameters of the random forest model?**\n\n- `max_depth`: Longest Path between root node and the leaf\n- `min_sample_split`: The minimum number of observations needed to split a given node\n- `max_leaf_nodes`: Conditions the splitting of the tree and hence, limits the growth of the trees\n- `min_samples_leaf`: minimum number of samples in the leaf node\n- `n_estimators`: Number of trees\n- `max_sample`: Fraction of original dataset given to any individual tree in the given model\n- `max_features`: Limits the maximum number of features provided to trees in random forest model"
+        },
+        {
+          "title": "How do we select the depth of the trees in random forest?",
+          "content": "**Q: How do we select the depth of the trees in random forest?**\n\nThe greater the depth, the greater amount of information is extracted from the tree, however, there is a limit to this, and the algorithm even if defensive against overfitting may learn complex features of noise present in data and as a result, may overfit on noise. Hence, there is no hard thumb rule in deciding the depth, but literature suggests a few tips on tuning the depth of the tree to prevent overfitting:\n\n- limit the maximum depth of a tree\n- limit the number of test nodes\n- limit the minimum number of objects at a node required to split\n- do not split a node when, at least, one of the resulting subsample sizes is below a given threshold\n- stop developing a node if it does not sufficiently improve the fit."
+        },
+        {
+          "title": "How do we know how many trees we need in random forest?",
+          "content": "**Q: How do we know how many trees we need in random forest?**\n\nThe number of trees in random forest is worked by n_estimators, and a random forest reduces overfitting by increasing the number of trees. There is no fixed thumb rule to decide the number of trees in a random forest, it is rather fine tuned with the data, typically starting off by taking the square of the number of features (n) present in the data followed by tuning until we get the optimal results."
+        },
+        {
+          "title": "Is it easy to parallelize training of a random forest model? How can we do it?",
+          "content": "**Q: Is it easy to parallelize training of a random forest model? How can we do it?**\n\nYes, R provides a simple way to parallelize training of random forests on large scale data.\nIt makes use of a parameter called multicombine which can be set to TRUE for parallelizing random forest computations.\n\n```R\nrf <- foreach(ntree=rep(25000, 6), .combine=randomForest::combine,\n              .multicombine=TRUE, .packages='randomForest') %dopar% {\n    randomForest(x, y, ntree=ntree)\n}\n```"
+        },
+        {
+          "title": "What are the potential problems with many large trees?",
+          "content": "**Q: What are the potential problems with many large trees?**\n\n- Overfitting: A large number of large trees can lead to overfitting, where the model becomes too complex and is able to memorize the training data but doesn't generalize well to new, unseen data.\n\n- Slow prediction time: As the number of trees in the forest increases, the prediction time for new data points can become quite slow. This can be a problem when you need to make predictions in real-time or on a large dataset.\n\n- Memory consumption: Random Forest models with many large trees can consume a lot of memory, which can be a problem when working with large datasets or on a limited hardware.\n\n- Lack of interpretability: Random Forest models with many large trees can be difficult to interpret, making it harder to understand how the model is making predictions or what features are most important.\n\n- Difficulty in tuning : With an increasing number of large trees the tuning process becomes more complex and computationally expensive."
+        },
+        {
+          "title": "What are the potential problems with many large trees? (cont.)",
+          "content": "It's important to keep in mind that the number of trees in a Random Forest should be chosen based on the specific problem and dataset, rather than using a large number of trees by default. In practice, the number of trees in a random forest is chosen based on the trade-off between the computational cost and the performance."
+        },
+        {
+          "title": "What happens when we have correlated features in our data?",
+          "content": "**Q: What happens when we have correlated features in our data?**\n\nIn random forest, since random forest samples some features to build each tree, the information contained in correlated features is twice as much likely to be picked than any other information contained in other features. \n\nIn general, when you are adding correlated features, it means that they linearly contains the same information and thus it will reduce the robustness of your model. Each time you train your model, your model might pick one feature or the other to \"do the same job\" i.e. explain some variance, reduce entropy, etc."
+        }
+      ]
+    },
+    {
+      "id": "gradient-boosting-2",
+      "name": "Gradient boosting",
+      "cards": [
+        {
+          "title": "What is gradient boosting trees?",
+          "content": "**Q: What is gradient boosting trees?**\n\nGradient boosting is a machine learning technique for regression and classification problems, which produces a prediction model in the form of an ensemble of weak prediction models, typically decision trees."
+        },
+        {
+          "title": "What’s the difference between random forest and gradient boosting?",
+          "content": "**Q: What’s the difference between random forest and gradient boosting?**\n\n1. Random Forests builds each tree independently while Gradient Boosting builds one tree at a time.\n   2. Random Forests combine results at the end of the process (by averaging or \"majority rules\") while Gradient Boosting combines     results along the way."
+        },
+        {
+          "title": "Is it possible to parallelize training of a gradient boosting model? How to do it?",
+          "content": "**Q: Is it possible to parallelize training of a gradient boosting model? How to do it?**\n\nYes, different frameworks provide different options to make training faster, using GPUs to speed up the process by making it highly parallelizable.For example, for XGBoost <i>tree_method = 'gpu_hist'</i> option makes training faster by use of GPUs."
+        },
+        {
+          "title": "Feature importance in gradient boosting trees  —  what are possible options?",
+          "content": "**Q: Feature importance in gradient boosting trees  —  what are possible options?**\n\nWith CatBoost you can use implemented method get_feature_importance for getting SHAP values. https://arxiv.org/abs/1905.04610v1\n\nIt allows to understand how excluding features helps to provide better results. Higher value is better.\n\nAlso you can add random noise column to your data (with normal distribution), calculate feature importance and exclude all features below noise importance."
+        },
+        {
+          "title": "What are the main parameters in the gradient boosting model?",
+          "content": "**Q: What are the main parameters in the gradient boosting model?**\n\nThere are many parameters, but below are a few key defaults.\n* learning_rate=0.1 (shrinkage).\n* n_estimators=100 (number of trees).\n* max_depth=3.\n* min_samples_split=2.\n* min_samples_leaf=1.\n* subsample=1.0."
+        },
+        {
+          "title": "How do you approach tuning parameters in XGBoost or LightGBM?",
+          "content": "**Q: How do you approach tuning parameters in XGBoost or LightGBM?**\n\nDepending upon the dataset, parameter tuning can be done manually or using hyperparameter optimization frameworks such as optuna and hyperopt. In manual parameter tuning, we need to be aware of max-depth, min_samples_leaf and min_samples_split so that our model does not overfit the data but try to predict generalized characteristics of data (basically keeping variance and bias low for our model)."
+        },
+        {
+          "title": "How do you select the number of trees in the gradient boosting model?",
+          "content": "**Q: How do you select the number of trees in the gradient boosting model?**\n\nMost implementations of gradient boosting are configured by default with a relatively small number of trees, such as hundreds or thousands. Using scikit-learn we can perform a grid search of the n_estimators model parameter"
+        }
+      ]
+    },
+    {
+      "id": "parameter-tuning",
+      "name": "Parameter tuning",
+      "cards": [
+        {
+          "title": "Which hyper-parameter tuning strategies (in general) do you know?",
+          "content": "**Q: Which hyper-parameter tuning strategies (in general) do you know?**\n\nThere are several strategies for hyper-tuning but I would argue that the three most popular nowadays are the following:\n* <b>Grid Search</b> is an exhaustive approach such that for each hyper-parameter, the user needs to <i>manually</i> give a list of values for the algorithm to try. After these values are selected, grid search then evaluates the algorithm using each and every combination of hyper-parameters and returns the combination that gives the optimal result (i.e. lowest MAE). Because grid search evaluates the given algorithm using all combinations, it's easy to see that this can be quite computationally expensive and can lead to sub-optimal results specifically since the user needs to specify specific values for these hyper-parameters, which is prone for error and requires domain knowledge."
+        },
+        {
+          "title": "Which hyper-parameter tuning strategies (in general) do you know? (cont.)",
+          "content": "* <b>Random Search</b> is similar to grid search but differs in the sense that rather than specifying which values to try for each hyper-parameter, an upper and lower bound of values for each hyper-parameter is given instead. With uniform probability, random values within these bounds are then chosen and similarly, the best combination is returned to the user. Although this seems less intuitive, no domain knowledge is necessary and theoretically much more of the parameter space can be explored."
+        },
+        {
+          "title": "Which hyper-parameter tuning strategies (in general) do you know? (cont.)",
+          "content": "* In a completely different framework, <b>Bayesian Optimization</b> is thought of as a more statistical way of optimization and is commonly used when using neural networks, specifically since one evaluation of a neural network can be computationally costly. In numerous research papers, this method heavily outperforms Grid Search and Random Search and is currently used on the Google Cloud Platform as well as AWS. Because an in-depth explanation requires a heavy background in bayesian statistics and gaussian processes (and maybe even some game theory), a \"simple\" explanation is that a much simpler/faster <i>acquisition function</i> intelligently chooses (using a <i>surrogate function</i> such as probability of improvement or GP-UCB) which hyper-parameter values to try on the computationally expensive, original algorithm. Using the result of the initial combination of values on the expensive/original function, the acquisition function takes the result of the expensive/original algorithm into account and uses it as its prior knowledge to again come up with another set of hyper-parameters to choose during the next iteration. This process continues either for a specified number of iterations or for a specified amount of time and similarly the combination of hyper-parameters that performs the best on the expensive/original algorithm is chosen."
+        },
+        {
+          "title": "What’s the difference between grid search parameter tuning strategy and random search? When to use one or another?",
+          "content": "**Q: What’s the difference between grid search parameter tuning strategy and random search? When to use one or another?**\n\nFor specifics, refer to the above answer."
+        }
+      ]
+    },
+    {
+      "id": "neural-networks",
+      "name": "Neural networks",
+      "cards": [
+        {
+          "title": "What kind of problems neural nets can solve?",
+          "content": "**Q: What kind of problems neural nets can solve?**\n\nNeural nets are good at solving non-linear problems. Some good examples are problems that are relatively easy for humans (because of experience, intuition, understanding, etc), but difficult for traditional regression models: speech recognition, handwriting recognition, image identification, etc."
+        },
+        {
+          "title": "How does a usual fully-connected feed-forward neural network work?",
+          "content": "**Q: How does a usual fully-connected feed-forward neural network work?**\n\nIn a usual fully-connected feed-forward network, each neuron receives input from every element of the previous layer and thus the receptive field of a neuron is the entire previous layer. They are usually used to represent feature vectors for input data in classification problems but can be expensive to train because of the number of computations involved."
+        },
+        {
+          "title": "Why do we need activation functions?",
+          "content": "**Q: Why do we need activation functions?**\n\nThe main idea of using neural networks is to learn complex nonlinear functions. If we are not using an activation function in between different layers of a neural network, we are just stacking up multiple linear layers one on top of another and this leads to learning a linear function. The Nonlinearity comes only with the activation function, this is the reason we need activation functions."
+        },
+        {
+          "title": "What are the problems with sigmoid as an activation function?",
+          "content": "**Q: What are the problems with sigmoid as an activation function?**\n\nThe derivative of the sigmoid function for large positive or negative numbers is almost zero. From this comes the problem of vanishing gradient — during the backpropagation our net will not learn (or will learn drastically slow). One possible way to solve this problem is to use ReLU activation function."
+        },
+        {
+          "title": "What is ReLU? How is it better than sigmoid or tanh?",
+          "content": "**Q: What is ReLU? How is it better than sigmoid or tanh?**\n\nReLU is an abbreviation for Rectified Linear Unit. It is an activation function which has the value 0 for all negative values and the value f(x) = x for all positive values. The ReLU has a simple activation function which makes it fast to compute and while the sigmoid and tanh activation functions saturate at higher values, the ReLU has a potentially infinite activation, which addresses the problem of vanishing gradients."
+        },
+        {
+          "title": "How we can initialize the weights of a neural network?",
+          "content": "**Q: How we can initialize the weights of a neural network?**\n\nProper initialization of weight matrix in neural network is very necessary.\nSimply we can say there are two ways for initializations.\n   1. Initializing weights with zeroes.\n      Setting weights to zero makes your network no better than a linear model. It is important to note that setting biases to 0 will not create any troubles as non zero weights take care of breaking the symmetry and even if bias is 0, the values in every neuron are still different.  \n   2. Initializing weights randomly.\n      Assigning random values to weights is better than just 0 assignment. \n* a) If weights are initialized with very high values the term np.dot(W,X)+b becomes significantly higher and if an activation function like sigmoid() is applied, the function maps its value near to 1 where the slope of gradient changes slowly and learning takes a lot of time.\n* b) If weights are initialized with low values it gets mapped to 0, where the case is the same as above. This problem is often referred to as the vanishing gradient."
+        },
+        {
+          "title": "What if we set all the weights of a neural network to 0?",
+          "content": "**Q: What if we set all the weights of a neural network to 0?**\n\nIf all the weights of a neural network are set to zero, the output of each connection is same (W*x = 0). This means the gradients which are backpropagated to each connection in a layer is same. This means all the connections/weights learn the same thing, and the model never converges."
+        },
+        {
+          "title": "What regularization techniques for neural nets do you know?",
+          "content": "**Q: What regularization techniques for neural nets do you know?**\n\n* L1 Regularization - Defined as the sum of absolute values of the individual parameters. The L1 penalty causes a subset of the weights to become zero, suggesting that the corresponding features may safely be discarded. \n* L2 Regularization - Defined as the sum of square of individual parameters. Often supported by regularization hyperparameter alpha. It results in weight decay. \n* Data Augmentation - This requires some fake data to be created as a part of training set. \n* Drop Out : This is most effective regularization technique for neural nets. Few random nodes in each layer is deactivated in forward pass. This allows the algorithm to train on different set of nodes in each iterations."
+        },
+        {
+          "title": "What is dropout? Why is it useful? How does it work?",
+          "content": "**Q: What is dropout? Why is it useful? How does it work?**\n\nDropout is a technique that at each training step turns off each neuron with a certain probability of *p*. This way at each iteration we train only *1-p* of neurons, which forces the network not to rely only on the subset of neurons for feature representation. This leads to regularizing effects that are controlled by the hyperparameter *p*."
+        }
+      ]
+    },
+    {
+      "id": "optimization-in-neural-networks",
+      "name": "Optimization in neural networks",
+      "cards": [
+        {
+          "title": "What is backpropagation? How does it work? Why do we need it?",
+          "content": "**Q: What is backpropagation? How does it work? Why do we need it?**\n\nThe Backpropagation algorithm looks for the minimum value of the error function in weight space using a technique called the delta rule or gradient descent. \nThe weights that minimize the error function is then considered to be a solution to the learning problem. \n\nWe need backpropogation because,\n* Calculate the error – How far is your model output from the actual output.\n* Minimum Error – Check whether the error is minimized or not.\n* Update the parameters – If the error is huge then, update the parameters (weights and biases). After that again check the error.  \nRepeat the process until the error becomes minimum.\n* Model is ready to make a prediction – Once the error becomes minimum, you can feed some inputs to your model and it will produce the output."
+        },
+        {
+          "title": "Which optimization techniques for training neural nets do you know?",
+          "content": "**Q: Which optimization techniques for training neural nets do you know?**\n\n* Gradient Descent\n* Stochastic Gradient Descent\n* Mini-Batch Gradient Descent(best among gradient descents)\n* Nesterov Accelerated Gradient\n* Momentum\n* Adagrad \n* AdaDelta\n* Adam(best one. less time, more efficient)"
+        },
+        {
+          "title": "How do we use SGD (stochastic gradient descent) for training a neural net?",
+          "content": "**Q: How do we use SGD (stochastic gradient descent) for training a neural net?**\n\nSGD approximates the expectation with few randomly selected samples (instead of the full data). In comparison to batch gradient descent, we can efficiently approximate the expectation in large data sets using SGD. For neural networks this reduces the training time a lot even considering that it will converge later as the random sampling adds noise to the gradient descent."
+        },
+        {
+          "title": "What’s the learning rate?",
+          "content": "**Q: What’s the learning rate?**\n\nThe learning rate is an important hyperparameter that controls how quickly the model is adapted to the problem during the training. It can be seen as the \"step width\" during the parameter updates, i.e. how far the weights are moved into the direction of the minimum of our optimization problem."
+        },
+        {
+          "title": "What happens when the learning rate is too large? Too small?",
+          "content": "**Q: What happens when the learning rate is too large? Too small?**\n\nA large learning rate can accelerate the training. However, it is possible that we \"shoot\" too far and miss the minimum of the function that we want to optimize, which will not result in the best solution. On the other hand, training with a small learning rate takes more time but it is possible to find a more precise minimum. The downside can be that the solution is stuck in a local minimum, and the weights won't update even if it is not the best possible global solution."
+        },
+        {
+          "title": "How to set the learning rate?",
+          "content": "**Q: How to set the learning rate?**\n\nThere is no straightforward way of finding an optimum learning rate for a model. It involves a lot of hit and trial. Usually starting with a small values such as 0.01 is a good starting point for setting a learning rate and further tweaking it so that it doesn't overshoot or converge too slowly."
+        },
+        {
+          "title": "What is Adam? What’s the main difference between Adam and SGD?",
+          "content": "**Q: What is Adam? What’s the main difference between Adam and SGD?**\n\nAdam (Adaptive Moment Estimation) is a optimization technique for training neural networks. on an average, it is the best optimizer .It works with momentums of first and second order. The intuition behind the Adam is that we don’t want to roll so fast just because we can jump over the minimum, we want to decrease the velocity a little bit for a careful search.\n\nAdam tends to converge faster, while SGD often converges to more optimal solutions.\nSGD's high variance disadvantages gets rectified by Adam (as advantage for Adam)."
+        },
+        {
+          "title": "When would you use Adam and when SGD?",
+          "content": "**Q: When would you use Adam and when SGD?**\n\nAdam tends to converge faster, while SGD often converges to more optimal solutions."
+        },
+        {
+          "title": "Do we want to have a constant learning rate or we better change it throughout training?",
+          "content": "**Q: Do we want to have a constant learning rate or we better change it throughout training?**\n\nGenerally, it is recommended to start learning rate with relatively high value and then gradually decrease learning rate so the model does not overshoot the minima and at the same time we don't want to start with very low learning rate as the model will take too long to converge. There are many available techniques to do decay the learning rate. For example, in PyTorch you can use\na function called **StepLR** which decays the learning rate of each parameter by value **gamma**-which we have to pass through argument- after n number of epoch which you can also set through function argument named **epoch_size**."
+        },
+        {
+          "title": "How do we decide when to stop training a neural net?",
+          "content": "**Q: How do we decide when to stop training a neural net?**\n\nSimply stop training when the validation error is the minimum."
+        },
+        {
+          "title": "What is model checkpointing?",
+          "content": "**Q: What is model checkpointing?**\n\nSaving the weights learned by a model mid training for long running processes is known as model checkpointing so that you can resume your training from a certain checkpoint."
+        },
+        {
+          "title": "Can you tell us how you approach the model training process?",
+          "content": "**Q: Can you tell us how you approach the model training process?**\n\n- Data Preparation: Clean the data, scale features, and split it into Train, Validation, and Test sets. After this, choose the architecture & hyperparameters for the model.\n- Train & Monitor: Run forward passes, compute loss, and update weights via backpropagation while tracking both training and validation loss.\n- Tuning & Regularization: Adjust hyperparameters and apply Dropout, Weight Decay, or Early Stopping to prevent overfitting. Then, evaluate the final model on the unseen test set to check real-world performance."
+        }
+      ]
+    },
+    {
+      "id": "neural-networks-for-computer-vision",
+      "name": "Neural networks for computer vision",
+      "cards": [
+        {
+          "title": "How we can use neural nets for computer vision?",
+          "content": "**Q: How we can use neural nets for computer vision?**\n\nNeural nets used in the area of computer vision are generally Convolutional Neural Networks(CNN's). You can learn about convolutions below. It appears that convolutions are quite powerful when it comes to working with images and videos due to their ability to extract and learn complex features. Thus CNN's are a go-to method for any problem in computer vision."
+        },
+        {
+          "title": "What’s a convolutional layer?",
+          "content": "**Q: What’s a convolutional layer?**\n\nThe idea of the convolutional layer is the assumption that the information needed for making a decision often is spatially close and thus, it only takes the weighted sum over nearby inputs. It also assumes that the networks’ kernels can be reused for all nodes, hence the number of weights can be drastically reduced. To counteract only one feature being learnt per layer, multiple kernels are applied to the input which creates parallel channels in the output. Consecutive layers can also be stacked to allow the network to find more high-level features."
+        },
+        {
+          "title": "Why do we actually need convolutions? Can’t we use fully-connected layers for that?",
+          "content": "**Q: Why do we actually need convolutions? Can’t we use fully-connected layers for that?**\n\nA fully-connected layer needs one weight per inter-layer connection, which means the number of weights which needs to be computed quickly balloons as the number of layers and nodes per layer is increased."
+        },
+        {
+          "title": "What’s pooling in CNN? Why do we need it?",
+          "content": "**Q: What’s pooling in CNN? Why do we need it?**\n\nPooling is a technique to downsample the feature map. It allows layers which receive relatively undistorted versions of the input to learn low level features such as lines, while layers deeper in the model can learn more abstract features such as texture."
+        },
+        {
+          "title": "How does max pooling work? Are there other pooling techniques?",
+          "content": "**Q: How does max pooling work? Are there other pooling techniques?**\n\nMax pooling is a technique where the maximum value of a receptive field is passed on in the next feature map. The most commonly used receptive field is 2 x 2 with a stride of 2, which means the feature map is downsampled from N x N to N/2 x N/2. Receptive fields larger than 3 x 3 are rarely employed as too much information is lost. \n\nOther pooling techniques include:\n\n* Average pooling, the output is the average value of the receptive field.\n* Min pooling, the output is the minimum value of the receptive field.\n* Global pooling, where the receptive field is set to be equal to the input size, this means the output is equal to a scalar and can be used to reduce the dimensionality of the feature map."
+        },
+        {
+          "title": "Are CNNs resistant to rotations? What happens to the predictions of a CNN if an image is rotated?",
+          "content": "**Q: Are CNNs resistant to rotations? What happens to the predictions of a CNN if an image is rotated?**\n\nCNNs are not resistant to rotation by design. However, we can make our models resistant by augmenting our datasets with different rotations of the raw data. The predictions of a CNN will change if an image is rotated and we did not augment our dataset accordingly. A demonstration of this occurence can be seen in this video, where a CNN changes its predicted class between a duck and a rabbit based on the rotation of the image."
+        },
+        {
+          "title": "What are augmentations? Why do we need them?",
+          "content": "**Q: What are augmentations? Why do we need them?**\n\nAugmentations are an artifical way of expanding the existing datasets by performing some transformations, color shifts or many other things on the data. It helps in diversifying the data and even increasing the data when there is scarcity of data for a model to train on."
+        },
+        {
+          "title": "What kind of augmentations do you know?",
+          "content": "**Q: What kind of augmentations do you know?**\n\nThere are many kinds of augmentations which can be used according to the type of data you are working on some of which are geometric and numerical transformation, PCA, cropping, padding, shifting, noise injection etc."
+        },
+        {
+          "title": "How to choose which augmentations to use?",
+          "content": "**Q: How to choose which augmentations to use?**\n\nAugmentations really depend on the type of output classes and the features you want your model to learn. For eg. if you have mostly properly illuminated images in your dataset and want your model to predict poorly illuminated images too, you can apply channel shifting on your data and include the resultant images in your dataset for better results."
+        },
+        {
+          "title": "What kind of CNN architectures for classification do you know?",
+          "content": "**Q: What kind of CNN architectures for classification do you know?**\n\nImage Classification\n* Inception v3\n* Xception \n* DenseNet\n* AlexNet\n* VGG16\n* ResNet\n* SqueezeNet\n* EfficientNet\n* MobileNet\n\nThe last three are designed so they use smaller number of parameters which is helpful for edge AI."
+        },
+        {
+          "title": "What is transfer learning? How does it work?",
+          "content": "**Q: What is transfer learning? How does it work?**\n\nGiven a source domain D_S and learning task T_S, a target domain D_T and learning task T_T, transfer learning aims to help improve the learning of the target predictive function f_T in D_T using the knowledge in D_S and T_S, where D_S ≠ D_T,or T_S ≠ T_T. In other words, transfer learning enables to reuse knowledge coming from other domains or learning tasks.\n\nIn the context of CNNs, we can use networks that were pre-trained on popular datasets such as ImageNet. We then can use the weights of the layers that learn to represent features and combine them with a new set of layers that learns to map the feature representations to the given classes. Two popular strategies are either to freeze the layers that learn the feature representations completely, or to give them a smaller learning rate."
+        },
+        {
+          "title": "What is object detection? Do you know any architectures for that?",
+          "content": "**Q: What is object detection? Do you know any architectures for that?**\n\nObject detection is finding Bounding Boxes around objects in an image. \nArchitectures :\nYOLO, Faster RCNN, Center Net"
+        }
+      ]
+    },
+    {
+      "id": "text-classification",
+      "name": "Text classification",
+      "cards": [
+        {
+          "title": "How can we use machine learning for text classification?",
+          "content": "**Q: How can we use machine learning for text classification?**\n\nMachine learning classification algorithms predict a class based on a numerical feature representation. This means that in order to use machine learning for text classification, we need to extract numerical features from our text data first before we can apply machine learning algorithms. Common approaches to extract numerical features from text data are bag of words, N-grams or word embeddings."
+        },
+        {
+          "title": "What is bag of words? How we can use it for text classification?",
+          "content": "**Q: What is bag of words? How we can use it for text classification?**\n\nBag of Words is a representation of text that describes the occurrence of words within a document. The order or structure of the words is not considered. For text classification, we look at the histogram of the words within the text and consider each word count as a feature."
+        },
+        {
+          "title": "What are the advantages and disadvantages of bag of words?",
+          "content": "**Q: What are the advantages and disadvantages of bag of words?**\n\nAdvantages:\n1. Simple to understand and implement.\n\nDisadvantages:\n1. The vocabulary requires careful design, most specifically in order to manage the size, which impacts the sparsity of the document representations.\n2. Sparse representations are harder to model both for computational reasons (space and time complexity) and also for information reasons\n3. Discarding word order ignores the context, and in turn meaning of words in the document. Context and meaning can offer a lot to the model, that if modeled could tell the difference between the same words differently arranged (“this is interesting” vs “is this interesting”), synonyms (“old bike” vs “used bike”)."
+        },
+        {
+          "title": "What are N-grams? How can we use them?",
+          "content": "**Q: What are N-grams? How can we use them?**\n\nThe function to tokenize into consecutive sequences of words is called n-grams. It can be used to find out N most co-occurring words (how often word X is followed by word Y) in a given sentence."
+        },
+        {
+          "title": "What is TF-IDF? How is it useful for text classification?",
+          "content": "**Q: What is TF-IDF? How is it useful for text classification?**\n\nTerm Frequency (TF) is a scoring of the frequency of the word in the current document. Inverse Document Frequency(IDF) is a scoring of how rare the word is across documents. It is used in scenario where highly recurring words may not contain as much informational content as the domain specific words. For example, words like “the” that are frequent across all documents therefore need to be less weighted. The TF-IDF score highlights words that are distinct (contain useful information) in a given document."
+        },
+        {
+          "title": "Which model would you use for text classification with bag of words features?",
+          "content": "**Q: Which model would you use for text classification with bag of words features?**\n\n1. Bag Of Words model\n2. Word2Vec Embeddings\n3. fastText Embeddings\n4. Convolutional Neural Networks (CNN)\n5. Long Short-Term Memory (LSTM)\n6. Bidirectional Encoder Representations from Transformers (BERT)"
+        },
+        {
+          "title": "Would you prefer gradient boosting trees model or logistic regression when doing text classification with bag of words?",
+          "content": "**Q: Would you prefer gradient boosting trees model or logistic regression when doing text classification with bag of words?**\n\nUsually logistic regression is better because bag of words creates a matrix with large number of columns. For a huge number of columns logistic regression is usually faster than gradient boosting trees."
+        },
+        {
+          "title": "What are word embeddings? Why are they useful? Do you know Word2Vec?",
+          "content": "**Q: What are word embeddings? Why are they useful? Do you know Word2Vec?**\n\nWord Embeddings are vector representations for words. Each word is mapped to one vector, this vector tries to capture some characteristics of the word, allowing similar words to have similar vector representations.  \nWord Embeddings helps in capturing the inter-word semantics and represents it in real-valued vectors.  \n\nWord2Vec is a method to construct such an embedding. It takes a text corpus as input and outputs a set of vectors which represents words in that corpus.  \n\nIt can be generated using two methods:\n\n- Common Bag of Words (CBOW)\n- Skip-Gram"
+        },
+        {
+          "title": "If you have a sentence with multiple words, you may need to combine multiple word embeddings into one. How would you do it?",
+          "content": "**Q: If you have a sentence with multiple words, you may need to combine multiple word embeddings into one. How would you do it?**\n\nApproaches ranked from simple to more complex:\n\n1. Take an average over all words\n2. Take a weighted average over all words. Weighting can be done by inverse document frequency (idf part of tf-idf).\n3. Use ML model like LSTM or Transformer."
+        },
+        {
+          "title": "Would you prefer gradient boosting trees model or logistic regression when doing text classification with embeddings?",
+          "content": "**Q: Would you prefer gradient boosting trees model or logistic regression when doing text classification with embeddings?**\n\nGradient boosting trees (GBTs) are generally a better choice than logistic regression for text classification with embeddings. This is because GBTs are able to learn more complex relationships between the features in the data, including the features extracted from the embeddings.\n\nLogistic regression is a linear model, which means that it can only learn linear relationships between the features. This can be a limitation for text classification, where the relationships between the features are often complex and non-linear.\n\nGBTs, on the other hand, are able to learn non-linear relationships between the features by combining multiple decision trees. This allows GBTs to learn more complex patterns in the data, which can lead to better performance on text classification tasks.\n\nIn addition, GBTs are more robust to outliers and noise in the data than logistic regression. This can be important for text classification tasks, where the data can be noisy and imbalanced."
+        },
+        {
+          "title": "Would you prefer gradient boosting trees model or logistic regression when doing text classification with embeddings? (cont.)",
+          "content": "Overall, GBTs are a better choice than logistic regression for text classification with embeddings, especially when the data is noisy or imbalanced. However, it is important to consider the computational cost and interpretability of GBTs before using them."
+        },
+        {
+          "title": "How can you use neural nets for text classification?",
+          "content": "**Q: How can you use neural nets for text classification?**\n\nHere is a general overview of how to use neural nets for text classification:"
+        }
+      ]
+    },
+    {
+      "id": "clustering",
+      "name": "Clustering",
+      "cards": [
+        {
+          "title": "What is unsupervised learning?",
+          "content": "**Q: What is unsupervised learning?**\n\nUnsupervised learning aims to detect patterns in data where no labels are given."
+        },
+        {
+          "title": "What is clustering? When do we need it?",
+          "content": "**Q: What is clustering? When do we need it?**\n\nClustering algorithms group objects such that similar feature points are put into the same groups (clusters) and dissimilar feature points are put into different clusters."
+        },
+        {
+          "title": "Do you know how K-means works?",
+          "content": "**Q: Do you know how K-means works?**\n\n1. Partition points into k subsets.\n2. Compute the seed points as the new centroids of the clusters of the current partitioning.\n3. Assign each point to the cluster with the nearest seed point.\n4. Go back to step 2 or stop when the assignment does not change."
+        },
+        {
+          "title": "How to select K for K-means?",
+          "content": "**Q: How to select K for K-means?**\n\n* Domain knowledge, i.e. an expert knows the value of k\n* Elbow method: compute the clusters for different values of k, for each k, calculate the total within-cluster sum of square, plot the sum according to the number of clusters and use the band as the number of clusters.\n* Average silhouette method: compute the clusters for different values of k, for each k, calculate the average silhouette of observations, plot the silhouette according to the number of clusters and select the maximum as the number of clusters."
+        },
+        {
+          "title": "What are the other clustering algorithms do you know?",
+          "content": "**Q: What are the other clustering algorithms do you know?**\n\n* k-medoids: Takes the most central point instead of the mean value as the center of the cluster. This makes it more robust to noise.\n* Agglomerative Hierarchical Clustering (AHC): hierarchical clusters combining the nearest clusters starting with each point as its own cluster.\n* DIvisive ANAlysis Clustering (DIANA): hierarchical clustering starting with one cluster containing all points and splitting the clusters until each point describes its own cluster.\n* Density-Based Spatial Clustering of Applications with Noise (DBSCAN): Cluster defined as maximum set of density-connected points."
+        },
+        {
+          "title": "Do you know how DBScan works?",
+          "content": "**Q: Do you know how DBScan works?**\n\n* Two input parameters epsilon (neighborhood radius) and minPts (minimum number of points in an epsilon-neighborhood)\n* Cluster defined as maximum set of density-connected points.\n* Points p_j and p_i are density-connected w.r.t. epsilon and minPts if there is a point o such that both, i and j are density-reachable from o w.r.t. epsilon and minPts.\n* p_j is density-reachable from p_i w.r.t. epsilon, minPts if there is a chain of points p_i -> p_i+1 -> p_i+x = p_j such that p_i+x is directly density-reachable from p_i+x-1.\n* p_j is a directly density-reachable point of the neighborhood of p_i if dist(p_i,p_j) <= epsilon."
+        },
+        {
+          "title": "When would you choose K-means and when DBScan?",
+          "content": "**Q: When would you choose K-means and when DBScan?**\n\n* DBScan is more robust to noise.\n* DBScan is better when the amount of clusters is difficult to guess.\n* K-means has a lower complexity, i.e. it will be much faster, especially with a larger amount of points."
+        }
+      ]
+    },
+    {
+      "id": "dimensionality-reduction-2",
+      "name": "Dimensionality reduction",
+      "cards": [
+        {
+          "title": "What is the curse of dimensionality? Why do we care about it?",
+          "content": "**Q: What is the curse of dimensionality? Why do we care about it?**\n\nData in only one dimension is relatively tightly packed. Adding a dimension stretches the points across that dimension, pushing them further apart. Additional dimensions spread the data even further making high dimensional data extremely sparse. We care about it, because it is difficult to use machine learning in sparse spaces."
+        },
+        {
+          "title": "Do you know any dimensionality reduction techniques?",
+          "content": "**Q: Do you know any dimensionality reduction techniques?**\n\n* Singular Value Decomposition (SVD)\n* Principal Component Analysis (PCA)\n* Linear Discriminant Analysis (LDA)\n* T-distributed Stochastic Neighbor Embedding (t-SNE)\n* Autoencoders\n* Fourier and Wavelet Transforms"
+        },
+        {
+          "title": "What’s singular value decomposition? How is it typically used for machine learning?",
+          "content": "**Q: What’s singular value decomposition? How is it typically used for machine learning?**\n\n* Singular Value Decomposition (SVD) is a general matrix decomposition method that factors a matrix X into three matrices L (left singular values), Σ (diagonal matrix) and R^T (right singular values).\n* For machine learning, Principal Component Analysis (PCA) is typically used. It is a special type of SVD where the singular values correspond to the eigenvectors and the values of the diagonal matrix are the squares of the eigenvalues. We use these features as they are statistically descriptive.\n* Having calculated the eigenvectors and eigenvalues, we can use the Kaiser-Guttman criterion, a scree plot or the proportion of explained variance to determine the principal components (i.e. the final dimensionality) that are useful for dimensionality reduction."
+        }
+      ]
+    },
+    {
+      "id": "ranking-and-search",
+      "name": "Ranking and search",
+      "cards": [
+        {
+          "title": "What is precision and recall at k?",
+          "content": "**Q: What is precision and recall at k?**\n\nPrecision at k and recall at k are evaluation metrics for ranking algorithms. Precision at k shows the share of relevant items in the first *k* results of the ranking algorithm. And Recall at k indicates the share of relevant items returned in top *k* results out of all correct answers for a given query.\n\nExample:\nFor a search query \"Car\" there are 3 relevant products in your shop. Your search algorithm returns 2 of those relevant products in the first 5 search results.\nPrecision at 5 = # num of relevant products in search result / k = 2/5 = 40%\nRecall at 5 = # num of relevant products in search result / # num of all relevant products = 2/3 = 66.6%"
+        }
+      ]
+    },
+    {
+      "id": "recommender-systems",
+      "name": "Recommender systems",
+      "cards": [
+        {
+          "title": "What is a recommender system?",
+          "content": "**Q: What is a recommender system?**\n\nRecommender systems are software tools and techniques that provide suggestions for items that are most likely of interest to a particular user."
+        },
+        {
+          "title": "What are good baselines when building a recommender system?",
+          "content": "**Q: What are good baselines when building a recommender system?**\n\n* A good recommer system should give relevant and personalized information.\n* It should not recommend items the user knows well or finds easily.\n* It should make diverse suggestions.\n* A user should explore new items."
+        },
+        {
+          "title": "What is collaborative filtering?",
+          "content": "**Q: What is collaborative filtering?**\n\n* Collaborative filtering is the most prominent approach to generate recommendations.\n* It uses the wisdom of the crowd, i.e. it gives recommendations based on the experience of others.\n* A recommendation is calculated as the average of other experiences.\n* Say we want to give a score that indicates how much user u will like an item i. Then we can calculate it with the experience of N other users U as r_ui = 1/N * sum(v in U) r_vi.\n* In order to rate similar experiences with a higher weight, we can introduce a similarity between users that we use as a multiplier for each rating.\n* Also, as users have an individual profile, one user may have an average rating much larger than another user, so we use normalization techniques (e.g. centering or Z-score normalization) to remove the users' biases.\n* Collaborative filtering does only need a rating matrix as input and improves over time. However, it does not work well on sparse data, does not work for cold starts (see below) and usually tends to overfit."
+        },
+        {
+          "title": "How we can incorporate implicit feedback (clicks, etc) into our recommender systems?",
+          "content": "**Q: How we can incorporate implicit feedback (clicks, etc) into our recommender systems?**\n\nIn comparison to explicit feedback, implicit feedback datasets lack negative examples. For example, explicit feedback can be a positive or a negative rating, but implicit feedback may be the number of purchases or clicks. One popular approach to solve this problem is named weighted alternating least squares (wALS) [Hu, Y., Koren, Y., & Volinsky, C. (2008, December). Collaborative filtering for implicit feedback datasets. In Data Mining, 2008. ICDM'08. Eighth IEEE International Conference on (pp. 263-272). IEEE.]. Instead of modeling the rating matrix directly, the numbers (e.g. amount of clicks) describe the strength in observations of user actions. The model tries to find latent factors that can be used to predict the expected preference of a user for an item."
+        },
+        {
+          "title": "What is the cold start problem?",
+          "content": "**Q: What is the cold start problem?**\n\nCollaborative filterung incorporates crowd knowledge to give recommendations for certain items. Say we want to recommend how much a user will like an item, we then will calculate the score using the recommendations of other users for this certain item. We can distinguish between two different ways of a cold start problem now. First, if there is a new item that has not been rated yet, we cannot give any recommendation. Also, when there is a new user, we cannot calculate a similarity to any other user."
+        },
+        {
+          "title": "Possible approaches to solving the cold start problem?",
+          "content": "**Q: Possible approaches to solving the cold start problem?**\n\n* Content-based filtering incorporates features about items to calculate a similarity between them. In this way, we can recommend items that have a high similarity to items that a user liked already. In this way, we are not dependent on the ratings of other users for a given item anymore and solve the cold start problem for new items.\n* Demographic filtering incorporates user profiles to calculate a similarity between them and solves the cold start problem for new users."
+        }
+      ]
+    },
+    {
+      "id": "time-series",
+      "name": "Time series",
+      "cards": [
+        {
+          "title": "What is a time series?",
+          "content": "**Q: What is a time series?**\n\nA time series is a set of observations ordered in time usually collected at regular intervals."
+        },
+        {
+          "title": "How is time series different from the usual regression problem?",
+          "content": "**Q: How is time series different from the usual regression problem?**\n\nThe principle behind causal forecasting is that the value that has to be predicted is dependant on the input features (causal factors). In time series forecasting, the to be predicted value is expected to follow a certain pattern over time."
+        },
+        {
+          "title": "Which models do you know for solving time series problems?",
+          "content": "**Q: Which models do you know for solving time series problems?**\n\n* Simple Exponential Smoothing: approximate the time series with an exponential function\n* Trend-Corrected Exponential Smoothing (Holt‘s Method): exponential smoothing that also models the trend\n* Trend- and Seasonality-Corrected Exponential Smoothing (Holt-Winter‘s Method): exponential smoothing that also models trend and seasonality\n* Time Series Decomposition: decomposed a time series into the four components trend, seasonal variation, cycling variation and irregular component\n* Autoregressive models: similar to multiple linear regression, except that the dependent variable y_t depends on its own previous values rather than other independent variables.\n* Deep learning approaches (RNN, LSTM, etc.)"
+        },
+        {
+          "title": "If there’s a trend in our series, how we can remove it? And why would we want to do it?",
+          "content": "**Q: If there’s a trend in our series, how we can remove it? And why would we want to do it?**\n\nWe can explicitly model the trend (and/or seasonality) with approaches such as Holt's Method or Holt-Winter's Method. We want to explicitly model the trend to reach the stationarity property for the data. Many time series approaches require stationarity. Without stationarity,the interpretation of the results of these analyses is problematic [Manuca, Radu & Savit, Robert. (1996). Stationarity and nonstationarity in time series analysis. Physica D: Nonlinear Phenomena. 99. 134-161. 10.1016/S0167-2789(96)00139-X. ]."
+        },
+        {
+          "title": "You have a series with only one variable “y” measured at time t. How do predict “y” at time t+1? Which approaches would you use?",
+          "content": "**Q: You have a series with only one variable “y” measured at time t. How do predict “y” at time t+1? Which approaches would you use?**\n\nWe want to look at the correlation between different observations of y. This measure of correlation is called autocorrelation. Autoregressive models are multiple regression models where the time-lag series of the original time series are treated like multiple independent variables."
+        },
+        {
+          "title": "You have a series with a variable “y” and a set of features. How do you predict “y” at t+1? Which approaches would you use?",
+          "content": "**Q: You have a series with a variable “y” and a set of features. How do you predict “y” at t+1? Which approaches would you use?**\n\nGiven the assumption that the set of features gives a meaningful causation to y, a causal forecasting approach such as linear regression or multiple nonlinear regression might be useful. In case there is a lot of data and the explainability of the results is not a high priority, we can also consider deep learning approaches."
+        },
+        {
+          "title": "What are the problems with using trees for solving time series problems?",
+          "content": "**Q: What are the problems with using trees for solving time series problems?**\n\nRandom Forest models are not able to extrapolate time series data and understand increasing/decreasing trends. It will provide us with average data points if the validation data has values greater than the training data points."
+        }
+      ]
+    },
+    {
+      "id": "python-answer",
+      "name": "Python: Answer:",
+      "cards": [
+        {
+          "title": "𝐄𝐱𝐩𝐥𝐚𝐢𝐧 𝐰𝐡𝐚𝐭 𝐅𝐥𝐚𝐬𝐤 𝐢𝐬 𝐚𝐧𝐝 𝐢𝐭𝐬 𝐛𝐞𝐧𝐞𝐟𝐢𝐭𝐬",
+          "content": "**Q: 𝐄𝐱𝐩𝐥𝐚𝐢𝐧 𝐰𝐡𝐚𝐭 𝐅𝐥𝐚𝐬𝐤 𝐢𝐬 𝐚𝐧𝐝 𝐢𝐭𝐬 𝐛𝐞𝐧𝐞𝐟𝐢𝐭𝐬**\n\nFlask is a web framework. This means flask provides you with tools, libraries, and technologies that allow you to build a web application. This web application can be some web pages, a blog, a wiki, or go as big as a web-based calendar application or a commercial website.\n\nBenefits of Flask:\n1. Scalable\nFlask’s status as a microframework means that it can be used to grow a tech project such as a web app very quickly. \n\n2. Flexible\nIt allows the project to be rearranged and moved around. Also makes sure that the project structure does not collapse when a part is altered.\n\n3. Easy to negotiate\nAt its core, the microframework is easy to understand for web developers also giving them more control over their code and what is possible."
+        },
+        {
+          "title": "𝐄𝐱𝐩𝐥𝐚𝐢𝐧 𝐰𝐡𝐚𝐭 𝐅𝐥𝐚𝐬𝐤 𝐢𝐬 𝐚𝐧𝐝 𝐢𝐭𝐬 𝐛𝐞𝐧𝐞𝐟𝐢𝐭𝐬 (cont.)",
+          "content": "4. Lightweight\nCertain parts of a design of a tool/framework might need assembling and reassembling and do not rely on a large number of extensions to function which gives web developers a certain level of control. Further, Flask also supports modular programming, which is where its functionality can be split into several interchangeable modules and each module acts as an independent entity and executes a part of the functionality."
+        },
+        {
+          "title": "𝐖𝐡𝐚𝐭 𝐢𝐬 𝐭𝐡𝐞 𝐝𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐜𝐞 𝐛𝐞𝐭𝐰𝐞𝐞𝐧 𝐥𝐢𝐬𝐭𝐬, 𝐚𝐫𝐫𝐚𝐲𝐬, 𝐚𝐧𝐝 𝐬𝐞𝐭𝐬 𝐢𝐧 𝐏𝐲𝐭𝐡𝐨𝐧, 𝐚𝐧𝐝 𝐰𝐡𝐞𝐧 𝐲𝐨𝐮 𝐬𝐡𝐨𝐮𝐥𝐝 𝐮𝐬𝐞 𝐞𝐚𝐜𝐡 𝐨𝐟 𝐭𝐡𝐞𝐦?",
+          "content": "**Q: 𝐖𝐡𝐚𝐭 𝐢𝐬 𝐭𝐡𝐞 𝐝𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐜𝐞 𝐛𝐞𝐭𝐰𝐞𝐞𝐧 𝐥𝐢𝐬𝐭𝐬, 𝐚𝐫𝐫𝐚𝐲𝐬, 𝐚𝐧𝐝 𝐬𝐞𝐭𝐬 𝐢𝐧 𝐏𝐲𝐭𝐡𝐨𝐧, 𝐚𝐧𝐝 𝐰𝐡𝐞𝐧 𝐲𝐨𝐮 𝐬𝐡𝐨𝐮𝐥𝐝 𝐮𝐬𝐞 𝐞𝐚𝐜𝐡 𝐨𝐟 𝐭𝐡𝐞𝐦?**\n\nAll three are data structures that can store sequences of data. but with some differences.\n\nList denoted by [ ], set by { } , and array/tuple by ( )\n\n𝐋𝐢𝐬𝐭: built-in data type in Python that helps store data in sequence with a very rich API that allows insertion removal retrieval and expansion. one of its benefits is that it allows the use of many data types in the same lists as it can store string, integers, floats of any other derived objects. one of its cons that are very slow if it will be used in numerical computation.\n\n𝐀𝐫𝐫𝐚𝐲: on the other hand array can only store a single data type like integers only, float only, or any derived object only. but unlike lists, it's very efficient in terms of speed and memory usage (NumPy is one of the best libraries that implements array operations as it's a very rich library that solves many problems in numerical computation like vectorization, broadcasting, ...etc)."
+        },
+        {
+          "title": "𝐖𝐡𝐚𝐭 𝐢𝐬 𝐭𝐡𝐞 𝐝𝐢𝐟𝐟𝐞𝐫𝐞𝐧𝐜𝐞 𝐛𝐞𝐭𝐰𝐞𝐞𝐧 𝐥𝐢𝐬𝐭𝐬, 𝐚𝐫𝐫𝐚𝐲𝐬, 𝐚𝐧𝐝 𝐬𝐞𝐭𝐬 𝐢𝐧 𝐏𝐲𝐭𝐡𝐨𝐧, 𝐚𝐧𝐝 𝐰𝐡𝐞𝐧 𝐲𝐨𝐮 𝐬𝐡𝐨𝐮𝐥𝐝 𝐮𝐬𝐞 𝐞𝐚𝐜𝐡 𝐨𝐟 𝐭𝐡𝐞𝐦? (cont.)",
+          "content": "𝐒𝐞𝐭: it's also a built-in data type in Python and can store more that data types. but it does not allow for the existence of duplicates and if there are duplicates it only uses one of them. provide a lot of methods like unions, diffs, and intersections."
+        }
+      ]
+    }
+  ]
+}

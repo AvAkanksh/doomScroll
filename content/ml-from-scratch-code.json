@@ -1,0 +1,510 @@
+{
+  "topics": [
+    {
+      "id": "layers",
+      "name": "Layers",
+      "cards": [
+        {
+          "title": "Layer: Overview",
+          "content": "**Layer** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nSets the shape that the layer expects of the input in the forward\n        pass method"
+        },
+        {
+          "title": "Dense: Overview",
+          "content": "**Dense** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nA fully-connected NN layer.\n    Parameters:\n    -----------\n    n_units: int\n        The number of neurons in the layer.\n    input_shape: tuple\n        The expected input shape of the layer. For dense layers a single digit specifying\n        the number of features of the input. Must be specified if it is the first layer in\n        the network."
+        },
+        {
+          "title": "RNN: Overview",
+          "content": "**RNN** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nA Vanilla Fully-Connected Recurrent Neural Network layer.\n\n    Parameters:\n    -----------\n    n_units: int\n        The number of hidden states in the layer.\n    activation: string\n        The name of the activation function which will be applied to the output of each state.\n    bptt_trunc: int\n        Decides how many time steps the gradient should be propagated backwards through states\n        given the loss gradient for time step t.\n    input_shape: tuple\n        The expected input shape of the layer. For dense layers a single digit specifying\n        the number of features of the input. Must be specified if it is the first layer in\n        the network.\n\n    Reference:\n    http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/"
+        },
+        {
+          "title": "Conv2D: Overview",
+          "content": "**Conv2D** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nA 2D Convolution Layer.\n\n    Parameters:\n    -----------\n    n_filters: int\n        The number of filters that will convolve over the input matrix. The number of channels\n        of the output shape.\n    filter_shape: tuple\n        A tuple (filter_height, filter_width).\n    input_shape: tuple\n        The shape of the expected input of the layer. (batch_size, channels, height, width)\n        Only needs to be specified for first layer in the network.\n    padding: string\n        Either 'same' or 'valid'. 'same' results in padding being added so that the output height and width\n        matches the input height and width. For 'valid' no padding is added.\n    stride: int\n        The stride length of the filters during the convolution over the input."
+        },
+        {
+          "title": "BatchNormalization: Overview",
+          "content": "**BatchNormalization** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nBatch normalization."
+        },
+        {
+          "title": "PoolingLayer: Overview",
+          "content": "**PoolingLayer** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/layers.py`\n\nA parent class of MaxPooling2D and AveragePooling2D"
+        }
+      ]
+    },
+    {
+      "id": "neural-network",
+      "name": "Neural Network",
+      "cards": [
+        {
+          "title": "NeuralNetwork: Overview",
+          "content": "**NeuralNetwork** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/deep_learning/neural_network.py`\n\nNeural Network. Deep Learning base model.\n\n    Parameters:\n    -----------\n    optimizer: class\n        The weight optimizer that will be used to tune the weights in order of minimizing\n        the loss.\n    loss: class\n        Loss function used to measure the model's performance. SquareLoss or CrossEntropy.\n    validation: tuple\n        A tuple containing validation data and labels (X, y)"
+        },
+        {
+          "title": "NeuralNetwork.fit()",
+          "content": "**NeuralNetwork.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y, n_epochs, batch_size):\n        \"\"\" Trains the model for a fixed number of epochs \"\"\"\n        for _ in self.progressbar(range(n_epochs)):\n            \n            batch_error = []\n            for X_batch, y_batch in batch_iterator(X, y, batch_size=batch_size):\n                loss, _ = self.train_on_batch(X_batch, y_batch)\n                batch_error.append(loss)\n\n            self.errors[\"training\"].append(np.mean(batch_error))\n\n            if self.val_set is not None:\n                val_loss, _ = self.test_on_batch(self.val_set[\"X\"], self.val_set[\"y\"])\n                self.errors[\"validation\"].append(val_loss)\n\n        return self.errors[\"training\"], self.errors[\"validation\"]\n```"
+        },
+        {
+          "title": "NeuralNetwork.predict()",
+          "content": "**NeuralNetwork.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Use the trained model to predict labels of X \"\"\"\n        return self._forward_pass(X, training=False)\n```"
+        }
+      ]
+    },
+    {
+      "id": "deep-q-network",
+      "name": "Deep Q Network",
+      "cards": [
+        {
+          "title": "DeepQNetwork: Overview",
+          "content": "**DeepQNetwork** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/reinforcement_learning/deep_q_network.py`\n\nQ-Learning with deep neural network to learn the control policy. \n    Uses a deep neural network model to predict the expected utility (Q-value) of executing an action in a given state. \n\n    Reference: https://arxiv.org/abs/1312.5602\n    Parameters:\n    -----------\n    env_name: string\n        The environment that the agent will explore. \n        Check: https://gym.openai.com/envs\n    epsilon: float\n        The epsilon-greedy value. The probability that the agent should select a random action instead of\n        the action that will maximize the expected utility. \n    gamma: float\n        Determines how much the agent should consider future rewards. \n    decay_rate: float\n        The rate of decay for the epsilon value after each epoch.\n    min_epsilon: float\n        The value which epsilon will approach as the training progresses."
+        }
+      ]
+    },
+    {
+      "id": "adaboost",
+      "name": "Adaboost",
+      "cards": [
+        {
+          "title": "Adaboost: Overview",
+          "content": "**Adaboost** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/adaboost.py`\n\nBoosting method that uses a number of weak classifiers in \n    ensemble to make a strong classifier. This implementation uses decision\n    stumps, which is a one level Decision Tree. \n\n    Parameters:\n    -----------\n    n_clf: int\n        The number of weak classifiers that will be used."
+        },
+        {
+          "title": "Adaboost.fit()",
+          "content": "**Adaboost.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        n_samples, n_features = np.shape(X)\n\n        # Initialize weights to 1/N\n        w = np.full(n_samples, (1 / n_samples))\n        \n        self.clfs = []\n        # Iterate through classifiers\n        for _ in range(self.n_clf):\n            clf = DecisionStump()\n            # Minimum error given for using a certain feature value threshold\n            # for predicting sample label\n            min_error = float('inf')\n            # Iterate throught every unique feature value and see what value\n            # makes the best threshold for predicting y\n            for feature_i in range(n_features):\n                feature_values = np.expand_dims(X[:, feature_i], axis=1)\n                unique_values = np.unique(feature_values)\n                # Try every unique feature value as threshold\n                for threshold in unique_values:\n                    p = 1\n                    # Set all predictions to '1' initially\n                    prediction = np.ones(np.shape(y))\n                    # Label the samples whose values are below threshold as '-1'\n                    prediction[X[:, feature_i] < threshold] = -1\n                    # Error = sum of weights of misclassified samples\n                    error = sum(w[y != prediction])\n                    \n                    # If the error is over 50% we flip the polarity so that samples that\n                    # were classified as 0 are classified as 1, and vice versa\n```"
+        },
+        {
+          "title": "Adaboost.predict()",
+          "content": "**Adaboost.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        n_samples = np.shape(X)[0]\n        y_pred = np.zeros((n_samples, 1))\n        # For each classifier => label the samples\n        for clf in self.clfs:\n            # Set all predictions to '1' initially\n            predictions = np.ones(np.shape(y_pred))\n            # The indexes where the sample values are below threshold\n            negative_idx = (clf.polarity * X[:, clf.feature_index] < clf.polarity * clf.threshold)\n            # Label those as '-1'\n            predictions[negative_idx] = -1\n            # Add predictions weighted by the classifiers alpha\n            # (alpha indicative of classifier's proficiency)\n            y_pred += clf.alpha * predictions\n\n        # Return sign of prediction sum\n        y_pred = np.sign(y_pred).flatten()\n\n        return y_pred\n\n\ndef main():\n    data = datasets.load_digits()\n    X = data.data\n    y = data.target\n\n    digit1 = 1\n    digit2 = 8\n    idx = np.append(np.where(y == digit1)[0], np.where(y == digit2)[0])\n    y = data.target[idx]\n```"
+        }
+      ]
+    },
+    {
+      "id": "bayesian-regression",
+      "name": "Bayesian Regression",
+      "cards": [
+        {
+          "title": "BayesianRegression: Overview",
+          "content": "**BayesianRegression** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/bayesian_regression.py`\n\nBayesian regression model. If poly_degree is specified the features will\n    be transformed to with a polynomial basis function, which allows for polynomial\n    regression. Assumes Normal prior and likelihood for the weights and scaled inverse\n    chi-squared prior and likelihood for the variance of the weights.\n\n    Parameters:\n    -----------\n    n_draws: float\n        The number of simulated draws from the posterior of the parameters.\n    mu0: array\n        The mean values of the prior Normal distribution of the parameters.\n    omega0: array\n        The precision matrix of the prior Normal distribution of the parameters.\n    nu0: float\n        The degrees of freedom of the prior scaled inverse chi squared distribution.\n    sigma_sq0: float\n        The scale parameter of the prior scaled inverse chi squared distribution.\n    poly_degree: int\n        The polynomial degree that the features should be transformed to. Allows\n        for polynomial regression.\n    cred_int: float\n        The credible interval (ETI in this impl.). 95 => 95% credible interval of the posterior\n        of the parameters.\n\n    Reference:\n        https://github.com/mattiasvillani/BayesLearnCourse/raw/master/Slides/BayesLearnL5.pdf"
+        },
+        {
+          "title": "BayesianRegression.fit()",
+          "content": "**BayesianRegression.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n\n        # If polynomial transformation\n        if self.poly_degree:\n            X = polynomial_features(X, degree=self.poly_degree)\n\n        n_samples, n_features = np.shape(X)\n\n        X_X = X.T.dot(X)\n\n        # Least squares approximate of beta\n        beta_hat = np.linalg.pinv(X_X).dot(X.T).dot(y)\n\n        # The posterior parameters can be determined analytically since we assume\n        # conjugate priors for the likelihoods.\n\n        # Normal prior / likelihood => Normal posterior\n        mu_n = np.linalg.pinv(X_X + self.omega0).dot(X_X.dot(beta_hat)+self.omega0.dot(self.mu0))\n        omega_n = X_X + self.omega0\n        # Scaled inverse chi-squared prior / likelihood => Scaled inverse chi-squared posterior\n        nu_n = self.nu0 + n_samples\n        sigma_sq_n = (1.0/nu_n)*(self.nu0*self.sigma_sq0 + \\\n            (y.T.dot(y) + self.mu0.T.dot(self.omega0).dot(self.mu0) - mu_n.T.dot(omega_n.dot(mu_n))))\n\n        # Simulate parameter values for n_draws\n        beta_draws = np.empty((self.n_draws, n_features))\n        for i in range(self.n_draws):\n            sigma_sq = self._draw_scaled_inv_chi_sq(n=1, df=nu_n, scale=sigma_sq_n)\n            beta = multivariate_normal.rvs(size=1, mean=mu_n[:,0], cov=sigma_sq*np.linalg.pinv(omega_n))\n            # Save parameter draws\n```"
+        },
+        {
+          "title": "BayesianRegression.predict()",
+          "content": "**BayesianRegression.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X, eti=False):\n\n        # If polynomial transformation\n        if self.poly_degree:\n            X = polynomial_features(X, degree=self.poly_degree)\n\n        y_pred = X.dot(self.w)\n        # If the lower and upper boundaries for the 95%\n        # equal tail interval should be returned\n        if eti:\n            lower_w = self.eti[:, 0]\n            upper_w = self.eti[:, 1]\n            y_lower_pred = X.dot(lower_w)\n            y_upper_pred = X.dot(upper_w)\n            return y_pred, y_lower_pred, y_upper_pred\n\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "decision-tree",
+      "name": "Decision Tree",
+      "cards": [
+        {
+          "title": "DecisionNode: Overview",
+          "content": "**DecisionNode** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/decision_tree.py`\n\nClass that represents a decision node or leaf in the decision tree\n\n    Parameters:\n    -----------\n    feature_i: int\n        Feature index which we want to use as the threshold measure.\n    threshold: float\n        The value that we will compare feature values at feature_i against to\n        determine the prediction.\n    value: float\n        The class prediction if classification tree, or float value if regression tree.\n    true_branch: DecisionNode\n        Next decision node for samples where features value met the threshold.\n    false_branch: DecisionNode\n        Next decision node for samples where features value did not meet the threshold."
+        },
+        {
+          "title": "DecisionTree: Overview",
+          "content": "**DecisionTree** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/decision_tree.py`\n\nSuper class of RegressionTree and ClassificationTree.\n\n    Parameters:\n    -----------\n    min_samples_split: int\n        The minimum number of samples needed to make a split when building a tree.\n    min_impurity: float\n        The minimum impurity required to split the tree further.\n    max_depth: int\n        The maximum depth of a tree.\n    loss: function\n        Loss function that is used for Gradient Boosting models to calculate impurity."
+        },
+        {
+          "title": "DecisionTree.fit()",
+          "content": "**DecisionTree.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y, loss=None):\n        \"\"\" Build decision tree \"\"\"\n        self.one_dim = len(np.shape(y)) == 1\n        self.root = self._build_tree(X, y)\n        self.loss=None\n```"
+        },
+        {
+          "title": "DecisionTree.predict()",
+          "content": "**DecisionTree.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Classify samples one by one and return the set of labels \"\"\"\n        y_pred = [self.predict_value(sample) for sample in X]\n        return y_pred\n```"
+        },
+        {
+          "title": "XGBoostRegressionTree: Overview",
+          "content": "**XGBoostRegressionTree** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/decision_tree.py`\n\nRegression tree for XGBoost\n    - Reference -\n    http://xgboost.readthedocs.io/en/latest/model.html"
+        },
+        {
+          "title": "XGBoostRegressionTree.fit()",
+          "content": "**XGBoostRegressionTree.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        self._impurity_calculation = self._gain_by_taylor\n        self._leaf_value_calculation = self._approximate_update\n        super(XGBoostRegressionTree, self).fit(X, y)\n```"
+        }
+      ]
+    },
+    {
+      "id": "gradient-boosting",
+      "name": "Gradient Boosting",
+      "cards": [
+        {
+          "title": "GradientBoosting: Overview",
+          "content": "**GradientBoosting** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/gradient_boosting.py`\n\nSuper class of GradientBoostingClassifier and GradientBoostinRegressor. \n    Uses a collection of regression trees that trains on predicting the gradient\n    of the loss function. \n\n    Parameters:\n    -----------\n    n_estimators: int\n        The number of classification trees that are used.\n    learning_rate: float\n        The step length that will be taken when following the negative gradient during\n        training.\n    min_samples_split: int\n        The minimum number of samples needed to make a split when building a tree.\n    min_impurity: float\n        The minimum impurity required to split the tree further. \n    max_depth: int\n        The maximum depth of a tree.\n    regression: boolean\n        True or false depending on if we're doing regression or classification."
+        },
+        {
+          "title": "GradientBoosting.fit()",
+          "content": "**GradientBoosting.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        y_pred = np.full(np.shape(y), np.mean(y, axis=0))\n        for i in self.bar(range(self.n_estimators)):\n            gradient = self.loss.gradient(y, y_pred)\n            self.trees[i].fit(X, gradient)\n            update = self.trees[i].predict(X)\n            # Update y prediction\n            y_pred -= np.multiply(self.learning_rate, update)\n```"
+        },
+        {
+          "title": "GradientBoosting.predict()",
+          "content": "**GradientBoosting.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = np.array([])\n        # Make predictions\n        for tree in self.trees:\n            update = tree.predict(X)\n            update = np.multiply(self.learning_rate, update)\n            y_pred = -update if not y_pred.any() else y_pred - update\n\n        if not self.regression:\n            # Turn into probability distribution\n            y_pred = np.exp(y_pred) / np.expand_dims(np.sum(np.exp(y_pred), axis=1), axis=1)\n            # Set label to the value that maximizes probability\n            y_pred = np.argmax(y_pred, axis=1)\n        return y_pred\n```"
+        },
+        {
+          "title": "GradientBoostingClassifier.fit()",
+          "content": "**GradientBoostingClassifier.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        y = to_categorical(y)\n        super(GradientBoostingClassifier, self).fit(X, y)\n```"
+        }
+      ]
+    },
+    {
+      "id": "k-nearest-neighbors",
+      "name": "K Nearest Neighbors",
+      "cards": [
+        {
+          "title": "KNN: Overview",
+          "content": "**KNN** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/k_nearest_neighbors.py`\n\nK Nearest Neighbors classifier.\n\n    Parameters:\n    -----------\n    k: int\n        The number of closest neighbors that will determine the class of the \n        sample that we wish to predict."
+        },
+        {
+          "title": "KNN.predict()",
+          "content": "**KNN.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X_test, X_train, y_train):\n        y_pred = np.empty(X_test.shape[0])\n        # Determine the class of each sample\n        for i, test_sample in enumerate(X_test):\n            # Sort the training samples by their distance to the test sample and get the K nearest\n            idx = np.argsort([euclidean_distance(test_sample, x) for x in X_train])[:self.k]\n            # Extract the labels of the K nearest neighboring training samples\n            k_nearest_neighbors = np.array([y_train[i] for i in idx])\n            # Label sample as the most common class label\n            y_pred[i] = self._vote(k_nearest_neighbors)\n\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "linear-discriminant-analysis",
+      "name": "Linear Discriminant Analysis",
+      "cards": [
+        {
+          "title": "LDA: Overview",
+          "content": "**LDA** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/linear_discriminant_analysis.py`\n\nThe Linear Discriminant Analysis classifier, also known as Fisher's linear discriminant.\n    Can besides from classification also be used to reduce the dimensionaly of the dataset."
+        },
+        {
+          "title": "LDA.transform()",
+          "content": "**LDA.transform** — pure NumPy implementation:\n\n```python\ndef transform(self, X, y):\n        self.fit(X, y)\n        # Project data onto vector\n        X_transform = X.dot(self.w)\n        return X_transform\n```"
+        },
+        {
+          "title": "LDA.fit()",
+          "content": "**LDA.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        # Separate data by class\n        X1 = X[y == 0]\n        X2 = X[y == 1]\n\n        # Calculate the covariance matrices of the two datasets\n        cov1 = calculate_covariance_matrix(X1)\n        cov2 = calculate_covariance_matrix(X2)\n        cov_tot = cov1 + cov2\n\n        # Calculate the mean of the two datasets\n        mean1 = X1.mean(0)\n        mean2 = X2.mean(0)\n        mean_diff = np.atleast_1d(mean1 - mean2)\n\n        # Determine the vector which when X is projected onto it best separates the\n        # data by class. w = (mean1 - mean2) / (cov1 + cov2)\n        self.w = np.linalg.pinv(cov_tot).dot(mean_diff)\n```"
+        },
+        {
+          "title": "LDA.predict()",
+          "content": "**LDA.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = []\n        for sample in X:\n            h = sample.dot(self.w)\n            y = 1 * (h < 0)\n            y_pred.append(y)\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "logistic-regression",
+      "name": "Logistic Regression",
+      "cards": [
+        {
+          "title": "LogisticRegression: Overview",
+          "content": "**LogisticRegression** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/logistic_regression.py`\n\nLogistic Regression classifier.\n    Parameters:\n    -----------\n    learning_rate: float\n        The step length that will be taken when following the negative gradient during\n        training.\n    gradient_descent: boolean\n        True or false depending if gradient descent should be used when training. If\n        false then we use batch optimization by least squares."
+        },
+        {
+          "title": "LogisticRegression.fit()",
+          "content": "**LogisticRegression.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y, n_iterations=4000):\n        self._initialize_parameters(X)\n        # Tune parameters for n iterations\n        for i in range(n_iterations):\n            # Make a new prediction\n            y_pred = self.sigmoid(X.dot(self.param))\n            if self.gradient_descent:\n                # Move against the gradient of the loss function with\n                # respect to the parameters to minimize the loss\n                self.param -= self.learning_rate * -(y - y_pred).dot(X)\n            else:\n                # Make a diagonal matrix of the sigmoid gradient column vector\n                diag_gradient = make_diagonal(self.sigmoid.gradient(X.dot(self.param)))\n                # Batch opt:\n                self.param = np.linalg.pinv(X.T.dot(diag_gradient).dot(X)).dot(X.T).dot(diag_gradient.dot(X).dot(self.param) + y - y_pred)\n```"
+        },
+        {
+          "title": "LogisticRegression.predict()",
+          "content": "**LogisticRegression.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = np.round(self.sigmoid(X.dot(self.param))).astype(int)\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "multi-class-lda",
+      "name": "Multi Class Lda",
+      "cards": [
+        {
+          "title": "MultiClassLDA: Overview",
+          "content": "**MultiClassLDA** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/multi_class_lda.py`\n\nEnables dimensionality reduction for multiple\n    class distributions. It transforms the features space into a space where\n    the between class scatter is maximized and the within class scatter is\n    minimized.\n\n    Parameters:\n    -----------\n    solver: str\n        If 'svd' we use the pseudo-inverse to calculate the inverse of matrices\n        when doing the transformation."
+        },
+        {
+          "title": "MultiClassLDA.transform()",
+          "content": "**MultiClassLDA.transform** — pure NumPy implementation:\n\n```python\ndef transform(self, X, y, n_components):\n        SW, SB = self._calculate_scatter_matrices(X, y)\n\n        # Determine SW^-1 * SB by calculating inverse of SW\n        A = np.linalg.inv(SW).dot(SB)\n\n        # Get eigenvalues and eigenvectors of SW^-1 * SB\n        eigenvalues, eigenvectors = np.linalg.eigh(A)\n\n        # Sort the eigenvalues and corresponding eigenvectors from largest\n        # to smallest eigenvalue and select the first n_components\n        idx = eigenvalues.argsort()[::-1]\n        eigenvalues = eigenvalues[idx][:n_components]\n        eigenvectors = eigenvectors[:, idx][:, :n_components]\n\n        # Project the data onto eigenvectors\n        X_transformed = X.dot(eigenvectors)\n\n        return X_transformed\n```"
+        }
+      ]
+    },
+    {
+      "id": "multilayer-perceptron",
+      "name": "Multilayer Perceptron",
+      "cards": [
+        {
+          "title": "MultilayerPerceptron: Overview",
+          "content": "**MultilayerPerceptron** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/multilayer_perceptron.py`\n\nMultilayer Perceptron classifier. A fully-connected neural network with one hidden layer.\n    Unrolled to display the whole forward and backward pass.\n\n    Parameters:\n    -----------\n    n_hidden: int:\n        The number of processing nodes (neurons) in the hidden layer. \n    n_iterations: float\n        The number of training iterations the algorithm will tune the weights for.\n    learning_rate: float\n        The step length that will be used when updating the weights."
+        },
+        {
+          "title": "MultilayerPerceptron.fit()",
+          "content": "**MultilayerPerceptron.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n\n        self._initialize_weights(X, y)\n\n        for i in range(self.n_iterations):\n\n            # ..............\n            #  Forward Pass\n            # ..............\n\n            # HIDDEN LAYER\n            hidden_input = X.dot(self.W) + self.w0\n            hidden_output = self.hidden_activation(hidden_input)\n            # OUTPUT LAYER\n            output_layer_input = hidden_output.dot(self.V) + self.v0\n            y_pred = self.output_activation(output_layer_input)\n\n            # ...............\n            #  Backward Pass\n            # ...............\n\n            # OUTPUT LAYER\n            # Grad. w.r.t input of output layer\n            grad_wrt_out_l_input = self.loss.gradient(y, y_pred) * self.output_activation.gradient(output_layer_input)\n            grad_v = hidden_output.T.dot(grad_wrt_out_l_input)\n            grad_v0 = np.sum(grad_wrt_out_l_input, axis=0, keepdims=True)\n            # HIDDEN LAYER\n            # Grad. w.r.t input of hidden layer\n            grad_wrt_hidden_l_input = grad_wrt_out_l_input.dot(self.V.T) * self.hidden_activation.gradient(hidden_input)\n            grad_w = X.T.dot(grad_wrt_hidden_l_input)\n```"
+        },
+        {
+          "title": "MultilayerPerceptron.predict()",
+          "content": "**MultilayerPerceptron.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        # Forward pass:\n        hidden_input = X.dot(self.W) + self.w0\n        hidden_output = self.hidden_activation(hidden_input)\n        output_layer_input = hidden_output.dot(self.V) + self.v0\n        y_pred = self.output_activation(output_layer_input)\n        return y_pred\n\n\ndef main():\n    data = datasets.load_digits()\n    X = normalize(data.data)\n    y = data.target\n\n    # Convert the nominal y values to binary\n    y = to_categorical(y)\n\n    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, seed=1)\n\n    # MLP\n    clf = MultilayerPerceptron(n_hidden=16,\n        n_iterations=1000,\n        learning_rate=0.01)\n\n    clf.fit(X_train, y_train)\n    y_pred = np.argmax(clf.predict(X_test), axis=1)\n    y_test = np.argmax(y_test, axis=1)\n\n    accuracy = accuracy_score(y_test, y_pred)\n    print (\"Accuracy:\", accuracy)\n```"
+        }
+      ]
+    },
+    {
+      "id": "naive-bayes",
+      "name": "Naive Bayes",
+      "cards": [
+        {
+          "title": "NaiveBayes: Overview",
+          "content": "**NaiveBayes** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/naive_bayes.py`\n\nThe Gaussian Naive Bayes classifier."
+        },
+        {
+          "title": "NaiveBayes.fit()",
+          "content": "**NaiveBayes.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        self.X, self.y = X, y\n        self.classes = np.unique(y)\n        self.parameters = []\n        # Calculate the mean and variance of each feature for each class\n        for i, c in enumerate(self.classes):\n            # Only select the rows where the label equals the given class\n            X_where_c = X[np.where(y == c)]\n            self.parameters.append([])\n            # Add the mean and variance for each feature (column)\n            for col in X_where_c.T:\n                parameters = {\"mean\": col.mean(), \"var\": col.var()}\n                self.parameters[i].append(parameters)\n```"
+        },
+        {
+          "title": "NaiveBayes.predict()",
+          "content": "**NaiveBayes.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Predict the class labels of the samples in X \"\"\"\n        y_pred = [self._classify(sample) for sample in X]\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "neuroevolution",
+      "name": "Neuroevolution",
+      "cards": [
+        {
+          "title": "Neuroevolution: Overview",
+          "content": "**Neuroevolution** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/neuroevolution.py`\n\nEvolutionary optimization of Neural Networks.\n\n    Parameters:\n    -----------\n    n_individuals: int\n        The number of neural networks that are allowed in the population at a time.\n    mutation_rate: float\n        The probability that a weight will be mutated.\n    model_builder: method\n        A method which returns a user specified NeuralNetwork instance."
+        }
+      ]
+    },
+    {
+      "id": "particle-swarm-optimization",
+      "name": "Particle Swarm Optimization",
+      "cards": [
+        {
+          "title": "ParticleSwarmOptimizedNN: Overview",
+          "content": "**ParticleSwarmOptimizedNN** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/particle_swarm_optimization.py`\n\nParticle Swarm Optimization of Neural Network.\n\n    Parameters:\n    -----------\n    n_individuals: int\n        The number of neural networks that are allowed in the population at a time.\n    model_builder: method\n        A method which returns a user specified NeuralNetwork instance.\n    inertia_weight:     float [0,1)\n    cognitive_weight:   float [0,1)\n    social_weight:      float [0,1)\n    max_velocity: float\n        The maximum allowed value for the velocity.\n\n    Reference:\n        Neural Network Training Using Particle Swarm Optimization\n        https://visualstudiomagazine.com/articles/2013/12/01/neural-network-training-using-particle-swarm-optimization.aspx"
+        }
+      ]
+    },
+    {
+      "id": "perceptron",
+      "name": "Perceptron",
+      "cards": [
+        {
+          "title": "Perceptron: Overview",
+          "content": "**Perceptron** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/perceptron.py`\n\nThe Perceptron. One layer neural network classifier.\n\n    Parameters:\n    -----------\n    n_iterations: float\n        The number of training iterations the algorithm will tune the weights for.\n    activation_function: class\n        The activation that shall be used for each neuron.\n        Possible choices: Sigmoid, ExpLU, ReLU, LeakyReLU, SoftPlus, TanH\n    loss: class\n        The loss function used to assess the model's performance.\n        Possible choices: SquareLoss, CrossEntropy\n    learning_rate: float\n        The step length that will be used when updating the weights."
+        },
+        {
+          "title": "Perceptron.fit()",
+          "content": "**Perceptron.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        n_samples, n_features = np.shape(X)\n        _, n_outputs = np.shape(y)\n\n        # Initialize weights between [-1/sqrt(N), 1/sqrt(N)]\n        limit = 1 / math.sqrt(n_features)\n        self.W = np.random.uniform(-limit, limit, (n_features, n_outputs))\n        self.w0 = np.zeros((1, n_outputs))\n\n        for i in self.progressbar(range(self.n_iterations)):\n            # Calculate outputs\n            linear_output = X.dot(self.W) + self.w0\n            y_pred = self.activation_func(linear_output)\n            # Calculate the loss gradient w.r.t the input of the activation function\n            error_gradient = self.loss.gradient(y, y_pred) * self.activation_func.gradient(linear_output)\n            # Calculate the gradient of the loss with respect to each weight\n            grad_wrt_w = X.T.dot(error_gradient)\n            grad_wrt_w0 = np.sum(error_gradient, axis=0, keepdims=True)\n            # Update weights\n            self.W  -= self.learning_rate * grad_wrt_w\n            self.w0 -= self.learning_rate  * grad_wrt_w0\n\n    # Use the trained model to predict labels of X\n```"
+        },
+        {
+          "title": "Perceptron.predict()",
+          "content": "**Perceptron.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = self.activation_func(X.dot(self.W) + self.w0)\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "random-forest",
+      "name": "Random Forest",
+      "cards": [
+        {
+          "title": "RandomForest: Overview",
+          "content": "**RandomForest** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/random_forest.py`\n\nRandom Forest classifier. Uses a collection of classification trees that\n    trains on random subsets of the data using a random subsets of the features.\n\n    Parameters:\n    -----------\n    n_estimators: int\n        The number of classification trees that are used.\n    max_features: int\n        The maximum number of features that the classification trees are allowed to\n        use.\n    min_samples_split: int\n        The minimum number of samples needed to make a split when building a tree.\n    min_gain: float\n        The minimum impurity required to split the tree further. \n    max_depth: int\n        The maximum depth of a tree."
+        },
+        {
+          "title": "RandomForest.fit()",
+          "content": "**RandomForest.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        n_features = np.shape(X)[1]\n        # If max_features have not been defined => select it as\n        # sqrt(n_features)\n        if not self.max_features:\n            self.max_features = int(math.sqrt(n_features))\n\n        # Choose one random subset of the data for each tree\n        subsets = get_random_subsets(X, y, self.n_estimators)\n\n        for i in self.progressbar(range(self.n_estimators)):\n            X_subset, y_subset = subsets[i]\n            # Feature bagging (select random subsets of the features)\n            idx = np.random.choice(range(n_features), size=self.max_features, replace=True)\n            # Save the indices of the features for prediction\n            self.trees[i].feature_indices = idx\n            # Choose the features corresponding to the indices\n            X_subset = X_subset[:, idx]\n            # Fit the tree to the data\n            self.trees[i].fit(X_subset, y_subset)\n```"
+        },
+        {
+          "title": "RandomForest.predict()",
+          "content": "**RandomForest.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_preds = np.empty((X.shape[0], len(self.trees)))\n        # Let each tree make a prediction on the data\n        for i, tree in enumerate(self.trees):\n            # Indices of the features that the tree has trained on\n            idx = tree.feature_indices\n            # Make a prediction based on those features\n            prediction = tree.predict(X[:, idx])\n            y_preds[:, i] = prediction\n            \n        y_pred = []\n        # For each sample\n        for sample_predictions in y_preds:\n            # Select the most common class prediction\n            y_pred.append(np.bincount(sample_predictions.astype('int')).argmax())\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "regression",
+      "name": "Regression",
+      "cards": [
+        {
+          "title": "l1_regularization: Overview",
+          "content": "**l1_regularization** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/regression.py`\n\nRegularization for Lasso Regression"
+        },
+        {
+          "title": "l2_regularization: Overview",
+          "content": "**l2_regularization** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/regression.py`\n\nRegularization for Ridge Regression"
+        },
+        {
+          "title": "l1_l2_regularization: Overview",
+          "content": "**l1_l2_regularization** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/regression.py`\n\nRegularization for Elastic Net Regression"
+        },
+        {
+          "title": "Regression: Overview",
+          "content": "**Regression** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/regression.py`\n\nBase regression model. Models the relationship between a scalar dependent variable y and the independent \n    variables X. \n    Parameters:\n    -----------\n    n_iterations: float\n        The number of training iterations the algorithm will tune the weights for.\n    learning_rate: float\n        The step length that will be used when updating the weights."
+        },
+        {
+          "title": "Regression.fit()",
+          "content": "**Regression.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        # Insert constant ones for bias weights\n        X = np.insert(X, 0, 1, axis=1)\n        self.training_errors = []\n        self.initialize_weights(n_features=X.shape[1])\n\n        # Do gradient descent for n_iterations\n        for i in range(self.n_iterations):\n            y_pred = X.dot(self.w)\n            # Calculate l2 loss\n            mse = np.mean(0.5 * (y - y_pred)**2 + self.regularization(self.w))\n            self.training_errors.append(mse)\n            # Gradient of l2 loss w.r.t w\n            grad_w = -(y - y_pred).dot(X) + self.regularization.grad(self.w)\n            # Update the weights\n            self.w -= self.learning_rate * grad_w\n```"
+        },
+        {
+          "title": "Regression.predict()",
+          "content": "**Regression.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        # Insert constant ones for bias weights\n        X = np.insert(X, 0, 1, axis=1)\n        y_pred = X.dot(self.w)\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "support-vector-machine",
+      "name": "Support Vector Machine",
+      "cards": [
+        {
+          "title": "SupportVectorMachine: Overview",
+          "content": "**SupportVectorMachine** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/support_vector_machine.py`\n\nThe Support Vector Machine classifier.\n    Uses cvxopt to solve the quadratic optimization problem.\n\n    Parameters:\n    -----------\n    C: float\n        Penalty term.\n    kernel: function\n        Kernel function. Can be either polynomial, rbf or linear.\n    power: int\n        The degree of the polynomial kernel. Will be ignored by the other\n        kernel functions.\n    gamma: float\n        Used in the rbf kernel function.\n    coef: float\n        Bias term used in the polynomial kernel function."
+        },
+        {
+          "title": "SupportVectorMachine.fit()",
+          "content": "**SupportVectorMachine.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n\n        n_samples, n_features = np.shape(X)\n\n        # Set gamma to 1/n_features by default\n        if not self.gamma:\n            self.gamma = 1 / n_features\n\n        # Initialize kernel method with parameters\n        self.kernel = self.kernel(\n            power=self.power,\n            gamma=self.gamma,\n            coef=self.coef)\n\n        # Calculate kernel matrix\n        kernel_matrix = np.zeros((n_samples, n_samples))\n        for i in range(n_samples):\n            for j in range(n_samples):\n                kernel_matrix[i, j] = self.kernel(X[i], X[j])\n\n        # Define the quadratic optimization problem\n        P = cvxopt.matrix(np.outer(y, y) * kernel_matrix, tc='d')\n        q = cvxopt.matrix(np.ones(n_samples) * -1)\n        A = cvxopt.matrix(y, (1, n_samples), tc='d')\n        b = cvxopt.matrix(0, tc='d')\n\n        if not self.C:\n            G = cvxopt.matrix(np.identity(n_samples) * -1)\n            h = cvxopt.matrix(np.zeros(n_samples))\n        else:\n```"
+        },
+        {
+          "title": "SupportVectorMachine.predict()",
+          "content": "**SupportVectorMachine.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = []\n        # Iterate through list of samples and make predictions\n        for sample in X:\n            prediction = 0\n            # Determine the label of the sample by the support vectors\n            for i in range(len(self.lagr_multipliers)):\n                prediction += self.lagr_multipliers[i] * self.support_vector_labels[\n                    i] * self.kernel(self.support_vectors[i], sample)\n            prediction += self.intercept\n            y_pred.append(np.sign(prediction))\n        return np.array(y_pred)\n```"
+        }
+      ]
+    },
+    {
+      "id": "xgboost",
+      "name": "Xgboost",
+      "cards": [
+        {
+          "title": "XGBoost: Overview",
+          "content": "**XGBoost** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/supervised_learning/xgboost.py`\n\nThe XGBoost classifier.\n\n    Reference: http://xgboost.readthedocs.io/en/latest/model.html\n\n    Parameters:\n    -----------\n    n_estimators: int\n        The number of classification trees that are used.\n    learning_rate: float\n        The step length that will be taken when following the negative gradient during\n        training.\n    min_samples_split: int\n        The minimum number of samples needed to make a split when building a tree.\n    min_impurity: float\n        The minimum impurity required to split the tree further. \n    max_depth: int\n        The maximum depth of a tree."
+        },
+        {
+          "title": "XGBoost.fit()",
+          "content": "**XGBoost.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y):\n        y = to_categorical(y)\n\n        y_pred = np.zeros(np.shape(y))\n        for i in self.bar(range(self.n_estimators)):\n            tree = self.trees[i]\n            y_and_pred = np.concatenate((y, y_pred), axis=1)\n            tree.fit(X, y_and_pred)\n            update_pred = tree.predict(X)\n\n            y_pred -= np.multiply(self.learning_rate, update_pred)\n```"
+        },
+        {
+          "title": "XGBoost.predict()",
+          "content": "**XGBoost.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        y_pred = None\n        # Make predictions\n        for tree in self.trees:\n            # Estimate gradient and update prediction\n            update_pred = tree.predict(X)\n            if y_pred is None:\n                y_pred = np.zeros_like(update_pred)\n            y_pred -= np.multiply(self.learning_rate, update_pred)\n\n        # Turn into probability distribution (Softmax)\n        y_pred = np.exp(y_pred) / np.sum(np.exp(y_pred), axis=1, keepdims=True)\n        # Set label to the value that maximizes probability\n        y_pred = np.argmax(y_pred, axis=1)\n        return y_pred\n```"
+        }
+      ]
+    },
+    {
+      "id": "apriori",
+      "name": "Apriori",
+      "cards": [
+        {
+          "title": "Apriori: Overview",
+          "content": "**Apriori** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/apriori.py`\n\nA method for determining frequent itemsets in a transactional database and\n    also for generating rules for those itemsets. \n\n    Parameters:\n    -----------\n    min_sup: float\n        The minimum fraction of transactions an itemets needs to\n        occur in to be deemed frequent\n    min_conf: float:\n        The minimum fraction of times the antecedent needs to imply\n        the concequent to justify rule"
+        }
+      ]
+    },
+    {
+      "id": "autoencoder",
+      "name": "Autoencoder",
+      "cards": [
+        {
+          "title": "Autoencoder: Overview",
+          "content": "**Autoencoder** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/autoencoder.py`\n\nAn Autoencoder with deep fully-connected neural nets.\n\n    Training Data: MNIST Handwritten Digits (28x28 images)"
+        }
+      ]
+    },
+    {
+      "id": "dbscan",
+      "name": "Dbscan",
+      "cards": [
+        {
+          "title": "DBSCAN: Overview",
+          "content": "**DBSCAN** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/dbscan.py`\n\nA density based clustering method that expands clusters from \n    samples that have more neighbors within a radius specified by eps\n    than the value min_samples.\n\n    Parameters:\n    -----------\n    eps: float\n        The radius within which samples are considered neighbors\n    min_samples: int\n        The number of neighbors required for the sample to be a core point."
+        },
+        {
+          "title": "DBSCAN.predict()",
+          "content": "**DBSCAN.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        self.X = X\n        self.clusters = []\n        self.visited_samples = []\n        self.neighbors = {}\n        n_samples = np.shape(self.X)[0]\n        # Iterate through samples and expand clusters from them\n        # if they have more neighbors than self.min_samples\n        for sample_i in range(n_samples):\n            if sample_i in self.visited_samples:\n                continue\n            self.neighbors[sample_i] = self._get_neighbors(sample_i)\n            if len(self.neighbors[sample_i]) >= self.min_samples:\n                # If core point => mark as visited\n                self.visited_samples.append(sample_i)\n                # Sample has more neighbors than self.min_samples => expand\n                # cluster from sample\n                new_cluster = self._expand_cluster(\n                    sample_i, self.neighbors[sample_i])\n                # Add cluster to list of clusters\n                self.clusters.append(new_cluster)\n\n        # Get the resulting cluster labels\n        cluster_labels = self._get_cluster_labels()\n        return cluster_labels\n```"
+        }
+      ]
+    },
+    {
+      "id": "fp-growth",
+      "name": "Fp Growth",
+      "cards": [
+        {
+          "title": "FPGrowth: Overview",
+          "content": "**FPGrowth** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/fp_growth.py`\n\nA method for determining frequent itemsets in a transactional database. \n    This is done by building a so called FP Growth tree, which can then be mined\n    to collect the frequent itemsets. More effective than Apriori for large transactional\n    databases.\n\n    Parameters:\n    -----------\n    min_sup: float\n        The minimum fraction of transactions an itemets needs to\n        occur in to be deemed frequent"
+        }
+      ]
+    },
+    {
+      "id": "gaussian-mixture-model",
+      "name": "Gaussian Mixture Model",
+      "cards": [
+        {
+          "title": "GaussianMixtureModel: Overview",
+          "content": "**GaussianMixtureModel** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/gaussian_mixture_model.py`\n\nA probabilistic clustering method for determining groupings among data samples.\n\n    Parameters:\n    -----------\n    k: int\n        The number of clusters the algorithm will form.\n    max_iterations: int\n        The number of iterations the algorithm will run for if it does\n        not converge before that. \n    tolerance: float\n        If the difference of the results from one iteration to the next is\n        smaller than this value we will say that the algorithm has converged."
+        },
+        {
+          "title": "GaussianMixtureModel.predict()",
+          "content": "**GaussianMixtureModel.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Run GMM and return the cluster indices \"\"\"\n        # Initialize the gaussians randomly\n        self._init_random_gaussians(X)\n\n        # Run EM until convergence or for max iterations\n        for _ in range(self.max_iterations):\n            self._expectation(X)    # E-step\n            self._maximization(X)   # M-step\n\n            # Check convergence\n            if self._converged(X):\n                break\n\n        # Make new assignments and return them\n        self._expectation(X)\n        return self.sample_assignments\n```"
+        }
+      ]
+    },
+    {
+      "id": "generative-adversarial-network",
+      "name": "Generative Adversarial Network",
+      "cards": [
+        {
+          "title": "GAN: Overview",
+          "content": "**GAN** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/generative_adversarial_network.py`\n\nA Generative Adversarial Network with deep fully-connected neural nets as\n    Generator and Discriminator.\n\n    Training Data: MNIST Handwritten Digits (28x28 images)"
+        }
+      ]
+    },
+    {
+      "id": "genetic-algorithm",
+      "name": "Genetic Algorithm",
+      "cards": [
+        {
+          "title": "GeneticAlgorithm: Overview",
+          "content": "**GeneticAlgorithm** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/genetic_algorithm.py`\n\nAn implementation of a Genetic Algorithm which will try to produce the user\n    specified target string.\n\n    Parameters:\n    -----------\n    target_string: string\n        The string which the GA should try to produce.\n    population_size: int\n        The number of individuals (possible solutions) in the population.\n    mutation_rate: float\n        The rate (or probability) of which the alleles (chars in this case) should be\n        randomly changed."
+        }
+      ]
+    },
+    {
+      "id": "k-means",
+      "name": "K Means",
+      "cards": [
+        {
+          "title": "KMeans: Overview",
+          "content": "**KMeans** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/k_means.py`\n\nA simple clustering method that forms k clusters by iteratively reassigning\n    samples to the closest centroids and after that moves the centroids to the center\n    of the new formed clusters.\n\n\n    Parameters:\n    -----------\n    k: int\n        The number of clusters the algorithm will form.\n    max_iterations: int\n        The number of iterations the algorithm will run for if it does\n        not converge before that."
+        },
+        {
+          "title": "KMeans.predict()",
+          "content": "**KMeans.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Do K-Means clustering and return cluster indices \"\"\"\n\n        # Initialize centroids as k random samples from X\n        centroids = self._init_random_centroids(X)\n\n        # Iterate until convergence or for max iterations\n        for _ in range(self.max_iterations):\n            # Assign samples to closest centroids (create clusters)\n            clusters = self._create_clusters(centroids, X)\n            # Save current centroids for convergence check\n            prev_centroids = centroids\n            # Calculate new centroids from the clusters\n            centroids = self._calculate_centroids(clusters, X)\n            # If no centroids have changed => convergence\n            diff = centroids - prev_centroids\n            if not diff.any():\n                break\n\n        return self._get_cluster_labels(clusters, X)\n```"
+        }
+      ]
+    },
+    {
+      "id": "partitioning-around-medoids",
+      "name": "Partitioning Around Medoids",
+      "cards": [
+        {
+          "title": "PAM: Overview",
+          "content": "**PAM** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/partitioning_around_medoids.py`\n\nA simple clustering method that forms k clusters by first assigning\n    samples to the closest medoids, and then swapping medoids with non-medoid\n    samples if the total distance (cost) between the cluster members and their medoid\n    is smaller than prevoisly.\n\n\n    Parameters:\n    -----------\n    k: int\n        The number of clusters the algorithm will form."
+        },
+        {
+          "title": "PAM.predict()",
+          "content": "**PAM.predict** — pure NumPy implementation:\n\n```python\ndef predict(self, X):\n        \"\"\" Do Partitioning Around Medoids and return the cluster labels \"\"\"\n        # Initialize medoids randomly\n        medoids = self._init_random_medoids(X)\n        # Assign samples to closest medoids\n        clusters = self._create_clusters(X, medoids)\n\n        # Calculate the initial cost (total distance between samples and\n        # corresponding medoids)\n        cost = self._calculate_cost(X, clusters, medoids)\n\n        # Iterate until we no longer have a cheaper cost\n        while True:\n            best_medoids = medoids\n            lowest_cost = cost\n            for medoid in medoids:\n                # Get all non-medoid samples\n                non_medoids = self._get_non_medoids(X, medoids)\n                # Calculate the cost when swapping medoid and samples\n                for sample in non_medoids:\n                    # Swap sample with the medoid\n                    new_medoids = medoids.copy()\n                    new_medoids[medoids == medoid] = sample\n                    # Assign samples to new medoids\n                    new_clusters = self._create_clusters(X, new_medoids)\n                    # Calculate the cost with the new set of medoids\n                    new_cost = self._calculate_cost(\n                        X, new_clusters, new_medoids)\n                    # If the swap gives us a lower cost we save the medoids and cost\n                    if new_cost < lowest_cost:\n```"
+        }
+      ]
+    },
+    {
+      "id": "principal-component-analysis",
+      "name": "Principal Component Analysis",
+      "cards": [
+        {
+          "title": "PCA: Overview",
+          "content": "**PCA** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/principal_component_analysis.py`\n\nA method for doing dimensionality reduction by transforming the feature\n    space to a lower dimensionality, removing correlation between features and\n    maximizing the variance along each feature axis. This class is also used throughout\n    the project to plot data."
+        },
+        {
+          "title": "PCA.transform()",
+          "content": "**PCA.transform** — pure NumPy implementation:\n\n```python\ndef transform(self, X, n_components):\n        \"\"\" Fit the dataset to the number of principal components specified in the\n        constructor and return the transformed dataset \"\"\"\n        covariance_matrix = calculate_covariance_matrix(X)\n\n        # Where (eigenvector[:,0] corresponds to eigenvalue[0])\n        eigenvalues, eigenvectors = np.linalg.eig(covariance_matrix)\n\n        # Sort the eigenvalues and corresponding eigenvectors from largest\n        # to smallest eigenvalue and select the first n_components\n        idx = eigenvalues.argsort()[::-1]\n        eigenvalues = eigenvalues[idx][:n_components]\n        eigenvectors = np.atleast_1d(eigenvectors[:, idx])[:, :n_components]\n\n        # Project the data onto principal components\n        X_transformed = X.dot(eigenvectors)\n\n        return X_transformed\n```"
+        }
+      ]
+    },
+    {
+      "id": "restricted-boltzmann-machine",
+      "name": "Restricted Boltzmann Machine",
+      "cards": [
+        {
+          "title": "RBM: Overview",
+          "content": "**RBM** from `eriklindernoren/ML-From-Scratch`\n`mlfromscratch/unsupervised_learning/restricted_boltzmann_machine.py`\n\nBernoulli Restricted Boltzmann Machine (RBM)\n\n    Parameters:\n    -----------\n    n_hidden: int:\n        The number of processing nodes (neurons) in the hidden layer. \n    learning_rate: float\n        The step length that will be used when updating the weights.\n    batch_size: int\n        The size of the mini-batch used to calculate each weight update.\n    n_iterations: float\n        The number of training iterations the algorithm will tune the weights for.\n\n    Reference:\n        A Practical Guide to Training Restricted Boltzmann Machines \n        URL: https://www.cs.toronto.edu/~hinton/absps/guideTR.pdf"
+        },
+        {
+          "title": "RBM.fit()",
+          "content": "**RBM.fit** — pure NumPy implementation:\n\n```python\ndef fit(self, X, y=None):\n        '''Contrastive Divergence training procedure'''\n\n        self._initialize_weights(X)\n\n        self.training_errors = []\n        self.training_reconstructions = []\n        for _ in self.progressbar(range(self.n_iterations)):\n            batch_errors = []\n            for batch in batch_iterator(X, batch_size=self.batch_size):\n                # Positive phase\n                positive_hidden = sigmoid(batch.dot(self.W) + self.h0)\n                hidden_states = self._sample(positive_hidden)\n                positive_associations = batch.T.dot(positive_hidden)\n\n                # Negative phase\n                negative_visible = sigmoid(hidden_states.dot(self.W.T) + self.v0)\n                negative_visible = self._sample(negative_visible)\n                negative_hidden = sigmoid(negative_visible.dot(self.W) + self.h0)\n                negative_associations = negative_visible.T.dot(negative_hidden)\n\n                self.W  += self.lr * (positive_associations - negative_associations)\n                self.h0 += self.lr * (positive_hidden.sum(axis=0) - negative_hidden.sum(axis=0))\n                self.v0 += self.lr * (batch.sum(axis=0) - negative_visible.sum(axis=0))\n\n                batch_errors.append(np.mean((batch - negative_visible) ** 2))\n\n            self.training_errors.append(np.mean(batch_errors))\n            # Reconstruct a batch of images from the training set\n            idx = np.random.choice(range(X.shape[0]), self.batch_size)\n```"
+        }
+      ]
+    }
+  ]
+}

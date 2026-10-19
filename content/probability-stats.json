@@ -1,0 +1,144 @@
+{
+  "topics": [
+    {
+      "id": "probability-answer",
+      "name": "Probability: Answer:",
+      "cards": [
+        {
+          "title": "Assume two coins, one fair and the other is unfair. You pick one at random, flip it five times, and observe that it c...",
+          "content": "**Q: Assume two coins, one fair and the other is unfair. You pick one at random, flip it five times, and observe that it c...**\n\nLet's use Baye’s theorem let U denote the case where you are flipping the unfair coin and F denote the case where you are flipping the fair coin. Since the coin is chosen randomly, we know that P(U)=P(F)=0.5. Let 5T denote the event of flipping 5 tails in a row.\n\nThen, we are interested in solving for P(U|5T) (the probability that you are flipping the unfair coin given that you obtained 5 tails). Since the unfair coin always results in tails, therefore P(5T|U) = 1 and also P(5T|F) =1/2⁵ = 1/32 by the definition of a fair coin.\n\nLets apply Bayes theorem where P(U|5T) = P(5T|U) * P(U) / P(5T|U)* P(U) + P(5T|F)* P(F) = 0.5 / 0.5 +0.5* 1/32 = 0.97\n\nTherefore the probability that you picked the unfair coin is 97%"
+        },
+        {
+          "title": "Assume you take a stick of length 1 and you break it uniformly at random into three parts. What is the probability th...",
+          "content": "**Q: Assume you take a stick of length 1 and you break it uniformly at random into three parts. What is the probability th...**\n\nThe right answer is 0.25\n\nLet's say, x and y are the lengths of the two parts, so the length of the third part will be 1-x-y\n\nAs per the triangle inequality theorem, the sum of two sides should always be greater than the third side. Therefore, no two lengths can be more than 1/2.\nx<1/2\ny<1/2\n\nTo achieve this the first breaking point (X) should before the 0.5 mark on the stick and the second breaking point (Y) should be after the 0.5 mark on the stick.\n\nP(X < 0.5) = (0.5-0) / (1-0) = 0.5\n\nP(Y > 0.5) = (1 - 0.5) / (1-0) = 0.5\n\nHence, overal probability = P(X < 0.5) * P(Y > 0.5) = 1/5 = 0.25"
+        },
+        {
+          "title": "Say you draw a circle and choose two chords at random. What is the probability that those chords will intersect?",
+          "content": "**Q: Say you draw a circle and choose two chords at random. What is the probability that those chords will intersect?**\n\nFor making 2 chords, 4 points are necessary and from 4 points there are 3 different combinations of pairs of chords can be made. From the 3 combinations, there is only one combination in which the two chords intersect hence answer is 1/3.\nLet's assume that P1, P2, P3, and P4 are four points then 3 different combinations are possible for pairs of chords: (P1 P2) (P3 P4) or (P1 P3) (P4 P2) or (P1 P4) (P2 P3) there the 3rd one will only intersect."
+        },
+        {
+          "title": "If there’s a 15% probability that you might see at least one airplane in a five-minute interval, what is the probabil...",
+          "content": "**Q: If there’s a 15% probability that you might see at least one airplane in a five-minute interval, what is the probabil...**\n\nProbability of at least one plane in 5 mins interval=0.15\nProbability of no plane in 5 mins interval=0.85\nProbability of seeing at least one plane in 30 mins=1 - Probability of not seeing any plane in 30 minutes\n=1-(0.85)^6 = 0.6228\n\nThis problem can also be solved using Poisson distribution. Refer this blog post."
+        },
+        {
+          "title": "According to hospital records, 75% of patients suffering from a disease die from that disease. Find out the probabili...",
+          "content": "**Q: According to hospital records, 75% of patients suffering from a disease die from that disease. Find out the probabili...**\n\nThis has to be a binomial since there are only 2 outcomes – death or life. \n\nHere n =6, and x=4. \n\np=0.25 (probability if life) q = 0.75(probability of death)\n\nUsing probability mass function equation:\n\nP(X) = nCx * p^x * q^(n-x)  \n\nThen:\n\nP(4) = 6C4 * (0.25)^4 * (0.75)^2 = 0.032"
+        }
+      ]
+    },
+    {
+      "id": "probability-the-right-answer-is-11-216",
+      "name": "Probability: The right answer is 11/216",
+      "cards": [
+        {
+          "title": "Assume you have a deck of 100 cards with values ranging from 1 to 100 and you draw two cards randomly without replace...",
+          "content": "**Q: Assume you have a deck of 100 cards with values ranging from 1 to 100 and you draw two cards randomly without replace...**\n\nThere are a total of (100 C 2) = 4950 ways to choose two cards at random from the 100 cards and there are only 50 pairs of these 4950 ways that you will get one number and it's double. Therefore the probability that the number of one of them is double the other is 50/4950."
+        },
+        {
+          "title": "What is the difference between the Bernoulli and Binomial distribution?",
+          "content": "**Q: What is the difference between the Bernoulli and Binomial distribution?**\n\nBernoulli and Binomial are both types of probability distributions.\n\nThe function of Bernoulli is given by\n\np(x) =p^x * q^(1-x) , x=[0,1] \n\nMean is p\n\nVariance p*(1-p)\n\nThe function Binomial is given by:\n\np(x) = nCx p^x q^(n-x) x=[0,1,2...n]\n\nMean : np\n\nVariance :npq\n\nWhere p and q are the probability of success and probability of failure respectively, n is the number of independent trials and x is the number of successes.\n\nAs we can see sample space( x ) for Bernoulli distribution is Binary (2 outcomes), and just a single trial. \n\nEg: A loan sanction for a person can be either a success or a failure, with no other possibility. (Hence single trial).\n\nWhereas for Binomial the sample space(x) ranges from 0 -n.\n\nEg. Tossing a coin 6 times, what is the probability of getting 2 or a few heads? \n\nHere sample space is x=[0,1,2] and more than 1 trial and n=6(finite)\n\nIn short, Bernoulli Distribution is a single trial version of Binomial Distribution."
+        },
+        {
+          "title": "If there are 30 people in a room, what is the probability that everyone has different birthdays?",
+          "content": "**Q: If there are 30 people in a room, what is the probability that everyone has different birthdays?**\n\nThe sample space is 365^30 and the number of events is 365p30 because we need to choose persons without replacement to get everyone to have a unique birthday therefore the Prob = 356p30 / 365^30 = 0.2936\n\nA theoretical explanation is provided in the figure below thanks to Fazil Mohammed.\n\n> Note: Why do we use permutations and not combinations here? \n \n\nWhen calculating 365C30, you are saying: “Out of 365 days, I'm choosing 30 distinct days, but I don't care in what order they are assigned to people.” This treats the selection of birthdays as unordered, which isn't the case in the birthday problem, because who gets which birthday is important."
+        },
+        {
+          "title": "If there are 30 people in a room, what is the probability that everyone has different birthdays? (cont.)",
+          "content": "For example, if you selected 30 distinct birthdays (as in a combination), this would only tell you which 30 birthdays are used, but it wouldn't account for the fact that different people being assigned different birthdays creates different outcomes. In contrast, with permutations, we are considering the specific assignment of each person to a particular birthday, where the order matters because we care about which person gets which birthday. i.e. if Person A is born on 01/01 and person B is born on 02/02, its different than if Person A is born on 02/02 and person B is born on 01/01.\n\nInteresting facts provided by Rishi Dey Chowdhury:\n1. With just 23 people there is over 50% chance of a birthday match and with 57 people the match probability exceeds 99%. One intuition to think of why with such a low number of people the probability of a match is so high. It's because for a match we require a pair of people and 23 choose 2 is 23*11 = 253 which is a relatively big number and ya 50% sounds like a decent probability of a match for this case."
+        },
+        {
+          "title": "If there are 30 people in a room, what is the probability that everyone has different birthdays? (cont.)",
+          "content": "2. Another interesting fact is if the assumption of equal probability of birthday of a person on any day out of 365 is violated and there is a non-equal probability of birthday of a person among days of the year then, it is even more likely to have a birthday match."
+        }
+      ]
+    },
+    {
+      "id": "probability-the-right-answer-is-5-32-or-0-156-there-are-diff",
+      "name": "Probability: The right answer is 5/32 or 0.156. There are different methods to solve it:",
+      "cards": [
+        {
+          "title": "Discuss some methods you will use to estimate the Parameters of a Probability Distribution",
+          "content": "**Q: Discuss some methods you will use to estimate the Parameters of a Probability Distribution**\n\nThere are different ways you can go about this. Following are some methods, one may choose only one of these or a combination depending on the observed data.\n- Method of moments\n- Maximum Likelihood Estimatation\n- Bayesian Estimation\n- Least Squares Estimation\n- Method of Least Absolute Deviation\n- Chi-squared Test"
+        },
+        {
+          "title": "You have 40 cards in four colors, 10 reds, 10 greens, 10 blues, and ten yellows. Each color has a number from 1 to 10...",
+          "content": "**Q: You have 40 cards in four colors, 10 reds, 10 greens, 10 blues, and ten yellows. Each color has a number from 1 to 10...**\n\nSince it doesn't matter how you choose the first card, so, choose one card at random.\nNow, all we have to care about is the restriction on the second card. It can't be the same number (i.e. 3 cards from the other colors can't be chosen in favorable cases) and also can't be the same color (i.e. 9 cards from the same color can't be chosen keep in mind we have already picked one).\n\nSo, the number of favorable choices for the 2nd card is (39-12)/39 = 27/39 = 9/13"
+        },
+        {
+          "title": "Can you explain the difference between frequentist and Bayesian probability approaches?",
+          "content": "**Q: Can you explain the difference between frequentist and Bayesian probability approaches?**\n\nThe frequentist approach to probability defines probability as the long-run relative frequency of an event in an infinite number of trials. It views probabilities as fixed and objective, determined by the data at hand. In this approach, the parameters of a model are treated as fixed and unknown and estimated using methods like maximum likelihood estimation.\n\nOn the other hand, Bayesian probability defines probability as a degree of belief, or the degree of confidence, in an event. It views probabilities as subjective and personal, representing an individual's beliefs. In this approach, the parameters of a model are treated as random variables with prior beliefs, which are updated as new data becomes available to form a posterior belief.\n\nIn summary, the frequentist approach deals with fixed and objective probabilities and uses methods like estimation, while the Bayesian approach deals with subjective and personal probabilities and uses methods like updating prior beliefs with new data."
+        },
+        {
+          "title": "Explain the Difference Between Probability and Likelihood",
+          "content": "**Q: Explain the Difference Between Probability and Likelihood**\n\nProbability and likelihood are two concepts that are often used in statistics and data analysis, but they have different meanings and uses.\n\nProbability is the measure of the likelihood of an event occurring. It is a number between 0 and 1, with 0 indicating an impossible event and 1 indicating a certain event. For example, the probability of flipping a coin and getting heads is 0.5.\n\nThe likelihood, on the other hand, is the measure of how well a statistical model or hypothesis fits a set of observed data. It is not a probability, but rather a measure of how plausible the data is given the model or hypothesis. For example, if we have a hypothesis that the average height of people in a certain population is 6 feet, the likelihood of observing a random sample of people with an average height of 5 feet would be low."
+        }
+      ]
+    },
+    {
+      "id": "statistics-a-b-testing-helps-us-to-determine-whether-a-chang",
+      "name": "Statistics: A/B testing helps us to determine whether a change in something will cause a change in performance significantly or not. So in other words you aim to statistically estimate the impact of a given change within your digital product (for example). You measure success and counter metrics on at least 1 treatment vs 1 control group (there can be more than 1 XP group for multivariate tests).",
+      "cards": [
+        {
+          "title": "Explain the central limit theorem and give examples of when you can use it in a real-world problem.",
+          "content": "**Q: Explain the central limit theorem and give examples of when you can use it in a real-world problem.**\n\ns:\n\nThe center limit theorem states that if any random variable, regardless of the distribution, is sampled a large enough time, the sample mean will be approximately normally distributed. This allows for studying the properties of any statistical distribution as long as there is a large enough sample size.\n\nImportant remark from Adrian Olszewski:\n⚠️ we can rely on the CLT with means (because it applies to any unbiased statistic) only if expressing data in this way makes sense. And it makes sense *ONLY* in the case of unimodal and symmetric data, coming from additive processes. So forget skewed, multi-modal data with mixtures of distributions, coming from multiplicative processes, and non-trivial mean-variance relationships. That are the places where arithmetic means is meaningless. Thus, using the CLT of e.g. bootstrap will give some valid answers to an invalid question."
+        },
+        {
+          "title": "Explain the central limit theorem and give examples of when you can use it in a real-world problem. (cont.)",
+          "content": "⚠️ the distribution of means isn't enough. Every single kind of inference requires the entire test statistic to follow a certain distribution. And the test statistic consists also of the estimate of variance. Never assume the same sample size sufficient for means will suffice for the entire test statistic. See an excerpt from Rand Wilcox attached. Especially do never believe in magic numbers like N=30.\n\n⚠️ think first about how to sensible describe your data, state the hypothesis of interest and then apply a valid method.\n\nExamples of real-world usage of CLT:"
+        },
+        {
+          "title": "Explain the central limit theorem and give examples of when you can use it in a real-world problem. (cont.)",
+          "content": "1. The CLT can be used at any company with a large amount of data. Consider companies like Uber/Lyft wants to test whether adding a new feature will increase the booked rides or not using hypothesis testing. So if we have a large number of individual ride X, which in this case is a Bernoulli random variable (since the rider will book a ride or not), we can estimate the statistical properties of the total number of bookings. Understanding and estimating these statistical properties play a significant role in applying hypothesis testing to your data and knowing whether adding a new feature will increase the number of booked riders or not.\n\n2. Manufacturing plants often use the central limit theorem to estimate how many products produced by the plant are defective."
+        },
+        {
+          "title": "Briefly explain the A/B testing and its application? What are some common pitfalls encountered in A/B testing?",
+          "content": "**Q: Briefly explain the A/B testing and its application? What are some common pitfalls encountered in A/B testing?**\n\nA/B testing helps us to determine whether a change in something will cause a change in performance significantly or not. So in other words you aim to statistically estimate the impact of a given change within your digital product (for example). You measure success and counter metrics on at least 1 treatment vs 1 control group (there can be more than 1 XP group for multivariate tests).\n\nApplications:\n1. Consider the example of a general store that sells bread packets but not butter, for a year. If we want to check whether its sale depends on the butter or not, then suppose the store also sells butter and sales for next year are observed. Now we can determine whether selling butter can significantly increase/decrease or doesn't affect the sale of bread."
+        },
+        {
+          "title": "Briefly explain the A/B testing and its application? What are some common pitfalls encountered in A/B testing? (cont.)",
+          "content": "2. While developing the landing page of a website you create 2 different versions of the page. You define a criteria for success eg. conversion rate. Then define your hypothesis\nNull hypothesis(H): No difference between the performance of the 2 versions. Alternative hypothesis(H'): version A will perform better than B.\n\nNOTE: You will have to split your traffic randomly(to avoid sample bias) into 2 versions. The split doesn't have to be symmetric, you just need to set the minimum sample size for each version to avoid undersample bias.\n\nNow if version A gives better results than version B, we will still have to statistically prove that results derived from our sample represent the entire population. Now one of the very common tests used to do so is 2 sample t-test where we use values of significance level (alpha) and p-value to see which hypothesis is right. If p-value<alpha, H is rejected.\n\nCommon pitfalls:"
+        }
+      ]
+    },
+    {
+      "id": "statistics-in-layman-s-terms",
+      "name": "Statistics: In Layman's terms:",
+      "cards": [
+        {
+          "title": "Briefly explain the A/B testing and its application? What are some common pitfalls encountered in A/B testing? (cont.)",
+          "content": "1. Wrong success metrics inadequate to the business problem\n2. Lack of counter metric, as you might add friction to the product regardless along with the positive impact\n3. Sample mismatch: heterogeneous control and treatment, unequal variances\n4. Underpowered test: too small sample or XP running too short 5. Not accounting for network effects (introduce bias within measurement)"
+        },
+        {
+          "title": "Describe briefly the hypothesis testing and p-value in layman’s term? And give a practical application for them ?",
+          "content": "**Q: Describe briefly the hypothesis testing and p-value in layman’s term? And give a practical application for them ?**\n\nIn Layman's terms:\n\n- Hypothesis test is where you have a current state (null hypothesis) and an alternative state (alternative hypothesis). You assess the results of both of the states and see some differences. You want to decide whether the difference is due to the alternative approach or not.\n\nYou use the p-value to decide this, where the p-value is the likelihood of getting the same results the alternative approach achieved if you keep using the existing approach. It's the probability to find the result in the gaussian distribution of the results you may get from the existing approach.\n\nThe rule of thumb is to reject the null hypothesis if the p-value < 0.05, which means that the probability to get these results from the existing approach is <95%. But this % changes according to task and domain."
+        },
+        {
+          "title": "Describe briefly the hypothesis testing and p-value in layman’s term? And give a practical application for them ? (cont.)",
+          "content": "To explain the hypothesis testing in Layman's term with an example, suppose we have two drugs A and B, and we want to determine whether these two drugs are the same or different. This idea of trying to determine whether the drugs are the same or different is called hypothesis testing. The null hypothesis is that the drugs are the same, and the p-value helps us decide whether we should reject the null hypothesis or not.\n\np-values are numbers between 0 and 1, and in this particular case, it helps us to quantify how confident we should be to conclude that drug A is different from drug B. The closer the p-value is to 0, the more confident we are that the drugs A and B are different."
+        },
+        {
+          "title": "Given a left-skewed distribution that has a median of 60, what conclusions can we draw about the mean and the mode of...",
+          "content": "**Q: Given a left-skewed distribution that has a median of 60, what conclusions can we draw about the mean and the mode of...**\n\nLeft skewed distribution means the tail of the distribution is to the left and the tip is to the right. So the mean which tends to be near outliers (very large or small values) will be shifted towards the left or in other words, towards the tail.\n\nWhile the mode (which represents the most repeated value) will be near the tip and the median is the middle element independent of the distribution skewness, therefore it will be smaller than the mode and more than the mean.\n\nMean < 60\nMode > 60"
+        },
+        {
+          "title": "What is the meaning of selection bias and how to avoid it?",
+          "content": "**Q: What is the meaning of selection bias and how to avoid it?**\n\nSampling bias is the phenomenon that occurs when a research study design fails to collect a representative sample of a target population. This typically occurs because the selection criteria for respondents failed to capture a wide enough sampling frame to represent all viewpoints.\n\nThe cause of sampling bias almost always owes to one of two conditions.\n1. Poor methodology: In most cases, non-representative samples pop up when researchers set improper parameters for survey research. The most accurate and repeatable sampling method is simple random sampling where a large number of respondents are chosen at random. When researchers stray from random sampling (also called probability sampling), they risk injecting their own selection bias into recruiting respondents."
+        }
+      ]
+    },
+    {
+      "id": "statistics-answer",
+      "name": "Statistics: Answer:",
+      "cards": [
+        {
+          "title": "What is the difference between a confidence interval and a prediction interval, and how do you calculate them? (cont.)",
+          "content": "The margin of error depends on the sample size, the standard deviation of the population (or the sample, if the population standard deviation is unknown), and the desired level of confidence. For example, if the sample size is larger or the standard deviation is smaller, the margin of error will be smaller, resulting in a narrower confidence interval.\n\nA prediction interval is a range of values that is likely to contain a future observation or outcome with a certain level of confidence. It is used to estimate the uncertainty or variability of a future value based on a statistical model and the observed data.\n\nFor example, if we have a regression model that predicts the sales of a product based on its price and advertising budget, we can use a prediction interval to estimate the range of possible sales for a new product with a certain price and advertising budget, with a certain level of confidence, such as 95%. This means that if we repeat the prediction process many times, 95% of the resulting intervals will contain the true sales value.\n\nThe formula for a prediction interval is:\nprediction interval = point estimate +/- margin of error"
+        },
+        {
+          "title": "What is the difference between a confidence interval and a prediction interval, and how do you calculate them? (cont.)",
+          "content": "The point estimate is the predicted value of the outcome variable based on the model and the input variables. The margin of error depends on the residual standard deviation of the model, which measures the variability of the observed data around the predicted values, and the desired level of confidence. For example, if the residual standard deviation is larger or the level of confidence is higher, the margin of error will be larger, resulting in a wider prediction interval."
+        }
+      ]
+    }
+  ]
+}

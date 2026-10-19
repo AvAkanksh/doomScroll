@@ -1,0 +1,82 @@
+{
+  "topics": [
+    {
+      "id": "sql-db-a-join-clause-is-used-to-combine-rows-from-two-or-mor",
+      "name": "SQL & DB: A JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.",
+      "cards": [
+        {
+          "title": "What are joins in SQL and discuss its types?",
+          "content": "**Q: What are joins in SQL and discuss its types?**\n\nA JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.\n\n* Inner join: Inner Join in SQL is the most common type of join. It is used to return all the rows from multiple tables where the join condition is satisfied. \n* Left Join:  Left Join in SQL is used to return all the rows from the left table but only the matching rows from the right table where the join condition is fulfilled.\n* Right Join: Right Join in SQL is used to return all the rows from the right table but only the matching rows from the left table where the join condition is fulfilled.\n* Full Join: Full join returns all the records when there is a match in any of the tables. Therefore, it returns all the rows from the left-hand side table and all the rows from the right-hand side table."
+        },
+        {
+          "title": "Define the primary, foreign, and unique keys and the differences between them?",
+          "content": "**Q: Define the primary, foreign, and unique keys and the differences between them?**\n\n**Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column\n\n* The primary key doesn't accept null or repeated values\n* The purpose of the primary key is to keep the Entity's integrity\n* There is only one PK in each table\n* Every row must have a unique primary key\n\n**Foreign key:** Is a key that is used to identify, show or describe the relationship between tuples of two tables. It acts as a cross-reference between tables because it references the primary key of another table, thereby establishing a link between them.\n\n* The purpose of the foreign key is to keep data integrity\n* It can contain null values or primary key values\n\n**Unique key:** It's a key that can identify each row in the table as the primary key but it can contain one null value\n\n* Every table can have more than one Unique key"
+        },
+        {
+          "title": "What is the difference between BETWEEN and IN operators in SQL?",
+          "content": "**Q: What is the difference between BETWEEN and IN operators in SQL?**\n\nThe SQL **BETWEEN** operator selects values within a given range. It is inclusive of both the ranges, begin and end values are included.  The values can be text, date, numbers, or other\n\nFor example, select * from tablename where price BETWEEN 10 and 100;\n\nThe **IN** operator is used to select rows in which a certain value exists in a given field. It is used with the WHERE clause to match values in a list.\n\nFor example, select COLUMN from tablename where 'USA' in (country);\n\nIN is mainly best for categorical variables(it can be used with Numerical as well) whereas Between is for Numerical Variables"
+        },
+        {
+          "title": "Assume you have the given table below which contains information on user logins. Write a query to obtain the number o...",
+          "content": "**Q: Assume you have the given table below which contains information on user logins. Write a query to obtain the number o...**\n\nFirst, we look at all the users who did not log in during the previous month. To obtain the last month's data, we subtract an 𝐈𝐍𝐓𝐄𝐑𝐕𝐀𝐋 of 1 month from the current month's login date. Then, we use 𝐖𝐇𝐄𝐑𝐄 𝐄𝐗𝐈𝐒𝐓𝐒 against the previous month's interval to check whether there was login in the previous month. Finally, we 𝗖𝗢𝗨𝗡𝗧 the number of users satisfying this condition.\n\n```\nSELECT \n    DATE_TRUNC('month', current_month.login_date) AS current_month,\n    COUNT(*) AS num_reactivated_users \nFROM \n    user_logins current_month\nWHERE\n    NOT EXISTS (\n      SELECT \n        *\n      FROM \n        user_logins last_month\n      WHERE\n        DATE_TRUNC('month', last_month.login_date) BETWEEN DATE_TRUNC('month', current_month.login_date) AND DATE_TRUNC('month', current_month.login_date) - INTERVAL '1 month'\n)\n```"
+        },
+        {
+          "title": "Describe the advantages and disadvantages of relational database vs NoSQL databases",
+          "content": "**Q: Describe the advantages and disadvantages of relational database vs NoSQL databases**\n\n**Advantages of Relational Databases:** Ensure data integrity through a defined schema and ACID properties.  Easy to get started with and use for small-scale applications. Lends itself well to vertical scaling.  Uses an almost standard query language, making learning or switching between types of relational databases easy.\n\n**Advantages of NoSQL Databases:** Offers more flexibility in data format and representations, which makes working with Unstructured or semistructured data easier.  Hence, useful when still the data schema or adding new features/functionality rapidly like in a startup environment to scale with horizontal scaling.  Lends itself better to applications that need to be highly available. \n\n**Disadvantages of Relational Databases:** Data schema needs to be known in advance.  Ale schemas is possible, but frequent changes to the schema for large tables can cause performance issues.  Horizontal scaling is relatively difficult, leading to eventual performance bottlenecks"
+        }
+      ]
+    },
+    {
+      "id": "sql-db-primary-key-is-a-key-that-is-used-to-uniquely-identif",
+      "name": "SQL & DB: **Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column",
+      "cards": [
+        {
+          "title": "Describe the advantages and disadvantages of relational database vs NoSQL databases (cont.)",
+          "content": "**Disadvantages of NoSQL Databases:** As outlined by the BASE framework, weaker guarantees of data correctness are made due to the soft-state and eventual consistency property.  Managing consistency can also be difficult due to the lack of a predefined schema that's strictly adhered to. Depending on the type of NoSQL database, it can be challenging for the database to handle its types of complex queries or access patterns."
+        },
+        {
+          "title": "Assume you are given the table below on user transactions. Write a query to obtain the third transaction of every user",
+          "content": "**Q: Assume you are given the table below on user transactions. Write a query to obtain the third transaction of every user**\n\nFirst, we obtain the transaction numbers for each user. We can do this by using the ROW_NUMBER window function, where we PARTITION by the user_id and ORDER by the transaction_date fields, calling the resulting field a transaction number. From there, we can simply take all transactions having a transaction number equal to 3."
+        },
+        {
+          "title": "What do you understand by Self Join? Explain using an example",
+          "content": "**Q: What do you understand by Self Join? Explain using an example**\n\nSelf-join is as its name implies, joining a table to itself on a database, this process may come in handy in a number of cases, such as:\n\n1- comparing the table's rows to themselves:\n\nIt's like we have two copies of the same table and join them together on a given condition to reach the required output query.\n\nEx. If we have a store database with a client's data table holding a bunch of demographics, we could self-join the client's table to get clients who are located in the same city/made a purchase on the same day/etc.\n\n2- querying a table that has hierarchical data:\n\nMeaning, the table has a primary key that has a one-to-many relationship with another foreign key inside the same table, in other words, the table has data that refers to the same table. We could use self-join in order to have a clear look at the data by matching its keys."
+        },
+        {
+          "title": "What do you understand by Self Join? Explain using an example (cont.)",
+          "content": "Ex. The organizational structure of a company may contain an employee table that has an employee id and his manager id (who is also an employee, hence has an employee id too) in the same table. Using self-join on this table would allow us to reference every employee directly to his manager.\n\nP.S. we would need to take care of duplicates that may occur and consider them in the conditions."
+        },
+        {
+          "title": "What is the difference between temporary tables and common table expressions?",
+          "content": "**Q: What is the difference between temporary tables and common table expressions?**\n\n𝗧𝗲𝗺𝗽𝗼𝗿𝗮𝗿𝘆 𝘁𝗮𝗯𝗹𝗲𝘀 and 𝗖𝗧𝗘s are both used to store intermediate results in MySQL, but there are some key differences between the two:\n\n𝗗𝗲𝗳𝗶𝗻𝗶𝘁𝗶𝗼𝗻: A temporary table is a physical table that is created in the database and persists until it is explicitly dropped or the session ends. A CTE is a virtual table that is defined only within the scope of a single SQL statement.\n\n𝗦𝘁𝗼𝗿𝗮𝗴𝗲: Temporary tables are stored in the database and occupy physical disk space. CTEs are not stored on disk and exist only in memory for the duration of the query.\n\n𝗔𝗰𝗰𝗲𝘀𝘀: Temporary tables can be accessed from any session that has the appropriate privileges. CTEs are only accessible within the scope of the query in which they are defined.\n\n𝗟𝗶𝗳𝗲𝘀𝗽𝗮𝗻: Temporary tables persist until they are explicitly dropped or the session ends. CTEs are only available for the duration of the query in which they are defined and are then discarded.\n\n𝗦𝘆𝗻𝘁𝗮𝘅: Temporary tables are created using the CREATE TEMPORARY TABLE statement, while CTEs are defined using the WITH clause."
+        }
+      ]
+    },
+    {
+      "id": "sql-db-answer",
+      "name": "SQL & DB: Answer:",
+      "cards": [
+        {
+          "title": "What is the difference between temporary tables and common table expressions? (cont.)",
+          "content": "𝗣𝘂𝗿𝗽𝗼𝘀𝗲: Temporary tables are typically used to store intermediate results that will be used in multiple queries, while CTEs are used to simplify complex queries by breaking them down into smaller, more manageable parts.\n\nIn summary, temporary tables are physical tables that persist in the database and can be accessed from any session, while CTEs are virtual tables that exist only within the scope of a single query and are discarded once the query is complete. Both temporary tables and CTEs can be useful tools for simplifying complex queries and storing intermediate results."
+        },
+        {
+          "title": "Why use Right Join When Left Join can suffice the requirement?",
+          "content": "**Q: Why use Right Join When Left Join can suffice the requirement?**\n\nIn MySQL, the 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 𝗮𝗻𝗱 𝗟𝗘𝗙𝗧 𝗝𝗢𝗜𝗡 are used to retrieve data from multiple tables by joining them based on a specified condition.\n\nGenerally, the 𝗟𝗘𝗙𝗧 𝗝𝗢𝗜𝗡 is used more frequently than the 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 because it returns all the rows from the left table and matching rows from the right table, or NULL values if there is no match.\n\nIn most cases, a 𝗟𝗘𝗙𝗧 𝗝𝗢𝗜𝗡 is sufficient to meet the requirement of retrieving all the data from the left table and matching data from the right table.\n\nHowever, there may be situations where using a 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 is more appropriate.\n\nHere are a few examples:\n\n𝟭. 𝗪𝗵𝗲𝗻 𝘁𝗵𝗲 𝗽𝗿𝗶𝗺𝗮𝗿𝘆 𝘁𝗮𝗯𝗹𝗲 𝗶𝘀 𝘁𝗵𝗲 𝗿𝗶𝗴𝗵𝘁 𝘁𝗮𝗯𝗹𝗲: If the right table contains the primary data that needs to be retrieved, and the left table contains supplementary data, a 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 can be used to retrieve all the data from the right table and matching data from the left table.\n\n𝟮. 𝗪𝗵𝗲𝗻 𝘁𝗵𝗲 𝗾𝘂𝗲𝗿𝘆 𝗻𝗲𝗲𝗱𝘀 𝘁𝗼 𝗯𝗲 𝗼𝗽𝘁𝗶𝗺𝗶𝘇𝗲𝗱: In some cases, a 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 may be more efficient than a 𝗟𝗘𝗙𝗧 𝗝𝗢𝗜𝗡 because the database optimizer can choose the most efficient join order based on the query structure and the available indexes."
+        },
+        {
+          "title": "Why use Right Join When Left Join can suffice the requirement? (cont.)",
+          "content": "𝟯. 𝗪𝗵𝗲𝗻 𝘂𝘀𝗶𝗻𝗴 𝗼𝘂𝘁𝗲𝗿 𝗷𝗼𝗶𝗻𝘀: If the query requires an outer join, a 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 may be used to return all the rows from the right table, including those with no matching rows in the left table.\nIt's important to note that while a 𝗥𝗜𝗚𝗛𝗧 𝗝𝗢𝗜𝗡 can provide additional functionality in certain cases, it may also make the query more complex and difficult to read. In most cases, a 𝗟𝗘𝗙𝗧 𝗝𝗢𝗜𝗡 is the preferred method for joining tables in MySQL."
+        },
+        {
+          "title": "Why Rank skips sequence?",
+          "content": "**Q: Why Rank skips sequence?**\n\ns:\nIn MySQL, the rank function may skip a sequence of numbers when using the `DENSE_RANK()` function or the `RANK()` function, depending on the data and the query. The `DENSE_RANK()` function assigns a unique rank to each distinct value in a result set, whereas the `RANK()` function assigns the same rank to the duplicate values.\n\nHere are some of the reasons why the rank function may skip a sequence in MySQL:\n\n1. 𝗧𝗵𝗲 `𝗗𝗘𝗡𝗦𝗘_𝗥𝗔𝗡𝗞()` function skips ranks when there are ties. For example, if there are two rows with the same values in the ranking column, both will be assigned the same rank, and the next rank will be incremented by 1.\n\n2. 𝗧𝗵𝗲 `𝗥𝗔𝗡𝗞()` function skips ranks when there are gaps between the duplicate values. For example, if there are three rows with the same values in the ranking column, and then the next row has a higher value, the `RANK()` function will skip over the fourth rank.\n\n3. The query may have filtering or grouping clauses that affect the ranking. For example, if a query filters out some rows or groups them by a different column, the ranking may not be sequential."
+        },
+        {
+          "title": "Why Rank skips sequence? (cont.)",
+          "content": "It's important to note that the ranking function in MySQL behaves differently from the ranking function in other databases, so the same query may produce different results in different database systems."
+        }
+      ]
+    }
+  ]
+}

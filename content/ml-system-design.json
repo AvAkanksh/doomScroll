@@ -1,0 +1,762 @@
+{
+  "topics": [
+    {
+      "id": "ad-click-prediction-for-social-networks",
+      "name": "Ad Click Prediction for Social Networks",
+      "cards": [
+        {
+          "title": "Ad Click Prediction for Social Networks",
+          "content": "* Build a machine learning model to predict if an ad will be clicked. For simplicity reasons, \nwe will not focus on the cascade of classifiers that's commonly used in adtech. \n\n* Background on how Adtech bidding works (source: ML in AdTech)\n\n1. Requirements\n* ML model with good performance. \n* System can scale to larger number of users with low latency. \n* Imbalance data: you can assume Click Through Rate (CTR) is very small in practice (1%-2%). \n* Serving: from the RTB worfklow diagram, it's important to have low latency (150 ms) for ad prediction. \n\n2. Calculate and estimation\n* Assumptions: 4K ads requests per second which is 10 billions ads requests per month. \n* Data: historical ad clicks data includes [user, ads, click_or_not]. With estimated 1% CTR, it has 100 millions clicked ads. We can start with 1 month of data for training and validation. \n\n* Train/validation data split: We split train/validation to simulate the actual online system for example: split by time. \n\n* Features: it's natural that the model need to have enough capacity to learn patterns from big training data. In practice it's common to have hundreds even thousands of features."
+        },
+        {
+          "title": "Ad Click Prediction for Social Networks (cont.)",
+          "content": "* Training: ability to retrain many times within one day to increase model performance in online manner. \n\n* Serving: latency within 150ms per request and 4K request per second. Test\n\n3. Metrics evaluation\n* During the training phase, we can focus on machine learning metrics instead of revenue metrics or CTR metrics. Regarding revenue-related metrics, we usually monitor during deployment and it's out of scope. See section 7 further readings to understand about offline metrics and online metrics. \n* Normalized Cross Entropy: predictive log loss divided by the cross entropy of the background CTR. This way NCE is insensitive to background CTR. This is the NCE formula (source facebook)\n\n* Calibration metrics measured by the expected clicks vs the actual observed clicks. Read more about calibration here"
+        },
+        {
+          "title": "Ad Click Prediction for Social Networks (cont.)",
+          "content": "4. Modeling: features scaling, major sub-sambling. \n* Model: We can use probabilistic sparse linear classifier (logistic regression). It's popular because of the computation efficiency and sparsity features.\n* Feature engineering:\n    * AdvertiserID: it's easy to have millions of advertisers. One common way is to use embedding as a distributed representation for advitiserID. If you're not familiar with embedding. Another way is to use feature hashing by Kilian Weinberger to handle large sparse column. Feature hashing helps increase speed and reduce memory usage. See video here. \n    * Numeric columns: pay attention to feature scaling.\n\n* Data processing:\n    * One way is subsampling majority negative class at different sub-sampling ratio. The key here is ensuring that the validation dataset has the same distribution as the test data set. We also need to pay attention how this sampling affect predictions. \n\n5. Model deployment and testing\n* During deployment phase, it's crucial to monitor the actual CTR and other revenue-related metrics.\n* Related to this topic, read more about A/B testing and multi-arms bandit.\n\n6. High level system design"
+        },
+        {
+          "title": "Ad Click Prediction for Social Networks (cont.)",
+          "content": "7. Further readings\n* Common ML designs\n* Machine Learning in Adtech\n* Ad Click Prediction: a View from the trenches\n* Practical lessons from Predicting Clicks on Ads at Facebook\n* Predictive Model Performance: Offline and Online Evaluation\n* Kaggle CTR prediction\n\n# Notes\n* If you're interested to learn more about paid ML system design course with more examples, click here.\n* If you find this helpful, you can Sponsor this project. It's cool if you don't."
+        }
+      ]
+    },
+    {
+      "id": "ads-click-prediction",
+      "name": "Ads Click Prediction",
+      "cards": [
+        {
+          "title": "Ads Click Prediction",
+          "content": "### 1. Problem Formulation\n* Clarifying questions\n  * What is the primary business objective of the click prediction system?\n  * What types of ads are we predicting clicks for (e.g., display ads, video ads, sponsored content)?\n  * Are there specific user segments or contexts we should consider (e.g., user demographics, browsing history)?\n  * How will we define and measure the success of click predictions (e.g., click-through rate, conversion rate)?\n  * Do we have negative feedback features (such as hide ad, block, etc)?\n  * Do we have fatigue period (where ad is no longer shown to the users where there is no interest, for X days)?\n  * What type of user-ad interaction data do we have access to can we use it for training our models? \n  * Do we need continual training? \n  * How do we collect negative samples? (not clicked, negative feedback). \n  \n* Use case(s) and business goal\n  * use case: predict which ads a user is likely to click on when presented with multiple ad options.\n  * business objective: maximize ad revenue by delivering more relevant ads to users, improving click-through rates, and maximizing the value of ad inventory.\n* Requirements;\n    * Real-time prediction capabilities to serve ads dynamically.\n    * Scalability to handle a large number of ad impressions.\n    * Integration with ad serving platforms and data sources.\n    * Continuous model training and updating.\n* Constraints:\n    * Privacy and compliance with data protection regulations.\n    * Latency requirements for real-time ad serving.\n    * Limited user attention, as users may quickly decide whether to click on an ad.\n* Data: Sources and Availability:\n    * Data sources include user interaction logs, ad content data, user profiles, and contextual information.\n    * Historical click and impression data for model training and evaluation.\n    * Availability of labeled data for supervised learning.\n* Assumptions:\n    * Users' click behavior is influenced by factors that can be learned from historical data.\n    * Ad content and relevance play a significant role in click predictions.\n    * The click behavior can be modeled as a classification problem.\n  \n* ML Formulation:\n    * Ad click prediction is a ranking problem"
+        },
+        {
+          "title": "Ads Click Prediction (cont.)",
+          "content": "### 2. Metrics  \n* Offline metrics \n  * CE \n  * NCE (normalized over baseline)\n* Online metrics \n  * CTR (#clicks/#impressions)\n  * Conversion rate (#conversion/#impression)\n  * Revenue lift (increase in revenue over time)\n  * Hide rate (#hidden ads/#impression)\n\n### 3. Architectural Components  \n* High level architecture \n* We can use point-wise learning to rank (LTR) \n    * The a binary classification task, where the goal is to predict whether a user will click (1) or not click (0) on a given ad impression -> given a pair of <user, ad> as input -> click or no click \n    * Features can include user demographics, ad characteristics, context (e.g., device, location), and historical behavior.\n    * Machine learning models, such as logistic regression, decision trees, gradient boosting, or deep neural networks, can be used for prediction.\n\n### 4. Data Collection and Preparation\n* Data Sources\n  * Users, \n  * Ads, \n  * User-ad interaction \n* ML Data types\n* Labelling"
+        },
+        {
+          "title": "Ads Click Prediction (cont.)",
+          "content": "### 5. Feature Engineering\n* Feature selection \n  * Ads: \n    * IDs \n    * categories \n    * Image/videos\n    * No of impressions / clicks (ad, adv, campaign)\n  * User: \n    * ID, username\n    * Demographics (Age, gender, location)\n    * Context (device, time of day, etc)\n    * Interaction history (e.g. user ad click rate, total clicks, etc)\n  * User-Ad interaction: \n    * IDs(user, Ad), interaction type, time, location, dwell time \n* Feature representation / preparation\n  * sparse features \n    * IDs: embedding layer (each ID type its own embedding layer)\n  * Dense features: \n    * Engagement feats: No of clicks, impressions, etc \n    * use directly \n  * Image / Video: \n    * preprocess \n    * use e.g. SimCLR to convert -> feature vector \n  * Category: Textual data \n    * normalization, tokenization, encoding"
+        },
+        {
+          "title": "Ads Click Prediction (cont.)",
+          "content": "### 6. Model Development and Offline Evaluation\n* Model selection \n  * LR \n  * Feature crossing + LR \n    * feature crossing: combine 2/more features into new feats (e.g. sum, product)\n      * pros: capture nonlin interactions b/w feats \n      * cons: manual process, and domain knowledge needed \n  * GBDT \n    * pros: interpretable\n    * cons: inefficient for continual training, can't train embedding layers \n  * GBDT + LR \n    * GBDT for feature selection and/or extraction, LR for classific\n  * NN\n    * Two options: single network, two tower network (user tower, ad tower)\n    * Cons for ads prediction: \n      * sparsity of features, huge number of them \n      * hard to capture pairwise interactions (large no of them)\n    * Not a good choice here. \n  * Deep and cross network (DCN)\n    * finds feature interactions automatically \n    * two parallel networks: deep network (learns complex features) and cross network (learns interactions)\n    * two types: stacked, and parallel \n  * Factorization Machine \n    * embedding based model, improves LR by automatically learning feature interactions (by learning embeddings for features) \n    * w0  + \\sum (w_i.x_i) + \\sum\\sum <v_i, v_j> x_i.x_j\n    * cons: can't learn higher order interactions from features unlike NN\n  * Deep factorization machine (DFM)\n    * combines a NN (for complex features) and a FM (for pairwise interactions)\n  * start with LR to form a baseline, then experiment with DCN & DeepFM \n   \n* Model Training \n  * Loss function: \n    * binary classification: CE \n    * Dataset \n      * labels: positive: user clicks the ad < t seconds after ad is shown, negative: no click within t secs  \n  * Model eval and HP tuning \n  * Iterations \n  \n### 7. Prediction Service\n* Data Prep pipeline\n  *  static features (e.g. ad img, category) -> batch feature compute (daily, weekly) -> feature store\n  *  dynamic features: # of ad impressions, clicks. \n* Prediction pipeline \n  * two stage (funnel) architecture \n    * candidate generation \n      * use ad targeting criteria by advertiser (age, gender, location, etc)\n    * ranking \n      * features -> model -> click prob. -> sort \n      * re-ranking: business logic (e.g. diversity)\n* Continual learning pipeline \n  * fine tune on new data, eval, and deploy if improves metrics  \n  \n### 8. Online Testing and Deployment  \n* A/B Test \n* Deployment and release"
+        },
+        {
+          "title": "Ads Click Prediction (cont.)",
+          "content": "### 9. Scaling, Monitoring, and Updates \n* Scaling (SW and ML systems)\n* Monitoring \n* Updates \n\n### 10. Other topics  \n* calibration: \n  * fine-tuning predicted probabilities to align them with actual click probabilities \n* data leakage: \n  * info from the test or eval dataset influences the training process\n  * target leakage, data contamination (from test to train set)\n* catastrophic forgetting \n  *  model trained on new data loses its ability to perform well on previously learned tasks"
+        }
+      ]
+    },
+    {
+      "id": "self-driving-cars",
+      "name": "Self-driving cars",
+      "cards": [
+        {
+          "title": "Self-driving cars",
+          "content": "- drives itself, with little or no human intervention \n- different levels of authonomy \n\n## Hardware support \n\n### Sensors \n\n* Camera\n  * used for classification, segmentation, and localization.\n  * problem w/ night time, and extreme conditions like fog, heavy rain.\n* LiDAR (Light Detection And Ranging,)\n  * uses lasers or light to measure the distance of the nearby objects.\n  * adds depth (3D perception), point cloud\n  * works at night or in dark, still fail when there’s noise from rain or fog.\n* RADAR (Radio detection and ranging)\n  * use radio waves (instead of lasers), so they work in any conditions\n  * sense the distance from reflection,\n  * very noisy (needs clean up (thresholding, FFT)), lower spatial resolution, interference w/ other radio systems \n  * point cloud\n* Audio \n## Stack\n\n* **Perception**"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "- Perception \nobjects, \nRaw sensor (lidar, camera, etc) data (image, point cloud)->  world understanding  \n  * Object detection (traffic lights, pedestrians, road signs, walkways, parking spots, lanes, etc), traffic light state detection, etc \n  * Localization\n    * calculate position and orientation of the vehicle as it navigates (Visual Odometry (VO)).\n    * Deep learning used to improve the performance of VO, and to classify objects.\n      * Examples: PoseNet and VLocNet++, use point data to estimate the 3D position and orientation.\n  * ....\n* **Behavior prediction**\n  * predict future trajectory of agents\n* **Planning**: decision making and generate trajectory\n* **Controller**: generate control commands: accelerate, break, steer left or right \n\n* Note: latency: orders of millisecond for some tasks, and order of 10 msec's for others  \n\n## Perception"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* 2D Object detection:  \n  * Two-stage detectors: using Region Proposal Network (RPN) to learn RoI for potential objects  + bounding box predictions (using RoI pooling): (R-CNN, Fast R-CNN, Faster R-CNN, Mask-RCNN (also does segmentation)\n    * used to outperform until focal loss\n  * One-stage: skip proposal generation; directly produce obj BB: YOLO, SSD, RetinaNet\n    * computationally appealing (real time)\n  * Transformer based: \n    * Detection Transformer (DETR): End-to-End Object Detection with Transformers\n      * uses a transformer encoder-decoder architecture, backbone  CNN  as the encoder and a transformer-based decoder.\n      * input image -> CNN -> feature map -> decoder -> final object queries, corresponding class labels and bounding boxes.\n      * handles varying no. of objects in an image, as it does not rely on a fixed set of object proposals.\n      * More\n    * TrackFormer: Multi-Object Tracking with Transformers\n      * on top of DETR \n  * NMS:\n\n* 3D Object detection:  \n  * from point cloud data, ideas transferred from 2D detection\n  * Examples:\n    * 3D convolutions on voxelized point cloud\n    * 2D convolutions on BEV\n  * heavy computation"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* Object tracking:\n  * use probabilistic methods such as EKF \n  * use ML based models \n    * use/fine-tune pre-trained CNNs for feature extraction ->  do tracking with correlation or regression.\n    * use DL based tracking algorithm, such as SORT (Simple Online and Realtime Tracking) or DeepSORT\n\n* Semantic segmentation \n  * pixel-wise classification of image (each pixel assigned a class)\n* Instance segmentation \n  * combine obj detection + semantic segmatation -> classify pixels of each instance of an object  \n\n## Behavior prediction\n\n  * Main task: Motion forecasting/ trajectory prediction (future): \n  * predict where each object will be in the future given multiple past frames\n  * Examples:\n    * use RNN/LSTM for prediction\n  \n* Input from perception + HDMap\n* Options: \n  * top-view representation: input -> CNN -> ..\n  * vectorized: context map  \n  * graph representation: GNN"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* Render a bird eye view image on a single RGB image\n  * one option for history: also render on single image\n  * another option: use feature extractor (CNN) for each frame then use LSTM to get temporal info\n  * Input: BEV image + (v, a, a_v)\n  * Out: (x, y, std)\n  \n* also possible to use LSTM networks to generate waypoints in the trajectory sequentially.\n\n* Challenge: Multimodality (distribution of different modes) - future uncertain\n  \n  <!-- - Generative [from noise ] - conditioned \n  - Anchor based - add human knowledge (possible goal locations) -> chose \n  - multi-head: models multi-modality \n  - intention-based:  -->\n\n## Planning \n\n- Decision making and generate trajectory  \n- input: route (from A to B), context map, prediction for nearby agents\n  \n- proposal: what are possible options for the plan (mathematical methods vs imitation learning) - predict what is optimal \n\n* Hierarchical RL can be used\n  * high level planner: yield, stop, turn left/right, lane following, etc)\n  * low level planner: execute commands\n\n- motion validation: check e.g. collision, red light, etc -> reject + ranking \n\n## Multi task approaches"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* ### Perception + Behavior prediction\n  * Fast& Furious (Uber):\n    * Tasks: Detection, tracking, short term (e.g. 1 sec) motion forecasting\n    * create BEV from point cloud data:\n      * quantize 3D → 3D voxel grid (binary for occupation) → height>channel(3rd dimension) in RGB + time as 4th dimension → Single stage detector similar to SSD\n    * deal with temporal dimension in two ways:\n      * early fusion (aggregate temporal info at the very first layer)\n      * late fusion (gradually merge the temporal info: allows the model to capture high-level motion features.)\n    * use multiple predefined boxes for each feature map location (similar to SSD)\n    * two branches after the feature map:\n      * binary classification (P (being a vehicle) for each pre-allocated box)\n      * predict (regress) the BB over the current frame as well as n − 1 frames into the future → size and heading\n      \n  * IntentNet: learning to predict intent from raw sensor data (Uber)\n    * Fuse BEV generated from the point cloud + HDMap info  to do detection, intention prediction, and trajectory prediction.\n    * I: Voxelized LiDAR in BEV, Rasterized HDMap\n    * O: detected objects, trajectory, 8-class intention (keep lane, turn left, etc)"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* ### Behavior Prediction + Planning (Mid-to-Mid Model)\n\n  * ChauffeurNet (Waymo)\n    * prediction and planning using single NN using Imitation Learning (IL)\n    * More info here\n\n* ###  End to end\n\n  * Learning to drive in a day (wayve.ai)\n    * RL to train a driving policy to follow a lane from scratch in less than 20 minutes!\n    * Without any HDMap and hand-written rules!\n  * Learning to Drive Like a Human\n    * Imitation learning + RL\n    * used some auxiliary tasks like segmentation, depth estimation, and optical flow estimation to learn a better representation of the scene and use it to train the policy.  \n\n# Example\nDesign an ML system to detect if a pedestrian is going to do jaywalking. \n\n### 1. Problem Formulation\n\n- Jaywalking: a pedestrian crossing a street where there is no  crosswalk or intersection.\n-  Goal: develop an ML system that can accurately predict if a pedestrian is going to do jaywalking over a short time horizon (e.g. 1 sec) in real-time. \n\n- Pedestrian action prediction is harder than vehicle: future behavior depends on other factors such as body pose, activity, etc."
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* ML Objective \n  * binary classification (predict if a pedestrian is going to do jaywalking or not in the next T seconds.)\n\n* Discuss data sources and availability. \n\n### 2. Metrics  \n#### Component level metrics \n* Object detection \n  * Precision \n    * calculated based on IOU threshold\n  * AP: avg. across various IOU thresholds \n  * mAP: mean of AP over C classes \n* jaywalking detection: \n  * Precision, Recall, F1  \n#### End-to-end metrics\n* Manual intervention \n* Simulation Errors \n  * historical log (scene recording) w/ expert driver \n  * input to our system and compare the decisions with the expert driver"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "### 3. Architectural Components  \n* Visual Understanding System \n  * Camera: Object detection (pedestrian, drivable region?) + tracking\n  * [Optional] Camera + object detection: Activity recognition \n  * Radar: 3D Object detection (skip)\n*  Behavior prediction system \n   *  Trajectory estimation  \n      *  require motion history\n   *  Ml based approach (classification) \n      *  Input: \n         *  Vision: local context: seq. of ped's cropped image (last k frames) + global context (semantically segmented images over last k frames) \n         *  Non-vision: Ped's trajectory (as BBs, last k frames) +  context map  + context(location, age group, etc)\n\n### 4. Data Collection and Preparation"
+        },
+        {
+          "title": "Self-driving cars (cont.)",
+          "content": "* Data collection and annotation:\n  * Collect datasets of pedestrian behavior, including both jaywalking and non-jaywalking behavior. This data can be obtained through public video footage or by recording video footage ourselves.\n  * Collect a diverse dataset of video clips or image sequences from various locations, including urban and suburban areas, with different pedestrian behaviors, traffic conditions, and lighting conditions.\n  * Annotate the data by marking pedestrians, their positions, and whether they are jaywalking or not. This can be done by drawing bounding boxes around pedestrians and labeling them accordingly (initially human labelers eventually auto-labeler system)\n  * Targeted data collection: \n    * in later iterations, we check cases where driver had to intervene when pedestrian jaywalking, check performance on last 20 frames, and ask labelers to label those and add to the dataset (examples need to be seen)\n  \n* Labeling: \n  * each video frame annotated with BB + pose info of the ped + activity tags (walking, standing, crossing, looking, etc) + attributes of pedestrian (age, gender, location, ets),  \n  * each video is annotated weather conditions and time of day.\n  \n* Data preprocessing:  \n  * Split the dataset into training, validation, and test sets.\n  * Normalize and resize the images to maintain consistency in input data.\n  *  Apply data augmentation techniques (e.g., rotation, flipping, brightness adjustments) to increase the  dataset's size and improve model generalization.\n     * enhance or augment the data with GANs \n  \n* Data augmentation"
+        }
+      ]
+    },
+    {
+      "id": "design-an-event-recommendation-system",
+      "name": "Design an event recommendation system",
+      "cards": [
+        {
+          "title": "Design an event recommendation system",
+          "content": "## 1. Problem Formulation \n\n* Clarifying questions \n  - Use case? \n    - event recommendation system similar to eventbrite's. \n  - What is the main Business objective? \n    - Increase ticket sales  \n  - Does it need to be personalized for the user? Personalized for the user\n  - User locations? Worldwide (multiple languages) \n  - User’s age group: \n  - How many users? 100 million DAU\n  - How many events? 1M events / month \n  - Latency requirements  - 200msec?\n  - Data access \n    - Do we log and have access to any data? Can we build a dataset using user interactions ?\n    - Do we have textual description of items? \n    - Can we use location data (e.g. 3rd party API)? (events are location based)\n  - Can users become friends on the platform? Do we wanna use friendships?\n  - Can users invite friends? \n  - Can users RSVP or just register?\n  - Free or Paid? Both"
+        },
+        {
+          "title": "Design an event recommendation system (cont.)",
+          "content": "* ML formulation \n  * ML Objective: Recommend most relevant (define) events to the users to maximize the number of registered events\n  * ML category: Recommendation system (ranking approach)\n    * rule based system \n    * embedding based (CF and content based)\n    * Ranking problem (LTR)\n      * pointwise, pairwise, listwise \n    * we choose pointwise LTR ranking formulation \n  * I/O: In: user_id, Out: ranked list of events + relevance score\n    * Pointwise LTR classifier I/O: I: <user_id, event_id>, O: P(event register) (Binary classification)\n\n## 2. Metrics (Offline and Online) \n\n* Offline: \n    * precision @k, recall @ k (not consider ranking quality)\n    * MRR, mAP, nDCG (good, focus on first element, binary relevance, non-binary relevance) -> here event register binary relevance so use mAP  \n   \n* Online: \n    * CTR, conversion rate, bookmark/like rate, revenue lift  \n\n## 3. Architectural Components (MVP Logic) \n* We two stage (funnel) architecture for \n  * candidate generation \n    * rule based event filtering (e.g. location, etc)\n  * ranking formulation (pointwise LTR) binary classifier  \n\n## 4. Data preparation"
+        },
+        {
+          "title": "Design an event recommendation system (cont.)",
+          "content": "* Data Sources: \n  1. Users (user profile, historical interactions)\n  2. Events \n  3. User friendships \n  4. User-event interactions\n  5. Context\n\n*  Labeling: \n\n## 5. Feature engineering \n\n* Note: Event based recommendation is more challenging than movie/video: \n   * events are short lived -> not many historical interactions -> cold start (constant new item problem)\n   * So we put more effort on feature engineering (many meaningful features)\n\n* Features: \n  - User features \n    - age (one hot), gender (bucketize), event history  \n \n  - Event features \n    - price, No of registered, \n    - time (event time, length, remained time)\n    - location  (city, country, accessibility)\n    - description\n    - host (& popularity)\n  \n  - User Event features \n    - event price similarity \n    - event description similarity \n    - no. registered similarity \n    - same city, state, country\n    - distance \n    - time similarity (event length, day, time of day)\n  \n  - Social features \n    - No./ ratio of friends going \n    - invited by friends (No)\n    - hosted by friend (similarity)\n  \n  - context \n    - location, time"
+        },
+        {
+          "title": "Design an event recommendation system (cont.)",
+          "content": "* Feature preprocessing \n  - one hot (gender)\n  - bucketize + one hot (age, distance, time)\n\n* feature processing \n  * Batch (for static) vs Online (streaming, for dynamic) processing \n  * efficient feature computation (e.g. for location, distance)\n  * improve: embedding learning - for users and events \n\n## 6. Model Development and Offline Evaluation \n\n* Model selection \n  * Binary classification problem: \n    * LR (nonlinear interactions)\n    * GBDT (good for structured, not for continual learning)\n    * NN (continual learning, expressive, nonlinear rels)\n  * we can start with GBDT as a baseline and experiment improvements by NN (both good options)\n* Dataset \n  * for each user and event pair, compute features, and label 1 if registered, 0 if not \n  * class imbalance \n    * resampling \n    * use focal loss or class-balanced loss \n\n## 7. Prediction Service \n* Candidate generation \n  * event filtering (millions to hundreds)\n    * rule based (given a user, e.g. location, type, etc filters)\n* Ranking \n  * compute scores for <usr, event> pairs, and sort \n\n## 8. Online Testing and Deployment  \nStandard approaches as before.  \n\n## 9. Scaling"
+        }
+      ]
+    },
+    {
+      "id": "feature-preprocessing",
+      "name": "Feature preprocessing",
+      "cards": [
+        {
+          "title": "Feature preprocessing",
+          "content": "## Text preprocessing \nnormalization -> tokenization -> token to ids\n* normalization \n* tokenization \n  * Word tokenization \n  * Subword tokenization \n  * Character tokenization \n* token to ids\n  * lookup table \n  * Hashing \n\n## Text encoders: \nText -> Vector (Embeddings) \nTwo approaches: \n  - Statistical \n    - BoW: converts documents into word frequency vectors, ignoring word order and grammar\n    - TF-IDF: evaluates the importance of a word (term) in a document relative to a collection of documents. It is calculated as the product of two components:\n\n      - Term Frequency (TF): This component measures how frequently a term occurs in a specific document and is calculated as the ratio of the number of times a term appears in a document (denoted as \"term_count\") to the total number of terms in that document (denoted as \"total_terms\"). The formula for TF is:\n\n        TF(t, d) = \\frac{\\text{term_count}}{\\text{total_terms}}"
+        },
+        {
+          "title": "Feature preprocessing (cont.)",
+          "content": "- Inverse Document Frequency (IDF): This component measures the rarity of a term across the entire collection of documents and is calculated as the logarithm of the ratio of the total number of documents in the collection (denoted as \"total_documents\") to the number of documents containing the term (denoted as \"document_frequency\"). The formula for IDF is:\n\n        IDF(t) = \\log\\left(\\frac{\\text{total_documents}}{\\text{document_frequency}}\\right)\n\n      The final TF-IDF score for a term \"t\" in a document \"d\" is obtained by multiplying the TF and IDF components:\n      TF-IDF(t,d)=TF(t,d)×IDF(t)\n  \n  - ML encoders \n    - Embedding (look up) layer:  a trainable layer that converts categorical inputs, such as words or IDs, into continuous-valued vectors, allowing the network to learn meaningful representations of these inputs during training.\n    - Word2Vec: based on shallow neural networks and consists of two main approaches: Continuous Bag of Words (CBOW) and Skip-gram.\n\n      - CBOW (Continuous Bag of Words):"
+        },
+        {
+          "title": "Feature preprocessing (cont.)",
+          "content": "In CBOW, the model predicts a target word based on the context words (words that surround it) within a fixed window.\n        It learns to generate the target word by taking the average of the embeddings of the context words.\n        CBOW is computationally efficient and works well for smaller datasets.\n      - Skip-gram:\n\n        In Skip-gram, the model predicts the context words (surrounding words) given a target word.\n        It learns to capture the relationships between the target word and its context words.\n        Skip-gram is particularly effective for capturing fine-grained semantic relationships and works well with large datasets.\n      \n      Both CBOW and Skip-gram use shallow neural networks to learn word embeddings. The resulting word vectors are dense and continuous, making them suitable for various NLP tasks, such as sentiment analysis, language modeling, and text classification. \n\n    - transformer based e.g. BERT: consider context, different embeddings for same words in different context"
+        },
+        {
+          "title": "Feature preprocessing (cont.)",
+          "content": "## Video preprocessing \nFrame-level: \nDecode frames -> sample frames -> resize -> scale, normalize, color correction \n### Video encoders: \n  - Video-level\n    - process whole video to create an embedding \n    - 3D convolutions or Transformers used \n    - more expensive, but captures temporal understanding\n    - Example: ViViT (Video Vision Transformer)\n  - Frame-level (from sampled frames and aggregate frame embeddings)\n    - less expensive (training and serving speed, compute power) \n    - Example: ViT (Vision Transformer)\n      - by dividing images into non-overlapping patches and processing them through a self-attention mechanism, enabling it to analyze image content; it differs from the original Transformer, which was initially designed for sequential data, like text, and relied on 1D positional encodings."
+        }
+      ]
+    },
+    {
+      "id": "design-a-game-recommendation-engine",
+      "name": "Design a game recommendation engine",
+      "cards": [
+        {
+          "title": "Design a game recommendation engine",
+          "content": "## 1. Problem Formulation \nUser-game interaction \n\nSome existing data examples:  \n* Games data\n\n  * app_id,\n   title,\n   date_release,\n   win,\n   mac,\n   linux,\n   rating,\n   positive_ratio,\n   user_reviews,\n   price_final,\n   price_original,\n   discount,\n   steam_deck,\n\n* User historic data \n   \n  *  user_id,\n   products,\n   reviews,\n\n* Recommendations data \n  \n  * app_id,\n  helpful,\n  funny,\n  date,\n  is_recommended,\n  hours,\n  user_id,\n  review_id,\n  \n* Reviews \n\n* Example Open Source Data: Steam games complete dataset (CF and content based github)\n  * Game fatures include:  \nUrl, \ntypes\nname,\ndesc_snippet,\nrecent_reviews,\nall_reviews,\nrelease_date,\ndeveloper,\npublisher,\npopular_tag,"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "### Clarifying questions \n- Use case? Homepage?\n  - Does user sends a text query as well?\n- Business objective? \n  - Increase user engagement (play, like, click, share), purchase?, create a better ultimate gaming experience \n- Similar to previously played, or personalized for the user? Personalized for the user\n- User locations? Worldwide (multiple languages) \n- User’s age group: \n- Do users have any favorite lists, play later, etc?\n- How many games? 100 million\n- How many users? 100 million DAU\n- Latency requirements  - 200msec?\n- Data access \n  - Do we log and have access to any data? Can we build a dataset using user interactions ?\n  - Do we have textual description of items? \n- can users become friends on the platform and do we wanna take that into account?\n- Free or Paid?  \n\n### ML objective\n\n- Recommend most engaging (define) games\n  * Max. No. of clicks (clickbait)\n  * Max. No. completed games/sessions/levels (bias to shorter)\n  * Max. total hours played ()\n  * Max. No. of relevant items (proxy by user implicit/explicit reactions) -> more control over signals, not the above shortcomings"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "* Define relevance: e.g. like is relevant, or playing half of it is, …\n* ML Objective: build dataset and model to predict the relevance score b/w user and a game\n* I/O: I: user_id, O: ranked list of games + relevance score\n* ML category: Recommendation System\n\n## 2. Metrics (Offline and Online) \n\n* Offline: \n    * precision @k, mAP, and diversity \n* Online: \n    * CTR, # of completed, # of purchased, total play time, total purchase, user feedback"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "## 3. Architectural Components (MVP Logic) \nThe main approaches used for personalized recommendation systems: \n* Content-based filtering: suggest items similar to those user found relevant (e.g. liked)\n    * No need for interaction data, recommends new items to users (no item cold start)\n    * Capture unique interests of users\n    * New user cold start \n    * Needs domain knowledge \n* CF: Using user-user (user based CF) or item-item similarities (item based CF)\n    * Pros\n        * No domain knowledge \n        * Capture new areas of interest \n        * Faster than content (no content info needed)\n    * Cons: \n        * Cold start problem (both user and item)\n        * No niche interest \n* Hybrid \n    * Parallel hybrid: combine(CF results, content based)\n    * Sequential: [CF based] -> Content based\n\nWhat do we choose? \nWe choose a sequential hybrid model (standard e.g. for video recommendation)\n\nWe follow  the three stage recommender system (funnel architecture) in order to meet latency requirements and eb able to scale the system to billions of items. \n\n```mermaid\n   Candidate generation --> Ranking --> Re-ranking\n```"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "In the first stage, we use a light model to retrive thousands of items from millions\nIn the second (ranking) stage, we focus on high precision using a powerful model. This will not impact serving speed much because it's only run on smaller subset of items. \n\nCandidate generation in practice comes from aggregation of different candidate generation models. Here we can assume three candidate generation modules: \n\n1. Candidate generation 1 (Relevance based)\n2. Candidate generation 2 (Popularity)\n3. Candidate generation 3 (Trending)  \n\nwhere we use CF for candidate generation 1\n\nWe use content based modeling for ranking.\n\n## 4. Data preparation \n\nData Sources: \n\n1. Users (user profile, historical interactions):\n     * User profile\n       * User_id, username, age, gender, location (city, country), lang, timezone\n\n2. Games (structures, metadata, game content - what is it?)\n   - Game_id, title, date, rating, expected_length?,  #reviews, language, tags, description, price, developer, publisher, level, #levels"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "3. User-Game interactions:  \nHistorical interactions: Play, purchase, like, and search history, etc  \n   - User_id, game_id, timestamp, interaction_type(purchase, play, like, impression, search), interaction_val, location\n\n1. Context: time of the day, day of the week, device, OS\n\nType\n\n- Removing duplicates \n- filling missing values \n- normalizing data.\n\n### Labeling: \nFor features in the form of <user, video> pairs -> labeling strategy based on explicit or implicit feedback \ne.g. \"positive\" if user liked the item explicitly or interacted (e.g. watched/played) at least for X (e.g. half of it).   \nnegative samples: sample from background distribution -> correct via importance smapling \n\n## 5. Feature engineering \n\nThere are several machine learning features that can be extracted from games. Here are some examples:"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "- Game metadata features\n- Game state: e.g. the positions of players, the status of objects and obstacles, the time remaining, and the score.\n- Game mechanics: The rules and interactions that govern the game. \n- User engagement: e.g. the length of play sessions, frequency of play, and player retention rates.\n- Social interactions: b/w players: to identify patterns of behavior, such as the formation of alliances, the sharing of resources, and the types of communication used between players.\n- Player preferences: which game features are most popular among players, which can help inform game design decisions.\n- Player behaviors: player movement patterns, the types of actions taken by players, and the strategies used to achieve objectives.\n\nWe select some important features as follows:\n\n* Game metadata features: \n  * Game ID, \n  Duration, \n  Language, \n  Title, \n  Description,\n  Genre/Category, \n  Tags,  \n  Publisher(popularity, reviews), \n  Release date, \n  Ratings, \n  Reviews, \n  (Game content ?)\ngame titles, genres, platforms, release dates, user ratings, and user reviews.\n\n* User profile: \n  * User ID, Age, Gender, Language, City, Country"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "* User-item historical features: \n  * User-item interactions \n    * Played, liked, impressions\n    * purchase history (avg. price)\n  * User search history \n\n* Context\n\n### Feature representation: \n\n* Categorical data (game_id, user_id, language, city): Use embedding layers, learned during\ntraining \n* Categorical_data(gender, age): one_hot\n* Continuous variables: normalize, or bucketize and one-hot (e.g. price) \n* Text:(title, desc, tags): title/description use embeddings, pre-trained BERT, fine tune on game language?, tags: CBOW\n* \n* Game content embeddings? \n\n## 6. Model Development and Offline Evaluation \n\n### 6.1 Candidate Generation \n\nFor candidate generation 1 (Relevance Based), we choose CF."
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "For CF there are two embedding based modeling options: \n1. Matrix Factorization \n   * Pros: Training speed (only two matrices to learn), Serving speed (static learned embeddings)\n   * Cons: only relies on user-item interactions (No user profile info e.g. language is used); new-user cold start problem \n2. Two tower neural network:\n   * Pros: Accepts user features (user profile + user search history) -> better quality recommendation; handles new users \n   * Cons: Expensive training, serving speed     \n\nWe chose two-tower network here. \n\n#### Two-tower network\n  * two encoder towers (user tower + encoder tower)\n  * user tower encodes user features into user embeddings  $u$ \n  * item tower encodes item features into item embeddings   $v_i$\n  * similarity $u$, $v_i$ is considered as a relevance score (ranking as classification problem)\n\n#### Loss function: \nMinimize cross entropy for each positive label and sampled negative examples"
+        },
+        {
+          "title": "Design a game recommendation engine (cont.)",
+          "content": "### 6.2 Ranking \nFor Ranking stage, we prioritize precision over efficiency. We choose content based filtering. Choose a model that relies in item features.  \nML Obj options: \n   - max P(watch| U, C)\n   - max expected total watch time \n   - multi-objective (multi-task learning: add corresponding losses)\n  \nModel Options: \n- FF NN (e.g. similar tower network to a tower network) + logistic regression \n- Deep Cross Network (DCN)\n\nFeatures  \n\n* Video ID embeddings (watched video embedding avg, impression video embedding), \n* Video historic\n  *  No. of previous impressions, reviews, likes, etc\n  *  Time features (e.g. time since last play), \n* Language embedding (user, item), \n* User profile \n* User Historic (e.g. search history)\n\n### 6.3 Re-Ranking \nRe-ranks items by additional business criteria (filter, promote)  \nWe can use ML models for clickbait, harmful content, etc or use heuristics   \nExamples: \n* Age restriction filter \n* Region restriction filter \n* Video freshness (promote fresh content)\n* Deduplication \n* Fairness, bias, etc"
+        }
+      ]
+    },
+    {
+      "id": "harmful-content-detection-on-social-media",
+      "name": "Harmful content detection on social media",
+      "cards": [
+        {
+          "title": "Harmful content detection on social media",
+          "content": "### 1. Problem Formulation\n* Clarifying questions\n  * What types of harmful content are we aiming to detect? (e.g., hate speech, explicit images, cyberbullying)?\n  * What are the potential sources of harmful content? (e.g., social media, user-generated content platforms)\n  * Are there specific legal or ethical considerations for content moderation\n  * What is the expected volume of content to be analyzed daily?\n  * What are supported languages? \n  * Are there human annotators available for labeling? \n  * Is there a feature for users to report harmful content? (click, text, etc). \n  * Is explainablity important here? \n  \n* Integrity deals with: \n    * Harmful content (focus here)\n    * Harmful act/actors  \n* Goal: monitor posts, detect harmful content, and demote/remove \n* Examples harmful content categories: violence, nudity, hate speech \n* ML objective: predict if a post is harmful \n  * Input: Post (MM: text, image, video) \n  * Output:  P(harmful) or P(violent), P(nude), P(hate), etc\n* ML Category: Multimodal (Multi-label) classification \n* Data: 500M posts / day (about 10K annotated)\n* Latency: can vary for different categories \n* Able to explain the reason to the users (category) \n* support different languages? Yes"
+        },
+        {
+          "title": "Harmful content detection on social media (cont.)",
+          "content": "### 2. Metrics  \n- Offline \n  - F1 score, PR-AUC, ROC-AUC \n- Online \n  - prevalence (percentage of harmful posts didn't prevent over all posts), harmful impressions, percentage of valid (reversed) appeals, proactive rate (ratio of system detected over system + user detected)"
+        },
+        {
+          "title": "Harmful content detection on social media (cont.)",
+          "content": "### 3. Architectural Components  \n* Multimodal input (text, image, video, etc): \n  * Multimodal fusion techniques \n    * Early Fusion: modalities combined first, then make a single prediction \n    * Late Fusion: process modalities independently, fuse predictions\n      * cons: separate training data for modalities, comb of individually safe content might be harmful \n* Multi-Label/Multi-Task classification \n  * Single binary classifier (P(harmful))\n    * easy, not explainable \n  * One binary classifier per harm category (p(violence), p(nude), p(hate))\n    * multiple models, trained and maintained separately, expensive \n  * Single multi-label classifier \n    * complicated task to learn \n  * Multi-task classifier: learn multi tasks simultanously \n    * single shared layers (learns similarities between tasks) -> transformed features \n    * task specific layers: classification heads \n    * pros: single model, shared layers prevent redundancy, train data for each task can be used for others as well (limited data)\n\n### 4. Data Collection and Preparation"
+        },
+        {
+          "title": "Harmful content detection on social media (cont.)",
+          "content": "* Main actors for which data is available: \n  * Users \n    * user_id, age, gender, location, contact\n  * Items(Posts) \n    * post_id, author_id, text context, images, videos, links, timestamp\n  * User-post interactions \n    * user_id, post_id, interaction_type, value, timestamp"
+        },
+        {
+          "title": "Harmful content detection on social media (cont.)",
+          "content": "### 5. Feature Engineering\nFeatures: \nPost Content (text, image, video) + Post Interactions (text + structured) + Author info + Context  \n* Posts \n  * Text:  \n    * Preprocessing (normalization + tokenization) \n    * Encoding (Vectorization): \n      * Statistical (BoW, TF-IDF)\n      * ML based encoders (BERT)\n    * We chose pre-trained ML based encoders (need semantics of the text)\n    * We chose Multilingual Distilled (smaller, faster) version of BERT (need context), DistilmBERT \n  * Images/ Videos:   \n    * Preprocessing: decoding, resize, scaling, normalization\n    * Feature extraction: pre-trained feature extractors \n      * Images: \n        * CLIP's visual encoder \n        * SImCLR \n      * Videos: \n        * VideoMoCo\n* Post interactions: \n  * No. of likes, comments, shares, reports (scale) \n  * Comments (text): similar to the post text (aggregate embeddings over comments)\n* Users: \n  * Only use post author's info\n    * demographics (age, gender, location)\n    * account features (No. of followers /following, account age)\n    * violation history (No of violations, No of user reports, profane words rate)\n* Context: \n  * Time of day, device"
+        },
+        {
+          "title": "Harmful content detection on social media (cont.)",
+          "content": "### 6. Model Development and Offline Evaluation\n* Model selection \n  * NN: we use NN as it's commonly used for multi-task learning \n* HP tuniing: \n  * No of hidden layers, neurons in layers, act. fcns, learning rate, etc\n  * grid search commonly used \n* Dataset: \n  * Natural labeling (user reports) - speed \n  * Hand labeling (human contractors) - accuracy \n  * we use natural labeling for train set (speed) and manual for eval set (accuracy)\n* loss function: \n  * L = L1 + L2 + L3 ... for each task \n  * each task is a binary classific so e.g. CE for each task  \n* Challenge for MM training: \n  * overfitting (when one modality e.g. image dominates training)\n    * gradient blending and focal loss \n\n### 7. Prediction Service\n* 3 main components: \n  * Harmful content detection service \n  * Demoting service (prob of harm with low confidence)\n  * violation service (prob of harm with high confidence)\n\n### 8. Online Testing and Deployment  \n\n### 9. Scaling, Monitoring, and Updates\n\n### 10. Other topics \n* biases by human labeling \n* use temporal information (e.g. sequence of actions)\n* detect fake accounts \n* architecture improvement: linear transformers"
+        }
+      ]
+    },
+    {
+      "id": "image-search-system-pinterest",
+      "name": "Image Search System (Pinterest)",
+      "cards": [
+        {
+          "title": "Image Search System (Pinterest)",
+          "content": "### 1. Problem Formulation\n* Clarifying questions\n    - What is the primary (business) objective of the visual search system?\n    - What are the specific use cases and scenarios where it will be applied?\n    - What are the system requirements (such as response time, accuracy, scalability, and integration with existing systems or platforms)?\n    - How will users interact with the system? (click, like, share, etc)? Click only\n    - What types of visual content will the system search through (images, videos, etc.)? Images only \n    - Are there any specific industries or domains where this system will be deployed (e.g., fashion, e-commerce, art, industrial inspection)?\n    - What is the expected scale of the system in terms of data and user interactions?\n    - Personalized? not required \n    - Can we use metadata? In general yes, here let's not. \n    - Can we assume the platform provides images which are safe? Yes\n* Use case(s) and business goal\n  * Use case: allowing users to search for visually similar items, given a query image by the user \n  * business goal: enhance user experience, increase click through rate, conversion rates, etc (depends on use case)\n* Requirements\n  * response time, accuracy, scalability (billions of images)\n* Constraints\n  * budget limitations, hardware limitations, or legal and privacy constraints\n* Data: sources and availability\n  * sources of visual data: user-generated, product catalogs, or public image databases?\n  * Available? \n* Assumptions\n* ML formulation: \n  * ML Objective: retrieve images that are similar to query image in terms of visual content \n  * ML I/O: I: a query image, and O: a ranked list of most similar images to the query image \n  * ML category: Ranking problem (rank a collection of items based on their relevance to a query)"
+        },
+        {
+          "title": "Image Search System (Pinterest) (cont.)",
+          "content": "### 2. Metrics  \n* Offline metrics \n  * MRR \n  * Recall@k \n  * Precision@k \n  * mAP \n  * nDCG \n* Online metrics \n  * CTR \n  * Time spent on images \n\n### 3. Architectural Components  \n* High level architecture \n  * Representation learning: \n    * transform input data into representations (embeddings) - similar images are close in their embedding space \n    * use distance between embeddings as a similarity measure between images \n\n### 4. Data Collection and Preparation\n* Data Sources\n  * User profile\n  * Images \n    * image file\n    * metadata\n  *  User-image interactions: impressions, clicks: \n  * Context \n* Data storage\n* ML Data types\n* Labelling"
+        },
+        {
+          "title": "Image Search System (Pinterest) (cont.)",
+          "content": "### 5. Feature Engineering\n* Feature selection \n  * User profile : User_id, username, age, gender, location (city, country), lang, timezone\n  * Image metadata: ID, user ID, tags, upload date, ... \n  * User-image interactions: impressions, clicks: \n    * user id, Query img id, returned img id, interaction type (click, impression), time, location\n* Feature representation \n  * Representation learning (embedding)\n* Feature preprocessing \n  * common feature preprocessing for images: \n    * Resize (e.g. 224x224), Scale (0-1), normalize (mean 0, var 1), color mode (RGB, CMYK)"
+        },
+        {
+          "title": "Image Search System (Pinterest) (cont.)",
+          "content": "### 6. Model Development and Offline Evaluation\n* Model selection \n  * we choose NN because of \n    * unstructured data (images, text) -> NN good at it \n    * embeddings needed \n  * Architecture type: \n    * CNN based e.g. ResNet \n    * Transformer based (ViT)\n    * Example: Image -> Convolutional layers -> FC layers -> embedding vector  \n* Model Training \n  * contrastive learning -> used for image representation learning \n    * train to distinguish similar and dissimilar items (images)\n* Dataset \n  * each data point: query img, positive sample (similar to q), n - 1 neg samples (dissimilar)\n    * query img : randomly choose \n    * neg samples: randomly choose \n    * positive samples: human judge, interactions (e.g. click) as a proxy, artificial image generated from q (self supervision)\n      * human: expensive, time consuming \n      * interactions: noisy and sparse \n      * artificial: augment (e.g. rotate) and use as a positive sample (similar to simCLR or MoCo) - data distribution differs in reality \n* Loss Function: contrastive loss \n  * contrastive loss: \n    * works on pairs (Eq, Ei)\n    * calculate distance: b/w pairs -> softmax -> cross entropy <- Labels \n* Model eval and HP tuning \n* Iterations \n  \n### 7. Prediction Service\n* Prediction pipeline"
+        },
+        {
+          "title": "Image Search System (Pinterest) (cont.)",
+          "content": "* Embedding generation service \n    * image -> preprocess -> embedding gen (ML model) -> img embedding \n  * NN search service \n    * retrieve the most similar images from embedding space \n      * Exact: O(N.D)\n      * Approximate(ANN) - sublinear e.g. O(D.logN)\n        * Tree based ANN (e.g. R-trees, Kd-trees) \n          * partition space into two (or more) at each non-leaf node, \n          * only search the partition for query q \n        * Locality Sensitive Hashing LSH \n          * using hash functions to group points into buckets (close points into same buckets)\n        * Clustering based \n    * We use ANN using an existing library like Faiss (Facebook)\n  * Re-ranking service \n    * business level logic and policies (e.g. filter inappropriate or private items, deduplicate, etc)\n* Indexing pipeline\n  * Indexing service: indexes images by their embeddings \n  * keep the table updated for new images \n  * increases memory usage -> use optimization (vector / product quantization)\n\n### 8. Online Testing and Deployment  \n* A/B Test \n* Deployment and release \n\n### 9. Scaling, Monitoring, and Updates \n* Scaling (SW and ML systems)\n* Monitoring \n* Updates \n\n### 10. Other points:"
+        }
+      ]
+    },
+    {
+      "id": "offline-metrics",
+      "name": "Offline Metrics",
+      "cards": [
+        {
+          "title": "Offline Metrics",
+          "content": "These offline metrics are commonly used in search, information retrieval, and recommendation systems to evaluate the quality of results or recommendations:\n\n### Recall@k:\n  - Definition: Recall@k evaluates the fraction of relevant items retrieved among the top k recommendations over total relevant items. It measures the system's ability to find all relevant items in a fixed-sized list.\n  - Use Case: In information retrieval and recommendation systems, Recall@k is crucial when it's essential to ensure that no relevant items are missed in the top k recommendations.\n\n### Precision@k:\n\n  - Definition: Precision@k assesses the fraction of retrieved items that are relevant among the top k recommendations. It measures the system's ability to provide relevant content at the top of the list.\n  - Use Case: Precision@k is vital when there's a need to present users with highly relevant content in the initial recommendations. It helps in reducing user frustration caused by irrelevant suggestions.\n\n### Mean Reciprocal Rank (MRR):"
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "- Definition: MRR measures the effectiveness of a system in ranking the most relevant items at the top of a list. It calculates the average of reciprocal ranks of the first correct item found in each ranked list of results: \n  MRR = 1/m \\Sum(1/rank_i)\n  - Use Case: MRR is often used in search and recommendation systems to assess how quickly users find relevant content. It's particularly useful when there is only one correct answer or when the order of results matters.\n\n### Mean Average Precision (mAP):\n\n  - Definition: mAP computes the average precision across multiple queries or users. Precision is calculated for each query, and the mean of these precisions is taken to provide a single performance score.\n  - Use Case: mAP is valuable in scenarios where there are multiple users or queries, and you want to assess the overall quality of recommendations or search results across a diverse set of queries. mAP works well for binary relevances. For continues scores, we use nDCG."
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "### Discounted Cumulative Gain (DCG):\n  - Definition: Discounted Cumulative Gain (DCG) is a widely used evaluation metric primarily applied in the fields of information retrieval, search engines, and recommendation systems.\n    - DCG quantifies the quality of a ranked list of items or search results by considering two key aspects:\n      1. Relevance: Each item in the list is associated with a relevance score, which indicates how relevant it is to the user's query or preferences. Relevance scores are typically on a scale, with higher values indicating greater relevance.\n      2. Position: DCG takes into account the position of each item in the ranked list. Items appearing higher in the list are considered more important because users are more likely to interact with or click on items at the top of the list.\n    - DCG calculates the cumulative gain by summing the relevance scores of items in the ranked list up to a specified position.\n    - To reflect the decreasing importance of items further down the list, DCG applies a discount factor, often logarithmic in nature.\n  - Use case: \n    - DCG is employed to evaluate how effectively a system ranks and presents relevant items to users.\n    - It is instrumental in optimizing search and recommendation algorithms, ensuring that highly relevant items are positioned at the top of the list for user engagement and satisfaction."
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "### Normalized Discounted Cumulative Gain (nDCG):\n\n  - Definition: nDCG measures the quality of a ranked list by considering the graded relevance of items. It discounts the relevance of items as they appear further down the list and normalizes the score. It is calculated as the fraction of DCG over the Ideal DCG(IDCG) for an ideal ranking. \n  - Use Case: nDCG is beneficial when relevance is not binary (i.e., there are degrees of relevance), and you want to account for the diminishing importance of items lower in the ranking.\n\n# Cross Entropy and Normalized Cross Entropy \n- The CE (also a loss function), measures how well the predicted probabilities align with the true class labels. It's defined as:"
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "- For binary classification:\n    CE = - [y * log(p) + (1 - y) * log(1 - p)]\n    \n    - For multi-class classification:\n    CE = - Σ(y_i * log(p_i))\n    \n    Where:\n    - y is the true class label (0 or 1 for binary, one-hot encoded vector for multi-class).\n    - p is the predicted probability assigned to the true class label.\n    - The negative sign ensures that the loss is minimized when the predicted probabilities match the true labels. (the lower the better)\n- NCE: CE(ML model) / CE(simple baseline)\n\n### Ranking:\n* Precision @k and Recall @k not a good fit (not consider ranking quality of out) \n* MRR, mAP, and nDCG good: \n  * MRR: focus on rank of 1st relevant item \n  * nDCG: relevance b/w user and item is non-binary \n  * mAP: relevance is binary \n* Ads ranking: NCE \n  \n# Online metrics \n* CTR \n\n- Definition:"
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "- Click-Through Rate (CTR) is a metric that quantifies user engagement with a specific item or element, such as an advertisement, a search result, a recommended product, or a link.\n    - It is calculated by dividing the number of clicks on the item by the total number of impressions (or views) it received.\n    - Formula for CTR:\n      CTR= Number of Clicks/Number of Impressions ×100%\n\n    - Impressions: Impressions refer to the total number of times the item was displayed or viewed by users. For ads, it's the number of times the ad was shown to users. For recommendations, it's the number of times an item was recommended to users.\n\n- Use Cases:\n  - Online Advertising campaigns: widely used to assess how well ads are performing. A high CTR indicates that the ad is compelling and relevant to the target audience.\n  - Recommendation Systems: CTR is used to measure how effectively recommended items attract user clicks.\n- Search Engines: CTR is used to evaluate the quality of search results. High CTR for a search result indicates that it was relevant to the user's query."
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "* Conversion Rate: Conversion Rate measures the percentage of users who take a specific desired action after interacting with an item, such as making a purchase, signing up for a newsletter, or filling out a form. It helps assess the effectiveness of a call to action.\n\n* Bounce Rate: Bounce Rate calculates the percentage of users who visit a webpage or view an item but leave without taking any further action, such as navigating to another page or interacting with additional content. A high bounce rate may indicate that users are not finding the content engaging.\n\n* Engagement Rate: Engagement Rate evaluates the level of user interaction and participation with content or ads. It can include metrics like comments, shares, likes, or time spent on a webpage. A high engagement rate suggests that users are actively involved with the content.\n\n* Time on Page: Time on Page measures how long users spend on a webpage or interacting with a specific piece of content. It helps evaluate user engagement and the effectiveness of content in holding user attention."
+        },
+        {
+          "title": "Offline Metrics (cont.)",
+          "content": "* Return on Investment (ROI): ROI assesses the financial performance of an advertising or marketing campaign by comparing the costs of the campaign to the revenue generated from it. It's crucial for measuring the profitability of marketing efforts."
+        }
+      ]
+    },
+    {
+      "id": "multimodal-video-search-system",
+      "name": "Multimodal Video Search System",
+      "cards": [
+        {
+          "title": "Multimodal Video Search System",
+          "content": "### 1. Problem Formulation\n* Clarifying questions\n    - What is the primary (business) objective of the search system?\n    - What are the specific use cases and scenarios where it will be applied?\n    - What are the system requirements (such as response time, accuracy, scalability, and integration with existing systems or platforms)?\n    - What is the expected scale of the system in terms of data and user interactions?\n    - Is their any data available? What format? \n    - Can we use video metadata? Yes \n    - Personalized? not required \n    - How many languages needs to be supported?\n    \n* Use case(s) and business goal\n  * Use case: user enters text query into search box, system shows the most relevant videos \n  * business goal: increase click through rate, watch time, etc.  \n* Requirements\n  * response time, accuracy, scalability (50M DAU)\n* Constraints\n  * budget limitations, hardware limitations, or legal and privacy constraints\n* Data: sources and availability\n  * Sources: videos (1B), text \n  * 10M pairs of <video, text_query>. Videos have metadata (title, description, tags) in text format \n* Assumptions\n* ML formulation: \n  * ML Objective: retrieve videos that are relevant to a text query  \n  * ML I/O: I: text query from a user, O: ranked list of relevant videos on a video sharing platform  \n  * ML category: Visual search + Text Search systems"
+        },
+        {
+          "title": "Multimodal Video Search System (cont.)",
+          "content": "### 2. Metrics  \n- Offline\n  - Precision@k, mAP, Recall@k, MRR \n  - we choose MRR (avg rank of first relevant element in results) due to the format of our eval data <video, text> pair \n- Online \n  - CTR: problem: doesn't track relevancy, click baits  \n  - video completion rate: partially watched videos might still found relevant by user \n  - total watch time\n  - we choose total watch time: good indicator of relevance \n\n### 3. Architectural Components  \nMultimodal search (video, text) for video content from text query: \n- Visual search system \n  - Text query -> videos (based on similarity of text and visual content) \n  - Two tower embedding architecture (video and text_query encoders)\n- Textual search system \n  - search for most similar titles, descs, and tags  w/ text query \n  - we can use Inverted Index (e.g. elastic search) for efficient full text search \n    - An inverted index is a data structure that maps terms (words) to the documents or locations where they appear, enabling efficient text-based document retrieval, commonly used in search engines."
+        },
+        {
+          "title": "Multimodal Video Search System (cont.)",
+          "content": "### 4. Data Collection and Preparation\nWe use provided annotated data in the format of <video_id, query>. \n### 5. Feature Engineering\n- Preprocessing unstructured data \n  - Text pre-processing : normalization, tokenization, token to ids\n  - Video preprocessing: decode into frames -> sample -> resize -> scale, normalize, color correct \n\n### 6. Model Development and Offline Evaluation\n* Model Selection  \n  - Text encoders: \n    - Text -> Vector (Embeddings)  \n    - Two approaches: \n      - Statistical (BoW, TF-IDF)\n      - ML encoders (word2vec, transformer based e.g. BERT)  \n    - We chose transformer based (BERT). \n\n  - Video encoders: \n    - Video-level\n      - more expensive, but captures temporal understanding\n      - Example: ViViT (Video Vision Transformer)\n    - Frame-level (from sample frames and aggregate)\n      - less expensive (training and serving speed, compute power) \n      - Example: ViT \n\n* Model Training   \n  - contrastive learning (similar to visual search system)."
+        },
+        {
+          "title": "Multimodal Video Search System (cont.)",
+          "content": "### 7. Prediction Service\nComponents: \n- Visual search from text query \n  - text -> preprocess -> encoder -> embedding \n  - videos are indexed by their encoded embeddings \n  - search: using approximate nearest neighbor search (ANN)\n- Textual search\n  - using Elasticsearch (full text / fuzzy search)\n- Fusion  \n  - re-rank based on weighted sum of rel scores \n  - re-rank using a model \n- Re-ranking \n  - business level logic and policies \n\n### 8. Online Testing and Deployment  \n\n### 9. Scaling, Monitoring, and Updates"
+        }
+      ]
+    },
+    {
+      "id": "popular-neural-network-architectures",
+      "name": "Popular Neural Network Architectures",
+      "cards": [
+        {
+          "title": "Popular Neural Network Architectures",
+          "content": "* ## Two stage funnel architecture \n  * candidate generation + ranking\n\n* ## Two-tower architecture\n\n* ## Wide and deep learning\n\n* ## Deep cross network\n\n* ## Multi-task learning\n\n* ## Transformers\n\n* ## Encoder, Decoder, Encoder-decoder\n\n* ## Knowledge Distillation (student-teacher network)\n\n* ## Contrastive Learning  \n\n* ## NLP\n\n  * BERT, T5, GPT\n\n* ## Computer Vision\n\n  * Object detectors (single stage, two-stage)\n  * Vision Transformer"
+        }
+      ]
+    },
+    {
+      "id": "news-feed-system",
+      "name": "News Feed System",
+      "cards": [
+        {
+          "title": "News Feed System",
+          "content": "### 1. Problem Formulation\nshow feed (recent posts and activities from other users) on a social network platform \n* Clarifying questions\n  * What is the primary business objective of the system? (increase user engagement)\n  * Do we show only posts or also activities from other users?\n  * What types of engagement are available? (like, click, share, comment, hide, etc)? Which ones are we optimizing for? \n  * Do we display ads as well? \n  * What types of data do the posts include? (text, image, video)?\n  * Are there specific user segments or contexts we should consider (e.g., user demographics)?\n  * Do we have negative feedback features (such as hide ad, block, etc)?\n  * What type of user-ad interaction data do we have access to can we use it for training our models? \n  * Do we need continual training? \n  * How do we collect negative samples? (not clicked, negative feedback). \n  * How fast the system needs to be? \n  * What is the scale of the system? \n  * Is personalization needed? Yes \n  \n* Use case(s) and business goal\n  * use case: show friends most engaging (and unseen) posts and activities on a social network platform app (personalized to user)\n  * business objective: Maximize user engagement (as a set of interactions)"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "* Requirements;\n    * Latency: 200 msec of newsfeed refreshed results after user opens/refreshes the app\n    * Scalability: 5 B total users, 2 B DAU, refresh app twice \n    \n* Constraints:\n    * Privacy and compliance with data protection regulations.\n    \n* Data: Sources and Availability:\n    * Data sources include user interaction logs, ad content data, user profiles, and contextual information.\n    * Historical click and impression data for model training and evaluation.\n\n* Assumptions:\n    * Users' engagement behavior can be characterized by their explicit (e.g. like, click, share, comment, etc) or implicit interactions (e.g. dwell time) \n  \n* ML Formulation:\n    * Objective: \n      * maximize number of explicit, implicit, or both type of reactions (weighted)\n      * implicit: more data, explicit: stronger signal, but less data -> weighted score of different interactions: share > comment > like > click etc \n    * I/O: I: user_id, O: ranked list of unseen posts sorted by engagement score (wighted sum) \n    * Category: Ranking problem: can be solved as pointwise LTR with multi/label (multi-task) classification"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "### 2. Metrics  \n* Offline \n  * ROC AUC (trade-off b/w TPR and FPR)\n* Online \n  * CTR, \n  * Reactions rate (like rate, comment rate, etc)\n  * Time spent \n  * User satisfaction (survey)\n\n### 3. Architectural Components  \n* High level architecture \n  * We can use point-wise learning to rank (LTR) formulation \n  * Options for multi-label/task classification: \n    * Use N independent classifiers (expensive to train and maintain) \n    * Use a multi-task classifier\n      * learn multi tasks simultaneously \n      * single shared layers (learns similarities between tasks) -> transformed features \n      * task specific layers: classification heads \n      * pros: single model, shared layers prevent redundancy, train data for each task can be used for others as well (limited data)\n\n### 4. Data Collection and Preparation\n* Data Sources\n  * Users, \n  * Posts, \n  * User-post interaction \n  * User-user (friendship)\n\n* Labelling\n\n### 5. Feature Engineering"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "* Feature selection \n  * Posts: \n    * Text\n    * Image/videos\n    * No of reactions (likes, shares, replies, etc)\n    * Age \n    * Hashtags \n  * User: \n    * ID, username\n    * Demographics (Age, gender, location)\n    * Context (device, time of day, etc)\n    * Interaction history (e.g. user click rate, total clicks, likes, et )\n  * User-Post interaction: \n    * IDs(user, Ad), interaction type, time, location \n  * User-user(post author) affinities \n    * connection type \n    * reaction history (No liked/commented/etc posts from author)\n\n* Feature representation / preparation\n  * Text: \n    * use a pre-trained LM to get embeddings\n    * use BERT here (posts are in phrases usually, context aware helps) \n  \n  * Image / Video: \n    * preprocess \n    * use pre-trained models e.g. SimCLR / CLIP to convert -> feature vector \n  \n  * Dense numerical features: \n    * Engagement feats (No of clicks, etc)\n      * use directly + scale the range\n  * Discrete numerical: \n    * Age: bucketize into categorical then one hot \n  * Hashtags: \n    *  tokenize, token to ID, simple vectorization (TF-IDF or word2vec) - no context \n\n### 6. Model Development and Offline Evaluation"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "* Model selection \n  * We choose NN \n    * unstructured data (text, img, video)\n    * embedding layers for categorical features\n    * fine tune pre-trained models used for feat eng.\n  * multi-labels \n    * P(click), P(like), P(Share), P(comment)\n  * Two options: \n    * N NN classifiers  \n    * Multi task NN (choose this) \n      * Shared layers \n      * Classification heads (click, like, share, comment)\n  * Passive users problem: \n    * All their Ps will be small \n    * add two more heads \n      * Dwell time (seconds spent on post)\n      * P(skip) (skip = spend time < t)"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "* Model Training \n  * Loss function: \n    * L = sum of L_is for each task \n    * for binary classif tasks: CE \n    * for regression task: MAE, MSE, or Huber loss\n  * Dataset \n    * use features, post features, interactions, labels\n    * labels: positive, negative for each task (like, didn't like etc)\n      * for dwell time: it's a regression \n    * Imbalanced dataset: downsample negative \n  * Model eval and HP tuning \n  * Iterations \n  \n### 7. Prediction Service\n* Data Prep pipeline\n  *  static features -> batch feature compute (daily, weekly) -> feature store\n  *  dynamic features: # of post clicks, etc _> streaming  \n\n* Prediction pipeline \n  * two stage (funnel) architecture \n    * candidate generation / retrieval service \n      * rule based \n      * filter and fetch unseen posts by users under certain criteria \n    * Ranking \n      * features -> model -> engagement prob. -> sort \n      * re-ranking: business logic, additional logic and filters (e.g. user interest category)\n* Continual learning pipeline \n  * fine tune on new data, eval, and deploy if improves metrics  \n  \n### 8. Online Testing and Deployment  \n* A/B Test \n* Deployment and release"
+        },
+        {
+          "title": "News Feed System (cont.)",
+          "content": "### 9. Scaling, Monitoring, and Updates \n* Scaling (SW and ML systems)\n* Monitoring \n* Updates \n\n### 10. Other topics  \n* Viral posts / Celebrities posts\n* New users (cold start)\n* Positional data bias \n* Update frequency \n* calibration: \n  * fine-tuning predicted probabilities to align them with actual click probabilities \n* data leakage: \n  * info from the test or eval dataset influences the training process\n  * target leakage, data contamination (from test to train set)\n* catastrophic forgetting \n  *  model trained on new data loses its ability to perform well on previously learned tasks"
+        }
+      ]
+    },
+    {
+      "id": "prediction-service",
+      "name": "Prediction Service",
+      "cards": [
+        {
+          "title": "Prediction Service",
+          "content": "## Embedding Generation \n\n## Indexing Service \n\n- Index text, image, video by their embeddings \n- provides and keeps updating a look up table \n  - index new items upon arrival \n  - pros: efficient search by NN service \n  - cons: memory usage \n    - optimization techniques \n\n## Nearest Neighbor Service \n\n- Approximate Nearest Neighbors (ANN)\n  - Tree-based ANN \n  - Locality-sensitive hashing (LSH)\n  - Clustering based"
+        }
+      ]
+    },
+    {
+      "id": "preprocessing",
+      "name": "Preprocessing",
+      "cards": [
+        {
+          "title": "Preprocessing",
+          "content": "## Preprocessing Text: \n\n* ### Normalization -> Tokenization [Pre-Tokenization -> Tokenizer Model -> Post-processing] -> Token to ids (lookup table, hashing)\n## Preprocessing Images:\n\n## Preprocessing Videos:\nDecode frames -> sample frames -> Resize -> Scale, normalize"
+        }
+      ]
+    },
+    {
+      "id": "friends-follower-recommendation-people-you-may-know",
+      "name": "Friends/Follower recommendation (People you may know)",
+      "cards": [
+        {
+          "title": "Friends/Follower recommendation (People you may know)",
+          "content": "### 1. Problem Formulation\nRecommend a list of users that you may want to connect with \n* Clarifying questions\n  * What is the primary business objective of the system? \n  * What's the primary use case of the system?\n  * Are there specific factors needs to be considered for recommendations?\n  * Are friendships/connections symmetrical?\n  * What is the scale of the system? (users, connections)\n  * can we assume the social graph is not very dynamic?\n  * Do we need continual training? \n  * How do we collect negative samples? (not clicked, negative feedback). \n  * How fast the system needs to be? \n  * Is personalization needed? Yes \n  \n## \n* Use case(s) and business goal\n  * use case: PYMMK: recommend a list of users to connect with on social media app (e.g. facebook, linkedin)\n  * business objective: maximize number of formed connections \n\n* Requirements;\n    * Scalability: 1 B total users, on avg. 10000 connection per user     \n  \n* Constraints:\n    * Privacy and compliance with data protection regulations.\n    \n* Data: Sources and Availability:"
+        },
+        {
+          "title": "Friends/Follower recommendation (People you may know) (cont.)",
+          "content": "* Assumptions:\n    * symmetric firendships\n  \n* ML Formulation:\n    * Objective: \n      * maximize number of formed connections \n    * I/O: I: user_id, O: ranked list of recommended users sorted by the relevance to the user \n    * ML Category: two options: \n      * Ranking problem: \n        * pointwise LTR - binary classifier (user_i, user_j) -> p(connection)\n        * cons: doesn't capture social connections \n      * Graph representation (edge prediction)\n        * supplement with graph info (nodes, edges)\n        * input: social graph, predict edge b/w nodes \n\n### 2. Metrics  \n* Offline \n  * GNN model: binary classification -> ROC-AUC \n  * Recommendation system: binary relationships -> mAP \n  \n* Online \n  * No of friend requests sent over X time \n  * No of friend requests accepted over X time \n  \n### 3. Architectural Components  \n* High level architecture \n  * Node-level predictions \n  * Edge-level predictions \n  \n### 4. Data Collection and Preparation\n* Data Sources\n  * Users, \n    * demographics, edu and work backgrounds, skills, etc\n    * note: standardized data (e.g. cs / computer science)\n  * User-user connections,  \n  * User-user interactions, \n\n* Labelling"
+        },
+        {
+          "title": "Friends/Follower recommendation (People you may know) (cont.)",
+          "content": "### 5. Feature Engineering\n\n* Feature selection\n    \n  * User: \n    * ID, username\n    * Demographics (Age, gender, location)\n    * Account/Network info: No of connections, followers, following, requests, etc, account age\n    * Interaction history (No of likes, shares, comments)\n    * Context (device, time of day, etc)\n    \n  * User-user connections: \n    * Connection: IDs(user1, user2), connection type, timestamp, location \n    * edu and work affinity: major similarity, companies in common, industry similarity, etc \n    * social affinity: No. mutual connections (time discounted)\n  * User-user interactions:  \n    * IDs(u user1, user2), interaction type, timestamp \n\n### 6. Model Development and Offline Evaluation\n\n* Model selection \n  * We choose GNN \n    * operate on graph data \n    * predict prob of edge \n    * input: graph (node and edge features)\n    * output: embedding of each node\n    * use similarities b/w node embeddings for edge prediction"
+        },
+        {
+          "title": "Friends/Follower recommendation (People you may know) (cont.)",
+          "content": "* Model Training \n  * snapshot of G at t. model predict connections at t+1\n  * Dataset \n    * create a snapshot at time t\n    * compute node and edge features \n    * create labels using snapshot at t + 1 (if connection formed, positive) \n  * Model eval and HP tuning \n  * Iterations \n  \n### 7. Prediction Service\n* Prediction pipeline \n  * Candidate generation \n    * Friends of Friends (FoF) - rule based - from 1B to 1K.1K = 1M candidates -> FoF service  \n  * Scoring service (using GNN model -> embeddings -> similarity scores)\n  * sort by score \n* pre-compute PYMK tables for each / active users and store in DB \n* re-rank based on business logic \n  \n### 8. Online Testing and Deployment  \n* A/B Test \n* Deployment and release \n\n### 9. Scaling, Monitoring, and Updates \n* Scaling (SW and ML systems)\n* Monitoring \n* Updates \n\n### 10. Other topics  \n* add a lightweight ranker \n* bias problem \n* delayed feedback problem (user accepts after days)\n* personalized random walk (for baseline)"
+        }
+      ]
+    },
+    {
+      "id": "search-system",
+      "name": "Search System",
+      "cards": [
+        {
+          "title": "Search System",
+          "content": "### 1. Problem Formulation\n* Clarifying questions\n    - Is it a generalized search engine (like google) or specialized (like amazon product)?\n    - What is the primary (business) objective of the search system?\n    - What are the specific use cases and scenarios where it will be applied?\n    - What are the system requirements (such as response time, accuracy, scalability, and integration with existing systems or platforms)?\n    - What is the expected scale of the system in terms of data and user interactions?\n    - Is their any data available? What format? \n    - Personalized? not required \n    - How many languages needs to be supported?\n    - What types of items (products) are available on the platform, and what attributes are associated with them?\n    - What are the common user search behaviors and patterns? Do users frequently use filters, sort options, or advanced search features?\n    - Are there specific search-related challenges unique to the use case (e-commerce)? such as handling product availability, pricing, and customer reviews?"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "* Use case(s) and business goal\n  * Use case: user enters text query into search box, system shows the most relevant items (products) \n  * business goal: increase CTR, conversion rate, etc  \n* Requirements\n  * response time, accuracy, scalability (50M DAU)\n* Constraints\n  * budget limitations, hardware limitations, or legal and privacy constraints\n* Data: sources and availability\n  * Sources:  \n  * \n* Assumptions\n* ML formulation: \n  * ML Objective: retrieve items that are most relevant to a text query  \n    * we can define relevance as weighted summary of click, successful session, conversion, etc. \n  * ML I/O: I: text query from a user, O: ranked list of most relevant items on an e-commerce platform  \n  * ML category: MM input search system -> retrieval and ranking \n    * ranking: MM input -> multi-label classification (click, success, convert, etc)\n    * we can use a multi-task classifier \n   \n### 2. Metrics  \n- Offline\n  - Precision@k, Recall@k, MRR, mAP, NDCG  \n  - we choose NDCG (non-binary relevance)\n- Online \n  - CTR: problem: doesn't track relevancy, click baits  \n  - success session rate: dwell time > T or add to cart \n  - total dwell time \n  - conversion rate"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "### 3. Architectural Components  \n* Multimodal search (text, photo, video) for product content from text query: \n* Multi-layer architecture \n  * Query Understanding -> Candidate generation -> stage 1 Ranker -> stage 2 Ranker -> Blender -> Filter \n* Query understanding \n  * spell checker \n  * query normalization \n  * query expansion (e.g. add alternative) / relaxation (e.g. remove \"good\")\n  * Intent/Domain classification \n* Candidate generation \n  * focus on recall, millions/billions into 10Ks \n* Ranking \n  * ML based \n  * multi-stage ranker: if more than 10k items to select from or QPS > 10k  \n  * 100k items: stage 1 (liner model) -> stage 2 (DNN model) -> 500 items\n* Blender: \n  * outputs a SERP (search engine result page)\n  * blends results from multiple sources e.g. textual (inverted index, semantic) search, visual search, etc."
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "#### Retrieval \n* from 100 B to 100k \n* IR: compares query text with document text \n* Document types: \n  * item (product) title \n  * item description \n  * item reviews \n  * item category \n* inverted index: \n  * index DS, mapping from words into their locations in a set of documents (e.g. ABC -> documents 1, 7)\n* after query expansion (e.g. black pants into black and pants or suit-pants or trousers etc), do a search in inverted index db and find relevant items with relevance score \n* relevance score \n  * weighted linear combination of: \n    * terms match (e.g. TF-IDF score)(e.g. w = 0.5), \n    * item popularity (e.g. no of reviews, or bought) (e.g. w=0.125), \n    * intent match score (e.g. 0.125/2), \n    * domain match score,  \n    * personalization score (e.g. age, gender, location, interests)"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "#### Ranking: \n* see the next sections. \n<!-- \n- Visual search system \n  - Text query -> videos (based on similarity of text and visual content) \n  - Two tower embedding architecture (video and text_query encoders)\n- Textual search system \n  - search for most similar titles, descs, and tags  w/ text query \n  - we can use Inverted Index (e.g. elastic search) for efficient full text search \n    - An inverted index is a data structure that maps terms (words) to the documents or locations where they appear, enabling efficient text-based document retrieval, commonly used in search engines. -->"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "### 4. Data Collection and Preparation\n- Data sources: \n  - Users \n  - Queries \n  - Items (products)\n  - Context \n- Labeling: \n  - use online user engagement data to generate positive and negative labels \n   \n<!-- We use provided annotated data in the format of <video_id, query>.  -->\n### 5. Feature Engineering\n* Feature selection \n  * User: \n    * ID, username, \n    * Demographics (age, gender, location)\n    * User interaction history (click rate, purchase rate, etc)\n    * User interests (e.g. categories)\n  * Context: \n    * device, \n    * time of the day, \n    * recent hype results \n    * previous queries \n  * Query features: \n    * query historical engagement (by other users)\n    * query intent / domain \n    * query embeddings \n  * Item (product) features \n    * Title (exact text + embeddings)\n    * Description (exact text + embeddings)\n    * Reviews data (avg reviews, no of reviews, review textual data (text + embeddings)) \n    * category \n    * page rank \n    * engagement radius \n  * User-Item(product) features \n    * distance (e.g. for shipment)\n    * historical engagement by the user (e.g. document type)\n  * Query-Item(product) features\n    * text match (title, description, category)\n    * unigram or bigram search (title, description, category) - TF-IDF score \n    * historical engagement (e.g. click rate of Item for that query)\n    * \n<!-- - Preprocessing unstructured data \n  - Text pre-processing : normalization, tokenization, token to ids\n  - Video preprocessing: decode into frames -> sample -> resize -> scale, normalize, color correct  -->"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "### 6. Model Development and Offline Evaluation\n#### Ranking \n\n* Model Selection  \n  * Two options:\n    * Pointwise LTR model: <user, item> -> relevance score \n      * approximate it as a binary classification problem p(relevant)\n    * Pairwise LTR model: <user, item1, item2> -> item1 score > item2 score ?\n      * loss function if the predicted order is correct \n      * more natural to ranking, more complicated \n  * Multi - Stage ranking \n    * 100k items (focus on recall) -> 500 items (focus on precision) -> 500 items in correct order   \n    * Stage 1: We use a pointwise LTR -> binary classifier \n      * latency: microseconds \n      * suggestion: LR or small MART (multiple additive regression trees)\n      * use ROC AUC for metric\n    * Stage 2: Pairwise LTR model \n      * Two options (choose based on train data availability and capacity):\n        * LambdaMART: a variation of MART, obj fcn changed to improve pairwise ranking  \n        * LambdaRank: NN based model, pairwise loss (minimize inversions in ranking)\n      * use NDCG for metric"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "* Training Dataset\n  * Pointwise approach \n    * positive samples: user engaged (e.g. click, spent time > T, add to cart, purchased)\n    * negative samples: no engagement by the user + random negative samples e.g. from pages 10 and beyond\n    * 5 million Q/day -> one positive one negative sample from each query -> 10 million samples a day \n    * use a whole week's data at least to capture daily patterns \n      * capturing and dealing with seasonal and holiday data \n    * train-valid/test split: 70/30 (of 70 million)\n    * temporal affect: e.g. use 3 weeks data: first 2/3 of weeks: train, last week valid / test \n  * Pairwise approach: \n    * ranks items according to their relative order, which is closer to the nature of ranking \n    * predict doc scores in a way that miimizes No of inversions in the final ranked result \n    * Two options for train data generation for pointwise approach\n      * human raters: each human rates 10 results per 100K queries * 10 humans = 10M examples\n        * expensive, doesn't scale \n      * online engagement data \n        * assign scores to each engagement type e.g. \n          * impression with no click -> label/score 0 \n          * click only -> score 1 \n          * spent time after click > T : score 2 \n          * add to cart : score 3 \n          * purchase: score 4  \n  \n  <!-- - Text encoders:  -->\n    <!-- - Text -> Vector (Embeddings)  \n    - Two approaches: \n      - Statistical (BoW, TF-IDF)\n      - ML encoders (word2vec, transformer based e.g. BERT)  \n    - We chose transformer based (BERT)."
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "- Video encoders: \n    - Video-level\n      - more expensive, but captures temporal understanding\n      - Example: ViViT (Video Vision Transformer)\n    - Frame-level (from sample frames and aggregate)\n      - less expensive (training and serving speed, compute power) \n      - Example: ViT \n -->\n\n<!-- * Model Training   \n  - contrastive learning (similar to visual search system).  -->"
+        },
+        {
+          "title": "Search System (cont.)",
+          "content": "### 7. Prediction Service\n<!-- - Visual search from text query \n  - text -> preprocess -> encoder -> embedding \n  - videos are indexed by their encoded embeddings \n  - search: using approximate nearest neighbor search (ANN)\n- Textual search\n  - using Elasticsearch (full text / fuzzy search)\n- Fusion  \n  - re-rank based on weighted sum of rel scores \n  - re-rank using a model \n- Re-ranking \n  - business level logic and policies  -->\n- Re-ranking \n  - business level logic and policies  -->\n    - filtering inappropriate items \n    - diversity (exploration/exploitation)\n    - etc \n  - Two ways: \n    - rule based filters and aggregators \n    - ML model \n      - Binary Classification (P(inappropriate))\n      - Data sources: human raters, user feedback (report, review)\n      - Features: same as product features in ranker\n      - Models: LR, MART, or DNN (depending on data size, capacity, experiments)\n      - More details on harmful content classification \n\n### 8. Online Testing and Deployment  \n### 9. Scaling, Monitoring, and Updates\n### 10. Other talking points \n* Positional bias"
+        }
+      ]
+    },
+    {
+      "id": "the-9-step-ml-system-design-formula-template",
+      "name": "The 9 Step ML System Design Formula Template",
+      "cards": [
+        {
+          "title": "The 9 Step ML System Design Formula Template",
+          "content": "1. Problem Formulation\n    * Clarifying questions\n    * Use case(s) and business goal\n    * Requirements\n    * Constraints\n    * Data: sources and availability\n    * Assumptions\n    * ML formulation\n\n2. Metrics  \n    * Offline metrics \n    * Online metrics \n\n3. Architectural Components  \n    * High level architecture \n\n4. Data Collection and Preparation\n    * Data needs\n    * Data Sources\n    * Data storage\n    * ML Data types\n    * Labelling\n\n5. Feature Engineering\n    * Feature selection \n    * Feature representation \n    * Feature preprocessing \n\n6. Model Development and Offline Evaluation\n    * Model selection \n    * Dataset construction \n    * Model Training \n    * Model eval and HP tuning \n    * Iterations \n\n7. Prediction Service\n\n8. Online Testing and Deployment  \n    * A/B Test \n    * Deployment and release \n\n9. Scaling, Monitoring, and Updates \n    * Scaling (SW and ML systems)\n    * Monitoring \n    * Updates"
+        }
+      ]
+    },
+    {
+      "id": "design-a-video-recommendation-system",
+      "name": "Design a video recommendation system",
+      "cards": [
+        {
+          "title": "Design a video recommendation system",
+          "content": "## 1. Problem Formulation \nUser-video interaction \n\nSome existing data examples:  \n* videos data\n* User historic data \n* Recommendations data \n* Reviews \n<!-- * video features include:  \nUrl, \ntypes\nname,\ndesc_snippet,\nrecent_reviews,\nall_reviews,\nrelease_date,\ndeveloper,\npublisher,\npopular_tag, -->\n\n### Clarifying questions \n- Use case? Homepage?\n  - Does user sends a text query as well?\n- Business objective? \n  - Increase user engagement (play, like, click, share), purchase?, create a better ultimate gaming experience \n- Similar to previously played, or personalized for the user? Personalized for the user\n- User locations? Worldwide (multiple languages) \n- User’s age group: \n- Do users have any favorite lists, play later, etc?\n- How many videos? 100 million\n- How many users? 100 million DAU\n- Latency requirements  - 200msec?\n- Data access \n  - Do we log and have access to any data? Can we build a dataset using user interactions ?\n  - Do we have textual description of items? \n- can users become friends on the platform and do we wanna take that into account?\n- Free or Paid?  \n\n### ML objective"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "- Recommend most engaging (define) videos\n  * Max. No. of clicks (clickbait)\n  * Max. No. completed videos/sessions/levels (bias to shorter)\n  * Max. total hours played ()\n  * Max. No. of relevant items (proxy by user implicit/explicit reactions) -> more control over signals, not the above shortcomings\n\n* Define relevance: e.g. like is relevant, or playing half of it is, …\n* ML Objective: build dataset and model to predict the relevance score b/w user and a video\n* I/O: I: user_id, O: ranked list of videos + relevance score\n* ML category: Recommendation System\n\n## 2. Metrics (Offline and Online) \n\n* Offline: \n    * precision @k, mAP, and diversity \n* Online: \n    * CTR, # of completed, # of purchased, total play time, total purchase, user feedback"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "## 3. Architectural Components (MVP Logic) \nThe main approaches used for personalized recommendation systems: \n* Content-based filtering: suggest items similar to those user found relevant (e.g. liked)\n    * No need for interaction data, recommends new items to users (no item cold start)\n    * Capture unique interests of users\n    * New user cold start \n    * Needs domain knowledge \n* CF: Using user-user (user based CF) or item-item similarities (item based CF)\n    * Pros\n        * No domain knowledge \n        * Capture new areas of interest \n        * Faster than content (no content info needed)\n    * Cons: \n        * Cold start problem (both user and item)\n        * No niche interest \n* Hybrid \n    * Parallel hybrid: combine(CF results, content based)\n    * Sequential: [CF based] -> Content based\n\nWhat do we choose? \nWe choose a sequential hybrid model (standard e.g. for video recommendation)\n\nWe follow  the three stage recommender system (funnel architecture) in order to meet latency requirements and be able to scale the system to billions of items. \n\n```mermaid\n   Candidate generation --> Ranking --> Re-ranking\n```"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "In the first stage, we use a light model to retrive thousands of items from millions\nIn the second (ranking) stage, we focus on high precision using a powerful model. This will not impact serving speed much because it's only run on smaller subset of items. \n\nCandidate generation in practice comes from aggregation of different candidate generation models. Here we can assume three candidate generation modules: \n\n1. Candidate generation 1 (Relevance based)\n2. Candidate generation 2 (Popularity)\n3. Candidate generation 3 (Trending)  \n\nwhere we use CF for candidate generation 1\n\nWe use content based modeling for ranking.\n\n## 4. Data preparation \n\nData Sources: \n\n1. Users (user profile, historical interactions):\n     * User profile\n       * User_id, username, age, gender, location (city, country), lang, timezone\n\n2. videos (structures, metadata, video content - what is it?)\n   - video_id, title, date, rating, expected_length?,  #reviews, language, tags, description, price, developer, publisher, level, #levels"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "3. User-video interactions:  \nHistorical interactions: Play, purchase, like, and search history, etc  \n   - User_id, video_id, timestamp, interaction_type(purchase, play, like, impression, search), interaction_val, location\n\n1. Context: time of the day, day of the week, device, OS\n\nType\n\n- Removing duplicates \n- filling missing values \n- normalizing data.\n\n### Labeling: \nFor features in the form of <user, video> pairs -> labeling strategy based on explicit or implicit feedback \ne.g. \"positive\" if user liked the item explicitly or interacted (e.g. watched/played) at least for X (e.g. half of it).   \nnegative samples: sample from background distribution -> correct via importance smapling \n\n## 5. Feature engineering \n\nThere are several machine learning features that can be extracted from videos. Here are some examples:"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "- video metadata features\n- video state: e.g. the positions of players, the status of objects and obstacles, the time remaining, and the score.\n- video mechanics: The rules and interactions that govern the video. \n- User engagement: e.g. the length of play sessions, frequency of play, and player retention rates.\n- Social interactions: b/w players: to identify patterns of behavior, such as the formation of alliances, the sharing of resources, and the types of communication used between players.\n- Player preferences: which video features are most popular among players, which can help inform video design decisions.\n- Player behaviors: player movement patterns, the types of actions taken by players, and the strategies used to achieve objectives.\n\nWe select some important features as follows:\n\n* video metadata features: \n  * video ID, \n  Duration, \n  Language, \n  Title, \n  Description,\n  Genre/Category, \n  Tags,  \n  Publisher(popularity, reviews), \n  Release date, \n  Ratings, \n  Reviews, \n  (video content ?)\nvideo titles, genres, platforms, release dates, user ratings, and user reviews.\n\n* User profile: \n  * User ID, Age, Gender, Language, City, Country"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "* User-item historical features: \n  * User-item interactions \n    * Played, liked, impressions\n    * purchase history (avg. price)\n  * User search history \n\n* Context\n\n### Feature representation: \n\n* Categorical data (video_id, user_id, language, city): Use embedding layers, learned during\ntraining \n* Categorical_data(gender, age): one_hot\n* Continuous variables: normalize, or bucketize and one-hot (e.g. price) \n* Text:(title, desc, tags): title/description use embeddings, pre-trained BERT, fine tune on video language?, tags: CBOW\n* \n* video content embeddings? \n\n## 6. Model Development and Offline Evaluation \n\n### 6.1 Candidate Generation \n\nFor candidate generation 1 (Relevance Based), we choose CF."
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "For CF there are two embedding based modeling options: \n1. Matrix Factorization \n   * Pros: Training speed (only two matrices to learn), Serving speed (static learned embeddings)\n   * Cons: only relies on user-item interactions (No user profile info e.g. language is used); new-user cold start problem \n2. Two tower neural network:\n   * Pros: Accepts user features (user profile + user search history) -> better quality recommendation; handles new users \n   * Cons: Expensive training, serving speed     \n\nWe chose two-tower network here. \n\n#### Two-tower network\n  * two encoder towers (user tower + encoder tower)\n  * user tower encodes user features into user embeddings  $u$ \n  * item tower encodes item features into item embeddings   $v_i$\n  * similarity $u$, $v_i$ is considered as a relevance score (ranking as classification problem)\n\n#### Loss function: \nMinimize cross entropy for each positive label and sampled negative examples"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "### 6.2 Ranking \nFor Ranking stage, we prioritize precision over efficiency. We choose content based filtering. Choose a model that relies in item features.  \nML Obj options: \n   - max P(watch| U, C)\n   - max expected total watch time \n   - multi-objective (multi-task learning: add corresponding losses)\n  \nModel Options: \n- FF NN (e.g. similar tower network to a tower network) + logistic regression \n- Deep Cross Network (DCN)\n\nFeatures  \n\n* Video ID embeddings (watched video embedding avg, impression video embedding), \n* Video historic\n  *  No. of previous impressions, reviews, likes, etc\n  *  Time features (e.g. time since last play), \n* Language embedding (user, item), \n* User profile \n* User Historic (e.g. search history)\n\n### 6.3 Re-Ranking \nRe-ranks items by additional business criteria (filter, promote)  \nWe can use ML models for clickbait, harmful content, etc or use heuristics   \nExamples: \n* Age restriction filter \n* Region restriction filter \n* Video freshness (promote fresh content)\n* Deduplication \n* Fairness, bias, etc"
+        },
+        {
+          "title": "Design a video recommendation system (cont.)",
+          "content": "## 7. Prediction Service \ntwo-tower network inference: find the k-top most relevant items given a user ->  \nIt's a classic nearest neighbor problem -> use approximate nearest neighbor (ANN) algorithms  \n\n## 8. Online Testing and Deployment  \nStandard approaches as before.  \n## 9. Scaling\nThe three stage candidate generation - ranking - re-ranking can be scaled well as described earlier. It also meets the requirements of speed (funnel architecture), precision(ranking component), and diversity (multiple candid generation). \n\n### Cold start problem: \n* new users: two tower architectures accepts new users and we can still use user profile info even with no interaction \n* new items: recommend to random users and collect some data - then fine tune the model using new data"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-1",
+      "name": "Answer to question 1",
+      "cards": [
+        {
+          "title": "Answer to question 1",
+          "content": "**Question 1**\n\nDuolingo is a platform for language learning. When a student is learning a new language, Duolingo wants to recommend increasingly difficult stories to read.\n\t- How would you measure the difficulty level of a story?\n\t- Given a story, how would you edit it to make it easier or more difficult?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-10",
+      "name": "Answer to question 10",
+      "cards": [
+        {
+          "title": "Answer to question 10",
+          "content": "**Question 10**\n\nAutocompletion: how would you build an algorithm to finish your sentence when you text?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-11",
+      "name": "Answer to question 11",
+      "cards": [
+        {
+          "title": "Answer to question 11",
+          "content": "**Question 11**\n\nWhen you type a question on StackOverflow, you're shown a list of similar questions to make sure that your question hasn't been asked before. How do you build such a system?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-12",
+      "name": "Answer to question 12",
+      "cards": [
+        {
+          "title": "Answer to question 12",
+          "content": "**Question 12**\n\nHow would you design an algorithm to match pool riders for Lyft or Uber?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-13",
+      "name": "Answer to question 13",
+      "cards": [
+        {
+          "title": "Answer to question 13",
+          "content": "**Question 13**\n\nOn social networks like Facebook, users can choose to list their high schools. Can you estimate what percentage of high schools listed on Facebook are real? How do we find out, and deploy at scale, a way of finding invalid schools?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-14",
+      "name": "Answer to question 14",
+      "cards": [
+        {
+          "title": "Answer to question 14",
+          "content": "**Question 14**\n\nHow would you build a trigger word detection algorithm to spot the word “activate” in a 10 second long audio clip?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-15",
+      "name": "Answer to question 15",
+      "cards": [
+        {
+          "title": "Answer to question 15",
+          "content": "**Question 15**\n\nIf you were to build a Netflix clone, how would you build a system that predicts when a user stops watching a TV show, whether they are tired of that show or they’re just taking a break?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-16",
+      "name": "Answer to question 16",
+      "cards": [
+        {
+          "title": "Answer to question 16",
+          "content": "**Question 16**\n\nFacebook would like to develop a way to estimate the month and day of people’s birthdays, regardless of whether people give us that information directly. What methods would you propose, and data would you use, to help with that task?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-17",
+      "name": "Answer to question 17",
+      "cards": [
+        {
+          "title": "Answer to question 17",
+          "content": "**Question 17**\n\nBuild a system to predict the language a text is written in.\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-18",
+      "name": "Answer to question 18",
+      "cards": [
+        {
+          "title": "Answer to question 18",
+          "content": "**Question 18**\n\nPredict the house price for a property listed on Zillow. Use that system to predict whether we invest on buying more properties in a certain city.\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-19",
+      "name": "Answer to question 19",
+      "cards": [
+        {
+          "title": "Answer to question 19",
+          "content": "**Question 19**\n\nImagine you were working on iPhone. Everytime users open their phones, you want to suggest one app they are most likely to open first with 90% accuracy. How would you do that?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-2",
+      "name": "Answer to question 2",
+      "cards": [
+        {
+          "title": "Answer to question 2",
+          "content": "**Question 2**\n\nGiven a dataset of credit card purchases information, each record is labelled as fraudulent or safe, how would you build a fraud detection algorithm?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-20",
+      "name": "Answer to question 20",
+      "cards": [
+        {
+          "title": "Answer to question 20",
+          "content": "**Question 20**\n\nHow do you map nicknames (Pete, Andy, Nick, Rob, etc) to real names?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-21",
+      "name": "Answer to question 21",
+      "cards": [
+        {
+          "title": "Answer to question 21",
+          "content": "**Question 21**\n\nAn e-commerce company is trying to minimize the time it takes customers to purchase their selected items. As a machine learning engineer, what can you do to help them?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-22",
+      "name": "Answer to question 22",
+      "cards": [
+        {
+          "title": "Answer to question 22",
+          "content": "**Question 22**\n\nBuild a chatbot to help people book hotels.\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-23",
+      "name": "Answer to question 23",
+      "cards": [
+        {
+          "title": "Answer to question 23",
+          "content": "**Question 23**\n\nHow would you design a question answering system that can extract an answer from a large collection of documents given a user query?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-24",
+      "name": "Answer to question 24",
+      "cards": [
+        {
+          "title": "Answer to question 24",
+          "content": "**Question 24**\n\nHow would you train a model to predict whether the word “jaguar” in a sentence refers to the animal or the car?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-25",
+      "name": "Answer to question 25",
+      "cards": [
+        {
+          "title": "Answer to question 25",
+          "content": "**Question 25**\n\nSuppose you’re building a software to manage the stock portfolio of your clients. You manage X amount of money. Imagine that you’ve converted all that amount into stocks, and find a stock that you definitely must buy. How do you decide which of your currently owned stocks to drop so that you can buy this new stock?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-26",
+      "name": "Answer to question 26",
+      "cards": [
+        {
+          "title": "Answer to question 26",
+          "content": "**Question 26**\n\nHow would you create a model to recognize whether an image is a triangle, a circle, or a square?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-27",
+      "name": "Answer to question 27",
+      "cards": [
+        {
+          "title": "Answer to question 27",
+          "content": "**Question 27**\n\nGiven only CIFAR-10 dataset, how to build a model to recognize if an image is in the 10 classes of CIFAR-10 or not?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-3",
+      "name": "Answer to question 3",
+      "cards": [
+        {
+          "title": "Answer to question 3",
+          "content": "**Question 3**\n\nYou run an e-commerce website. Sometimes, users want to buy an item that is no longer available. Build a recommendation system to suggest replacement items.\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-4",
+      "name": "Answer to question 4",
+      "cards": [
+        {
+          "title": "Answer to question 4",
+          "content": "**Question 4**\n\nFor any user on Twitter, how would you suggest who they should follow? What do you do when that user is new? What are some of the limitations of data-driven recommender systems?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-5",
+      "name": "Answer to question 5",
+      "cards": [
+        {
+          "title": "Answer to question 5",
+          "content": "**Question 5**\n\nWhen you enter a search query on Google, you’re shown a list of related searches. How would you generate a list of related searches for each query?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-6",
+      "name": "Answer to question 6",
+      "cards": [
+        {
+          "title": "Answer to question 6",
+          "content": "**Question 6**\n\nBuild a system that return images associated with a query like in Google Images.\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-7",
+      "name": "Answer to question 7",
+      "cards": [
+        {
+          "title": "Answer to question 7",
+          "content": "**Question 7**\n\nHow would you build a system to suggest trending hashtags on Twitter?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-8",
+      "name": "Answer to question 8",
+      "cards": [
+        {
+          "title": "Answer to question 8",
+          "content": "**Question 8**\n\nEach question on Quora often gets many different answers. How do you create a model that ranks all these answers? How computationally intensive is this model?\n\n**Answer**"
+        }
+      ]
+    },
+    {
+      "id": "answer-to-question-9",
+      "name": "Answer to question 9",
+      "cards": [
+        {
+          "title": "Answer to question 9",
+          "content": "**Question 9**\n\nHow to you build a system to display top 10 results when a user searches for rental listings in a certain location on Airbnb?\n\n**Answer**"
+        }
+      ]
+    }
+  ]
+}

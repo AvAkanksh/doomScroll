@@ -14,6 +14,46 @@
       "file": "ml-architectures.json",
       "label": "LLM & Architectures",
       "color": "#76ff03"
+    },
+    {
+      "file": "deep-learning-qa.json",
+      "label": "Deep Learning Q&A",
+      "color": "#ab47bc"
+    },
+    {
+      "file": "llm-from-scratch.json",
+      "label": "LLM From Scratch",
+      "color": "#66bb6a"
+    },
+    {
+      "file": "ml-from-scratch-code.json",
+      "label": "ML From Scratch",
+      "color": "#26c6da"
+    },
+    {
+      "file": "ml-fundamentals-qa.json",
+      "label": "ML Fundamentals Q&A",
+      "color": "#ff6e40"
+    },
+    {
+      "file": "ml-interview-qa.json",
+      "label": "ML Interview Q&A",
+      "color": "#ef5350"
+    },
+    {
+      "file": "ml-system-design.json",
+      "label": "ML System Design",
+      "color": "#ff4081"
+    },
+    {
+      "file": "probability-stats.json",
+      "label": "Probability & Statistics",
+      "color": "#ffd740"
+    },
+    {
+      "file": "sql-databases.json",
+      "label": "SQL & Databases",
+      "color": "#81c784"
     }
   ]
 }

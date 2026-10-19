@@ -1,0 +1,239 @@
+{
+  "generated_at": "2026-10-19",
+  "categories": {
+    "deep-learning-qa": {
+      "file": "deep-learning-qa.json",
+      "label": "Deep Learning Q&A",
+      "topics": [
+        "Deep Learning: Deep Neural Networks",
+        "Deep Learning: Natural Language Processing",
+        "Deep Learning: Computer Vision",
+        "Deep Learning: Answer:",
+        "Deep Learning: To reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:",
+        "Deep Learning: Batch normalization is a technique for training very deep neural networks that standardizes the inputs to a layer for each mini-batch.",
+        "Deep Learning: By taking incremental steps towards the minimal value, the gradient descent algorithm aims to minimize the error. The weights and biases in a neural network are updated using these processes. However, at times, the steps grow excessively large, resulting in increased updates to weights and bias terms to the point where the weights overflow (or become NaN, that is, Not a Number). An exploding gradient is the result of this, and it is an unstable method."
+      ],
+      "total_cards": 31
+    },
+    "llm-from-scratch": {
+      "file": "llm-from-scratch.json",
+      "label": "LLM From Scratch",
+      "topics": [
+        "Chapter 1: Understanding Large Language Models",
+        "Chapter 2: Working with Text Data",
+        "Chapter 3: Coding Attention Mechanisms",
+        "Chapter 4: Implementing a GPT Model from Scratch to Generate Text",
+        "Chapter 5: Pretraining on Unlabeled Data",
+        "Chapter 6: Finetuning for Classification",
+        "Chapter 7: Finetuning to Follow Instructions"
+      ],
+      "total_cards": 16
+    },
+    "ml-from-scratch-code": {
+      "file": "ml-from-scratch-code.json",
+      "label": "ML From Scratch",
+      "topics": [
+        "Layers",
+        "Neural Network",
+        "Deep Q Network",
+        "Adaboost",
+        "Bayesian Regression",
+        "Decision Tree",
+        "Gradient Boosting",
+        "K Nearest Neighbors",
+        "Linear Discriminant Analysis",
+        "Logistic Regression",
+        "Multi Class Lda",
+        "Multilayer Perceptron",
+        "Naive Bayes",
+        "Neuroevolution",
+        "Particle Swarm Optimization",
+        "Perceptron",
+        "Random Forest",
+        "Regression",
+        "Support Vector Machine",
+        "Xgboost",
+        "Apriori",
+        "Autoencoder",
+        "Dbscan",
+        "Fp Growth",
+        "Gaussian Mixture Model",
+        "Generative Adversarial Network",
+        "Genetic Algorithm",
+        "K Means",
+        "Partitioning Around Medoids",
+        "Principal Component Analysis",
+        "Restricted Boltzmann Machine"
+      ],
+      "total_cards": 80
+    },
+    "ml-fundamentals-qa": {
+      "file": "ml-fundamentals-qa.json",
+      "label": "ML Fundamentals Q&A",
+      "topics": [
+        "Machine Learning Fundamentals",
+        "Algorithms and Ensembles",
+        "Data Preprocessing and Feature Engineering",
+        "Optimization and Training",
+        "Deep Learning and Neural Networks",
+        "Computer Vision",
+        "Dimensionality Reduction",
+        "Model Evaluation and Validation",
+        "Probability and Statistics",
+        "Coding and Implementation",
+        "Supervised machine learning",
+        "Linear regression",
+        "Validation",
+        "Classification",
+        "Regularization",
+        "Feature selection",
+        "Decision trees",
+        "Random forest",
+        "Gradient boosting",
+        "Parameter tuning",
+        "Neural networks",
+        "Optimization in neural networks",
+        "Neural networks for computer vision",
+        "Text classification",
+        "Clustering",
+        "Dimensionality reduction",
+        "Ranking and search",
+        "Recommender systems",
+        "Time series"
+      ],
+      "total_cards": 211
+    },
+    "ml-interview-qa": {
+      "file": "ml-interview-qa.json",
+      "label": "ML Interview Q&A",
+      "topics": [
+        "Machine Learning: Similarities:",
+        "Machine Learning: Answer:",
+        "Machine Learning: Gradient descent is a generic optimization algorithm cable for finding optimal solutions to a wide range of problems. The general idea of gradient descent is to tweak parameters iteratively in order to minimize a cost function.",
+        "Machine Learning: Entropy and Information Gain are two key metrics used in determining the relevance of decision-making when constructing a decision tree model and determining the nodes and the best way to split.",
+        "Machine Learning: Linear regression is a supervised statistical model to predict dependent variable quantity based on independent variables.",
+        "Machine Learning: Both mean square error (MSE) and mean absolute error (MAE) measures the distances between vectors and express average model prediction in units of the target variable. Both can range from 0 to infinity, the lower they are the better the model."
+      ],
+      "total_cards": 30
+    },
+    "ml-system-design": {
+      "file": "ml-system-design.json",
+      "label": "ML System Design",
+      "topics": [
+        "Ad Click Prediction for Social Networks",
+        "Ads Click Prediction",
+        "Self-driving cars",
+        "Design an event recommendation system",
+        "Feature preprocessing",
+        "Design a game recommendation engine",
+        "Harmful content detection on social media",
+        "Image Search System (Pinterest)",
+        "Offline Metrics",
+        "Multimodal Video Search System",
+        "Popular Neural Network Architectures",
+        "News Feed System",
+        "Prediction Service",
+        "Preprocessing",
+        "Friends/Follower recommendation (People you may know)",
+        "Search System",
+        "The 9 Step ML System Design Formula Template",
+        "Design a video recommendation system",
+        "Answer to question 1",
+        "Answer to question 10",
+        "Answer to question 11",
+        "Answer to question 12",
+        "Answer to question 13",
+        "Answer to question 14",
+        "Answer to question 15",
+        "Answer to question 16",
+        "Answer to question 17",
+        "Answer to question 18",
+        "Answer to question 19",
+        "Answer to question 2",
+        "Answer to question 20",
+        "Answer to question 21",
+        "Answer to question 22",
+        "Answer to question 23",
+        "Answer to question 24",
+        "Answer to question 25",
+        "Answer to question 26",
+        "Answer to question 27",
+        "Answer to question 3",
+        "Answer to question 4",
+        "Answer to question 5",
+        "Answer to question 6",
+        "Answer to question 7",
+        "Answer to question 8",
+        "Answer to question 9"
+      ],
+      "total_cards": 122
+    },
+    "probability-stats": {
+      "file": "probability-stats.json",
+      "label": "Probability & Statistics",
+      "topics": [
+        "Probability: Answer:",
+        "Probability: The right answer is 11/216",
+        "Probability: The right answer is 5/32 or 0.156. There are different methods to solve it:",
+        "Statistics: A/B testing helps us to determine whether a change in something will cause a change in performance significantly or not. So in other words you aim to statistically estimate the impact of a given change within your digital product (for example). You measure success and counter metrics on at least 1 treatment vs 1 control group (there can be more than 1 XP group for multivariate tests).",
+        "Statistics: In Layman's terms:",
+        "Statistics: Answer:"
+      ],
+      "total_cards": 26
+    },
+    "python-coding": {
+      "file": "python-coding.json",
+      "label": "Python Coding",
+      "topics": [
+        "Python: Answer:"
+      ],
+      "total_cards": 4
+    },
+    "sql-databases": {
+      "file": "sql-databases.json",
+      "label": "SQL & Databases",
+      "topics": [
+        "SQL & DB: A JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.",
+        "SQL & DB: **Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column",
+        "SQL & DB: Answer:"
+      ],
+      "total_cards": 15
+    },
+    "ml-theory": {
+      "file": "ml-theory.json",
+      "label": "Ml Theory",
+      "topics": [
+        "Bias-Variance Tradeoff",
+        "Regularization: L1, L2 & Beyond",
+        "Gradient Descent & Optimization",
+        "Ensemble Methods",
+        "Evaluation Metrics & Cross-Validation"
+      ],
+      "total_cards": 32
+    },
+    "ml-coding": {
+      "file": "ml-coding.json",
+      "label": "Ml Coding",
+      "topics": [
+        "Linear Regression from Scratch",
+        "Logistic Regression from Scratch",
+        "K-Means Clustering from Scratch",
+        "Neural Network Forward & Backward",
+        "PCA from Scratch"
+      ],
+      "total_cards": 28
+    },
+    "ml-architectures": {
+      "file": "ml-architectures.json",
+      "label": "Ml Architectures",
+      "topics": [
+        "The Transformer Architecture",
+        "Attention Mechanisms Deep Dive",
+        "Modern LLM Building Blocks",
+        "LoRA & Parameter-Efficient Fine-Tuning",
+        "LLM Inference Optimization"
+      ],
+      "total_cards": 31
+    }
+  }
+}

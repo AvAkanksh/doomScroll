@@ -1,0 +1,170 @@
+{
+  "topics": [
+    {
+      "id": "deep-learning-deep-neural-networks",
+      "name": "Deep Learning: Deep Neural Networks",
+      "cards": [
+        {
+          "title": "What are autoencoders? Explain the different layers of autoencoders and mention three practical usages of them?",
+          "content": "**Q: What are autoencoders? Explain the different layers of autoencoders and mention three practical usages of them?**\n\nAutoencoders are one of the deep learning types used for unsupervised learning. There are key layers of autoencoders, which are the input layer, encoder, bottleneck hidden layer, decoder, and output.\n\nThe three layers of the autoencoder are:-\n1) Encoder - Compresses the input data to an encoded representation which is typically much smaller than the input data.\n2) Latent Space Representation/ Bottleneck/ Code - Compact summary of the input containing the most important features\n3) Decoder - Decompresses the knowledge representation and reconstructs the data back from its encoded form.\nThen a loss function is used at the top to compare the input and output images.\nNOTE- It's a requirement that the dimensionality of the input and output be the same. Everything in the middle can be played with.\n\nAutoencoders have a wide variety of usage in the real world. The following are some of the popular ones:"
+        },
+        {
+          "title": "What are autoencoders? Explain the different layers of autoencoders and mention three practical usages of them? (cont.)",
+          "content": "1. Transformers and Big Bird (Autoencoders is one of these components in both algorithms): Text Summarizer, Text Generator\n2. Image compression\n3. Nonlinear version of PCA"
+        },
+        {
+          "title": "What is an activation function and discuss the use of an activation function? Explain three different types of activa...",
+          "content": "**Q: What is an activation function and discuss the use of an activation function? Explain three different types of activa...**\n\nIn mathematical terms, the activation function serves as a gate between the current neuron input and its output, going to the next level. Basically, it decides whether neurons should be activated or not.\nIt is used to introduce non-linearity into a model.\n\nActivation functions are added to introduce non-linearity to the network, it doesn't matter how many layers or how many neurons your net has, the output will be linear combinations of the input in the absence of activation functions. In other words, activation functions are what make a linear regression model different from a neural network. We need non-linearity, to capture more complex features and model more complex variations that simple linear models can not capture.\n\nThere are a lot of activation functions:\n\n* Sigmoid function: f(x) = 1/(1+exp(-x))\n\nThe output value of it is between 0 and 1, we can use it for classification. It has some problems like the gradient vanishing on the extremes, also it is computationally expensive since it uses exp.\n\n* Relu: f(x) = max(0,x)"
+        },
+        {
+          "title": "What is an activation function and discuss the use of an activation function? Explain three different types of activa... (cont.)",
+          "content": "it returns 0 if the input is negative and the value of the input if the input is positive. It solves the problem of vanishing gradient for the positive side, however, the problem is still on the negative side. It is fast because we use a linear function in it.\n\n* Leaky ReLU:\n\nF(x)= ax, x<0\nF(x)= x, x>=0\n\nIt solves the problem of vanishing gradient on both sides by returning a value “a” on the negative side and it does the same thing as ReLU for the positive side.\n\n* Softmax: it is usually used at the last layer for a classification problem because it returns a set of probabilities, where the sum of them is 1. Moreover, it is compatible with cross-entropy loss, which is usually the loss function for classification problems."
+        },
+        {
+          "title": "You are using a deep neural network for a prediction task. After training your model, you notice that it is strongly ...",
+          "content": "**Q: You are using a deep neural network for a prediction task. After training your model, you notice that it is strongly ...**\n\nTo reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:\n\n1. The input data to the network:\n\n* Check if all the features are available and reliable\n* Check if the training sample distribution is the same as the validation and test set distribution. Because if there is a difference in validation set distribution then it is hard for the model to predict as these complex patterns are unknown to the model.\n* Check for train / valid data contamination (or leakage)\n* The dataset size is enough, if not try data augmentation to increase the data size\n* The dataset is balanced"
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-natural-language-processing",
+      "name": "Deep Learning: Natural Language Processing",
+      "cards": [
+        {
+          "title": "You are using a deep neural network for a prediction task. After training your model, you notice that it is strongly ... (cont.)",
+          "content": "2. Network architecture:\n* Overfitting could be due to model complexity. Question each component:\n  * can fully connect layers be replaced with convolutional + pooling layers?\n  * what is the justification for the number of layers and number of neurons chosen? Given how hard it is to tune these, can a pre-trained model be used?\n  * Add regularization - lasso (l1), ridge (l2), elastic net (both)\n* Add dropouts\n* Add batch normalization\n\n3. The training process:\n* Improvements in validation losses should decide when to stop training. Use callbacks for early stopping when there are no significant changes in the validation loss and restore_best_weights."
+        },
+        {
+          "title": "Why should we use Batch Normalization?",
+          "content": "**Q: Why should we use Batch Normalization?**\n\nBatch normalization is a technique for training very deep neural networks that standardizes the inputs to a layer for each mini-batch.\n\nUsually, a dataset is fed into the network in the form of batches where the distribution of the data differs for every batch size. By doing this, there might be chances of vanishing gradient or exploding gradient when it tries to backpropagate. In order to combat these issues, we can use BN (with irreducible error) layer mostly on the inputs to the layer before the activation function in the previous layer and after fully connected layers.\n\nBatch Normalisation has the following effects on the Neural Network:\n\n1. Robust Training of the deeper layers of the network.\n2. Better covariate-shift proof NN Architecture.\n3. Has a slight regularisation effect.\n4. Centred and Controlled values of Activation.\n5. Tries to Prevent exploding/vanishing gradient.\n6. Faster Training/Convergence to the minimum loss function"
+        },
+        {
+          "title": "How to know whether your model is suffering from the problem of Exploding Gradients?",
+          "content": "**Q: How to know whether your model is suffering from the problem of Exploding Gradients?**\n\nBy taking incremental steps towards the minimal value, the gradient descent algorithm aims to minimize the error. The weights and biases in a neural network are updated using these processes. However, at times, the steps grow excessively large, resulting in increased updates to weights and bias terms to the point where the weights overflow (or become NaN, that is, Not a Number). An exploding gradient is the result of this, and it is an unstable method.\n\nThere are some subtle signs that you may be suffering from exploding gradients during the training of your network, such as:\n\n1. The model is unable to get traction on your training data (e g. poor loss).\n2. The model is unstable, resulting in large changes in loss from update to update.\n3. The model loss goes to NaN during training.\n\nIf you have these types of problems, you can dig deeper to see if you have a problem with exploding gradients. There are some less subtle signs that you can use to confirm that you have exploding gradients:"
+        },
+        {
+          "title": "How to know whether your model is suffering from the problem of Exploding Gradients? (cont.)",
+          "content": "1. The model weights quickly become very large during training.\n2. The model weights go to NaN values during training.\n3. The error gradient values are consistently above 1.0 for each node and layer during training."
+        },
+        {
+          "title": "Can you name and explain a few hyperparameters used for training a neural network?",
+          "content": "**Q: Can you name and explain a few hyperparameters used for training a neural network?**\n\nHyperparameters are any parameter in the model that affects the performance but is not learned from the data unlike parameters ( weights and biases), the only way to change it is manually by the user.\n\n1. Number of nodes: number of inputs in each layer.\n\n2. Batch normalization: normalization/standardization of inputs in a layer.\n\n3. Learning rate: the rate at which weights are updated.\n\n4. Dropout rate: percent of nodes to drop temporarily during the forward pass.\n\n5. Kernel: matrix to perform dot product of image array with\n\n6. Activation function: defines how the weighted sum of inputs is transformed into outputs (e.g. tanh, sigmoid, softmax, Relu, etc)\n\n7. Number of epochs: number of passes an algorithm has to perform for training\n\n8. Batch size: number of samples to pass through the algorithm individually. E.g. if the dataset has 1000 records and we set a batch size of 100 then the dataset will be divided into 10 batches which will be propagated to the algorithm one after another."
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-computer-vision",
+      "name": "Deep Learning: Computer Vision",
+      "cards": [
+        {
+          "title": "Can you name and explain a few hyperparameters used for training a neural network? (cont.)",
+          "content": "9. Momentum: Momentum can be seen as a learning rate adaptation technique that adds a fraction of the past update vector to the current update vector. This helps damps oscillations and speed up progress towards the minimum.\n\n10. Optimizers: They focus on getting the learning rate right.\n\n* Adagrad optimizer: Adagrad uses a large learning rate for infrequent features and a smaller learning rate for frequent features.\n\n* Other optimizers, like Adadelta, RMSProp, and Adam, make further improvements to fine-tuning the learning rate and momentum to get to the optimal weights and bias. Thus getting the learning rate right is key to well-trained models.\n\n11. Learning Rate: Controls how much to update weights & bias (w+b) terms after training on each batch. Several helpers are used to getting the learning rate right."
+        },
+        {
+          "title": "Can you explain the parameter sharing concept in deep learning?",
+          "content": "**Q: Can you explain the parameter sharing concept in deep learning?**\n\nParameter sharing is the method of sharing weights by all neurons in a particular feature map. Therefore helps to reduce the number of parameters in the whole system, making it computationally cheap. It basically means that the same parameters will be used to represent different transformations in the system. This basically means the same matrix elements may be updated multiple times during backpropagation from varied gradients. The same set of elements will facilitate transformations at more than one layer instead of those from a single layer as conventional. This is usually done in architectures like Siamese that tend to have parallel trunks trained simultaneously. In that case, using shared weights in a few layers( usually the bottom layers) helps the model converge better. This behavior, as observed, can be attributed to more diverse feature representations learned by the system. Since neurons corresponding to the same features are triggered in varied scenarios. Helps to model to generalize better."
+        },
+        {
+          "title": "Can you explain the parameter sharing concept in deep learning? (cont.)",
+          "content": "Note that sometimes the parameter sharing assumption may not make sense. This is especially the case when the input images to a ConvNet have some specific centered structure, where we should expect, for example, that completely different features should be learned on one side of the image than another. \n\nOne practical example is when the input is faces that have been centered in the image. You might expect that different eye-specific or hair-specific features could (and should) be learned in different spatial locations. In that case, it is common to relax the parameter sharing scheme, and instead, simply call the layer a Locally-Connected Layer."
+        },
+        {
+          "title": "Describe the architecture of a typical Convolutional Neural Network (CNN)?",
+          "content": "**Q: Describe the architecture of a typical Convolutional Neural Network (CNN)?**\n\nIn a typical CNN architecture, a few convolutional layers are connected in a cascade style. Each convolutional layer is followed by a Rectified Linear Unit (ReLU) layer or other activation function, then a pooling layer*, then one or more convolutional layers (+ReLU), then another pooling layer.\n\nThe output from each convolution layer is a set of objects called feature maps, generated by a single kernel filter. The feature maps are used to define a new input to the next layer. A common trend is to keep on increasing the number of filters as the size of the image keeps dropping as it passes through the Convolutional and Pooling layers. The size of each kernel filter is usually 3×3 kernel because it can extract the same features which extract from large kernels and faster than them."
+        },
+        {
+          "title": "Describe the architecture of a typical Convolutional Neural Network (CNN)? (cont.)",
+          "content": "After that, the final small image with a large number of filters(which is a 3D output from the above layers) is flattened and passed through fully connected layers. At last, we use a softmax layer with the required number of nodes for classification or use the output of the fully connected layers for some other purpose depending on the task.\n\nThe number of these layers can increase depending on the complexity of the data and when they increase you need more data. Stride, Padding, Filter size, Type of Pooling, etc all are Hyperparameters and need to be chosen (maybe based on some previously built successful models)\n\n*Pooling: it is a way to reduce the number of features by choosing a number to represent its neighbor. And it has many types max-pooling, average pooling, and global average.\n\n* Max pooling: it takes the max number of window 2×2 as an example and represents this window by using the max number in it then slides on the image to make the same operation.\n* Average pooling: it is the same as max-pooling but takes the average of the window."
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-answer",
+      "name": "Deep Learning: Answer:",
+      "cards": [
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "## Q44: Discuss some popular deep learning frameworks or libraries used for computer vision tasks.\nAnswer:"
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-to-reduce-overfitting-in-a-deep-neural-network",
+      "name": "Deep Learning: To reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:",
+      "cards": [
+        {
+          "title": "How does L1/L2 regularization affect a neural network?",
+          "content": "**Q: How does L1/L2 regularization affect a neural network?**\n\nOverfitting occurs in more complex neural network models (many layers, many neurons) and the complexity of the neural network can be reduced by using L1 and L2 regularization as well as dropout , Data augmenration and Dropaout.\nL1 regularization forces the weight parameters to become zero. L2 regularization forces the weight parameters towards zero (but never exactly zero|| weight deccay )\n\nSmaller weight parameters make some neurons neglectable therfore neural network becomes less complex and less overfitting.\n\nRegularisation has the following benefits: \n- Reducing the variance of the model over unseen data.\n- Makes it feasible to fit much more complicated models without overfitting.\n- Reduces the magnitude of weights and biases.\n- L1 learns sparse models that is many weights turn out to be 0.\n- https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers/tree/main"
+        },
+        {
+          "title": "𝐇𝐨𝐰 𝐰𝐨𝐮𝐥𝐝 𝐲𝐨𝐮 𝐜𝐡𝐚𝐧𝐠𝐞 𝐚 𝐩𝐫𝐞-𝐭𝐫𝐚𝐢𝐧𝐞𝐝 𝐧𝐞𝐮𝐫𝐚𝐥 𝐧𝐞𝐭𝐰𝐨𝐫𝐤 𝐟𝐫𝐨𝐦 𝐜𝐥𝐚𝐬𝐬𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐭𝐨 𝐫𝐞𝐠𝐫𝐞𝐬𝐬𝐢𝐨𝐧?",
+          "content": "**Q: 𝐇𝐨𝐰 𝐰𝐨𝐮𝐥𝐝 𝐲𝐨𝐮 𝐜𝐡𝐚𝐧𝐠𝐞 𝐚 𝐩𝐫𝐞-𝐭𝐫𝐚𝐢𝐧𝐞𝐝 𝐧𝐞𝐮𝐫𝐚𝐥 𝐧𝐞𝐭𝐰𝐨𝐫𝐤 𝐟𝐫𝐨𝐦 𝐜𝐥𝐚𝐬𝐬𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐭𝐨 𝐫𝐞𝐠𝐫𝐞𝐬𝐬𝐢𝐨𝐧?**\n\nUsing transfer learning where we can use our knowledge about one task to do another. First set of layers of a neural network are usually feature extraction layers and will be useful for all tasks with the same input distribution. So, we should replace the last fully connected layer and Softmax responsible for classification with one neuron for regression-or fully connected-layer for correction then one neuron for regression.\n\nWe can optionally freeze the first set of layers if we have few data or to converge fast. Then we can train the network with the data we have and using the suitable loss for the regression problem, making use of the robust feature extraction -first set of layers- of a pre-trained model on huge data."
+        },
+        {
+          "title": "What might happen if you set the momentum hyperparameter too close to 1 (e.g., 0.9999) when using an SGD optimizer?",
+          "content": "**Q: What might happen if you set the momentum hyperparameter too close to 1 (e.g., 0.9999) when using an SGD optimizer?**\n\nIf the momentum hyperparameter is set too close to 1 (e.g., 0.99999) when using an SGD optimizer, then the algorithm will likely pick up a lot of speed, hopefully moving roughly toward the global minimum, but its momentum will carry it right past the minimum.\n\nThen it will slow down and come back, accelerate again, overshoot again, and so on. It may oscillate this way many times before converging, so overall it will take much longer to converge than with a smaller momentum value."
+        },
+        {
+          "title": "What might happen if you set the momentum hyperparameter too close to 1 (e.g., 0.9999) when using an SGD optimizer? (cont.)",
+          "content": "Also since the momentum is used to update the weights based on an \"exponential moving average\" of all the previous gradients instead of the current gradient only, this in some sense, combats the instability of the gradients that comes with stochastic gradient descent, the higher the momentum term, the stronger the influence of previous gradients to the current optimization step (with the more recent gradients having even stronger influence), setting a momentum term close to 1, will result in a gradient that is almost a sum of all the previous gradients basically, which might result in an exploding gradient scenario."
+        },
+        {
+          "title": "What are the hyperparameters that can be optimized for the batch normalization layer?",
+          "content": "**Q: What are the hyperparameters that can be optimized for the batch normalization layer?**\n\nThe $\\gamma$ and $\\beta$ hyperparameters for the batch normalization layer are learned end to end by the network. \nIn batch-normalization, the outputs of the intermediate layers are normalized to have a mean of 0 and standard deviation of 1. Rescaling by $\\gamma$ and shifting by $\\beta$ helps us change the mean and standard deviation to other values."
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-batch-normalization-is-a-technique-for-trainin",
+      "name": "Deep Learning: Batch normalization is a technique for training very deep neural networks that standardizes the inputs to a layer for each mini-batch.",
+      "cards": [
+        {
+          "title": "What is the effect of dropout on the training and prediction speed of your deep learning model?",
+          "content": "**Q: What is the effect of dropout on the training and prediction speed of your deep learning model?**\n\nDropout is a regularization technique, which zeroes down some weights and scales up the rest of the weights by a factor of 1/(1-p). Let's say if Dropout layer is initialized with p=0.5, that means half of the weights will zeroed down, and rest will be scaled by a factor of 2. This layer is only enabled during training and is disabled during validation and testing. Hence validation and testing is faster. The reason why it works only during training is, we want to reduce the complexity of the model so that model doesn't overfit. Once the model is trained, it doesn't make sense to keep that layer enabled."
+        },
+        {
+          "title": "What is the advantage of deep learning over traditional machine learning?",
+          "content": "**Q: What is the advantage of deep learning over traditional machine learning?**\n\nDeep learning offers several advantages over traditional machine learning approaches, including:\n\n1. Ability to process large amounts of data: Deep learning models can analyze and process massive amounts of data quickly and accurately, making it ideal for tasks such as image recognition or natural language processing.\n\n2. Automated feature extraction: In traditional machine learning, feature engineering is a crucial step in the model building process. Deep learning models, on the other hand, can automatically learn and extract features from the raw data, reducing the need for human intervention.\n\n3. Better accuracy: Deep learning models have shown to achieve higher accuracy levels in complex tasks such as speech recognition and image classification when compared to traditional machine learning models.\n\n4. Adaptability to new data: Deep learning models can adapt and learn from new data, making them suitable for use in dynamic and ever-changing environments."
+        },
+        {
+          "title": "What is the advantage of deep learning over traditional machine learning? (cont.)",
+          "content": "While deep learning does have its advantages, it also has some limitations, such as requiring large amounts of data and computational resources, making it unsuitable for some applications."
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages?",
+          "content": "**Q: What is a depthwise Separable layer and what are its advantages?**\n\nStandard neural network Convolution layers involve a lot of multiplications that make them unsuitable for deployment. \n\nIn this above scenario, we have an input image of 12x12x3 pixels and we apply a 5x5 convolution(no padding, stride = 1). We stack 256 such kernels\nso that we get an output of dimensions 8x8x256.\n\nHere, there are 256 5x5x3 kernels that move 8x8 times which leads to 256x3x5x5x8x8 = 1,28,800 multiplications.\n\nDepthwise separable convolution separates this process into two parts: a depthwise convolution and a pointwise convolution.\n\nIn depthwise convolution, we apply a kernel parallelly to each channel of the image.\n\nWe end up getting 3 different outputs (representing 3 channels of the image) to get an 8x8x1 image. These are stacked together to form a 8x8x3 image.\n\nPointwise Convolution now converts this 8x8x3 image input from the depthwise convolution back to an 8x8x1 output.\n\nStacking 256 1x1x3 kernels give us the final output as the standard convolution.\n\nTotal Number of multiplications:"
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "For Depthwise convolution, we have 3 5x5x1 kernels moving 8x8 times, totalling 3x5x5x8x8=4800 multiplications.\n\nIn Pointwise convolution, we have 256 1x1x3 kernels moving 8x8 times, which is a total of 256x1x1x3x8x8=49152 multiplications.\n\nTotal number of multiplications = 4800 + 49152 = 53952 multiplications which is way lower than the standard convolution case.\n\nReference: https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728\n\n# Natural Language Processing #\n\n## Q23: What is transformer architecture, and why is it widely used in natural language processing tasks? ##\nAnswer:\nThe key components of a transformer architecture are as follows:\n\n1. Encoder: The encoder processes the input sequence, such as a sentence or a document, and transforms it into a set of representations that capture the contextual information of each input element. The encoder consists of multiple identical layers, each containing a self-attention mechanism and position-wise feed-forward neural networks. The self-attention mechanism allows the model to attend to different parts of the input sequence while encoding it."
+        }
+      ]
+    },
+    {
+      "id": "deep-learning-by-taking-incremental-steps-towards-the-minima",
+      "name": "Deep Learning: By taking incremental steps towards the minimal value, the gradient descent algorithm aims to minimize the error. The weights and biases in a neural network are updated using these processes. However, at times, the steps grow excessively large, resulting in increased updates to weights and bias terms to the point where the weights overflow (or become NaN, that is, Not a Number). An exploding gradient is the result of this, and it is an unstable method.",
+      "cards": [
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "2. Decoder: The decoder takes the encoded representations generated by the encoder and generates an output sequence. It also consists of multiple identical layers, each containing a self-attention mechanism and additional cross-attention mechanisms. The cross-attention mechanisms enable the decoder to attend to relevant parts of the encoded input sequence when generating the output.\n\n3. Self-Attention: Self-attention is a mechanism that allows the transformer to weigh the importance of different elements in the input sequence when generating representations. It computes attention scores between each element and every other element in the sequence, resulting in a weighted sum of the values. This process allows the model to capture dependencies and relationships between different elements in the sequence.\n\n4. Positional Encoding: Transformers incorporate positional encoding to provide information about the order or position of elements in the input sequence. This encoding is added to the input embeddings and allows the model to understand the sequential nature of the data."
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "5. Feed-Forward Networks: Transformers utilize feed-forward neural networks to process the representations generated by the attention mechanisms. These networks consist of multiple layers of fully connected neural networks with activation functions, enabling non-linear transformations of the input representations.\n\nThe transformer architecture is widely used in NLP tasks due to several reasons:\n\nSelf-Attention Mechanism: Transformers leverage a self-attention mechanism that allows the model to focus on different parts of the input sequence during processing. This mechanism enables the model to capture long-range dependencies and contextual information efficiently, making it particularly effective for tasks that involve understanding and generating natural language.\n\nParallelization: Transformers can process the elements of a sequence in parallel, as opposed to recurrent neural networks (RNNs) that require sequential processing. This parallelization greatly accelerates training and inference, making transformers more computationally efficient."
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "Scalability: Transformers scale well with the length of input sequences, thanks to the self-attention mechanism. Unlike RNNs, transformers do not suffer from the vanishing or exploding gradient problem, which can hinder the modeling of long sequences. This scalability makes transformers suitable for tasks that involve long texts or documents.\n\nTransfer Learning: Transformers have shown great success in pre-training and transfer learning. Models like BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer) are pre-trained on massive amounts of text data, enabling them to learn rich representations of language. These pre-trained models can then be fine-tuned on specific downstream tasks with comparatively smaller datasets, leading to better generalization and improved performance.\n\nContextual Understanding: Transformers excel in capturing the contextual meaning of words and sentences. By considering the entire input sequence simultaneously, transformers can generate more accurate representations that incorporate global context, allowing for better language understanding and generation."
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "## Q24: Explain the key components of a transformer model. ##\nAnswer:\n\nA transformer model consists of several key components that work together to process and generate representations for input sequences. The main components of a transformer model are as follows:\n\n* Encoder: The encoder is responsible for processing the input sequence and generating representations that capture the contextual information of each element. It consists of multiple identical layers, typically stacked on top of each other. Each layer contains two sub-layers: a self-attention mechanism and a position-wise feed-forward neural network.\n\n  * Self-Attention Mechanism: This mechanism allows the model to attend to different parts of the input sequence while encoding it. It computes attention scores between each element and every other element in the sequence, resulting in a weighted sum of values. This process allows the model to capture dependencies and relationships between different elements."
+        },
+        {
+          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
+          "content": "* Position-wise Feed-Forward Neural Network: After the self-attention mechanism, a feed-forward neural network is applied to each position separately. It consists of fully connected layers with activation functions, enabling non-linear transformations of the input representations.\n\n* Decoder: The decoder takes the encoded representations generated by the encoder and generates an output sequence. It also consists of multiple identical layers, each containing sub-layers such as self-attention, cross-attention, and position-wise feed-forward networks.\n\n  * Self-Attention Mechanism: Similar to the encoder, the decoder uses self-attention to attend to different parts of the decoded sequence while generating the output. It allows the  decoder to consider the previously generated elements in the output sequence when generating the next element.\n\n  * Cross-Attention Mechanism: In addition to self-attention, the decoder employs cross-attention to attend to relevant parts of the encoded input sequence. It allows the decoder to align and extract information from the encoded sequence when generating the output."
+        }
+      ]
+    }
+  ]
+}

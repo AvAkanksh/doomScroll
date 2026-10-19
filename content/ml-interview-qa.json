@@ -1,0 +1,160 @@
+{
+  "topics": [
+    {
+      "id": "machine-learning-similarities",
+      "name": "Machine Learning: Similarities:",
+      "cards": [
+        {
+          "title": "Mention three ways to make your model robust to outliers.",
+          "content": "**Q: Mention three ways to make your model robust to outliers.**\n\nInvestigating the outliers is always the first step in understanding how to treat them. After you understand the nature of why the outliers occurred you can apply one of the several methods mentioned here."
+        },
+        {
+          "title": "Describe the motivation behind random forests and mention two reasons why they are better than individual decision tr...",
+          "content": "**Q: Describe the motivation behind random forests and mention two reasons why they are better than individual decision tr...**\n\nThe motivation behind random forest or ensemble models in general in layman's terms, Let's say we have a question/problem to solve we bring 100 people and ask each of them the question/problem and record their solution. The rest of the answer is here"
+        },
+        {
+          "title": "What are the differences and similarities between gradient boosting and random forest? and what are the advantages an...",
+          "content": "**Q: What are the differences and similarities between gradient boosting and random forest? and what are the advantages an...**\n\nSimilarities:\n1. Both these algorithms are decision-tree-based algorithms\n2. Both these algorithms are ensemble algorithms\n3. Both are flexible models and do not need much data preprocessing.\n\nThe rest of the answer is here"
+        },
+        {
+          "title": "What are L1 and L2 regularization? What are the differences between the two?",
+          "content": "**Q: What are L1 and L2 regularization? What are the differences between the two?**\n\nRegularization is a technique used to avoid overfitting by trying to make the model more simple.The rest of the answer is here"
+        },
+        {
+          "title": "What are the Bias and Variance in a Machine Learning Model and explain the bias-variance trade-off?",
+          "content": "**Q: What are the Bias and Variance in a Machine Learning Model and explain the bias-variance trade-off?**\n\nThe goal of any supervised machine learning model is to estimate the mapping function (f) that predicts the target variable (y) given input (x). The prediction error can be broken down into three parts:\nThe rest of the answer is here"
+        }
+      ]
+    },
+    {
+      "id": "machine-learning-answer",
+      "name": "Machine Learning: Answer:",
+      "cards": [
+        {
+          "title": "Can you explain the ARIMA model and its components?",
+          "content": "**Q: Can you explain the ARIMA model and its components?**\n\nThe ARIMA model, which stands for Autoregressive Integrated Moving Average, is a widely used time series forecasting model. It combines three key components: Autoregression (AR), Differencing (I), and Moving Average (MA).\n\n* Autoregression (AR):\nThe autoregressive component captures the relationship between an observation in a time series and a certain number of lagged observations. It assumes that the value at a given time depends linearly on its own previous values. The \"p\" parameter in ARIMA(p, d, q) represents the order of autoregressive terms. For example, ARIMA(1, 0, 0) refers to a model with one autoregressive term.\n\n* Differencing (I):\nDifferencing is used to make a time series stationary by removing trends or seasonality. It calculates the difference between consecutive observations to eliminate any non-stationary behavior. The \"d\" parameter in ARIMA(p, d, q) represents the order of differencing. For instance, ARIMA(0, 1, 0) indicates that differencing is applied once."
+        },
+        {
+          "title": "Can you explain the ARIMA model and its components? (cont.)",
+          "content": "* Moving Average (MA):\nThe moving average component takes into account the dependency between an observation and a residual error from a moving average model applied to lagged observations. It assumes that the value at a given time depends linearly on the error terms from previous time steps. The \"q\" parameter in ARIMA(p, d, q) represents the order of the moving average terms. For example, ARIMA(0, 0, 1) signifies a model with one moving average term.\n\nBy combining these three components, the ARIMA model can capture both autoregressive patterns, temporal dependencies, and stationary behavior in a time series. The parameters p, d, and q are typically determined through techniques like the Akaike Information Criterion (AIC) or Bayesian Information Criterion (BIC).\n\nIt's worth noting that there are variations of the ARIMA model, such as SARIMA (Seasonal ARIMA), which incorporates additional seasonal components for modeling seasonal patterns in the data."
+        },
+        {
+          "title": "Can you explain the ARIMA model and its components? (cont.)",
+          "content": "ARIMA models are widely used in forecasting applications, but they do make certain assumptions about the underlying data, such as linearity and stationarity. It's important to validate these assumptions and adjust the model accordingly if they are not met."
+        },
+        {
+          "title": "What are the assumptions made by the ARIMA model?",
+          "content": "**Q: What are the assumptions made by the ARIMA model?**\n\nThe ARIMA model makes several assumptions about the underlying time series data. These assumptions are important to ensure the validity and accuracy of the model's results. Here are the key assumptions:\n\nStationarity: The ARIMA model assumes that the time series is stationary. Stationarity means that the statistical properties of the data, such as the mean and variance, remain constant over time. This assumption is crucial for the autoregressive and moving average components to hold. If the time series is non-stationary, differencing (the \"I\" component) is applied to transform it into a stationary series.\n\nLinearity: The ARIMA model assumes that the relationship between the observations and the lagged values is linear. It assumes that the future values of the time series can be modeled as a linear combination of past values and error terms.\n\nNo Autocorrelation in Residuals: The ARIMA model assumes that the residuals (the differences between the predicted values and the actual values) do not exhibit any autocorrelation. In other words, the errors are not correlated with each other."
+        },
+        {
+          "title": "What are the assumptions made by the ARIMA model? (cont.)",
+          "content": "Normally Distributed Residuals: The ARIMA model assumes that the residuals follow a normal distribution with a mean of zero. This assumption is necessary for statistical inference, parameter estimation, and hypothesis testing.\n\nIt's important to note that while these assumptions are commonly made in ARIMA modeling, they may not always hold in real-world scenarios. It's essential to assess the data and, if needed, apply transformations or consider alternative models that relax some of these assumptions. Additionally, diagnostics tools, such as residual analysis and statistical tests, can help evaluate the adequacy of the assumptions and the model's fit to the data."
+        }
+      ]
+    },
+    {
+      "id": "machine-learning-gradient-descent-is-a-generic-optimization-",
+      "name": "Machine Learning: Gradient descent is a generic optimization algorithm cable for finding optimal solutions to a wide range of problems. The general idea of gradient descent is to tweak parameters iteratively in order to minimize a cost function.",
+      "cards": [
+        {
+          "title": "What is the ROC curve and when should you use it?",
+          "content": "**Q: What is the ROC curve and when should you use it?**\n\nROC curve, Receiver Operating Characteristic curve, is a graphical representation of the model's performance where we plot the True Positive Rate (TPR) against the False Positive Rate (FPR) for different threshold values, for hard classification, between 0 to 1 based on model output.\n\nThis ROC curve is mainly used to compare two or more models as shown in the figure below. Now, it is easy to see that a reasonable model will always give FPR less (since it's an error) than TPR so, the curve hugs the upper left corner of the square box 0 to 1 on the TPR axis and 0 to 1 on the FPR axis.\n\nThe more the AUC(area under the curve) for a model's ROC curve, the better the model in terms of prediction accuracy in terms of TPR and FPR.\n\nHere are some benefits of using the ROC Curve :\n\n* Can help prioritize either true positives or true negatives depending on your case study (Helps you visually choose the best hyperparameters for your case)\n\n* Can be very insightful when we have unbalanced datasets\n\n* Can be used to compare different ML models by calculating the area under the ROC curve (AUC)"
+        },
+        {
+          "title": "What is the difference between hard and soft voting classifiers in the context of ensemble learners?",
+          "content": "**Q: What is the difference between hard and soft voting classifiers in the context of ensemble learners?**\n\n* Hard Voting: We take into account the class predictions for each classifier and then classify an input based on the maximum votes to a particular class.\n\n* Soft Voting: We take into account the probability predictions for each class by each classifier and then classify an input to the class with maximum probability based on the average probability (averaged over the classifier's probabilities) for that class."
+        },
+        {
+          "title": "What is boosting in the context of ensemble learners discuss two famous boosting methods",
+          "content": "**Q: What is boosting in the context of ensemble learners discuss two famous boosting methods**\n\nBoosting refers to any Ensemble method that can combine several weak learners into a strong learner. The general idea of most boosting methods is to train predictors sequentially, each trying to correct its predecessor.\n\nThere are many boosting methods available, but by far the most popular are: \n\n* Adaptive Boosting: One way for a new predictor to correct its predecessor is to pay a bit more attention to the training instances that the predecessor under-fitted. This results in new predictors focusing more and more on the hard cases.\n* Gradient Boosting:  Another very popular Boosting algorithm is Gradient Boosting. Just like AdaBoost, Gradient Boosting works by sequentially adding predictors to an ensemble, each one correcting its predecessor. However, instead of tweaking the instance weights at every iteration as AdaBoost does, this method tries to fit the new predictor to the residual errors made by the previous predictor."
+        },
+        {
+          "title": "How can you evaluate the performance of a dimensionality reduction algorithm on your dataset?",
+          "content": "**Q: How can you evaluate the performance of a dimensionality reduction algorithm on your dataset?**\n\nIntuitively, a dimensionality reduction algorithm performs well if it eliminates a lot of dimensions from the dataset without losing too much information. One way to measure this is to apply the reverse transformation and measure the reconstruction error. However, not all dimensionality reduction algorithms provide a reverse transformation.\n\nAlternatively, if you are using dimensionality reduction as a preprocessing step before another Machine Learning algorithm (e.g., a Random Forest classifier), then you can simply measure the performance of that second algorithm; if dimensionality reduction did not lose too much information, then the algorithm should perform just as well as when using the original dataset."
+        },
+        {
+          "title": "Define the curse of dimensionality and how to solve it.",
+          "content": "**Q: Define the curse of dimensionality and how to solve it.**\n\nCurse of dimensionality represents the situation when the amount of data is too few to be represented in a high-dimensional space, as it will be highly scattered in that high-dimensional space and it becomes more probable that we overfit this data. If we increase the number of features, we are implicitly increasing model complexity and if we increase model complexity we need more data. \n\nPossible solutions are:\nRemove irrelevant features not discriminating classes correlated or features not resulting in much improvement, we can use:\n\n* Feature selection(select the most important ones).\n* Feature extraction(transform current feature dimensionality into a lower dimension preserving the most possible amount of information like PCA )."
+        }
+      ]
+    },
+    {
+      "id": "machine-learning-entropy-and-information-gain-are-two-key-me",
+      "name": "Machine Learning: Entropy and Information Gain are two key metrics used in determining the relevance of decision-making when constructing a decision tree model and determining the nodes and the best way to split.",
+      "cards": [
+        {
+          "title": "In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA, or Kernel PCA?",
+          "content": "**Q: In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA, or Kernel PCA?**\n\nRegular PCA is the default, but it works only if the dataset fits in memory. Incremental PCA is useful for large datasets that don't fit in memory, but it is slower than regular PCA, so if the dataset fits in memory you should prefer regular PCA. Incremental PCA is also useful for online tasks when you need to apply PCA on the fly, every time a new instance arrives. Randomized PCA is useful when you want to considerably reduce dimensionality and the dataset fits in memory; in this case, it is much faster than regular PCA. Finally, Kernel PCA is useful for nonlinear datasets."
+        },
+        {
+          "title": "Discuss two clustering algorithms that can scale to large datasets",
+          "content": "**Q: Discuss two clustering algorithms that can scale to large datasets**\n\n**Minibatch Kmeans:**  Instead of using the full dataset at each iteration, the algorithm\nis capable of using mini-batches, moving the centroids just slightly at each iteration.\nThis speeds up the algorithm typically by a factor of 3 or 4 and makes it\npossible to cluster huge datasets that do not fit in memory. Scikit-Learn implements\nthis algorithm in the MiniBatchKMeans class.\n\n**Balanced Iterative Reducing and Clustering using Hierarchies (BIRCH)** \nis a clustering algorithm that can cluster large datasets by first generating a small and compact summary of the large dataset that retains as much information as possible. This smaller summary is then clustered instead of clustering the larger dataset."
+        },
+        {
+          "title": "Do you need to scale your data if you will be using the SVM classifier and discus your answer",
+          "content": "**Q: Do you need to scale your data if you will be using the SVM classifier and discus your answer**\n\nYes, feature scaling is required for SVM and all margin-based classifiers since the optimal hyperplane (the decision boundary) is dependent on the scale of the input features. In other words, the distance between two observations will differ for scaled and non-scaled cases, leading to different models being generated. \n\nThis can be seen in the figure below, when the features have different scales, we can see that the decision boundary and the support vectors are only classifying the X1 features without taking into consideration the X0 feature, however after scaling the data to the same scale the decision boundaries and support vectors are looking much better and the model is taking into account both features.\n\nTo scale the data, normalization, and standardization are the most popular approaches."
+        },
+        {
+          "title": "What are Loss Functions and Cost Functions? Explain the key Difference Between them.",
+          "content": "**Q: What are Loss Functions and Cost Functions? Explain the key Difference Between them.**\n\nThe loss function is the measure of the performance of the model on a single training example, whereas the cost function is the average loss function over all training examples or across the batch in the case of mini-batch gradient descent.\n\nSome examples of loss functions are Mean Squared Error, Binary Cross Entropy, etc.\n\nWhereas, the cost function is the average of the above loss functions over training examples."
+        },
+        {
+          "title": "What is the importance of batch in machine learning and explain some batch-dependent gradient descent algorithms?",
+          "content": "**Q: What is the importance of batch in machine learning and explain some batch-dependent gradient descent algorithms?**\n\nIn the memory, the dataset can load either completely at once or in the form of a set. If we have a huge size of the dataset, then loading the whole data into memory will reduce the training speed, hence batch term is introduced.\n\nExample: image data contains 1,00,000 images, we can load this into 3125 batches where 1 batch = 32 images. So instead of loading the whole 1,00,000 images in memory, we can load 32 images 3125 times which requires less memory.\n\nIn summary, a batch is important in two ways: (1) Efficient memory consumption. (2) Improve training speed.\n\nThere are 3 types of gradient descent algorithms based on batch size: (1) Stochastic gradient descent (2) Batch gradient descent (3) Mini Batch gradient descent\n\nIf the whole data is in a single batch, it is called batch gradient descent. If the single data points are equal to one batch i.e. number of batches = number of data instances, it is called stochastic gradient descent. If the number of batches is less than the number of data points or greater than 1, it is known as mini-batch gradient descent."
+        }
+      ]
+    },
+    {
+      "id": "machine-learning-linear-regression-is-a-supervised-statistic",
+      "name": "Machine Learning: Linear regression is a supervised statistical model to predict dependent variable quantity based on independent variables.",
+      "cards": [
+        {
+          "title": "What are the different methods to split a tree in a decision tree algorithm?",
+          "content": "**Q: What are the different methods to split a tree in a decision tree algorithm?**\n\nDecision trees can be of two types regression and classification.\nFor classification, classification accuracy created a lot of instability. So the following loss functions are used:\n- Gini's Index\nGini impurity is used to predict the likelihood of a randomly chosen example being incorrectly classified by a particular node. It’s referred to as an “impurity” measure because it demonstrates how the model departs from a simple division.\n\n- Cross-entropy or Information Gain\nInformation gain refers to the process of identifying the most important features/attributes that convey the most information about a class. The entropy principle is followed with the goal of reducing entropy from the root node to the leaf nodes. Information gain is the difference in entropy before and after splitting, which describes the impurity of in-class items."
+        },
+        {
+          "title": "What are the different methods to split a tree in a decision tree algorithm? (cont.)",
+          "content": "For regression, the good old mean squared error serves as a good loss function which is minimized by splits of the input features and predicting the mean value of the target feature on the subspaces resulting from the split. But finding the split that results in the minimum possible residual sum of squares is computationally infeasible, so a greedy top-down approach is taken i.e. the splits are made at a level from top to down which results in maximum reduction of RSS. We continue this until some maximum depth or number of leaves is attained."
+        },
+        {
+          "title": "Why boosting is a more stable algorithm as compared to other ensemble algorithms?",
+          "content": "**Q: Why boosting is a more stable algorithm as compared to other ensemble algorithms?**\n\nBoosting algorithms focus on errors found in previous iterations until they become obsolete. Whereas in bagging there is no corrective loop. That’s why boosting is a more stable algorithm compared to other ensemble algorithms."
+        },
+        {
+          "title": "What is active learning and discuss one strategy of it?",
+          "content": "**Q: What is active learning and discuss one strategy of it?**\n\nActive learning is a special case of machine learning in which a learning algorithm can interactively query a user (or some other information source) to label new data points with the desired outputs. In statistics literature, it is sometimes referred to as optimal experimental design.\n\n1. Stream-based sampling \nIn stream-based selective sampling, unlabelled data is continuously fed to an active learning system, where the learner decides whether to send the same to a human oracle or not based on a predefined learning strategy. This method is apt in scenarios where the model is in production and the data sources/distributions vary over time. \n\n2. Pool-based sampling\nIn this case, the data samples are chosen from a pool of unlabelled data based on the informative value scores and sent for manual labeling. Unlike stream-based sampling, oftentimes, the entire unlabelled dataset is scrutinized for the selection of the best instances."
+        },
+        {
+          "title": "What are the different approaches to implementing recommendation systems?",
+          "content": "**Q: What are the different approaches to implementing recommendation systems?**\n\n1. 𝐂𝐨𝐧𝐭𝐞𝐧𝐭-𝐁𝐚𝐬𝐞𝐝 𝐅𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠: Content-Based Filtering depends on similarities of items and users' past activities on the website to recommend any product or service.\n\nThis filter helps in avoiding a cold start for any new products as it doesn't rely on other users' feedback, it can recommend products based on similarity factors. However, content-based filtering needs a lot of domain knowledge so that the recommendations made are 100 percent accurate.\n\n2. 𝐂𝐨𝐥𝐥𝐚𝐛𝐨𝐫𝐚𝐭𝐢𝐯𝐞-𝐁𝐚𝐬𝐞𝐝 𝐅𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠: The primary job of a collaborative filtering system is to overcome the shortcomings of content-based filtering.\n\nSo, instead of focusing on just one user, the collaborative filtering system focuses on all the users and clusters them according to their interests.\n\nBasically, it recommends a product 'x' to user 'a' based on the interest of user 'b'; users 'a' and 'b' must have had similar interests in the past, which is why they are clustered together."
+        }
+      ]
+    },
+    {
+      "id": "machine-learning-both-mean-square-error-mse-and-mean-absolut",
+      "name": "Machine Learning: Both mean square error (MSE) and mean absolute error (MAE) measures the distances between vectors and express average model prediction in units of the target variable. Both can range from 0 to infinity, the lower they are the better the model.",
+      "cards": [
+        {
+          "title": "What are the different approaches to implementing recommendation systems? (cont.)",
+          "content": "The domain knowledge that is required for collaborative filtering is less, recommendations made are more accurate and it can adapt to the changing tastes of users over time. However, collaborative filtering faces the problem of a cold start as it heavily relies on feedback or activity from other users.\n\n3. 𝐇𝐲𝐛𝐫𝐢𝐝 𝐟𝐢𝐥𝐭𝐞𝐫𝐢𝐧𝐠:  A mixture of content and collaborative methods. Uses descriptors and interactions.\n\nMore modern approaches typically fall into the hybrid filtering category and tend to work in two stages:\n\n1). A candidate generation phase where we coarsely generate candidates from a corpus of hundreds of thousands, millions, or billions of items down to a few hundred or thousand\n\n2) A ranking phase where we re-rank the candidates into a final top-n set to be shown to the user. Some systems employ multiple candidate generation methods and rankers."
+        },
+        {
+          "title": "What are the evaluation metrics that can be used for multi-label classification?",
+          "content": "**Q: What are the evaluation metrics that can be used for multi-label classification?**\n\nMulti-label classification is a type of classification problem where each instance can be assigned to multiple classes or labels simultaneously.\n\nThe evaluation metrics for multi-label classification are designed to measure the performance of a multi-label classifier in predicting the correct set of labels for each instance.\nSome commonly used evaluation metrics for multi-label classification are:\n\n1. Hamming Loss: Hamming Loss is the fraction of labels that are incorrectly predicted. It is defined as the average number of labels that are predicted incorrectly per instance.\n\n2. Accuracy: Accuracy is the fraction of instances that are correctly predicted. In multi-label classification, accuracy is calculated as the percentage of instances for which all labels are predicted correctly."
+        },
+        {
+          "title": "What are the evaluation metrics that can be used for multi-label classification? (cont.)",
+          "content": "3. Precision, Recall, F1-Score: These metrics can be applied to each label separately, treating the classification of each label as a separate binary classification problem. Precision measures the proportion of predicted positive labels that are correct, recall measures the proportion of actual positive labels that are correctly predicted, and F1-score is the harmonic mean of precision and recall.\n\n4. Macro-F1, Micro-F1: Macro-F1 and Micro-F1 are two types of F1-score metrics that take into account the label imbalance in the dataset. Macro-F1 calculates the F1-score for each label and then averages them, while Micro-F1 calculates the overall F1-score by aggregating the true positive, false positive, and false negative counts across all labels.\n\nThere are other metrics that can be used such as:\n* Precision at k (P@k)\n* Average precision at k (AP@k)\n* Mean average precision at k (MAP@k)"
+        },
+        {
+          "title": "What is the difference between concept and data drift and how to overcome each of them?",
+          "content": "**Q: What is the difference between concept and data drift and how to overcome each of them?**\n\nConcept drift and data drift are two different types of problems that can occur in machine learning systems.\n\nConcept drift refers to changes in the underlying relationships between the input data and the target variable over time. This means that the distribution of the data that the model was trained on no longer matches the distribution of the data it is being tested on. For example, a spam filter model that was trained on emails from several years ago may not be as effective at identifying spam emails from today because the language and tactics used in spam emails may have changed.\n\nData drift, on the other hand, refers to changes in the input data itself over time. This means that the values of the input feature that the model was trained on no longer match the values of the input features in the data it is being tested on. For example, a model that was trained on data from a particular geographical region may not be as effective at predicting outcomes for data from a different region."
+        },
+        {
+          "title": "What is the difference between concept and data drift and how to overcome each of them? (cont.)",
+          "content": "To overcome concept drift, one approach is to use online learning methods that allow the model to adapt to new data as it arrives. This involves continually training the model on the most recent data while using historical data to maintain context. Another approach is to periodically retrain the model using a representative sample of the most recent data.\n\nTo overcome data drift, one approach is to monitor the input data for changes and retrain the model when significant changes are detected. This may involve setting up a monitoring system that alerts the user when the data distribution changes beyond a certain threshold.\n\nAnother approach is to preprocess the input data to remove or mitigate the effects of the features changing over time so that the model can continue learning from the remaining features."
+        }
+      ]
+    }
+  ]
+}
