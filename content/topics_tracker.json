@@ -13,7 +13,7 @@
         "Positional Encoding (labml)",
         "Feed Forward Network (labml)"
       ],
-      "total_cards": 49
+      "total_cards": 44
     },
     "deep-learning-qa": {
       "file": "deep-learning-qa.json",
@@ -40,17 +40,16 @@
         "Statistical Inference",
         "Data Science Resources"
       ],
-      "total_cards": 119
+      "total_cards": 116
     },
     "karpathy-code": {
       "file": "karpathy-code.json",
       "topics": [
         "Micrograd: Autograd Engine",
         "nanoGPT: GPT Implementation",
-        "nanoGPT: Training Loop",
         "Mamba: Selective State Space Model"
       ],
-      "total_cards": 27
+      "total_cards": 17
     },
     "llm-from-scratch": {
       "file": "llm-from-scratch.json",
@@ -63,27 +62,11 @@
         "Chapter 6: Finetuning for Classification",
         "Chapter 7: Finetuning to Follow Instructions"
       ],
-      "total_cards": 16
+      "total_cards": 10
     },
     "llm-interview-qa": {
       "file": "llm-interview-qa.json",
       "topics": [
-        "Prompt Engineering & Basics of LLM",
-        "Retrieval Augmented Generation (RAG)",
-        "Document digitization & Chunking",
-        "Embedding Models",
-        "Internal Working of Vector Databases",
-        "Advanced Search Algorithms",
-        "Language Models Internal Working",
-        "Supervised Fine-Tuning of LLM",
-        "Preference Alignment (RLHF/DPO)",
-        "Evaluation of LLM System",
-        "Hallucination Control Techniques",
-        "Deployment of LLM",
-        "Agent-Based System",
-        "Prompt Hacking",
-        "Miscellaneous",
-        "Case Studies",
         "LLM Basics & Architecture",
         "LLM Training & Fine-tuning",
         "LLM Inference & Deployment",
@@ -92,9 +75,10 @@
         "LLM Evaluation & Safety",
         "LLM Tokenization & Embeddings",
         "LLM Scaling & Optimization",
-        "LLM Applications & Tools"
+        "LLM Applications & Tools",
+        "LLM Interview Deep Dives"
       ],
-      "total_cards": 103
+      "total_cards": 73
     },
     "ml-architectures": {
       "file": "ml-architectures.json",
@@ -223,36 +207,9 @@
         "Friends/Follower recommendation (People you may know)",
         "Search System",
         "The 9 Step ML System Design Formula Template",
-        "Design a video recommendation system",
-        "Answer to question 1",
-        "Answer to question 10",
-        "Answer to question 11",
-        "Answer to question 12",
-        "Answer to question 13",
-        "Answer to question 14",
-        "Answer to question 15",
-        "Answer to question 16",
-        "Answer to question 17",
-        "Answer to question 18",
-        "Answer to question 19",
-        "Answer to question 2",
-        "Answer to question 20",
-        "Answer to question 21",
-        "Answer to question 22",
-        "Answer to question 23",
-        "Answer to question 24",
-        "Answer to question 25",
-        "Answer to question 26",
-        "Answer to question 27",
-        "Answer to question 3",
-        "Answer to question 4",
-        "Answer to question 5",
-        "Answer to question 6",
-        "Answer to question 7",
-        "Answer to question 8",
-        "Answer to question 9"
+        "Design a video recommendation system"
       ],
-      "total_cards": 122
+      "total_cards": 94
     },
     "ml-theory": {
       "file": "ml-theory.json",

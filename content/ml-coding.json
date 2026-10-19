@@ -74,7 +74,7 @@
         },
         {
           "title": "K-Means++ Initialization",
-          "content": "Random initialization → bad local minima. **K-Means++** gives a provable $O(\\log K)$ approximation:\n\n```python\ndef kmeans_plus_plus(X, K):\n    n = len(X)\n    centers = [X[np.random.randint(n)]]\n    \n    for _ in range(1, K):\n        # Distance to nearest existing center\n        dists = np.array([\n            np.min([np.sum((x - c)**2) for c in centers])\n            for x in X\n        ])\n        # Sample proportional to distance^2\n        probs = dists / dists.sum()\n        centers.append(X[np.random.choice(n, p=probs)])\n    \n    return np.array(centers)\n```\n\n**How it works:** First center is random. Each subsequent center is chosen with probability proportional to $D(x)^2$ — the squared distance to the nearest existing center. This spreads centers out."
+          "content": "Random initialization → bad local minima. **K-Means++** gives a provable $O(\\log K)$ approximation:\n\n```python\ndef kmeans_plus_plus(X, K):\n    n = len(X)\n    centers = [X[np.random.randint(n)]]\n    \n    for _ in range(1, K):\n        # Distance to nearest existing center\n        dists = np.array([\n            np.min([np.sum((x - c)**2) for c in centers])\n            for x in X\n        ])\n        # Sample proportional to distance^2\n        probs = dists / dists.sum()\n        centers.append(X[np.random.choice(n, p=probs)])\n    \n    return np.array(centers)\n```\n\n**How it works:** First center is random. Each subsequent center is chosen with probability proportional to $D(x)^2$ — the squared distance to the nearest existing center. This spreads centers out.**"
         },
         {
           "title": "K-Means Interview Essentials",
@@ -130,7 +130,7 @@
         },
         {
           "title": "The SVD Approach (Better)",
-          "content": "In practice, **SVD is preferred** over eigendecomposition:\n\n$$\\mathbf{X}_c = \\mathbf{U}\\boldsymbol{\\Sigma}\\mathbf{V}^T$$\n\nThe columns of $\\mathbf{V}$ ARE the principal components. The singular values relate to eigenvalues: $\\lambda_i = \\sigma_i^2 / (n-1)$.\n\n```python\ndef pca_svd(X, k):\n    mean = X.mean(axis=0)\n    X_c = X - mean\n    \n    U, S, Vt = np.linalg.svd(X_c, full_matrices=False)\n    \n    W = Vt[:k].T              # (d, k)\n    X_proj = X_c @ W          # (n, k)\n    explained_var = S[:k]**2 / (len(X) - 1)\n    \n    return X_proj, explained_var, W, mean\n```\n\n**Why SVD is better:**\n- No need to form $\\mathbf{X}^T\\mathbf{X}$ ($d \\times d$ can be huge)\n- Numerically more stable\n- Works when $n < d$ (more features than samples)"
+          "content": "In practice, **SVD is preferred** over eigendecomposition:\n\n$$\\mathbf{X}_c = \\mathbf{U}\\boldsymbol{\\Sigma}\\mathbf{V}^T$$\n\nThe columns of $\\mathbf{V}$ ARE the principal components. The singular values relate to eigenvalues: $\\lambda_i = \\sigma_i^2 / (n-1)$.\n\n```python\ndef pca_svd(X, k):\n    mean = X.mean(axis=0)\n    X_c = X - mean\n    \n    U, S, Vt = np.linalg.svd(X_c, full_matrices=False)\n    \n    W = Vt[:k].T              # (d, k)\n    X_proj = X_c @ W          # (n, k)\n    explained_var = S[:k]**2 / (len(X) - 1)\n    \n    return X_proj, explained_var, W, mean\n```\n\n**Why SVD is better:**\n- No need to form $\\mathbf{X}^T\\mathbf{X}$ ($d \\times d$ can be huge)\n- Numerically more stable\n- Works when $n < d$ (more features than samples)**"
         },
         {
           "title": "Explained Variance & Choosing k",

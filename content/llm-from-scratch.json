@@ -15,10 +15,6 @@
       "name": "Chapter 2: Working with Text Data",
       "cards": [
         {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code and exercise solutions\n\n&nbsp;"
-        },
-        {
           "title": "Bonus Materials",
           "content": "- 02_bonus_bytepair-encoder contains optional code to benchmark different byte pair encoder implementations\n\n- 03_bonus_embedding-vs-matmul contains optional (bonus) code to explain that embedding layers and fully connected layers applied to one-hot encoded vectors are equivalent.\n\n- 04_bonus_dataloader-intuition contains optional (bonus) code to explain the data loader more intuitively with simple numbers rather than text.\n\n- 05_bpe-from-scratch contains (bonus) code that implements and trains a GPT-2 BPE tokenizer from scratch.\n\nIn the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.\n\n[](https://www.youtube.com/watch?v=341Rb8fJxY0)"
         }
@@ -29,10 +25,6 @@
       "name": "Chapter 3: Coding Attention Mechanisms",
       "cards": [
         {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code.\n\n&nbsp;"
-        },
-        {
           "title": "Bonus Materials",
           "content": "- 02_bonus_efficient-multihead-attention implements and compares different implementation variants of multihead-attention\n- 03_understanding-buffers explains the idea behind PyTorch buffers, which are used to implement the causal attention mechanism in chapter 3\n\nIn the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.\n\n[](https://www.youtube.com/watch?v=-Ll8DtpNtvk)"
         }
@@ -42,10 +34,6 @@
       "id": "chapter-4-implementing-a-gpt-model-from-scratch-to-generate-",
       "name": "Chapter 4: Implementing a GPT Model from Scratch to Generate Text",
       "cards": [
-        {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code.\n\n&nbsp;"
-        },
         {
           "title": "Bonus Materials",
           "content": "- 02_performance-analysis contains optional code analyzing the performance of the GPT model(s) implemented in the main chapter\n- 03_kv-cache implements a KV cache to speed up the text generation during inference\n- 07_moe explanation and implementation of Mixture-of-Experts (MoE)\n- ch05/07_gpt_to_llama contains a step-by-step guide for converting a GPT architecture implementation to Llama 3.2 and loads pretrained weights from Meta AI (it might be interesting to look at alternative architectures after completing chapter 4, but you can also save that for after reading chapter 5)\n\n&nbsp;"
@@ -65,10 +53,6 @@
       "name": "Chapter 5: Pretraining on Unlabeled Data",
       "cards": [
         {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code\n\n&nbsp;"
-        },
-        {
           "title": "Bonus Materials",
           "content": "- 02_alternative_weight_loading contains code to load the GPT model weights from alternative places in case the model weights become unavailable from OpenAI\n- 03_bonus_pretraining_on_gutenberg contains code to pretrain the LLM longer on the whole corpus of books from Project Gutenberg\n- 04_learning_rate_schedulers contains code implementing a more sophisticated training function including learning rate schedulers and gradient clipping\n- 05_bonus_hparam_tuning contains an optional hyperparameter tuning script\n- 06_user_interface implements an interactive user interface to interact with the pretrained LLM\n- 08_memory_efficient_weight_loading contains a bonus notebook showing how to load model weights via PyTorch's `load_state_dict` method more efficiently\n- 09_extending-tokenizers contains a from-scratch implementation of the GPT-2 BPE tokenizer\n- 10_llm-training-speed shows PyTorch performance tips to improve the LLM training speed\n- 18_muon explains how to use the Muon optimizer with the GPT model training setup\n- 19_cpu_mps_differences collects examples where CPU and MPS devices behave differently\n\n&nbsp;"
         },
@@ -83,10 +67,6 @@
       "name": "Chapter 6: Finetuning for Classification",
       "cards": [
         {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code\n\n&nbsp;"
-        },
-        {
           "title": "Bonus Materials",
           "content": "- 02_bonus_additional-experiments includes additional experiments (e.g., training the last vs first token, extending the input length, etc.)\n- 03_bonus_imdb-classification compares the LLM from chapter 6 with other models on a 50k IMDb movie review sentiment classification dataset\n- 04_user_interface implements an interactive user interface to interact with the pretrained LLM\n\n[](https://www.youtube.com/watch?v=5PFXJYme4ik)"
         }
@@ -96,10 +76,6 @@
       "id": "chapter-7-finetuning-to-follow-instructions",
       "name": "Chapter 7: Finetuning to Follow Instructions",
       "cards": [
-        {
-          "title": "Main Chapter Code",
-          "content": "- 01_main-chapter-code contains the main chapter code and exercise solutions\n\n&nbsp;"
-        },
         {
           "title": "Bonus Materials",
           "content": "- 02_dataset-utilities contains utility code that can be used for preparing an instruction dataset\n- 03_model-evaluation contains utility code for evaluating instruction responses using a local Llama 3 model and the GPT-4 API\n- 04_preference-tuning-with-dpo implements code for preference finetuning with Direct Preference Optimization (DPO)\n- 05_dataset-generation contains code to generate and improve synthetic datasets for instruction finetuning\n- 06_user_interface implements an interactive user interface to interact with the pretrained LLM\n\n[](https://www.youtube.com/watch?v=4yNswvhPWCQ)"

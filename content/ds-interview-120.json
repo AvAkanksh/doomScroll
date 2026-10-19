@@ -63,10 +63,6 @@
           "content": "**Q: You run your regression on different subsets of your data, and find that in each subset, the beta value for a certain variable varies wildly. What could be the issue here?**\n\n- The dataset might be heterogeneous. In which case, it is recommended to cluster datasets into different subsets wisely, and then draw different models for different subsets. Or, use models like non parametric models (trees) which can deal with heterogeneity quite nicely."
         },
         {
-          "title": "What is the main idea behind ensemble learning? If I had many different models t",
-          "content": "**Q: What is the main idea behind ensemble learning? If I had many different models that predicted the same response variable, what might I want to do to incorporate all of the models? Would you expect this to perform better than an individual model or worse?**"
-        },
-        {
           "title": "What is the main idea behind ensemble learning? If I had many different models t (cont.)",
           "content": "- The assumption is that a group of weak learners can be combined to form a strong learner.\n  - Hence the combined model is expected to perform better than an individual model.\n  - Assumptions:\n    - average out biases\n    - reduce variance\n  - Bagging works because some underlying learning algorithms are unstable: slightly different inputs leads to very different outputs. If you can take advantage of this instability by running multiple instances, it can be shown that the reduced instability leads to lower error. If you want to understand why, the original bagging paper( http://www.springerlink.com/cont...) has a section called \"why bagging works\"\n  - Boosting works because of the focus on better defining the \"decision edge\". By reweighting examples near the margin (the positive and negative examples) you get a reduced error (see http://citeseerx.ist.psu.edu/vie...)\n  - Use the outputs of your models as inputs to a meta-model.   \n\nFor example, if you're doing binary classification, you can use all the probability outputs of your individual models as inputs to a final logistic regression (or any model, really) that can combine the probability estimates."
         },
@@ -119,10 +115,6 @@
         {
           "title": "What error metric would you use to evaluate how good a binary classifier is? Wha",
           "content": "**Q: What error metric would you use to evaluate how good a binary classifier is? What if the classes are imbalanced? What if there are more than 2 groups?**\n\n- Accuracy: proportion of instances you predict correctly. Pros: intuitive, easy to explain, Cons: works poorly when the class labels are imbalanced and the signal from the data is weak\n- AUROC: plot fpr on the x axis and tpr on the y axis for different threshold. Given a random positive instance and a random negative instance, the AUC is the probability that you can identify who's who. Pros: Works well when testing the ability of distinguishing the two classes, Cons: can’t interpret predictions as probabilities (because AUC is determined by rankings), so can’t explain the uncertainty of the model\n- logloss/deviance: Pros: error metric based on probabilities, Cons: very sensitive to false positives, negatives\n- When there are more than 2 groups, we can have k binary classifications and add them up for logloss. Some metrics like AUC is only applicable in the binary case."
-        },
-        {
-          "title": "What are various ways to predict a binary response variable? Can you compare two",
-          "content": "**Q: What are various ways to predict a binary response variable? Can you compare two of them and tell me when one would be more appropriate? What’s the difference between these? (SVM, Logistic Regression, Naive Bayes, Decision Tree, etc.)**"
         },
         {
           "title": "What are various ways to predict a binary response variable? Can you compare two (cont.)",
@@ -389,10 +381,6 @@
           "content": "**Q: What would be some issues if blogs decide to cover one of your experimental groups?**\n\n- Same as the previous question. The above problem can happen in larger scale."
         },
         {
-          "title": "How would you conduct an A/B test on an opt-in feature?",
-          "content": "**Q: How would you conduct an A/B test on an opt-in feature?**\n\n- Ask someone for more details."
-        },
-        {
           "title": "How would you run an A/B test for many variants, say 20 or more?",
           "content": "**Q: How would you run an A/B test for many variants, say 20 or more?**\n\n- one control, 20 treatment, if the sample size for each group is big enough.\n  - Ways to attempt to correct for this include changing your confidence level (e.g. Bonferroni Correction) or doing family-wide tests before you dive in to the individual metrics (e.g. Fisher's Protected LSD)."
         },
@@ -439,7 +427,7 @@
       ]
     },
     {
-      "id": "data-science-resources",
+      "id": "data-science-resources-2",
       "name": "Data Science Resources",
       "cards": [
         {
@@ -452,23 +440,23 @@
         },
         {
           "title": "Some Tips on Resume/CV:",
-          "content": "**Some Tips on Resume/CV:**\n\n* Describe past roles and an impact you made in a **quantifiable** way, be concise and I repeat, **quantify** the impact, rather than talking with facts that have no relevance. According to Google Recruiters, use the XYZ formula - \n```Accomplished [X] as measured by [Y], by doing [Z]```\n\n* Keep it short, ideally not more than 2 pages, as you might know, an average recruiter scans your resume only for 6 seconds, and makes a decision based on that.\n\n* If you are a fresher and don't have experience, try to solve end-to-end use-cases and mention them in your CV, preferably with the demo link(makes it easy for the recruiter) and the link to source code on GitHub.\n\n* Avoid too much technical jargon, and this goes without saying, do not mention anything you are not confident about, this might become a major bottleneck during your interview.\n\n* Some helpful links :\n  * Advice on building Data Portfolio Projects 📘\n  * How to write a killer Software Engineering Resume 📘\n  * Get your Data Science Resume past the ATS 📘\n  * How to write a developer résumé that hiring managers will actually read 📘\n\n***"
+          "content": "**Some Tips on Resume/CV:**\n\n* Describe past roles and an impact you made in a **quantifiable** way, be concise and I repeat, **quantify** the impact, rather than talking with facts that have no relevance. According to Google Recruiters, use the XYZ formula -\n\n```Accomplished [X] as measured by [Y], by doing [Z]```\n\n* Keep it short, ideally not more than 2 pages, as you might know, an average recruiter scans your resume only for 6 seconds, and makes a decision based on that.\n\n* If you are a fresher and don't have experience, try to solve end-to-end use-cases and mention them in your CV, preferably with the demo link(makes it easy for the recruiter) and the link to source code on GitHub.\n\n* Avoid too much technical jargon, and this goes without saying, do not mention anything you are not confident about, this might become a major bottleneck during your interview.\n\n* Some helpful links :\n  * Advice on building Data Portfolio Projects 📘\n  * How to write a killer Software Engineering Resume 📘\n  * Get your Data Science Resume past the ATS 📘\n  * How to write a developer résumé that hiring managers will actually read 📘\n\n*****"
         },
         {
           "title": "Some Tips on Resume/CV: (cont.)",
-          "content": "* If you want to quickly revise your math basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFzFmR919-Erw/feedshare-document-pdf-analyzed/0/1655384106479?e=1656547200&v=beta&t=9bm4OUyWfM1dQR8LWXsLrGDqYz_Yr_e7TJxHXLXe36I\n\n* If you want to quick revise you Stats and ML basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFLvzVgVxYAAA/feedshare-document-pdf-analyzed/0/1656265480370?e=1657152000&v=beta&t=RD90ZEx3x2VLUGSthO-1uYKadzwTRixKRg3s8j2nvOc"
+          "content": "* If you want to quickly revise your math basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFzFmR919-Erw/feedshare-document-pdf-analyzed/0/1655384106479?e=1656547200&v=beta&t=9bm4OUyWfM1dQR8LWXsLrGDqYz_Yr_e7TJxHXLXe36I\n\n* If you want to quick revise you Stats and ML basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFLvzVgVxYAAA/feedshare-document-pdf-analyzed/0/1656265480370?e=1657152000&v=beta&t=RD90ZEx3x2VLUGSthO-1uYKadzwTRixKRg3s8j2nvOc****"
         },
         {
           "title": "Probability, Statistics and Linear Algebra",
-          "content": "**Probability, Statistics and Linear Algebra**\n\n* Understand the basics of Descriptive Statistics(Really Important for an interview) 📘\n* 40 Question on **probability** for a Data Science Interview 📘\n* 40 Statistics Interview Problems and Answers for Data Scientists 📘\n* Probability and Statistics in the context of Deep Learning 📘\n* Probability v/s Likelihood 📹\n* Bootstrap Methods - The Swiss Army Knife of any Data Scientist 📘\n* Confidence Intervals Explained Simply for Data Scientists 📘\n* P-value Explained Simply for Data Scientists 📘\n* PDF is not a probability 📘\n* 5 Sampling algorithms every Data Scientist should know 📘\n* The 10 Statistical Techniques Data Scientists Need to Master 📘\n* Crash Course in Applied Linear Algebra 📹\n\n***"
+          "content": "**Probability, Statistics and Linear Algebra**\n\n* Understand the basics of Descriptive Statistics(Really Important for an interview) 📘\n* 40 Question on **probability** for a Data Science Interview 📘\n* 40 Statistics Interview Problems and Answers for Data Scientists 📘\n* Probability and Statistics in the context of Deep Learning 📘\n* Probability v/s Likelihood 📹\n* Bootstrap Methods - The Swiss Army Knife of any Data Scientist 📘\n* Confidence Intervals Explained Simply for Data Scientists 📘\n* P-value Explained Simply for Data Scientists 📘\n* PDF is not a probability 📘\n* 5 Sampling algorithms every Data Scientist should know 📘\n* The 10 Statistical Techniques Data Scientists Need to Master 📘\n* Crash Course in Applied Linear Algebra 📹\n\n*"
         },
         {
           "title": "SQL and Data Acquisition",
-          "content": "**SQL and Data Acquisition**\n\nThis is probably the entry point of your Data Science project, SQL is one of the most important skills for any Data Scientist.\n\n* 5 Common SQL Interview Problems for Data Scientists 📘\n* 46 Questions to test a Data Scientist on SQL 📘\n* 30 SQL Interview Questions curated for FAANG by an Ex-Facebook Data Scientist 📘\n* SQL Interview Questions 📘\n* How to ace Data Science Interviews - SQL 📘\n* 3 Must Know SQL Questions to pass your Data Science Interview 📘\n* 10 frequently asked SQL Queries in Interviews 📘\n* Technical Data Science Interview Questions: SQL and Coding 📘\n* How to optimize SQL Queries - Datacamp 📘\n* Ten SQL Concepts You Should Know for Data Science Interviews 📘\n\n***"
+          "content": "**SQL and Data Acquisition**\n\nThis is probably the entry point of your Data Science project, SQL is one of the most important skills for any Data Scientist.\n\n* 5 Common SQL Interview Problems for Data Scientists 📘\n* 46 Questions to test a Data Scientist on SQL 📘\n* 30 SQL Interview Questions curated for FAANG by an Ex-Facebook Data Scientist 📘\n* SQL Interview Questions 📘\n* How to ace Data Science Interviews - SQL 📘\n* 3 Must Know SQL Questions to pass your Data Science Interview 📘\n* 10 frequently asked SQL Queries in Interviews 📘\n* Technical Data Science Interview Questions: SQL and Coding 📘\n* How to optimize SQL Queries - Datacamp 📘\n* Ten SQL Concepts You Should Know for Data Science Interviews 📘\n\n*"
         },
         {
           "title": "Data Preparation and Visualization",
-          "content": "**Data Preparation and Visualization**\n\n* 5 Feature Selection Algorithms every Data Scientist should know 📘 \n* 6 Different Ways to Compensate for Missing Values In a Dataset  📘 \n* A Brief Overview of Outlier Detection Techniques 📘 \n* Cleaning and Prepping Data with Python for Data Science — Best Practices and Helpful Packages 📘 \n* When to use which plot for visualization 📘\n* Ways to detect and remove Outliers 📘\n* Dealing with Class Imbalances in Machine Learning 📘\n* Smarter ways to encode categorical data\n* Numpy and Pandas Cheatsheet 📘\n* 3 Methods to deal with outliers 📘\n* Feature Selection Techniques 📘\n* Why, how and When to scale your features 📘\n* Everything you need to know about Scatter plots 📘\n* How to Select Features for Machine Learning 📹\n* 10 ways for Feature Selection 📹\n\n***"
+          "content": "**Data Preparation and Visualization**\n\n* 5 Feature Selection Algorithms every Data Scientist should know 📘 \n* 6 Different Ways to Compensate for Missing Values In a Dataset  📘 \n* A Brief Overview of Outlier Detection Techniques 📘 \n* Cleaning and Prepping Data with Python for Data Science — Best Practices and Helpful Packages 📘 \n* When to use which plot for visualization 📘\n* Ways to detect and remove Outliers 📘\n* Dealing with Class Imbalances in Machine Learning 📘\n* Smarter ways to encode categorical data\n* Numpy and Pandas Cheatsheet 📘\n* 3 Methods to deal with outliers 📘\n* Feature Selection Techniques 📘\n* Why, how and When to scale your features 📘\n* Everything you need to know about Scatter plots 📘\n* How to Select Features for Machine Learning 📹\n* 10 ways for Feature Selection 📹\n\n*"
         },
         {
           "title": "Classic Machine Learning Algorithms",
@@ -476,51 +464,51 @@
         },
         {
           "title": "Classic Machine Learning Algorithms (cont.)",
-          "content": "* 30 Questions to test a Data Scientist on Tree based models 📘\n* Gini-index v/s Information Entropy 📘\n* Decision Tree vs. Random Forest – Which Algorithm Should you Use? 📘\n* Why Random Forest doesn't work well for Time-Series? 📘\n* Comprehensive guide to Ensemble Models 📘\n* The Simple Math behind 3 Decision Tree Splitting criterions 📘\n\n### 4. K-Nearest-Neighbors\n\n* Fundamental Interview Questions on KNN - A Quick refresh 📘\n* 30 Questions to test a Data Scientist on KNN 📘\n* Pros and Cons of KNN 📘\n* KNN Algorithm - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n\n### 5. Support Vector Machines\n\n* All about SVMs - Math, Terminology, Intuition, Kernels in one article 📘\n* 25 Questions to test a Data Scientist on SVMs 📘\n\n### 6. Naive Bayes\n\n* 12 tips to make most out of Naive Bayes 📘\n* Naive Bayes - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n* 6 easy steps to learn Naive Bayes 📘\n\n***"
+          "content": "* 30 Questions to test a Data Scientist on Tree based models 📘\n* Gini-index v/s Information Entropy 📘\n* Decision Tree vs. Random Forest – Which Algorithm Should you Use? 📘\n* Why Random Forest doesn't work well for Time-Series? 📘\n* Comprehensive guide to Ensemble Models 📘\n* The Simple Math behind 3 Decision Tree Splitting criterions 📘\n\n### 4. K-Nearest-Neighbors\n\n* Fundamental Interview Questions on KNN - A Quick refresh 📘\n* 30 Questions to test a Data Scientist on KNN 📘\n* Pros and Cons of KNN 📘\n* KNN Algorithm - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n\n### 5. Support Vector Machines\n\n* All about SVMs - Math, Terminology, Intuition, Kernels in one article 📘\n* 25 Questions to test a Data Scientist on SVMs 📘\n\n### 6. Naive Bayes\n\n* 12 tips to make most out of Naive Bayes 📘\n* Naive Bayes - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n* 6 easy steps to learn Naive Bayes 📘\n\n*"
         },
         {
           "title": "Time Series",
-          "content": "**Time Series**\n\n* 40 Questions to test a Data Scientist on Time Series 📘\n* 11 Classical Time Series Forecasting Methods 📘\n* Interview Questions on ARIMA 📹\n\n***"
+          "content": "**Time Series**\n\n* 40 Questions to test a Data Scientist on Time Series 📘\n* 11 Classical Time Series Forecasting Methods 📘\n* Interview Questions on ARIMA 📹\n\n*"
         },
         {
           "title": "Unsupervised Learning",
-          "content": "**Unsupervised Learning**\n\n* The DOs and DONTs of PCA(Principal Component Analysis) 📘\n* An introduction to t-SNE : DataCamp 📘\n* Dimensionally Reducing Squeezing out the good stuff 📘\n* Dimensionality Reduction for Dummies : Part 1 - Intuition 📘\n* In-depth Explanation of DBSCAN Algorithm 📘\n\n***"
+          "content": "**Unsupervised Learning**\n\n* The DOs and DONTs of PCA(Principal Component Analysis) 📘\n* An introduction to t-SNE : DataCamp 📘\n* Dimensionally Reducing Squeezing out the good stuff 📘\n* Dimensionality Reduction for Dummies : Part 1 - Intuition 📘\n* In-depth Explanation of DBSCAN Algorithm 📘\n\n*"
         },
         {
           "title": "Deep Learning",
-          "content": "**Deep Learning**\n\n* Why Regularization reduces overfitting in Deep Neural Networks 📹\n* Pros and Cons of Neural Networks 📘\n* When not to use Neural Networks 📘\n* 40 Questions to test a Data Scientist on Deep learning 📘\n* 21 Popular Deep Learning Interview Questions 📘\n* Deep Learning Interview Questions - Edureka 📹\n* Activation Functions in a Neural Network - Explained 📘\n* Vanishing and Exploding Gradient - Clearly Explained 📹\n* Bias and Variance - Very clearly explained 📹\n* Why use ReLU over Sigmoid 📘\n* 25 Deep Learning Interview Qurstions to test your knowledge 📘\n* 10 Deep Learning Best Practices to Keep in Mind in 2020 📘\n\n***"
+          "content": "**Deep Learning**\n\n* Why Regularization reduces overfitting in Deep Neural Networks 📹\n* Pros and Cons of Neural Networks 📘\n* When not to use Neural Networks 📘\n* 40 Questions to test a Data Scientist on Deep learning 📘\n* 21 Popular Deep Learning Interview Questions 📘\n* Deep Learning Interview Questions - Edureka 📹\n* Activation Functions in a Neural Network - Explained 📘\n* Vanishing and Exploding Gradient - Clearly Explained 📹\n* Bias and Variance - Very clearly explained 📹\n* Why use ReLU over Sigmoid 📘\n* 25 Deep Learning Interview Qurstions to test your knowledge 📘\n* 10 Deep Learning Best Practices to Keep in Mind in 2020 📘\n\n*"
         },
         {
           "title": "GenAI and LLMs",
-          "content": "**GenAI and LLMs**\n\n* LoRA Explained 📹\n* RAG v/s Fine-tuning v/s Prompt Engineering📹\n* Cross-encoders vs Bi-encoders : A deep-dive into text encoding methods📘\n* RAG 101\n* Generative AI in a Nutshell📹\n* BERT Theory in-depth explanation in one video📹\n* Transformers Theory in-depth explanation in one video📹\n* The math behind Attention: Keys, Queries, and Values matrices📹\n  \n\n***"
+          "content": "**GenAI and LLMs**\n\n* LoRA Explained 📹\n* RAG v/s Fine-tuning v/s Prompt Engineering📹\n* Cross-encoders vs Bi-encoders : A deep-dive into text encoding methods📘\n* RAG 101\n* Generative AI in a Nutshell📹\n* BERT Theory in-depth explanation in one video📹\n* Transformers Theory in-depth explanation in one video📹\n* The math behind Attention: Keys, Queries, and Values matrices📹\n  \n\n*"
         },
         {
           "title": "Machine Learning Interpretability",
-          "content": "**Machine Learning Interpretability**\n\n* Four Questions on Deciphering the World of Machine Learning Models 📘\n* Machine Learning Explanaibility - Crash Course by Kaggle 📘\n* SHAP Values explained simply 📹\n\n***"
+          "content": "**Machine Learning Interpretability**\n\n* Four Questions on Deciphering the World of Machine Learning Models 📘\n* Machine Learning Explanaibility - Crash Course by Kaggle 📘\n* SHAP Values explained simply 📹\n\n*"
         },
         {
           "title": "Case Studies",
-          "content": "**Case Studies**\n\nCase studies are extremely important for interviews, below are some resources to practice, think first before looking at the solutions.\n* Dawn of Taxi Aggregators 📘\n* Optimizing product prices for an online vendor 📘\n* Tips for a Case-Study Interview 📘\n* Mercari Price Prediction 📘\n* End-to-End multiclass Text Classification pipeline 📘\n* End-to-End multiclass Image Classification pipeline 📘\n* Large Scale Forecasting for 1000+ products - Nagarro 📹\n* Clustering and Classification in E-Commerce 📘\n* The ABCs of Learning to Rank 📘\n* Data Science Case Study: Optimizing Product Placement in Retail  📘\n\n***"
+          "content": "**Case Studies**\n\nCase studies are extremely important for interviews, below are some resources to practice, think first before looking at the solutions.\n* Dawn of Taxi Aggregators 📘\n* Optimizing product prices for an online vendor 📘\n* Tips for a Case-Study Interview 📘\n* Mercari Price Prediction 📘\n* End-to-End multiclass Text Classification pipeline 📘\n* End-to-End multiclass Image Classification pipeline 📘\n* Large Scale Forecasting for 1000+ products - Nagarro 📹\n* Clustering and Classification in E-Commerce 📘\n* The ABCs of Learning to Rank 📘\n* Data Science Case Study: Optimizing Product Placement in Retail  📘\n\n*"
         },
         {
           "title": "NLP",
-          "content": "**NLP**\n\n* 30 Questions to test a Data Scientist on NLP\n* 11 Most Commonly Asked NLP Interview Questions For Beginners\n* How to solve 90% of NLP Problems\n* Questions asked for NLP Roles at Companies\n* Vector-based Methods for Similarity Search (TF-IDF, BM25, SBERT) 📹\n* Understanding BERT in detail - one of the best playlist's to understand the fundamentals and inner workings of BERT, huge shoutout to Chris McCormick\n 📹\n* Word Embeddings, CBoW and Skipgram 📹\n* CBoW v/s Skipgram : Data Science Interview Question 📹\n\n***"
+          "content": "**NLP**\n\n* 30 Questions to test a Data Scientist on NLP\n* 11 Most Commonly Asked NLP Interview Questions For Beginners\n* How to solve 90% of NLP Problems\n* Questions asked for NLP Roles at Companies\n* Vector-based Methods for Similarity Search (TF-IDF, BM25, SBERT) 📹\n* Understanding BERT in detail - one of the best playlist's to understand the fundamentals and inner workings of BERT, huge shoutout to Chris McCormick\n 📹\n* Word Embeddings, CBoW and Skipgram 📹\n* CBoW v/s Skipgram : Data Science Interview Question 📹\n\n*"
         },
         {
           "title": "Data Science Interviews at FAANG and Similar Companies",
-          "content": "**Data Science Interviews at FAANG and Similar Companies**\n\n* Amazon’s Data Scientist Interview Practice Problems 📘\n* Microsoft Data Science Interview Questions and Answers 📘\n* Problem Solving Questions for Data Science interview at Google 📘\n\n***"
+          "content": "**Data Science Interviews at FAANG and Similar Companies**\n\n* Amazon’s Data Scientist Interview Practice Problems 📘\n* Microsoft Data Science Interview Questions and Answers 📘\n* Problem Solving Questions for Data Science interview at Google 📘\n\n*"
         },
         {
           "title": "Becoming a Rockstar Data Scientist(read if you have extra ti",
-          "content": "**Becoming a Rockstar Data Scientist(read if you have extra time)**\n\nGoing through these will definately add extra brownie points, so don't miss these if you got time.\n\n* Top 13 Skills To Become a Rockstar Data Scientist 📘 \n* Understand these 4 ML concepts to sound like a master 📘\n* 12 things I wish I knew before starting as a Data Scientist 📘\n* Understand the Data Science pipeline 📘\n* Kaggle Data Science Glossary 📘\n* Google Machine Learning Glossary 📘\n* Running your ML Predictions 50 times faster - Hummingbird 📘\n* 3 Mistakes you should not make in a Data Science Interview 📘\n* How to find Feature importances for BlackBox Models? 📘\n\n***"
+          "content": "**Becoming a Rockstar Data Scientist(read if you have extra time)**\n\nGoing through these will definately add extra brownie points, so don't miss these if you got time.\n\n* Top 13 Skills To Become a Rockstar Data Scientist 📘 \n* Understand these 4 ML concepts to sound like a master 📘\n* 12 things I wish I knew before starting as a Data Scientist 📘\n* Understand the Data Science pipeline 📘\n* Kaggle Data Science Glossary 📘\n* Google Machine Learning Glossary 📘\n* Running your ML Predictions 50 times faster - Hummingbird 📘\n* 3 Mistakes you should not make in a Data Science Interview 📘\n* How to find Feature importances for BlackBox Models? 📘\n\n*"
         },
         {
           "title": "Data Structures and Algorithms(Optional)",
-          "content": "**Data Structures and Algorithms(Optional)**\n\nAlthough this might be optional, but do not miss this if the Job Description explicitly asks for this, and especially never miss this if you are interviewing at FAANG and similar organizations, or if you have a CS Background. You don't have to be as good as an SDE at this, but at least know the basics.\n\n* A Data Scientist's guide to Data Structures and Algorithms 📘\n* Handling Trees in Data Science Algorithmic Interview 📘\n* A simple introduction to Linked Lists for Data Scientists 📘\n* Dynamic Programming for Data Scientists 📘\n* 3 Programming concepts for Data Scientists 📘\n* Data Scientists, The 5 Graph Algorithms that you should know 📘\n\n***"
+          "content": "**Data Structures and Algorithms(Optional)**\n\nAlthough this might be optional, but do not miss this if the Job Description explicitly asks for this, and especially never miss this if you are interviewing at FAANG and similar organizations, or if you have a CS Background. You don't have to be as good as an SDE at this, but at least know the basics.\n\n* A Data Scientist's guide to Data Structures and Algorithms 📘\n* Handling Trees in Data Science Algorithmic Interview 📘\n* A simple introduction to Linked Lists for Data Scientists 📘\n* Dynamic Programming for Data Scientists 📘\n* 3 Programming concepts for Data Scientists 📘\n* Data Scientists, The 5 Graph Algorithms that you should know 📘\n\n*"
         },
         {
           "title": "Engineering and Deployment",
-          "content": "**Engineering and Deployment**\n\n* A Layman’s Guide for Data Scientists to create APIs in minutes 📘\n* Take your Machine Learning Models to Production with these 5 simple steps 📘\n* 2 way to deploy your ML models 📘\n* How to deploy a Keras model as a web app through Flask 📘\n* How to write Web apps using simple Python for Data Scientists? 📘\n\n***"
+          "content": "**Engineering and Deployment**\n\n* A Layman’s Guide for Data Scientists to create APIs in minutes 📘\n* Take your Machine Learning Models to Production with these 5 simple steps 📘\n* 2 way to deploy your ML models 📘\n* How to deploy a Keras model as a web app through Flask 📘\n* How to write Web apps using simple Python for Data Scientists? 📘\n\n*"
         }
       ]
     }
