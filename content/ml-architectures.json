@@ -1,0 +1,158 @@
+{
+  "topics": [
+    {
+      "id": "transformer-architecture",
+      "name": "The Transformer Architecture",
+      "cards": [
+        {
+          "title": "Why Transformers Replaced Everything",
+          "content": "Before Transformers (2017), sequence modeling meant RNNs/LSTMs:\n- Sequential processing — can't parallelize\n- Long-range dependencies fade (even with LSTM gates)\n- Training is slow ($O(n)$ sequential steps)\n\n**Transformers solve all three** with **self-attention:**\n- Fully parallel — every token attends to every other token simultaneously\n- Direct connections between any two positions (no vanishing gradients over distance)\n- Training is $O(1)$ depth (but $O(n^2)$ in sequence length)\n\nThe paper: *\"Attention Is All You Need\"* (Vaswani et al., 2017). The architecture has two parts: **encoder** (processes input) and **decoder** (generates output). Modern LLMs (GPT, LLaMA) use **decoder-only** Transformers."
+        },
+        {
+          "title": "Scaled Dot-Product Attention",
+          "content": "The core operation of every Transformer:\n\n$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$\n\n- **Q** (Query): What am I looking for? $(n, d_k)$\n- **K** (Key): What do I contain? $(n, d_k)$\n- **V** (Value): What information do I provide? $(n, d_v)$\n\n**Step by step:**\n1. Compute attention scores: $QK^T$ → $(n, n)$ matrix\n2. Scale by $\\sqrt{d_k}$ — prevents softmax saturation for large $d_k$\n3. Apply softmax row-wise — each row sums to 1\n4. Multiply by V — weighted sum of values\n\n**Why scale?** Without scaling, dot products grow as $O(d_k)$, pushing softmax into saturation (near one-hot). Scaling keeps gradients healthy."
+        },
+        {
+          "title": "Multi-Head Attention",
+          "content": "Instead of one attention function, use $h$ parallel \"heads\":\n\n$$\\text{MultiHead}(Q,K,V) = \\text{Concat}(\\text{head}_1,...,\\text{head}_h)W^O$$\n$$\\text{head}_i = \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$\n\nWith $d_{\\text{model}} = 768$ and $h = 12$ heads: each head uses $d_k = d_v = 768/12 = 64$.\n\n```python\ndef multihead_attention(Q, K, V, W_q, W_k, W_v, W_o, n_heads):\n    B, n, d = Q.shape\n    dk = d // n_heads\n    \n    q = (Q @ W_q).reshape(B, n, n_heads, dk).transpose(0,2,1,3)\n    k = (K @ W_k).reshape(B, n, n_heads, dk).transpose(0,2,1,3)\n    v = (V @ W_v).reshape(B, n, n_heads, dk).transpose(0,2,1,3)\n    \n    scores = (q @ k.transpose(-2,-1)) / np.sqrt(dk)\n    attn = softmax(scores, axis=-1)\n    out = (attn @ v).transpose(0,2,1,3).reshape(B, n, d)\n    return out @ W_o\n```\n\n**Why multiple heads?** Each head can attend to different aspects: syntax, semantics, positional patterns."
+        },
+        {
+          "title": "The Causal Mask",
+          "content": "For **autoregressive** generation (GPT-style), token $i$ must NOT attend to future tokens $j > i$.\n\nSolution: **causal mask** — set future positions to $-\\infty$ before softmax:\n\n```python\ndef causal_attention(Q, K, V):\n    d_k = Q.shape[-1]\n    scores = Q @ K.transpose(-2, -1) / np.sqrt(d_k)\n    \n    # Causal mask: upper triangle = -inf\n    n = scores.shape[-1]\n    mask = np.triu(np.ones((n, n)), k=1) * -1e9\n    scores += mask\n    \n    attn = softmax(scores, axis=-1)\n    return attn @ V\n```\n\nAfter softmax, masked positions become 0 — no information flows from the future.\n\n**Interview favorite:** \"Write causal self-attention from scratch.\" Know this cold: QKV projections, scaling, masking with `-inf`, softmax, multiply by V."
+        },
+        {
+          "title": "Transformer Block: The Full Picture",
+          "content": "Each Transformer block has two sub-layers:\n\n**1. Multi-Head Self-Attention + Residual + LayerNorm**\n$$\\mathbf{x}' = \\text{LayerNorm}(\\mathbf{x} + \\text{MHA}(\\mathbf{x}))$$\n\n**2. Feed-Forward Network + Residual + LayerNorm**\n$$\\mathbf{x}'' = \\text{LayerNorm}(\\mathbf{x}' + \\text{FFN}(\\mathbf{x}'))$$\n\nWhere FFN is a simple 2-layer MLP:\n$$\\text{FFN}(x) = W_2 \\cdot \\text{ReLU}(W_1 x + b_1) + b_2$$\n\n$W_1$ projects up to $4d$ (the \"expansion ratio\"), $W_2$ projects back to $d$.\n\n**Residual connections** are essential — they allow gradients to flow directly through the network (skip connections). Without them, deep Transformers can't train.\n\n**LayerNorm** stabilizes training by normalizing activations across the feature dimension."
+        },
+        {
+          "title": "Positional Encoding",
+          "content": "Self-attention is **permutation-invariant** — it doesn't know token order! We add positional information.\n\n**Original (sinusoidal):**\n$$PE_{(pos, 2i)} = \\sin(pos / 10000^{2i/d})$$\n$$PE_{(pos, 2i+1)} = \\cos(pos / 10000^{2i/d})$$\n\n**Why sines/cosines?** For any fixed offset $k$, $PE_{pos+k}$ can be represented as a linear function of $PE_{pos}$ — the model can learn relative positions.\n\n**Modern alternatives:**\n- **Learned positional embeddings** (BERT, GPT-2): just a lookup table. Simple and effective.\n- **RoPE** (LLaMA, modern LLMs): Rotary position embeddings that encode relative positions directly in the attention computation. Now the standard.\n- **ALiBi** (BLOOM): Adds linear biases to attention scores based on distance. No learned parameters."
+        },
+        {
+          "title": "Transformer Interview Essentials",
+          "content": "**Q: Computational complexity of self-attention?**\n$O(n^2 d)$ — quadratic in sequence length. This is why context windows are expensive.\n\n**Q: Encoder-only vs. Decoder-only vs. Encoder-Decoder?**\n- Encoder-only (BERT): bidirectional attention, good for understanding tasks\n- Decoder-only (GPT): causal attention, good for generation\n- Encoder-Decoder (T5, original Transformer): for seq2seq tasks\n\n**Q: What does each attention head learn?**\nDifferent heads capture: syntax (subject-verb), coreference (pronoun resolution), positional patterns (nearby tokens), semantic similarity.\n\n**Q: Why does FFN have a 4x expansion?**\nMore parameters in a simple structure. The FFN acts as a key-value memory: $W_1$ acts as keys, $W_2$ as values. Most of the Transformer's parameters are in FFN layers.\n\n**Q: Pre-norm vs. Post-norm?**\nPre-norm (LN before attention/FFN) is now standard — more stable training for deep models. Post-norm (original paper) needs careful LR warmup."
+        }
+      ]
+    },
+    {
+      "id": "attention-deep-dive",
+      "name": "Attention Mechanisms Deep Dive",
+      "cards": [
+        {
+          "title": "Self-Attention vs. Cross-Attention",
+          "content": "**Self-attention:** Q, K, V all come from the same sequence.\nUsed in: every Transformer layer for encoding context.\n\n**Cross-attention:** Q comes from one sequence, K and V from another.\nUsed in: encoder-decoder models (decoder queries attend to encoder keys/values).\n\n```python\n# Self-attention\nQ = X @ W_q  # X is the same for Q, K, V\nK = X @ W_k\nV = X @ W_v\n\n# Cross-attention\nQ = decoder_hidden @ W_q  # Q from decoder\nK = encoder_output @ W_k   # K, V from encoder\nV = encoder_output @ W_v\n```\n\nCross-attention is how the decoder \"looks at\" the input. In machine translation, it's how the output language attends to the input language."
+        },
+        {
+          "title": "Grouped-Query Attention (GQA)",
+          "content": "Standard Multi-Head Attention: each head has its own Q, K, V projections.\nWith 32 heads → 32 K matrices, 32 V matrices in the KV-cache. **Expensive!**\n\n**GQA** (used in LLaMA 2/3, Gemma, Mistral): group heads and share K, V projections.\n\nExample: 32 query heads, 8 KV groups → each K,V is shared by 4 query heads.\n\n```python\ndef gqa(Q, K, V, n_heads, n_kv_heads):\n    # Q: (B, n_heads, seq, dk)\n    # K, V: (B, n_kv_heads, seq, dk)\n    group_size = n_heads // n_kv_heads\n    \n    # Repeat K, V for each head in the group\n    K = K.repeat(1, group_size, 1, 1)  # PyTorch\n    V = V.repeat(1, group_size, 1, 1)\n    \n    scores = (Q @ K.transpose(-2,-1)) / sqrt(dk)\n    return softmax(scores) @ V\n```\n\n**Why?** Reduces KV-cache memory by $n_{\\text{heads}}/n_{\\text{kv}}$ with minimal quality loss."
+        },
+        {
+          "title": "Multi-Query Attention (MQA)",
+          "content": "**MQA** is the extreme case: ALL heads share ONE K and ONE V.\n\n$n_{\\text{kv\\_heads}} = 1$\n\n**Tradeoff:**\n- MHA: Best quality, largest KV-cache\n- GQA: Near-MHA quality, smaller KV-cache\n- MQA: Fastest inference, smallest KV-cache, slight quality drop\n\n| Variant | KV-cache size | Quality |\n| MHA | $2 \\times n_h \\times d_k$ per token | Best |\n| GQA | $2 \\times n_{kv} \\times d_k$ per token | Near-MHA |\n| MQA | $2 \\times d_k$ per token | Good |\n\n**Industry adoption:**\n- GPT-3: MHA\n- PaLM: MQA\n- LLaMA 2 (70B): GQA with 8 KV heads\n- LLaMA 3: GQA (all sizes)\n- Mistral: GQA\n\nGQA has become the sweet spot for production LLMs."
+        },
+        {
+          "title": "FlashAttention",
+          "content": "Standard attention materializes the full $n \\times n$ attention matrix → $O(n^2)$ memory.\n\n**FlashAttention** computes exact attention without materializing the full matrix, using **tiling and kernel fusion:**\n\n1. Split Q, K, V into blocks that fit in SRAM (fast GPU memory)\n2. Compute attention one block at a time\n3. Accumulate results using the **online softmax trick** (track running max and sum)\n4. Never write the $n \\times n$ matrix to HBM (slow GPU memory)\n\n**Results:**\n- Memory: $O(n)$ instead of $O(n^2)$\n- Speed: 2-4x faster (fewer HBM reads/writes)\n- Exact (not approximate!) — same output as standard attention\n\n**Key insight:** The bottleneck is memory bandwidth (HBM ↔ SRAM), not compute. FlashAttention is **IO-aware** — it minimizes data movement.\n\nEvery modern LLM training framework uses FlashAttention. It's the single most important systems optimization for Transformers."
+        },
+        {
+          "title": "Sliding Window & Sparse Attention",
+          "content": "Full attention is $O(n^2)$. For very long sequences, we need subquadratic alternatives:\n\n**Sliding Window Attention** (Mistral, Longformer):\nEach token attends only to the $w$ nearest tokens. $O(nw)$ complexity.\nCombined with multiple layers, information can still propagate across the full sequence.\n\n**Sparse Attention** (BigBird, Longformer):\nCombine local windowed attention + global tokens + random attention.\n\n**Linear Attention** (Mamba, RWKV):\nReplace softmax attention with linear operators → $O(n)$ complexity.\nMamba uses **selective state spaces**: a learned recurrence that decides what to remember/forget.\n\n**Interview comparison:**\n- Full attention: $O(n^2)$, best quality, standard for $n < 8K$\n- Sliding window: $O(nw)$, simple, good for long contexts\n- Linear/SSM: $O(n)$, emerging, trades some quality for speed\n\n**Flash + Sliding Window** is the current production sweet spot (Mistral uses this)."
+        },
+        {
+          "title": "Attention Interview Lightning Round",
+          "content": "**Q: Why Q, K, V instead of just similarity between embeddings?**\nSeparate projections let the model learn *what to look for* (Q), *what to advertise* (K), and *what to provide* (V) independently. A token's key and value serve different purposes.\n\n**Q: What is the attention output for a single head?**\nA weighted average of value vectors, where weights come from query-key similarity. Each output position is a different weighted combination of all input positions.\n\n**Q: Can attention weights be negative?**\nNo — softmax outputs are in $(0, 1)$. But the resulting output can be negative (V can have negative entries).\n\n**Q: What happens if we remove scaling $\\sqrt{d_k}$?**\nFor large $d_k$, dot products become large, softmax becomes near-one-hot. Gradients vanish for all but the top-scoring key. Training becomes unstable.\n\n**Q: How much memory does the KV-cache use?**\nPer token: $2 \\times n_{\\text{layers}} \\times n_{\\text{kv\\_heads}} \\times d_k \\times \\text{bytes}$. For LLaMA-70B with 4K context: ~1.2GB in fp16."
+        }
+      ]
+    },
+    {
+      "id": "modern-llm-blocks",
+      "name": "Modern LLM Building Blocks",
+      "cards": [
+        {
+          "title": "RMSNorm — Simpler, Faster LayerNorm",
+          "content": "**LayerNorm** normalizes by mean AND variance:\n$$\\text{LN}(x) = \\frac{x - \\mu}{\\sqrt{\\sigma^2 + \\epsilon}} \\cdot \\gamma + \\beta$$\n\n**RMSNorm** drops the mean centering — just normalizes by RMS:\n$$\\text{RMSNorm}(x) = \\frac{x}{\\sqrt{\\frac{1}{d}\\sum x_i^2 + \\epsilon}} \\cdot \\gamma$$\n\n```python\ndef rmsnorm(x, weight, eps=1e-6):\n    rms = np.sqrt(np.mean(x**2, axis=-1, keepdims=True) + eps)\n    return (x / rms) * weight\n```\n\n**Why RMSNorm?**\n- ~10-15% faster (no mean computation)\n- Empirically matches LayerNorm quality\n- Used in LLaMA, Mistral, Gemma — all modern LLMs\n- Fewer parameters (no $\\beta$ bias term)\n\n**Pre-RMSNorm** (applying norm BEFORE attention/FFN) is now the standard — it's more stable than post-norm for deep models."
+        },
+        {
+          "title": "RoPE — Rotary Position Embeddings",
+          "content": "Instead of ADDING positional info to embeddings, **RoPE** encodes position by ROTATING query and key vectors:\n\n$$f(\\mathbf{q}, m) = \\mathbf{q} \\cdot e^{im\\theta}$$\n\nIn practice, it operates on pairs of dimensions:\n\n```python\ndef apply_rope(x, freqs):\n    # x: (..., d), freqs: (seq_len, d//2)\n    x_pairs = x.reshape(*x.shape[:-1], -1, 2)\n    x_complex = x_pairs[..., 0] + 1j * x_pairs[..., 1]\n    x_rotated = x_complex * freqs\n    return np.stack([x_rotated.real, x_rotated.imag], -1).reshape(x.shape)\n\ndef precompute_freqs(dim, seq_len, base=10000):\n    freqs = 1.0 / (base ** (np.arange(0, dim, 2) / dim))\n    t = np.arange(seq_len)\n    angles = np.outer(t, freqs)\n    return np.exp(1j * angles)\n```\n\n**Key property:** $\\langle f(q,m), f(k,n) \\rangle$ depends only on $m - n$ (relative position). This gives relative position encoding for free."
+        },
+        {
+          "title": "SwiGLU — The Modern Activation",
+          "content": "The FFN in the original Transformer:\n$$\\text{FFN}(x) = W_2 \\cdot \\text{ReLU}(W_1 x)$$\n\n**SwiGLU** replaces this with a gated activation:\n$$\\text{SwiGLU}(x) = W_2 \\cdot (\\text{Swish}(W_1 x) \\odot W_3 x)$$\n\nWhere $\\text{Swish}(x) = x \\cdot \\sigma(x)$ and $\\odot$ is element-wise multiplication.\n\n```python\ndef swiglu_ffn(x, W1, W3, W2):\n    gate = x @ W1\n    gate = gate * sigmoid(gate)  # Swish activation\n    up = x @ W3\n    return (gate * up) @ W2\n```\n\n**Note:** SwiGLU has 3 weight matrices instead of 2. To keep parameter count similar, the hidden dimension is $\\frac{2}{3} \\times 4d$ instead of $4d$.\n\n**Why it works:** The gating mechanism ($W_3 x$) lets the network learn which features to pass through. Used in LLaMA, PaLM, Mistral."
+        },
+        {
+          "title": "Weight Tying & Embedding Tricks",
+          "content": "**Weight Tying:** Share the input embedding matrix with the output (LM head) projection.\n\nIf vocab size $V$ = 32K and $d$ = 4096:\n- Input embedding: $(V, d)$ = 131M params\n- Output projection: $(d, V)$ = 131M params\n\nWith tying: use the SAME matrix (transposed for output) → save 131M params.\n\n```python\nclass LLM:\n    def __init__(self, V, d):\n        self.embed = np.random.randn(V, d) * 0.02\n    \n    def forward(self, token_ids):\n        x = self.embed[token_ids]  # input embedding\n        # ... transformer layers ...\n        logits = x @ self.embed.T  # output projection (tied!)\n        return logits\n```\n\n**Used in:** GPT-2, LLaMA, most modern LLMs.\n\n**Other embedding tricks:**\n- Rotary embeddings (RoPE) replace absolute position embeddings\n- BPE tokenization (32K-128K vocab is standard)"
+        },
+        {
+          "title": "Putting It All Together: LLaMA Block",
+          "content": "A modern LLM Transformer block (LLaMA-style):\n\n```python\ndef llama_block(x, attn_w, ffn_w, norm_w):\n    # Pre-norm + GQA attention + residual\n    h = rmsnorm(x, norm_w['attn'])\n    h = gqa_attention(h, attn_w)  # with RoPE\n    x = x + h  # residual\n    \n    # Pre-norm + SwiGLU FFN + residual\n    h = rmsnorm(x, norm_w['ffn'])\n    h = swiglu_ffn(h, ffn_w['W1'], ffn_w['W3'], ffn_w['W2'])\n    x = x + h  # residual\n    \n    return x\n```\n\n**Full LLaMA architecture:**\n1. Token embedding (+ RoPE applied in attention)\n2. N × LLaMA blocks\n3. Final RMSNorm\n4. Linear head (tied with embedding)\n\n**vs. Original Transformer:**\n- RMSNorm instead of LayerNorm\n- Pre-norm instead of post-norm\n- SwiGLU instead of ReLU FFN\n- RoPE instead of sinusoidal/learned positions\n- GQA instead of MHA\n- No bias terms anywhere"
+        },
+        {
+          "title": "Building Blocks Interview Essentials",
+          "content": "**Q: Pre-norm vs post-norm — why does it matter?**\nPre-norm: gradients pass through residual path unscaled → stable training without careful LR warmup. Post-norm can diverge for deep models.\n\n**Q: Why no bias terms in modern LLMs?**\nPaLM showed removing biases doesn't hurt quality but enables tensor parallelism optimizations. Simplicity + efficiency.\n\n**Q: What's the memory footprint of a 7B parameter model?**\nfp32: 28GB. fp16: 14GB. int8: 7GB. int4: 3.5GB. Plus KV-cache during inference.\n\n**Q: RoPE base frequency — what happens if you change it?**\nHigher base = longer effective context window but weaker short-range position signal. LLaMA 3 uses base=500K for 128K context (vs. 10K for 8K context in LLaMA 2).\n\n**Q: Why is the FFN hidden dim $\\frac{8}{3}d$ in LLaMA?**\nSwiGLU has 3 matrices. $\\frac{8}{3}d \\times 3 = 8d$ total params ≈ the $4d \\times 2 = 8d$ params in a standard ReLU FFN."
+        }
+      ]
+    },
+    {
+      "id": "lora-finetuning",
+      "name": "LoRA & Parameter-Efficient Fine-Tuning",
+      "cards": [
+        {
+          "title": "The Fine-Tuning Problem",
+          "content": "You want to adapt a 7B-parameter LLM to your task. **Full fine-tuning** means updating ALL 7B parameters:\n- Need 28GB+ GPU memory just for weights (fp32)\n- Plus optimizer states (Adam: 2x weights = 56GB more)\n- Plus gradients and activations\n- Total: **~120GB+ for a 7B model**\n\nThis is expensive and stores a full copy per task.\n\n**Parameter-Efficient Fine-Tuning (PEFT)** freezes the base model and only trains a small number of new parameters:\n- LoRA: ~0.1-1% of original parameters\n- Only 10-100MB of new weights per task\n- Can merge into base model for zero inference overhead\n\nThis is the dominant approach for adapting LLMs today."
+        },
+        {
+          "title": "LoRA — Low-Rank Adaptation",
+          "content": "**Core idea:** Weight updates during fine-tuning have low rank. So instead of updating a full $W \\in \\mathbb{R}^{d \\times k}$, learn a low-rank decomposition:\n\n$$W' = W + \\Delta W = W + BA$$\n\nWhere $B \\in \\mathbb{R}^{d \\times r}$, $A \\in \\mathbb{R}^{r \\times k}$, and $r \\ll \\min(d, k)$.\n\n```python\nclass LoRALinear:\n    def __init__(self, W_frozen, r=8, alpha=16):\n        d, k = W_frozen.shape\n        self.W = W_frozen  # frozen\n        self.A = np.random.randn(r, k) * 0.01\n        self.B = np.zeros((d, r))\n        self.scale = alpha / r\n    \n    def forward(self, x):\n        base = x @ self.W.T\n        lora = x @ self.A.T @ self.B.T * self.scale\n        return base + lora\n```\n\n**Initialization:** $A \\sim \\mathcal{N}(0, \\sigma^2)$, $B = 0$. This means $\\Delta W = 0$ at start — training begins from the pre-trained model exactly."
+        },
+        {
+          "title": "LoRA Hyperparameters",
+          "content": "**Rank $r$:** Controls capacity of the update.\n- $r = 8$: Typical default. Works well for most tasks.\n- $r = 16-64$: For complex tasks or larger models.\n- Higher $r$ = more parameters, more expressive, slower.\n\n**Scaling factor $\\alpha/r$:** Controls the magnitude of LoRA updates.\n- $\\alpha = 2r$ is common (so scale = 2)\n- Higher $\\alpha$ → larger updates → faster adaptation but less stable\n\n**Which layers to adapt?**\n- Original paper: Q and V projections only\n- Practice: all linear layers (Q, K, V, O, FFN) works best\n- Applying LoRA to just attention: good. To everything: better.\n\n**Parameter count for $r=8$ on a 7B model:**\nEach linear layer adds $2 \\times r \\times d$ params. ~20M total ≈ 0.3% of 7B.\n\n**Merging for inference:**\n$$W_{\\text{merged}} = W + \\frac{\\alpha}{r} BA$$\nNo extra latency at inference time — just add the LoRA weights to the base model once."
+        },
+        {
+          "title": "QLoRA — Quantized LoRA",
+          "content": "**QLoRA** makes fine-tuning even cheaper:\n1. Quantize the base model to **4-bit** (NF4 data type)\n2. Add LoRA adapters in fp16/bf16\n3. Train ONLY the LoRA parameters\n\n**Key innovations:**\n- **NF4 (NormalFloat4):** Optimal 4-bit quantization for normally distributed weights\n- **Double quantization:** Quantize the quantization constants too\n- **Paged optimizers:** Use CPU RAM for optimizer states that don't fit in GPU\n\n**Result:** Fine-tune a 65B model on a single 48GB GPU.\n\nMemory breakdown for 7B with QLoRA:\n- Base model (4-bit): ~3.5GB\n- LoRA params (bf16): ~20MB\n- Optimizer states: ~40MB\n- Activations: varies\n- **Total: ~8-12GB** (vs. 120GB for full fine-tuning!)\n\nQLoRA quality matches full fine-tuning in most benchmarks."
+        },
+        {
+          "title": "Other PEFT Methods",
+          "content": "**Prefix Tuning:** Prepend learned \"soft tokens\" to the input at every layer.\n- Tokens are virtual (not in vocab)\n- 0.1% of parameters\n- Less expressive than LoRA\n\n**Adapters:** Insert small trainable layers between frozen Transformer blocks.\n- bottleneck architecture: project down → ReLU → project up\n- Adds inference latency (can't merge)\n\n**IA3 (Infused Adapter by Inhibiting and Amplifying):**\n- Learn per-element scaling vectors for K, V, and FFN\n- Even fewer parameters than LoRA\n- Very fast training\n\n**DoRA (Weight-Decomposed LoRA):**\n- Decomposes weight into magnitude and direction\n- Applies LoRA only to direction\n- Closer to full fine-tuning behavior\n\n**Current best practice:** LoRA or QLoRA with $r=16$, applied to all linear layers. It's simple, efficient, and works."
+        },
+        {
+          "title": "LoRA Interview Essentials",
+          "content": "**Q: Why does LoRA work? Why are updates low-rank?**\nPre-trained models are already close to the task solution. Fine-tuning makes small adjustments in a low-dimensional subspace. The \"intrinsic dimensionality\" of the update is much smaller than the full parameter space.\n\n**Q: Can you stack multiple LoRA adapters?**\nYes. Keep base model frozen, swap LoRA weights for different tasks. This is how you serve one base model for many users cheaply.\n\n**Q: LoRA vs. full fine-tuning — when is full FT better?**\nWhen the task is very different from pre-training (e.g., new language), or you need maximum quality and have the compute budget.\n\n**Q: What's catastrophic forgetting? Does LoRA help?**\nFull fine-tuning can \"forget\" pre-training knowledge. LoRA mitigates this because the base weights are frozen — you can always remove the adapter to recover the original model.\n\n**Q: LoRA for inference — any overhead?**\nZero, after merging: $W_{\\text{new}} = W + \\frac{\\alpha}{r}BA$. The merged model is architecturally identical to the original."
+        }
+      ]
+    },
+    {
+      "id": "inference-optimization",
+      "name": "LLM Inference Optimization",
+      "cards": [
+        {
+          "title": "Why LLM Inference is Hard",
+          "content": "LLM inference has two phases:\n\n**1. Prefill (prompt processing):**\nProcess all input tokens in parallel. Compute-bound. Fast.\n\n**2. Decode (token generation):**\nGenerate one token at a time, autoregressively. **Memory-bandwidth-bound.** Slow.\n\nEach generated token requires:\n- Loading ALL model weights from memory\n- Attending to ALL previous tokens (growing KV-cache)\n- For one output token\n\n**The math:** A 7B model in fp16 = 14GB. At 2TB/s bandwidth (A100), reading weights takes ~7ms per token → ~140 tokens/sec max. Most of the GPU's compute is idle!\n\nThis is the **memory wall** — and why inference optimization is critical for production LLMs."
+        },
+        {
+          "title": "KV-Cache — The Core Optimization",
+          "content": "During autoregressive decoding, the K and V matrices for previous tokens don't change. **Cache them!**\n\n```python\ndef generate_with_kv_cache(model, prompt_ids, max_tokens):\n    kv_cache = {}  # layer -> (K, V)\n    \n    # Prefill: process all prompt tokens\n    logits, kv_cache = model.forward(\n        prompt_ids, kv_cache=None\n    )\n    \n    for _ in range(max_tokens):\n        next_token = sample(logits[:, -1])\n        # Decode: only process the NEW token\n        logits, kv_cache = model.forward(\n            [next_token], kv_cache=kv_cache\n        )\n        # kv_cache grows by 1 position per step\n```\n\n**Without KV-cache:** Each new token recomputes attention over all previous tokens → $O(n^2)$ total work for $n$ tokens.\n\n**With KV-cache:** Each new token only computes its own Q, concatenates to cached K,V → $O(n)$ per token, $O(n^2)$ total.\n\n**KV-cache memory for LLaMA-70B, 4K context, fp16:**\n80 layers × 8 KV heads × 128 dim × 4096 tokens × 2 bytes × 2 (K+V) = ~1.3GB"
+        },
+        {
+          "title": "Quantization — Making Models Smaller",
+          "content": "Reduce precision of weights (and optionally activations):\n\n**Common formats:**\n- fp32 → fp16/bf16: 2x compression, minimal quality loss\n- fp16 → int8: 2x compression, <1% quality loss\n- fp16 → int4: 4x compression, 1-3% quality loss\n\n**Popular methods:**\n\n**GPTQ:** Post-training quantization using second-order info (Hessian). Quantizes layer by layer, compensating for each layer's error.\n\n**AWQ (Activation-Aware):** Not all weights are equally important. Protect the 1% of weights that correspond to large activations.\n\n**GGUF/GGML (llama.cpp):** CPU-friendly quantization. Various formats: Q4_0, Q4_K_M, Q5_K_M.\n\n**Rule of thumb for quality:**\n- Q8 (int8): Nearly lossless\n- Q6_K: Very good\n- Q4_K_M: Good tradeoff (most popular)\n- Q4_0: Noticeable degradation\n- Q2: Significant quality loss"
+        },
+        {
+          "title": "PagedAttention & vLLM",
+          "content": "**Problem:** KV-cache memory must be pre-allocated per request. Different sequences have different lengths → massive memory waste.\n\nExample: Reserve 2K tokens of KV-cache per request, but average usage is 500 tokens → 75% wasted.\n\n**PagedAttention** (vLLM) applies OS virtual memory concepts:\n- Divide KV-cache into fixed-size **pages** (e.g., 16 tokens each)\n- Allocate pages on demand, not upfront\n- Pages can be non-contiguous in physical memory\n- Share pages across requests (for common prefixes)\n\n**Results:**\n- 2-4x higher throughput vs. naive serving\n- Near-zero memory waste\n- Efficient prefix caching (important for system prompts)\n\n**vLLM** implements PagedAttention and is the de facto standard for LLM serving.\n\n**Continuous batching:** Don't wait for all sequences to finish. As one completes, immediately start another. Keeps GPU utilization high."
+        },
+        {
+          "title": "Speculative Decoding",
+          "content": "**Idea:** Use a small, fast **draft model** to generate $K$ candidate tokens, then verify them in parallel with the large model.\n\n```\n1. Draft model generates K=5 tokens quickly\n2. Large model processes all 5 in ONE forward pass\n3. Accept tokens where large model agrees\n4. Reject and resample from the first disagreement\n```\n\n**Why it works:** Most tokens are \"easy\" (the draft model gets them right). Only hard tokens need the large model's full power.\n\n**Typical speedup:** 2-3x for code/structured text (high acceptance), 1.3-1.5x for creative text (lower acceptance).\n\n**Key property:** The output distribution is EXACTLY the same as the large model alone. It's mathematically lossless — just faster.\n\n**Variants:**\n- Medusa: Multiple prediction heads on the SAME model (no draft model needed)\n- Self-speculative: Use early-exit layers of the same model as draft\n- EAGLE: Learns a lightweight draft head"
+        },
+        {
+          "title": "Inference Interview Essentials",
+          "content": "**Q: Why is LLM inference memory-bound during decode?**\nEach token loads the full model weights (~14GB for 7B) but does very little compute (one token × model). The arithmetic intensity is too low to saturate the GPU's compute units.\n\n**Q: How does batching help?**\nMultiple sequences share the weight-loading cost. Processing 32 tokens (one per sequence) with one weight load is 32x better arithmetic intensity.\n\n**Q: What is the KV-cache memory for a model with $L$ layers, $h$ KV-heads, $d_k$ head dim, sequence length $n$?**\n$2 \\times L \\times h \\times d_k \\times n \\times \\text{bytes\\_per\\_element}$\n\n**Q: FP8 vs INT8 quantization?**\nFP8 (E4M3) keeps a wider dynamic range. INT8 needs calibration data. FP8 is becoming standard on H100 GPUs.\n\n**Q: What's tensor parallelism vs. pipeline parallelism?**\nTensor: split each layer across GPUs. Pipeline: assign different layers to different GPUs. Tensor is better for latency, pipeline for throughput."
+        }
+      ]
+    }
+  ]
+}

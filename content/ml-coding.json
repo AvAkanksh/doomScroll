@@ -1,0 +1,146 @@
+{
+  "topics": [
+    {
+      "id": "linear-regression-scratch",
+      "name": "Linear Regression from Scratch",
+      "cards": [
+        {
+          "title": "The Setup",
+          "content": "**Goal:** Given features $\\mathbf{X} \\in \\mathbb{R}^{n \\times d}$ and targets $\\mathbf{y} \\in \\mathbb{R}^n$, find weights $\\mathbf{w}$ that minimize:\n\n$$\\mathcal{L} = \\frac{1}{2n}\\|\\mathbf{Xw} - \\mathbf{y}\\|^2$$\n\nTwo approaches:\n- **Normal Equation** — closed-form, $O(d^3)$ compute\n- **Gradient Descent** — iterative, scales to large $d$\n\nIn interviews, you'll be asked to implement both in pure NumPy. No sklearn allowed."
+        },
+        {
+          "title": "Normal Equation — NumPy",
+          "content": "The closed-form solution:\n\n$$\\mathbf{w}^* = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{y}$$\n\n```python\nimport numpy as np\n\ndef fit_normal(X, y):\n    # Add bias column\n    X_b = np.c_[np.ones(len(X)), X]\n    # Normal equation\n    w = np.linalg.inv(X_b.T @ X_b) @ X_b.T @ y\n    return w\n\ndef predict(X, w):\n    X_b = np.c_[np.ones(len(X)), X]\n    return X_b @ w\n```\n\n**Gotcha:** `np.linalg.inv` is numerically unstable. In practice, use `np.linalg.lstsq(X_b, y)` or `np.linalg.solve(X_b.T @ X_b, X_b.T @ y)`. Interviewers love this follow-up."
+        },
+        {
+          "title": "Gradient Descent — NumPy",
+          "content": "The gradient of MSE loss:\n\n$$\\nabla_\\mathbf{w} \\mathcal{L} = \\frac{1}{n}\\mathbf{X}^T(\\mathbf{Xw} - \\mathbf{y})$$\n\n```python\ndef fit_gd(X, y, lr=0.01, epochs=1000):\n    X_b = np.c_[np.ones(len(X)), X]\n    n = len(X)\n    w = np.zeros(X_b.shape[1])\n    \n    for _ in range(epochs):\n        grad = (1/n) * X_b.T @ (X_b @ w - y)\n        w -= lr * grad\n    \n    return w\n```\n\n**Key vectorization:** The gradient is a single matrix multiply — no loops over samples. This is what interviewers look for: `X_b.T @ (X_b @ w - y)` not a for-loop over each data point."
+        },
+        {
+          "title": "Adding L2 Regularization",
+          "content": "Ridge regression adds $\\lambda\\|\\mathbf{w}\\|^2$ to the loss.\n\n**Normal equation (Ridge):**\n\n$$\\mathbf{w}^* = (\\mathbf{X}^T\\mathbf{X} + \\lambda\\mathbf{I})^{-1}\\mathbf{X}^T\\mathbf{y}$$\n\n```python\ndef fit_ridge(X, y, lam=1.0):\n    X_b = np.c_[np.ones(len(X)), X]\n    d = X_b.shape[1]\n    I = np.eye(d)\n    I[0, 0] = 0  # Don't regularize bias!\n    w = np.linalg.solve(\n        X_b.T @ X_b + lam * I,\n        X_b.T @ y\n    )\n    return w\n```\n\n**For gradient descent**, add $\\frac{\\lambda}{n}\\mathbf{w}$ to the gradient (but NOT the bias term). Common interview follow-up: \"Why don't we regularize the bias?\""
+        },
+        {
+          "title": "Mini-Batch SGD Version",
+          "content": "For large datasets, compute gradient on random batches:\n\n```python\ndef fit_sgd(X, y, lr=0.01, epochs=100, batch=32):\n    X_b = np.c_[np.ones(len(X)), X]\n    n = len(X)\n    w = np.zeros(X_b.shape[1])\n    \n    for _ in range(epochs):\n        idx = np.random.permutation(n)\n        for start in range(0, n, batch):\n            bi = idx[start:start+batch]\n            Xm, ym = X_b[bi], y[bi]\n            grad = (1/len(bi)) * Xm.T @ (Xm @ w - ym)\n            w -= lr * grad\n    \n    return w\n```\n\n**Interview tips:**\n- Shuffle indices each epoch (not just random sampling)\n- Gradient is normalized by batch size, not full dataset\n- Feature scaling is critical for convergence: `X = (X - X.mean(0)) / X.std(0)`"
+        },
+        {
+          "title": "Common Interview Pitfalls",
+          "content": "**1. Forgetting the bias term:**\nAlways prepend a column of ones to X, or track bias separately.\n\n**2. Not normalizing features:**\nIf feature scales differ by 1000x, GD will zig-zag. Always standardize.\n\n**3. Wrong gradient sign:**\nIt's $\\mathbf{X}^T(\\hat{y} - y)$, not $\\mathbf{X}^T(y - \\hat{y})$. Subtracting the gradient means `w -= lr * grad`.\n\n**4. Matrix dimension errors:**\n- $\\mathbf{X}$: $(n, d)$, $\\mathbf{w}$: $(d,)$, $\\mathbf{y}$: $(n,)$\n- $\\mathbf{X}^T\\mathbf{X}$: $(d, d)$, $\\mathbf{X}^T\\mathbf{y}$: $(d,)$\n\n**5. Inverting a singular matrix:**\n$\\mathbf{X}^T\\mathbf{X}$ can be singular when $n < d$ or features are linearly dependent. Ridge fixes this by adding $\\lambda\\mathbf{I}$.\n\n**The golden rule:** If your vectorized implementation uses a for-loop over samples, you're doing it wrong."
+        }
+      ]
+    },
+    {
+      "id": "logistic-regression-scratch",
+      "name": "Logistic Regression from Scratch",
+      "cards": [
+        {
+          "title": "From Linear to Logistic",
+          "content": "Logistic regression models the probability of class 1:\n\n$$P(y=1|\\mathbf{x}) = \\sigma(\\mathbf{w}^T\\mathbf{x}) = \\frac{1}{1 + e^{-\\mathbf{w}^T\\mathbf{x}}}$$\n\n**Why sigmoid?**\n- Maps $(-\\infty, +\\infty) \\to (0, 1)$ — valid probability\n- Derivative has a beautiful form: $\\sigma'(z) = \\sigma(z)(1 - \\sigma(z))$\n- Corresponds to assuming a log-linear model for the odds ratio\n\n**Loss function:** Binary Cross-Entropy (BCE):\n\n$$\\mathcal{L} = -\\frac{1}{n}\\sum_{i=1}^{n}\\left[y_i\\log(\\hat{y}_i) + (1-y_i)\\log(1-\\hat{y}_i)\\right]$$\n\nNo closed-form solution — must use gradient descent."
+        },
+        {
+          "title": "The Gradient — Surprisingly Clean",
+          "content": "Gradient of BCE w.r.t. weights:\n\n$$\\nabla_\\mathbf{w}\\mathcal{L} = \\frac{1}{n}\\mathbf{X}^T(\\hat{\\mathbf{y}} - \\mathbf{y})$$\n\nwhere $\\hat{\\mathbf{y}} = \\sigma(\\mathbf{Xw})$.\n\n**Notice:** This is the SAME form as linear regression! The sigmoid's derivative cancels perfectly with the cross-entropy derivative.\n\n```python\ndef sigmoid(z):\n    return 1 / (1 + np.exp(-np.clip(z, -500, 500)))\n\ndef fit_logistic(X, y, lr=0.1, epochs=1000):\n    X_b = np.c_[np.ones(len(X)), X]\n    w = np.zeros(X_b.shape[1])\n    \n    for _ in range(epochs):\n        y_hat = sigmoid(X_b @ w)\n        grad = (1/len(X)) * X_b.T @ (y_hat - y)\n        w -= lr * grad\n    \n    return w\n```\n\n**Critical:** Clip the sigmoid input to avoid numerical overflow in `exp()`."
+        },
+        {
+          "title": "Numerical Stability Tricks",
+          "content": "**Problem 1: Sigmoid overflow**\n`exp(-700)` underflows, `exp(700)` overflows.\n\n```python\ndef sigmoid_stable(z):\n    pos = z >= 0\n    neg = ~pos\n    result = np.empty_like(z, dtype=float)\n    result[pos] = 1 / (1 + np.exp(-z[pos]))\n    ez = np.exp(z[neg])\n    result[neg] = ez / (1 + ez)\n    return result\n```\n\n**Problem 2: Log of zero**\nIn BCE, `log(0)` = `-inf`. Fix with clipping:\n\n```python\ndef bce_loss(y, y_hat, eps=1e-15):\n    y_hat = np.clip(y_hat, eps, 1 - eps)\n    return -np.mean(\n        y * np.log(y_hat) + \n        (1 - y) * np.log(1 - y_hat)\n    )\n```\n\n**Interview signal:** Knowing these stability tricks shows production experience."
+        },
+        {
+          "title": "Multi-Class: Softmax Regression",
+          "content": "For $K$ classes, generalize sigmoid to **softmax**:\n\n$$P(y=k|\\mathbf{x}) = \\frac{e^{\\mathbf{w}_k^T\\mathbf{x}}}{\\sum_{j=1}^{K} e^{\\mathbf{w}_j^T\\mathbf{x}}}$$\n\n```python\ndef softmax(Z):\n    Z = Z - Z.max(axis=1, keepdims=True)  # stability\n    eZ = np.exp(Z)\n    return eZ / eZ.sum(axis=1, keepdims=True)\n\ndef fit_softmax(X, y, K, lr=0.1, epochs=500):\n    X_b = np.c_[np.ones(len(X)), X]\n    n, d = X_b.shape\n    W = np.zeros((d, K))\n    Y = np.eye(K)[y]  # one-hot encode\n    \n    for _ in range(epochs):\n        probs = softmax(X_b @ W)\n        grad = (1/n) * X_b.T @ (probs - Y)\n        W -= lr * grad\n    \n    return W\n```\n\n**Key:** Subtract max for numerical stability BEFORE exp. This doesn't change the output (it cancels in the ratio)."
+        },
+        {
+          "title": "Decision Boundary & Interview Questions",
+          "content": "**The decision boundary** is where $P(y=1) = 0.5$, i.e., $\\mathbf{w}^T\\mathbf{x} = 0$.\n\nThis is always a **hyperplane** — logistic regression is a linear classifier. For non-linear boundaries, you need feature engineering (polynomial features) or kernel tricks.\n\n**Q: Why BCE and not MSE for classification?**\nMSE with sigmoid has many local minima and vanishing gradients (sigmoid saturates). BCE is convex w.r.t. weights — guarantees global optimum.\n\n**Q: Logistic regression vs. Naive Bayes?**\nBoth are linear classifiers. LR is discriminative (models $P(y|x)$ directly). NB is generative (models $P(x|y)P(y)$). LR needs more data but makes fewer assumptions.\n\n**Q: How to handle imbalanced classes?**\n- Weighted BCE: multiply loss by $1/\\text{class\\_freq}$\n- Oversample minority (SMOTE)\n- Adjust threshold (don't use 0.5 blindly)\n\n**Q: Can logistic regression output calibrated probabilities?**\nYes — it's one of the few models with naturally calibrated outputs (if not regularized too heavily)."
+        }
+      ]
+    },
+    {
+      "id": "kmeans-scratch",
+      "name": "K-Means Clustering from Scratch",
+      "cards": [
+        {
+          "title": "The Algorithm",
+          "content": "**K-Means** partitions $n$ points into $K$ clusters by minimizing **inertia** (within-cluster sum of squares):\n\n$$J = \\sum_{k=1}^{K}\\sum_{\\mathbf{x}_i \\in C_k} \\|\\mathbf{x}_i - \\boldsymbol{\\mu}_k\\|^2$$\n\n**Lloyd's algorithm:**\n1. Initialize $K$ centroids (randomly or with K-Means++)\n2. **Assign:** Each point to its nearest centroid\n3. **Update:** Each centroid to the mean of its assigned points\n4. Repeat until convergence\n\nConvergence is guaranteed (inertia decreases monotonically) but only to a **local minimum**. The result depends on initialization."
+        },
+        {
+          "title": "Vectorized NumPy Implementation",
+          "content": "The key trick: **compute all pairwise distances without loops** using the identity:\n\n$$\\|a - b\\|^2 = \\|a\\|^2 + \\|b\\|^2 - 2a^Tb$$\n\n```python\ndef kmeans(X, K, max_iter=100):\n    n, d = X.shape\n    # K-Means++ init\n    idx = [np.random.randint(n)]\n    for _ in range(1, K):\n        dist = np.min(cdist(X, X[idx]), axis=1)\n        prob = dist**2 / (dist**2).sum()\n        idx.append(np.random.choice(n, p=prob))\n    centroids = X[idx].copy()\n    \n    for _ in range(max_iter):\n        # Assign: vectorized distance\n        dists = cdist(X, centroids)\n        labels = dists.argmin(axis=1)\n        # Update\n        new_c = np.array([X[labels==k].mean(0) \n                          for k in range(K)])\n        if np.allclose(centroids, new_c): break\n        centroids = new_c\n    \n    return labels, centroids\n```"
+        },
+        {
+          "title": "Distance Matrix Without scipy",
+          "content": "Pure NumPy pairwise distance — the interview version:\n\n```python\ndef cdist_numpy(A, B):\n    \"\"\"Pairwise L2 distances: (n,d) x (m,d) -> (n,m)\"\"\"\n    # ||a-b||^2 = ||a||^2 + ||b||^2 - 2*a.b\n    A_sq = (A**2).sum(axis=1, keepdims=True)  # (n,1)\n    B_sq = (B**2).sum(axis=1, keepdims=True)  # (m,1)\n    dist_sq = A_sq + B_sq.T - 2 * A @ B.T    # (n,m)\n    return np.sqrt(np.maximum(dist_sq, 0))     # numerical fix\n```\n\n**Why `np.maximum(dist_sq, 0)`?** Floating point errors can make distances slightly negative. `sqrt` of negative = NaN. Always clamp.\n\nThis trick avoids the $O(nmd)$ triple loop and runs in $O(nm + nd + md)$ memory with fast BLAS matrix multiply. **This is THE pattern for \"implement distance computation without loops.\"**"
+        },
+        {
+          "title": "K-Means++ Initialization",
+          "content": "Random initialization → bad local minima. **K-Means++** gives a provable $O(\\log K)$ approximation:\n\n```python\ndef kmeans_plus_plus(X, K):\n    n = len(X)\n    centers = [X[np.random.randint(n)]]\n    \n    for _ in range(1, K):\n        # Distance to nearest existing center\n        dists = np.array([\n            np.min([np.sum((x - c)**2) for c in centers])\n            for x in X\n        ])\n        # Sample proportional to distance^2\n        probs = dists / dists.sum()\n        centers.append(X[np.random.choice(n, p=probs)])\n    \n    return np.array(centers)\n```\n\n**How it works:** First center is random. Each subsequent center is chosen with probability proportional to $D(x)^2$ — the squared distance to the nearest existing center. This spreads centers out."
+        },
+        {
+          "title": "K-Means Interview Essentials",
+          "content": "**Q: How do you choose K?**\n- **Elbow method:** Plot inertia vs. K, look for the \"elbow\"\n- **Silhouette score:** Measures how similar points are to their own cluster vs. neighboring clusters. Range: [-1, 1]\n- Domain knowledge (e.g., \"we need 5 customer segments\")\n\n**Q: When does K-Means fail?**\n- Non-spherical clusters (elongated, irregular shapes)\n- Clusters with different sizes/densities\n- High dimensions (distance becomes less meaningful — curse of dimensionality)\n\n**Q: K-Means vs. K-Medoids?**\nK-Medoids uses actual data points as centers (more robust to outliers) but is $O(n^2)$.\n\n**Q: Time complexity?**\n$O(nKd)$ per iteration. Usually converges in 10-20 iterations.\n\n**Q: Soft K-Means?**\nGaussian Mixture Models (GMM) — each point has a probability of belonging to each cluster, fitted with EM algorithm."
+        }
+      ]
+    },
+    {
+      "id": "neural-net-scratch",
+      "name": "Neural Network Forward & Backward",
+      "cards": [
+        {
+          "title": "The Architecture",
+          "content": "A 2-layer MLP for classification:\n\nInput $\\mathbf{x} \\in \\mathbb{R}^d$ → Hidden $\\mathbf{h} \\in \\mathbb{R}^H$ → Output $\\hat{\\mathbf{y}} \\in \\mathbb{R}^K$\n\n**Forward pass:**\n\n$$\\mathbf{z}_1 = \\mathbf{W}_1\\mathbf{x} + \\mathbf{b}_1$$\n$$\\mathbf{h} = \\text{ReLU}(\\mathbf{z}_1)$$\n$$\\mathbf{z}_2 = \\mathbf{W}_2\\mathbf{h} + \\mathbf{b}_2$$\n$$\\hat{\\mathbf{y}} = \\text{softmax}(\\mathbf{z}_2)$$\n\n**Loss:** Cross-entropy = $-\\sum_k y_k \\log \\hat{y}_k$\n\nThis is the bread and butter of ML coding interviews. You need to derive AND implement every gradient from scratch."
+        },
+        {
+          "title": "Forward Pass — NumPy",
+          "content": "```python\ndef forward(X, W1, b1, W2, b2):\n    # X: (n, d), W1: (d, H), W2: (H, K)\n    Z1 = X @ W1 + b1           # (n, H)\n    H = np.maximum(0, Z1)       # ReLU\n    Z2 = H @ W2 + b2            # (n, K)\n    # Stable softmax\n    Z2 -= Z2.max(axis=1, keepdims=True)\n    eZ = np.exp(Z2)\n    Y_hat = eZ / eZ.sum(axis=1, keepdims=True)\n    return Z1, H, Z2, Y_hat\n\ndef cross_entropy(Y_hat, Y):\n    n = len(Y)\n    # Y is one-hot (n, K)\n    return -np.sum(Y * np.log(Y_hat + 1e-15)) / n\n```\n\n**Remember:** Subtract max before softmax, add epsilon before log. These two stability tricks are non-negotiable."
+        },
+        {
+          "title": "Backward Pass — Deriving Gradients",
+          "content": "**The chain rule, layer by layer:**\n\n**1. Output layer gradient (softmax + cross-entropy):**\nThe combined gradient is beautifully simple:\n$$\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{z}_2} = \\hat{\\mathbf{y}} - \\mathbf{y}$$\n\nThis is one of the most important derivations. The softmax derivative $\\frac{\\partial \\hat{y}_i}{\\partial z_j} = \\hat{y}_i(\\delta_{ij} - \\hat{y}_j)$ combines with the CE derivative $-y_i/\\hat{y}_i$ to give $\\hat{y}_i - y_i$.\n\n**2. Gradients for $\\mathbf{W}_2$ and $\\mathbf{b}_2$:**\n$$\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{W}_2} = \\mathbf{h}^T (\\hat{\\mathbf{y}} - \\mathbf{y})$$\n$$\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{b}_2} = \\sum(\\hat{\\mathbf{y}} - \\mathbf{y})$$\n\n**3. Backprop through ReLU:**\n$$\\frac{\\partial \\mathcal{L}}{\\partial \\mathbf{z}_1} = (\\hat{\\mathbf{y}} - \\mathbf{y})\\mathbf{W}_2^T \\odot \\mathbf{1}[\\mathbf{z}_1 > 0]$$"
+        },
+        {
+          "title": "Backward Pass — NumPy Code",
+          "content": "```python\ndef backward(X, Y, Z1, H, Y_hat, W2):\n    n = len(X)\n    \n    # Output gradient\n    dZ2 = (Y_hat - Y) / n              # (n, K)\n    dW2 = H.T @ dZ2                     # (H, K)\n    db2 = dZ2.sum(axis=0)               # (K,)\n    \n    # Hidden layer gradient\n    dH = dZ2 @ W2.T                     # (n, H)\n    dZ1 = dH * (Z1 > 0)                 # ReLU grad\n    dW1 = X.T @ dZ1                     # (d, H)\n    db1 = dZ1.sum(axis=0)               # (H,)\n    \n    return dW1, db1, dW2, db2\n```\n\n**Dimension check (CRITICAL):**\n- `dW` always has same shape as `W`\n- `db` always has same shape as `b`\n- Pattern: `dW = input.T @ downstream_grad`\n\nIf dimensions don't match, your gradient is wrong. This is the fastest debugging check."
+        },
+        {
+          "title": "Full Training Loop",
+          "content": "```python\ndef train(X, y, H=128, K=10, lr=0.01, epochs=100):\n    n, d = X.shape\n    Y = np.eye(K)[y]  # one-hot\n    \n    # Xavier init\n    W1 = np.random.randn(d, H) * np.sqrt(2/d)\n    b1 = np.zeros(H)\n    W2 = np.random.randn(H, K) * np.sqrt(2/H)\n    b2 = np.zeros(K)\n    \n    for epoch in range(epochs):\n        Z1, Hid, Z2, Y_hat = forward(X, W1, b1, W2, b2)\n        loss = cross_entropy(Y_hat, Y)\n        dW1, db1, dW2, db2 = backward(\n            X, Y, Z1, Hid, Y_hat, W2\n        )\n        W1 -= lr * dW1\n        b1 -= lr * db1\n        W2 -= lr * dW2\n        b2 -= lr * db2\n    \n    return W1, b1, W2, b2\n```\n\n**Xavier initialization:** `randn * sqrt(2/fan_in)` for ReLU. Keeps variance stable across layers. Using `randn * 0.01` works for shallow nets but causes vanishing gradients in deep nets."
+        },
+        {
+          "title": "Gradient Checking",
+          "content": "**Always verify your gradients** with numerical differentiation:\n\n```python\ndef grad_check(f, w, eps=1e-5):\n    grad_num = np.zeros_like(w)\n    for i in range(len(w.flat)):\n        old = w.flat[i]\n        w.flat[i] = old + eps\n        fp = f(w)\n        w.flat[i] = old - eps\n        fm = f(w)\n        w.flat[i] = old\n        grad_num.flat[i] = (fp - fm) / (2 * eps)\n    return grad_num\n```\n\nCompare with analytical gradient using **relative error:**\n$$\\frac{\\|g_{\\text{analytic}} - g_{\\text{numeric}}\\|}{\\|g_{\\text{analytic}}\\| + \\|g_{\\text{numeric}}\\|}$$\n\nShould be $< 10^{-5}$ for correct gradients.\n\n**Interview tip:** Mention gradient checking even if you don't implement it. It shows you know how to verify correctness — a sign of engineering maturity."
+        },
+        {
+          "title": "Interview Follow-ups",
+          "content": "**Q: Why not use sigmoid activation in hidden layers?**\nVanishing gradient problem. Sigmoid saturates for large inputs → gradient ≈ 0 → learning stops. ReLU doesn't saturate for positive inputs.\n\n**Q: What's dying ReLU?**\nIf a neuron's input is always negative, its gradient is always 0 — it never updates. Fix: Leaky ReLU ($\\max(0.01x, x)$) or PReLU.\n\n**Q: Batch norm — where does it go?**\nAfter linear transform, before activation: `BN(Wx + b)` then ReLU. Though some argue after activation works too.\n\n**Q: What happens without bias terms?**\nThe network can't learn functions that don't pass through the origin. Biases shift the activation function.\n\n**Q: Why divide by n in the gradient?**\nTo make the gradient magnitude independent of batch size. Without it, larger batches would need smaller learning rates."
+        }
+      ]
+    },
+    {
+      "id": "pca-scratch",
+      "name": "PCA from Scratch",
+      "cards": [
+        {
+          "title": "What PCA Does",
+          "content": "**Principal Component Analysis** finds directions of maximum variance in the data.\n\nGiven $\\mathbf{X} \\in \\mathbb{R}^{n \\times d}$ (centered), PCA finds orthogonal directions $\\mathbf{u}_1, \\mathbf{u}_2, ...$ such that projecting data onto $\\mathbf{u}_1$ captures the most variance, $\\mathbf{u}_2$ captures the second most (orthogonal to $\\mathbf{u}_1$), etc.\n\n**Uses:**\n- Dimensionality reduction (keep top $k$ components)\n- Visualization (project to 2D/3D)\n- Denoising (discard low-variance components)\n- Decorrelation (PCA components are uncorrelated)\n\nMathematically, PCA solves:\n$$\\mathbf{u}_1 = \\arg\\max_{\\|\\mathbf{u}\\|=1} \\mathbf{u}^T\\mathbf{C}\\mathbf{u}$$\n\nwhere $\\mathbf{C} = \\frac{1}{n}\\mathbf{X}^T\\mathbf{X}$ is the covariance matrix."
+        },
+        {
+          "title": "The Eigendecomposition Approach",
+          "content": "The solution is the **eigenvectors** of the covariance matrix:\n\n```python\ndef pca_eigen(X, k):\n    # Step 1: Center the data\n    mean = X.mean(axis=0)\n    X_c = X - mean\n    \n    # Step 2: Covariance matrix\n    C = (X_c.T @ X_c) / (len(X) - 1)\n    \n    # Step 3: Eigendecomposition\n    eigenvalues, eigenvectors = np.linalg.eigh(C)\n    \n    # Step 4: Sort by largest eigenvalue\n    idx = eigenvalues.argsort()[::-1]\n    eigenvalues = eigenvalues[idx]\n    eigenvectors = eigenvectors[:, idx]\n    \n    # Step 5: Project\n    W = eigenvectors[:, :k]  # (d, k)\n    X_proj = X_c @ W         # (n, k)\n    \n    return X_proj, eigenvalues, W, mean\n```\n\n**Use `eigh`** not `eig` — covariance matrices are symmetric, and `eigh` is faster and numerically stable."
+        },
+        {
+          "title": "The SVD Approach (Better)",
+          "content": "In practice, **SVD is preferred** over eigendecomposition:\n\n$$\\mathbf{X}_c = \\mathbf{U}\\boldsymbol{\\Sigma}\\mathbf{V}^T$$\n\nThe columns of $\\mathbf{V}$ ARE the principal components. The singular values relate to eigenvalues: $\\lambda_i = \\sigma_i^2 / (n-1)$.\n\n```python\ndef pca_svd(X, k):\n    mean = X.mean(axis=0)\n    X_c = X - mean\n    \n    U, S, Vt = np.linalg.svd(X_c, full_matrices=False)\n    \n    W = Vt[:k].T              # (d, k)\n    X_proj = X_c @ W          # (n, k)\n    explained_var = S[:k]**2 / (len(X) - 1)\n    \n    return X_proj, explained_var, W, mean\n```\n\n**Why SVD is better:**\n- No need to form $\\mathbf{X}^T\\mathbf{X}$ ($d \\times d$ can be huge)\n- Numerically more stable\n- Works when $n < d$ (more features than samples)"
+        },
+        {
+          "title": "Explained Variance & Choosing k",
+          "content": "**Explained variance ratio** for component $i$:\n\n$$\\text{ratio}_i = \\frac{\\lambda_i}{\\sum_j \\lambda_j}$$\n\n```python\ndef explained_variance_ratio(eigenvalues):\n    return eigenvalues / eigenvalues.sum()\n\n# Choose k to capture 95% of variance\nratios = explained_variance_ratio(eigenvalues)\ncumulative = np.cumsum(ratios)\nk = np.searchsorted(cumulative, 0.95) + 1\n```\n\n**Rules of thumb:**\n- Keep components until cumulative explained variance > 95%\n- Scree plot: plot eigenvalues, look for the \"elbow\"\n- For visualization: k=2 or k=3\n\n**Interview insight:** The eigenvalue spectrum tells you the intrinsic dimensionality. If the first 10 components explain 99% of variance in 1000-dimensional data, the data effectively lives on a 10-dimensional manifold."
+        },
+        {
+          "title": "PCA Interview Deep Cuts",
+          "content": "**Q: What assumptions does PCA make?**\nLinearity (components are linear combos of features). Variance = importance. Features should be on similar scales (standardize first!).\n\n**Q: PCA vs. t-SNE?**\nPCA preserves global structure (linear). t-SNE preserves local neighborhoods (non-linear). Use PCA for preprocessing, t-SNE for visualization only.\n\n**Q: Should you standardize before PCA?**\nYes, unless all features are in the same units. Otherwise, features with larger scale dominate the first components.\n\n**Q: Kernel PCA?**\nApply PCA in a kernel-induced feature space. Can capture non-linear structure. Common kernels: RBF, polynomial.\n\n**Q: Can PCA be used for anomaly detection?**\nYes. Points with high reconstruction error (large residual after projecting to $k$ components) are anomalous.\n\n**Q: Incremental/online PCA?**\nSVD updates exist that don't require the full dataset in memory. Scikit-learn's `IncrementalPCA` implements this."
+        }
+      ]
+    }
+  ]
+}

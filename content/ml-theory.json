@@ -1,0 +1,162 @@
+{
+  "topics": [
+    {
+      "id": "bias-variance",
+      "name": "Bias-Variance Tradeoff",
+      "cards": [
+        {
+          "title": "The Fundamental Question",
+          "content": "Every ML model faces one core tension: **will it generalize?**\n\nYour model can fail in two ways:\n- **Too simple** (underfitting) — misses real patterns\n- **Too complex** (overfitting) — memorizes noise\n\nThe bias-variance tradeoff is the mathematical framework for understanding this tension. It decomposes your model's expected error into three irreducible components.\n\nThis concept appears in virtually every ML interview. It's the lens through which interviewers evaluate whether you truly understand model selection."
+        },
+        {
+          "title": "Bias — The Systematic Error",
+          "content": "**Bias** measures how far your model's *average* prediction is from the truth.\n\n$$\\text{Bias}[\\hat{f}(x)] = E[\\hat{f}(x)] - f(x)$$\n\nHigh bias means your model makes **strong assumptions** that don't match reality. No amount of data fixes this.\n\n**Example:** Fitting a straight line to quadratic data. The line will always miss the curve, no matter how much data you feed it.\n\n**High-bias models:** Linear Regression, Logistic Regression, Naive Bayes — few parameters, strong assumptions.\n\nThe fix: increase model complexity, add polynomial features, use a more flexible model family."
+        },
+        {
+          "title": "Variance — The Sensitivity",
+          "content": "**Variance** measures how much your predictions **change** when trained on different subsets of data.\n\n$$\\text{Var}[\\hat{f}(x)] = E\\left[(\\hat{f}(x) - E[\\hat{f}(x)])^2\\right]$$\n\nHigh variance = your model memorizes training data, including noise. Great training accuracy, terrible test accuracy.\n\n**High-variance models:** Deep neural nets, k-NN with k=1, unpruned decision trees — many parameters, can fit anything.\n\n**Key insight:** Variance decreases with more training data (each sample has less influence). Bias does NOT decrease with more data — it's structural."
+        },
+        {
+          "title": "The Exact Decomposition",
+          "content": "For squared error loss, total expected error decomposes **exactly**:\n\n$$E[(y - \\hat{f}(x))^2] = \\underbrace{\\text{Bias}^2[\\hat{f}(x)]}_{\\text{systematic error}} + \\underbrace{\\text{Var}[\\hat{f}(x)]}_{\\text{sensitivity}} + \\underbrace{\\sigma^2}_{\\text{noise}}$$\n\n**Derivation sketch:** Add and subtract $E[\\hat{f}(x)]$ inside the square, expand, and use the fact that noise $\\epsilon$ is independent of $\\hat{f}$.\n\nThe $\\sigma^2$ term is **irreducible** — it's noise in the data itself. No model can beat it. This is the theoretical floor."
+        },
+        {
+          "title": "The U-Shaped Curve",
+          "content": "As **model complexity** increases:\n- Bias **decreases** — model captures more patterns\n- Variance **increases** — model becomes more sensitive\n- Total error follows a **U-shape**\n\nThe sweet spot is where $\\text{Bias}^2 + \\text{Var}$ is minimized.\n\n### Practical diagnosis:\n\n**High bias (underfitting):**\n- Training AND validation error both high\n- Gap between them is small\n- More data won't help — need a better model\n\n**High variance (overfitting):**\n- Training error low, validation error high\n- Large gap between them\n- More data WILL help, as will regularization"
+        },
+        {
+          "title": "Strategies & Ensemble Connection",
+          "content": "### Reducing Bias:\n- More complex model (deeper tree, wider network)\n- Add features / feature engineering\n- Reduce regularization strength\n- **Boosting** (sequentially reduces bias)\n\n### Reducing Variance:\n- More training data\n- Regularization (L1, L2, dropout)\n- Simpler model\n- **Bagging** (averages reduce variance by $1/n$)\n- Early stopping\n\n**Why ensembles are powerful:** Bagging attacks variance (Random Forest). Boosting attacks bias (XGBoost). This is why ensembles dominate tabular ML — they give you knobs for both."
+        },
+        {
+          "title": "Interview Lightning Round",
+          "content": "**Q: How does k affect bias-variance in k-NN?**\nSmall k → low bias, high variance (each point is its own neighborhood). Large k → high bias, low variance (over-smoothing).\n\n**Q: Can you have low bias AND low variance?**\nNot without infinite data. In practice, you trade off. Ensembles and regularization help find the best tradeoff.\n\n**Q: How does regularization affect the decomposition?**\nIncreases bias slightly, decreases variance significantly. Net effect: usually lower total error.\n\n**Q: Does the tradeoff apply to 0-1 loss (classification)?**\nThe *exact* additive decomposition only holds for squared loss. For classification, the relationship is more complex — but the intuition (simple vs. complex) still applies."
+        }
+      ]
+    },
+    {
+      "id": "regularization",
+      "name": "Regularization: L1, L2 & Beyond",
+      "cards": [
+        {
+          "title": "Why Regularize?",
+          "content": "Without regularization, models are free to assign **arbitrarily large weights** to features. This leads to:\n- Overfitting (high variance)\n- Numerically unstable solutions\n- Poor generalization\n\nRegularization adds a **penalty term** to the loss function that discourages complexity:\n\n$$\\mathcal{L}_{\\text{reg}} = \\mathcal{L}_{\\text{data}} + \\lambda \\cdot R(\\mathbf{w})$$\n\nWhere $\\lambda$ controls the regularization strength and $R(\\mathbf{w})$ penalizes large weights.\n\nThe key question: **what form should the penalty take?**"
+        },
+        {
+          "title": "L2 Regularization (Ridge)",
+          "content": "**Ridge regression** penalizes the sum of squared weights:\n\n$$\\mathcal{L} = \\|\\mathbf{y} - \\mathbf{Xw}\\|^2 + \\lambda \\|\\mathbf{w}\\|_2^2$$\n\nClosed-form solution:\n\n$$\\mathbf{w}^* = (\\mathbf{X}^T\\mathbf{X} + \\lambda \\mathbf{I})^{-1}\\mathbf{X}^T\\mathbf{y}$$\n\n**Key properties:**\n- Shrinks weights **toward zero** but never exactly to zero\n- Makes $\\mathbf{X}^T\\mathbf{X} + \\lambda \\mathbf{I}$ always invertible (fixes multicollinearity)\n- Equivalent to a **Gaussian prior** on weights: $w_i \\sim \\mathcal{N}(0, \\frac{1}{\\lambda})$\n- Gradient: $2\\lambda \\mathbf{w}$ — weight decay in neural networks is L2 regularization"
+        },
+        {
+          "title": "L1 Regularization (Lasso)",
+          "content": "**Lasso** penalizes the sum of absolute weights:\n\n$$\\mathcal{L} = \\|\\mathbf{y} - \\mathbf{Xw}\\|^2 + \\lambda \\|\\mathbf{w}\\|_1$$\n\n**Key properties:**\n- Drives weights **exactly to zero** — built-in feature selection!\n- No closed-form solution (not differentiable at zero)\n- Solved with coordinate descent or subgradient methods\n- Equivalent to a **Laplace prior** on weights: $p(w_i) \\propto e^{-\\lambda|w_i|}$\n\n**Why sparsity?** The L1 penalty has sharp corners at zero in weight space. The loss contours are more likely to touch these corners than the smooth L2 ball."
+        },
+        {
+          "title": "L1 vs L2: The Geometric View",
+          "content": "The classic interview diagram: plot the loss function contours against the constraint region.\n\n**L2 constraint:** A circle ($w_1^2 + w_2^2 \\leq t$). The elliptical loss contours touch the smooth circle — rarely at an axis.\n\n**L1 constraint:** A diamond ($|w_1| + |w_2| \\leq t$). The diamond has **corners on the axes**. Loss contours are much more likely to touch a corner, setting one weight to exactly zero.\n\nThis geometric argument explains why L1 gives sparse solutions and L2 doesn't.\n\n**When to use which:**\n- L1 when you suspect many features are irrelevant (feature selection)\n- L2 when all features contribute but you want to prevent any one from dominating\n- Elastic Net when you want both"
+        },
+        {
+          "title": "Elastic Net & Other Regularizers",
+          "content": "**Elastic Net** combines L1 and L2:\n\n$$R(\\mathbf{w}) = \\alpha \\|\\mathbf{w}\\|_1 + (1-\\alpha) \\|\\mathbf{w}\\|_2^2$$\n\nGets sparsity from L1 and stability from L2. Particularly useful when features are correlated — pure L1 arbitrarily picks one from a group, while Elastic Net keeps the group together.\n\n**In Deep Learning:**\n- **Weight decay** = L2 regularization on all weights\n- **Dropout** = stochastic regularization (randomly zeros activations)\n- **Batch Normalization** = implicit regularization effect\n- **Early stopping** = limits effective model complexity\n- **Data augmentation** = regularization through training distribution\n\nAll of these reduce variance without explicitly adding a penalty term."
+        },
+        {
+          "title": "Regularization Interview Essentials",
+          "content": "**Q: Why is L1 not differentiable at 0?**\nThe absolute value function has a kink at zero. We use subgradients: any value in $[-1, 1]$ is a valid subgradient at $w=0$.\n\n**Q: Does regularization affect bias or variance?**\nIncreases bias (constrains model), decreases variance (reduces sensitivity). Net effect usually positive.\n\n**Q: What's the Bayesian interpretation?**\nL2 = Gaussian prior (MAP estimation). L1 = Laplace prior. Stronger $\\lambda$ = stronger prior belief that weights should be small.\n\n**Q: How do you choose $\\lambda$?**\nCross-validation. Try a logarithmic grid: $[10^{-4}, 10^{-3}, ..., 10^{2}]$. Plot validation error vs. $\\lambda$ and pick the elbow.\n\n**Q: Weight decay vs. L2 regularization — same thing?**\nFor SGD: yes. For Adam: no! AdamW decouples weight decay from the adaptive learning rate, which matters in practice."
+        }
+      ]
+    },
+    {
+      "id": "gradient-descent",
+      "name": "Gradient Descent & Optimization",
+      "cards": [
+        {
+          "title": "The Optimization Problem",
+          "content": "All of ML boils down to: **find the parameters that minimize a loss function.**\n\n$$\\mathbf{w}^* = \\arg\\min_{\\mathbf{w}} \\mathcal{L}(\\mathbf{w})$$\n\nFor simple models (linear regression), we have closed-form solutions. For everything else — neural networks, SVMs with kernels, etc. — we need **iterative optimization**.\n\nGradient descent is the workhorse: move in the direction of steepest descent.\n\n$$\\mathbf{w}_{t+1} = \\mathbf{w}_t - \\eta \\nabla \\mathcal{L}(\\mathbf{w}_t)$$\n\nWhere $\\eta$ is the **learning rate** — the single most important hyperparameter in deep learning."
+        },
+        {
+          "title": "Batch vs. Stochastic vs. Mini-Batch",
+          "content": "**Batch GD:** Compute gradient over ALL training examples.\n- Pro: Stable, true gradient direction\n- Con: Slow for large datasets, can't escape local minima\n\n**Stochastic GD (SGD):** Compute gradient on ONE random example.\n- Pro: Fast updates, noisy gradient helps escape local minima\n- Con: Very noisy, doesn't converge smoothly\n\n**Mini-Batch GD:** Compute gradient on a batch of B examples.\n- Best of both worlds\n- Typical batch sizes: 32, 64, 128, 256\n- Larger batch → better gradient estimate but less regularization\n- Smaller batch → noisier but better generalization (implicit regularization)\n\n**Interview insight:** Large-batch training often generalizes worse because the noise in small-batch SGD acts as implicit regularization, pushing toward flatter minima."
+        },
+        {
+          "title": "Momentum & Nesterov",
+          "content": "**Problem with vanilla SGD:** Oscillates in steep directions, crawls in flat directions.\n\n**Momentum** accumulates a velocity vector:\n\n$$\\mathbf{v}_t = \\gamma \\mathbf{v}_{t-1} + \\eta \\nabla \\mathcal{L}(\\mathbf{w}_t)$$\n$$\\mathbf{w}_{t+1} = \\mathbf{w}_t - \\mathbf{v}_t$$\n\nTypically $\\gamma = 0.9$. Think of a ball rolling downhill — it builds up speed in consistent directions and dampens oscillations.\n\n**Nesterov Accelerated Gradient (NAG):**\nLook ahead *before* computing the gradient:\n\n$$\\mathbf{v}_t = \\gamma \\mathbf{v}_{t-1} + \\eta \\nabla \\mathcal{L}(\\mathbf{w}_t - \\gamma \\mathbf{v}_{t-1})$$\n\nThe \"lookahead\" gives a better gradient estimate. Nesterov has provably better convergence for convex functions: $O(1/t^2)$ vs. $O(1/t)$ for vanilla GD."
+        },
+        {
+          "title": "Adam — The Default Optimizer",
+          "content": "**Adam** (Adaptive Moment Estimation) combines momentum with per-parameter adaptive learning rates:\n\n$$m_t = \\beta_1 m_{t-1} + (1-\\beta_1)g_t \\quad \\text{(1st moment)}$$\n$$v_t = \\beta_2 v_{t-1} + (1-\\beta_2)g_t^2 \\quad \\text{(2nd moment)}$$\n$$\\hat{m}_t = \\frac{m_t}{1-\\beta_1^t}, \\quad \\hat{v}_t = \\frac{v_t}{1-\\beta_2^t} \\quad \\text{(bias correction)}$$\n$$w_{t+1} = w_t - \\frac{\\eta}{\\sqrt{\\hat{v}_t} + \\epsilon} \\hat{m}_t$$\n\nDefaults: $\\beta_1=0.9$, $\\beta_2=0.999$, $\\epsilon=10^{-8}$.\n\nThe bias correction fixes the initialization bias (both moments start at 0). Without it, early updates would be too small."
+        },
+        {
+          "title": "AdamW & The Weight Decay Fix",
+          "content": "**The problem with Adam + L2 regularization:**\n\nIn Adam, the adaptive learning rate scales the gradient — including the L2 penalty gradient. This means L2 regularization is coupled with the adaptive rate, breaking the intended regularization.\n\n**AdamW** fixes this by **decoupling** weight decay:\n\n$$w_{t+1} = w_t - \\frac{\\eta}{\\sqrt{\\hat{v}_t}+\\epsilon}\\hat{m}_t - \\eta\\lambda w_t$$\n\nThe weight decay term $\\eta\\lambda w_t$ is applied directly, not through the adaptive mechanism.\n\n**This matters in practice.** AdamW is now the standard optimizer for training Transformers and LLMs. The original BERT, GPT, LLaMA — all use AdamW.\n\n**Interview tip:** If asked \"what optimizer would you use for training a Transformer?\" — the answer is AdamW with a cosine learning rate schedule."
+        },
+        {
+          "title": "Learning Rate Schedules",
+          "content": "The learning rate $\\eta$ should **change during training**:\n\n**Warmup:** Start small, linearly increase. Prevents large, destructive updates when model is randomly initialized. Critical for Transformers.\n\n**Step decay:** Divide LR by 10 at specific epochs. Simple but requires tuning.\n\n**Cosine annealing:**\n$$\\eta_t = \\eta_{\\min} + \\frac{1}{2}(\\eta_{\\max}-\\eta_{\\min})(1+\\cos(\\frac{t}{T}\\pi))$$\nSmooth decay. The standard for modern LLM training.\n\n**Cosine with warm restarts:** Reset LR periodically. Can help escape local minima.\n\n**One-cycle:** Warmup to high LR, then cosine decay. Fast convergence.\n\nThe **LLM standard:** Linear warmup (2000 steps) → cosine decay to $\\eta_{\\min} = 0.1 \\cdot \\eta_{\\max}$."
+        },
+        {
+          "title": "Optimization Interview Essentials",
+          "content": "**Q: Why does SGD sometimes generalize better than Adam?**\nSGD noise helps find flatter minima (which generalize better). Adam can converge to sharp minima. This is why some CV papers still use SGD+momentum.\n\n**Q: What's the difference between local minima and saddle points?**\nIn high-dimensional spaces, local minima are rare. **Saddle points** (some dimensions curve up, others down) are the real challenge. Momentum and adaptive methods help escape them.\n\n**Q: What is gradient clipping?**\nCap the gradient norm: `grad = grad * (max_norm / grad_norm)` if `grad_norm > max_norm`. Prevents exploding gradients in RNNs and Transformers. Standard max_norm = 1.0.\n\n**Q: Can gradient descent find the global minimum?**\nFor convex problems: yes (with proper LR). For non-convex (neural nets): no guarantee, but in practice, most local minima are similarly good in high dimensions."
+        }
+      ]
+    },
+    {
+      "id": "ensemble-methods",
+      "name": "Ensemble Methods",
+      "cards": [
+        {
+          "title": "Why Ensembles Work",
+          "content": "Combining multiple models almost always beats any single model. Here's the math:\n\nIf you average $n$ models with **uncorrelated errors**, each with variance $\\sigma^2$, the ensemble's variance is:\n\n$$\\text{Var}_{\\text{ensemble}} = \\frac{\\sigma^2}{n}$$\n\nThis is the **wisdom of crowds** — errors cancel out when models make different mistakes.\n\nBut in practice, model errors ARE correlated (they're trained on the same data). If average pairwise correlation is $\\rho$:\n\n$$\\text{Var}_{\\text{ensemble}} = \\rho \\sigma^2 + \\frac{1-\\rho}{n}\\sigma^2$$\n\nAs $n \\to \\infty$, variance → $\\rho\\sigma^2$. You can't ensemble away the correlated part. **This is why diversity matters** — and why Random Forest randomizes feature subsets."
+        },
+        {
+          "title": "Bagging & Random Forests",
+          "content": "**Bagging** (Bootstrap AGGregatING):\n1. Draw $n$ bootstrap samples (sample with replacement)\n2. Train one model on each\n3. Average predictions (regression) or majority vote (classification)\n\n**Random Forest** = Bagging + feature randomization:\n- At each split, only consider $\\sqrt{p}$ random features (classification) or $p/3$ (regression)\n- This **decorrelates** the trees, reducing $\\rho$ in the variance formula\n\n**Key properties:**\n- Primarily **reduces variance** (bias stays roughly the same)\n- Embarrassingly parallel (trees are independent)\n- Out-of-bag (OOB) error: ~37% of data is left out per tree — free validation!\n- Doesn't overfit with more trees (variance keeps decreasing)"
+        },
+        {
+          "title": "Boosting — AdaBoost",
+          "content": "Boosting builds models **sequentially**, each correcting the previous one's mistakes.\n\n**AdaBoost algorithm:**\n1. Initialize sample weights uniformly: $w_i = 1/n$\n2. For $t = 1, ..., T$:\n   - Train weak learner $h_t$ on weighted data\n   - Compute weighted error: $\\epsilon_t = \\sum_i w_i \\cdot \\mathbf{1}[h_t(x_i) \\neq y_i]$\n   - Compute model weight: $\\alpha_t = \\frac{1}{2}\\ln\\frac{1-\\epsilon_t}{\\epsilon_t}$\n   - Update sample weights: $w_i \\leftarrow w_i \\cdot e^{-\\alpha_t y_i h_t(x_i)}$\n3. Final prediction: $H(x) = \\text{sign}(\\sum_t \\alpha_t h_t(x))$\n\n**Key insight:** Misclassified samples get **higher weights**, forcing the next learner to focus on hard examples. This **reduces bias** primarily."
+        },
+        {
+          "title": "Gradient Boosting & XGBoost",
+          "content": "**Gradient Boosting** generalizes boosting to any differentiable loss function:\n\n1. Start with a constant prediction: $F_0(x) = \\arg\\min_c \\sum L(y_i, c)$\n2. For $t = 1, ..., T$:\n   - Compute **pseudo-residuals**: $r_i = -\\frac{\\partial L(y_i, F_{t-1}(x_i))}{\\partial F_{t-1}(x_i)}$\n   - Fit a tree $h_t$ to the pseudo-residuals\n   - Update: $F_t(x) = F_{t-1}(x) + \\eta \\cdot h_t(x)$\n\n**XGBoost** adds:\n- **Second-order Taylor expansion** of the loss (uses Hessian)\n- L1 + L2 regularization on leaf weights\n- Column subsampling (like Random Forest)\n- Efficient split-finding with histograms\n- Built-in handling of missing values\n\nXGBoost dominates Kaggle and production tabular ML for a reason."
+        },
+        {
+          "title": "Bagging vs. Boosting",
+          "content": "### Bagging (Random Forest):\n- Reduces **variance**\n- Trees are **independent** (parallelizable)\n- Hard to overfit with more trees\n- Robust to noisy data\n- Less tuning needed\n\n### Boosting (XGBoost, LightGBM):\n- Reduces **bias** (and variance with regularization)\n- Trees are **sequential** (slower to train)\n- CAN overfit with too many trees\n- Sensitive to noisy labels\n- More hyperparameters to tune\n\n**When to use which:**\n- Noisy labels, little tuning time → Random Forest\n- Clean data, max performance → Gradient Boosting\n- Production with interpretability needs → Single tree or RF with SHAP\n- Kaggle competition → XGBoost or LightGBM, always\n\n**Stacking:** Use outputs of multiple models as features for a meta-learner. Most powerful but most complex."
+        },
+        {
+          "title": "Ensemble Interview Deep Cuts",
+          "content": "**Q: Why can't you overfit with more trees in Random Forest?**\nEach new tree is an independent estimate. Averaging more independent estimates only reduces variance — like taking more samples from a distribution.\n\n**Q: What's the OOB error in Random Forest?**\nEach tree is trained on ~63% of data (bootstrap). The remaining 37% is a free validation set for that tree. Average the OOB predictions across all trees for an unbiased error estimate.\n\n**Q: LightGBM vs XGBoost?**\nLightGBM: leaf-wise growth (faster, risk of overfitting). XGBoost: level-wise growth (slower, more balanced). LightGBM also uses histogram binning and GOSS (gradient-based one-side sampling) for speed.\n\n**Q: What's the learning rate in gradient boosting?**\nA shrinkage factor $\\eta \\in (0, 1)$ applied to each tree. Smaller $\\eta$ needs more trees but generalizes better. Common: $\\eta = 0.01$ to $0.1$."
+        }
+      ]
+    },
+    {
+      "id": "evaluation-metrics",
+      "name": "Evaluation Metrics & Cross-Validation",
+      "cards": [
+        {
+          "title": "Beyond Accuracy",
+          "content": "**Accuracy** = correct predictions / total predictions. Sounds great. But consider:\n\nA fraud detection system where 99.9% of transactions are legitimate. A model that predicts \"not fraud\" for everything gets **99.9% accuracy** — and catches zero fraud.\n\nThis is the **class imbalance problem**, and it's why accuracy alone is dangerous.\n\nYou need metrics that capture:\n- **How many positives did you catch?** (Recall)\n- **How many of your positive predictions were right?** (Precision)\n- **At what cost?** (False positive rate)\n\nThe right metric depends on the **business cost** of each type of error."
+        },
+        {
+          "title": "Precision, Recall & F1",
+          "content": "From the **confusion matrix:**\n\n- **Precision** = $\\frac{TP}{TP + FP}$ — of everything you labeled positive, how many actually were?\n- **Recall** = $\\frac{TP}{TP + FN}$ — of all actual positives, how many did you catch?\n- **F1 Score** = $\\frac{2 \\cdot P \\cdot R}{P + R}$ — harmonic mean of precision and recall\n\n**Precision-Recall tradeoff:** Lowering the classification threshold catches more positives (higher recall) but includes more false positives (lower precision).\n\n**When precision matters more:** Spam filter (false positives = good emails in spam)\n**When recall matters more:** Cancer detection (false negatives = missed cancer)\n\n**F-beta score:** $F_\\beta = (1+\\beta^2)\\frac{P \\cdot R}{\\beta^2 P + R}$. Use $\\beta=2$ to weight recall higher."
+        },
+        {
+          "title": "ROC-AUC & PR Curves",
+          "content": "**ROC Curve:** Plot True Positive Rate vs. False Positive Rate at all thresholds.\n- TPR (Recall) = $TP/(TP+FN)$\n- FPR = $FP/(FP+TN)$\n- **AUC** = area under this curve. 0.5 = random, 1.0 = perfect.\n- Interpretation: probability that a random positive ranks higher than a random negative.\n\n**PR Curve:** Plot Precision vs. Recall.\n- Better for **imbalanced datasets** (ROC can look optimistic when negatives dominate)\n- Area under PR curve (AP or AUPRC) is the key metric\n\n**Interview rule of thumb:**\n- Balanced classes → ROC-AUC is fine\n- Imbalanced classes → use PR-AUC\n- ROC-AUC of 0.85 with 1% positive rate can still mean terrible precision"
+        },
+        {
+          "title": "Cross-Validation Done Right",
+          "content": "**k-Fold CV:** Split data into k folds, train on k-1, validate on 1. Repeat k times. Average the scores.\n\nTypical k: 5 or 10. Tradeoff:\n- More folds → less bias (bigger training set per fold), more variance, more compute\n- Fewer folds → more bias, less variance, faster\n\n**Stratified k-Fold:** Preserves class proportions in each fold. **Always use this for classification.**\n\n**Critical mistakes to avoid:**\n- **Data leakage:** Fitting scaler/encoder on full data before splitting. Always fit on train fold only!\n- **Time series:** Can't shuffle! Use **TimeSeriesSplit** (always train on past, validate on future)\n- **Grouped data:** Multiple samples from same patient/user must stay in same fold. Use **GroupKFold**."
+        },
+        {
+          "title": "Regression Metrics",
+          "content": "**MSE** = $\\frac{1}{n}\\sum(y_i - \\hat{y}_i)^2$ — penalizes large errors quadratically. Sensitive to outliers.\n\n**RMSE** = $\\sqrt{MSE}$ — same units as target. Easier to interpret.\n\n**MAE** = $\\frac{1}{n}\\sum|y_i - \\hat{y}_i|$ — robust to outliers, harder to optimize (not differentiable at 0).\n\n**R²** = $1 - \\frac{\\sum(y_i-\\hat{y}_i)^2}{\\sum(y_i-\\bar{y})^2}$ — fraction of variance explained. 1.0 = perfect, 0 = predicting the mean. Can be **negative** (worse than predicting mean).\n\n**MAPE** = $\\frac{1}{n}\\sum|\\frac{y_i-\\hat{y}_i}{y_i}|$ — percentage error, undefined when $y_i = 0$.\n\n**When to use what:** RMSE for general use, MAE when outliers exist, MAPE for business stakeholders who think in percentages."
+        },
+        {
+          "title": "Metrics Interview Essentials",
+          "content": "**Q: When would you use log-loss over accuracy?**\nLog-loss penalizes confident wrong predictions heavily. A model predicting 0.51 for a positive is much better than predicting 0.99 for a negative — accuracy treats them the same, log-loss doesn't.\n\n**Q: What's the AUC of a random model?**\n0.5. The ROC curve is a diagonal line.\n\n**Q: How do you handle multi-class evaluation?**\nMacro-average (average per-class metric — treats all classes equally) vs. micro-average (pool all TP/FP/FN — weighted by class frequency). Use macro when minority classes matter.\n\n**Q: Nested cross-validation — when do you need it?**\nWhen you're doing hyperparameter tuning. Outer loop estimates generalization performance, inner loop selects hyperparameters. Without nesting, your performance estimate is biased optimistically.\n\n**Q: What if your test set performance differs wildly from CV?**\nDistribution shift. Your train and test come from different distributions. Investigate feature distributions."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "file": "ml-theory.json",
+      "label": "ML Theory",
+      "color": "#e040fb"
+    },
+    {
+      "file": "ml-coding.json",
+      "label": "ML Coding",
+      "color": "#00e5ff"
+    },
+    {
+      "file": "ml-architectures.json",
+      "label": "LLM & Architectures",
+      "color": "#76ff03"
+    }
+  ]
+}

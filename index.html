@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>DoomScroll — Learn While You Scroll</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000;--card:#0a0a0a;--text:#f5f5f5;--dim:#888;--border:#1a1a1a;--code:#0d1117}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+#app{height:100%;width:100%;max-width:540px;margin:0 auto;position:relative}
+#feed{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#feed::-webkit-scrollbar{display:none}
+
+.card{min-height:100vh;min-height:100dvh;scroll-snap-align:start;padding:56px 20px 24px;display:flex;flex-direction:column;border-bottom:1px solid var(--border);position:relative}
+.card-progress{position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.card-progress-fill{height:100%;border-radius:0 2px 2px 0;transition:width .3s}
+.card-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-shrink:0}
+.card-badge{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff}
+.card-topic{font-size:13px;color:var(--dim);font-weight:500}
+.card-counter{margin-left:auto;font-size:12px;color:var(--dim);white-space:nowrap}
+.card-title{font-size:21px;font-weight:700;line-height:1.3;margin-bottom:14px;flex-shrink:0}
+.card-body{flex:1;font-size:14.5px;line-height:1.75;color:#ccc}
+.card-body p{margin-bottom:10px}
+.card-body strong{color:var(--text);font-weight:600}
+.card-body code:not([class*="language-"]){background:var(--code);padding:2px 6px;border-radius:4px;font-size:12.5px;font-family:'Fira Code',Consolas,monospace}
+.card-body pre{background:var(--code);border-radius:8px;padding:14px;margin:10px 0;overflow-x:auto;border:1px solid #21262d}
+.card-body pre code{font-size:12.5px;line-height:1.5;font-family:'Fira Code',Consolas,monospace;background:none;padding:0}
+.card-body ul,.card-body ol{margin:6px 0 10px;padding-left:20px}
+.card-body li{margin:4px 0}
+.card-body blockquote{border-left:3px solid var(--dim);padding-left:12px;color:var(--dim);margin:10px 0;font-style:italic}
+.card-body h3{font-size:16px;color:var(--text);margin:14px 0 6px;font-weight:600}
+.card-body .katex-display{margin:12px 0;overflow-x:auto;padding:4px 0}
+.card-body .katex{font-size:1.05em}
+
+.topic-divider{min-height:100vh;min-height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.topic-divider .check{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px}
+.topic-divider h2{font-size:22px;font-weight:700;margin-bottom:4px}
+.topic-divider .done{color:var(--dim);font-size:14px}
+.topic-divider .nxt-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-top:32px}
+.topic-divider .nxt-name{font-size:18px;font-weight:600;margin-top:6px}
+.topic-divider .hint{font-size:12px;color:var(--dim);margin-top:40px;animation:pulse 2s ease-in-out infinite}
+
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.7}}
+
+#splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);z-index:100;transition:opacity .6s}
+#splash.hide{opacity:0;pointer-events:none}
+#splash h1{font-size:32px;font-weight:800;background:linear-gradient(135deg,#e040fb,#00e5ff,#76ff03);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#splash p{color:var(--dim);margin-top:6px;font-size:14px}
+#splash .spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .8s linear infinite;margin-top:24px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#cat-bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:540px;display:flex;gap:6px;padding:10px 16px;background:linear-gradient(var(--bg),transparent);z-index:10;pointer-events:none}
+.cat-pill{font-size:10px;padding:4px 10px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:#fff;opacity:.7}
+
+@media(min-width:768px){
+  #app{max-width:620px}
+  .card{padding:56px 32px 28px}
+  .card-title{font-size:24px}
+  .card-body{font-size:15.5px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="splash"><h1>DoomScroll</h1><p>Learn while you scroll</p><div class="spinner"></div></div>
+  <div id="cat-bar"></div>
+  <div id="feed"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script>
+(async()=>{
+  const feed=document.getElementById('feed');
+  const bar=document.getElementById('cat-bar');
+
+  // Load all content
+  const manifest=await fetch('content/manifest.json').then(r=>r.json());
+  const topics=[];
+
+  for(const cat of manifest.categories){
+    const data=await fetch('content/'+cat.file).then(r=>r.json());
+    data.topics.forEach(t=>topics.push({...t,cat:cat.label,color:cat.color}));
+    bar.innerHTML+=`<span class="cat-pill" style="background:${cat.color}">${cat.label}</span>`;
+  }
+
+  // Shuffle helper
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+  let queue=shuffle([...topics]);
+
+  function nextTopic(){
+    if(!queue.length) queue=shuffle([...topics]);
+    return queue.shift();
+  }
+
+  function renderTopic(){
+    const topic=nextTopic();
+    const n=topic.cards.length;
+
+    topic.cards.forEach((card,i)=>{
+      const el=document.createElement('div');
+      el.className='card';
+      el.innerHTML=`
+        <div class="card-progress"><div class="card-progress-fill" style="width:${(i+1)/n*100}%;background:${topic.color}"></div></div>
+        <div class="card-meta">
+          <span class="card-badge" style="background:${topic.color}">${topic.cat}</span>
+          <span class="card-topic">${topic.name}</span>
+          <span class="card-counter">${i+1}/${n}</span>
+        </div>
+        <h2 class="card-title">${card.title}</h2>
+        <div class="card-body">${md(card.content)}</div>`;
+      feed.appendChild(el);
+    });
+
+    // Transition card
+    const peek=queue[0]||topics[0];
+    const d=document.createElement('div');
+    d.className='card topic-divider';
+    d.innerHTML=`
+      <div class="check" style="background:${topic.color}20;color:${topic.color}">&#10003;</div>
+      <h2>${topic.name}</h2>
+      <p class="done">Topic complete</p>
+      <p class="nxt-label">Up next</p>
+      <p class="nxt-name" style="color:${peek.color}">${peek.name}</p>
+      <p class="hint">&darr; keep scrolling</p>`;
+    feed.appendChild(d);
+
+    Prism.highlightAllUnder(feed);
+  }
+
+  // Simple markdown renderer
+  function md(txt){
+    if(!txt)return'';
+    return txt.split(/(```[\s\S]*?```)/).map(part=>{
+      if(part.startsWith('```')){
+        const nl=part.indexOf('\n');
+        const lang=part.slice(3,nl).trim()||'python';
+        const code=part.slice(nl+1,part.length-3);
+        return'<pre><code class="language-'+lang+'">'+esc(code)+'</code></pre>';
+      }
+      return part.split('\n\n').filter(Boolean).map(b=>{
+        b=b.trim();if(!b)return'';
+        if(/^- /m.test(b)){
+          return'<ul>'+b.split('\n').filter(l=>l.startsWith('- ')).map(l=>'<li>'+il(l.slice(2))+'</li>').join('')+'</ul>';
+        }
+        if(b.startsWith('$$')&&b.endsWith('$$')){
+          try{return katex.renderToString(b.slice(2,-2).trim(),{displayMode:true,throwOnError:false})}catch(e){return'<p>'+b+'</p>'}
+        }
+        if(b.startsWith('### '))return'<h3>'+il(b.slice(4))+'</h3>';
+        if(b.startsWith('> '))return'<blockquote>'+il(b.slice(2))+'</blockquote>';
+        return'<p>'+il(b)+'</p>';
+      }).join('');
+    }).join('');
+  }
+
+  function il(s){
+    s=s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
+    s=s.replace(/\$([^$\n]+?)\$/g,(_,m)=>{try{return katex.renderToString(m,{throwOnError:false})}catch(e){return m}});
+    s=s.replace(/\n/g,'<br>');
+    return s;
+  }
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  // Render initial batch
+  for(let i=0;i<3;i++) renderTopic();
+
+  // Infinite scroll
+  feed.addEventListener('scroll',()=>{
+    if(feed.scrollTop+feed.clientHeight>feed.scrollHeight-2000) renderTopic();
+  });
+
+  // Keyboard nav
+  document.addEventListener('keydown',e=>{
+    const h=window.innerHeight;
+    if(e.key==='ArrowDown'||e.key===' '){feed.scrollBy({top:h,behavior:'smooth'});e.preventDefault()}
+    if(e.key==='ArrowUp'){feed.scrollBy({top:-h,behavior:'smooth'});e.preventDefault()}
+  });
+
+  // Hide splash
+  setTimeout(()=>document.getElementById('splash').classList.add('hide'),600);
+})();
+</script>
+</body>
+</html>
