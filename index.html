@@ -8,83 +8,101 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#000;--card:#0a0a0a;--card-up:#111;--text:#f5f5f5;--dim:#777;--border:#1a1a1a;--code:#0d1117}
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+:root{
+  --bg:#050505;--card:#0c0c0c;--surface:#111;--text:#f0f0f0;--dim:#666;--muted:#999;
+  --border:#1a1a1a;--code:#0d1117;--accent:#a78bfa;--glow:rgba(167,139,250,.12);
+  --radius:16px;--max-w:520px
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
 
-#app{height:100%;width:100%;max-width:540px;margin:0 auto;position:relative}
+#app{height:100%;width:100%;max-width:var(--max-w);margin:0 auto;position:relative}
 
-/* Category bar — single row, horizontal scroll */
-#cat-bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:540px;display:flex;gap:6px;padding:10px 16px 8px;background:linear-gradient(var(--bg) 70%,transparent);z-index:10;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* ─── Top bar ─── */
+#topbar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);z-index:20;padding:12px 16px 0;background:linear-gradient(var(--bg) 60%,transparent);pointer-events:none}
+#topbar-inner{display:flex;align-items:center;gap:10px;margin-bottom:8px;pointer-events:auto}
+#logo{font-size:16px;font-weight:800;letter-spacing:-.3px;background:linear-gradient(135deg,#a78bfa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;flex:1}
+.nav-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:5px 12px;border-radius:20px;cursor:pointer;font-weight:600;letter-spacing:.3px;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.nav-btn:hover{color:var(--text);border-color:#333;background:#1a1a1a}
+.nav-btn svg{width:13px;height:13px;fill:currentColor}
+
+/* ─── Category bar ─── */
+#cat-bar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 0 8px;pointer-events:auto}
 #cat-bar::-webkit-scrollbar{display:none}
-.cat-pill{font-size:10px;padding:4px 10px;border-radius:12px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#fff;opacity:.5;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:opacity .2s,transform .2s;pointer-events:auto}
-.cat-pill:active{transform:scale(.95)}
-.cat-pill.active{opacity:1;box-shadow:0 0 8px rgba(255,255,255,.15)}
+.cat-pill{font-size:10px;padding:5px 12px;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#fff;opacity:.35;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .25s;border:1.5px solid transparent}
+.cat-pill:active{transform:scale(.94)}
+.cat-pill.active{opacity:1;border-color:rgba(255,255,255,.15);box-shadow:0 0 12px var(--glow)}
 
-/* Feed */
+/* ─── Feed ─── */
 #feed{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 #feed::-webkit-scrollbar{display:none}
 
-/* Cards */
-.card{height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+/* ─── Cards ─── */
+.card{height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+.card-glow{position:absolute;top:-80px;right:-40px;width:200px;height:200px;border-radius:50%;filter:blur(80px);opacity:.06;pointer-events:none;z-index:0}
+
 .card-progress{position:absolute;top:0;left:0;right:0;height:3px;background:var(--border);z-index:2}
-.card-progress-fill{height:100%;border-radius:0 2px 2px 0;transition:width .3s}
-.card-header{padding:48px 20px 0;flex-shrink:0}
-.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.card-badge{padding:3px 10px;border-radius:12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#fff}
-.card-topic{font-size:12px;color:var(--dim);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.card-counter{font-size:11px;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
-.card-title{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:8px}
+.card-progress-fill{height:100%;border-radius:0 2px 2px 0;transition:width .4s ease}
 
-/* Scrollable card body */
-.card-scroll{flex:1;overflow-y:auto;padding:0 20px 24px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;-webkit-overflow-scrolling:touch}
+.card-header{padding:56px 20px 0;flex-shrink:0;position:relative;z-index:1}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.card-badge{padding:3px 10px;border-radius:20px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#fff;display:inline-flex;align-items:center;gap:4px}
+.card-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6}
+.card-topic{font-size:11px;color:var(--dim);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.card-counter{font-size:10px;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums;background:var(--surface);padding:2px 8px;border-radius:10px;border:1px solid var(--border)}
+
+.card-title{font-size:20px;font-weight:700;line-height:1.35;letter-spacing:-.2px;margin-bottom:10px}
+
+/* ─── Scrollable card body ─── */
+.card-scroll{flex:1;overflow-y:auto;padding:0 20px 80px;scrollbar-width:thin;scrollbar-color:var(--border) transparent;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
 .card-scroll::-webkit-scrollbar{width:3px}
-.card-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.card-scroll::-webkit-scrollbar-thumb{background:#222;border-radius:2px}
 
-.card-body{font-size:14px;line-height:1.75;color:#ccc}
+.card-body{font-size:14px;line-height:1.8;color:#bbb}
 .card-body p{margin-bottom:10px}
 .card-body strong{color:var(--text);font-weight:600}
-.card-body code:not([class*="language-"]){background:var(--code);padding:1.5px 5px;border-radius:4px;font-size:12px;font-family:'Fira Code',Consolas,monospace}
-.card-body pre{background:var(--code);border-radius:8px;padding:12px;margin:8px 0;overflow-x:auto;border:1px solid #21262d;max-height:300px;overflow-y:auto}
-.card-body pre code{font-size:12px;line-height:1.5;font-family:'Fira Code',Consolas,monospace;background:none;padding:0}
-.card-body ul,.card-body ol{margin:6px 0 10px;padding-left:20px}
-.card-body li{margin:3px 0}
-.card-body li ul,.card-body li ol{margin:2px 0 2px;padding-left:16px}
-.card-body blockquote{border-left:3px solid #444;padding:8px 12px;color:var(--dim);margin:10px 0;font-style:italic;background:rgba(255,255,255,.02);border-radius:0 6px 6px 0}
-.card-body h3{font-size:15px;color:var(--text);margin:14px 0 6px;font-weight:600}
-.card-body hr{border:none;border-top:1px solid var(--border);margin:12px 0}
+.card-body code:not([class*="language-"]){background:#161b22;padding:1.5px 6px;border-radius:5px;font-size:12px;font-family:'Fira Code','JetBrains Mono',Consolas,monospace;color:#e6db74;border:1px solid #21262d}
+.card-body pre{background:#0d1117;border-radius:10px;padding:14px;margin:10px 0;overflow-x:auto;border:1px solid #21262d;max-height:280px;overflow-y:auto}
+.card-body pre code{font-size:12px;line-height:1.55;font-family:'Fira Code','JetBrains Mono',Consolas,monospace;background:none;padding:0;border:none;color:inherit}
+.card-body ul,.card-body ol{margin:6px 0 12px;padding-left:20px}
+.card-body li{margin:4px 0;padding-left:2px}
+.card-body li::marker{color:var(--dim)}
+.card-body li ul,.card-body li ol{margin:3px 0 3px;padding-left:16px}
+.card-body blockquote{border-left:3px solid var(--accent);padding:10px 14px;color:var(--muted);margin:12px 0;font-style:italic;background:rgba(167,139,250,.04);border-radius:0 8px 8px 0}
+.card-body h3{font-size:15px;color:var(--text);margin:16px 0 6px;font-weight:600}
+.card-body hr{border:none;border-top:1px solid var(--border);margin:14px 0}
 .card-body .katex-display{margin:10px 0;overflow-x:auto;padding:4px 0}
 .card-body .katex{font-size:1.02em}
 
-/* Fade at bottom of scrollable card */
-.card-fade{position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:1}
+.card-fade{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--bg));pointer-events:none;z-index:1}
 
-/* Topic divider */
-.topic-divider{height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
-.topic-divider .check{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
-.topic-divider h2{font-size:20px;font-weight:700;margin-bottom:4px}
-.topic-divider .done{color:var(--dim);font-size:13px}
-.topic-divider .nxt-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-top:28px}
-.topic-divider .nxt-name{font-size:17px;font-weight:600;margin-top:6px}
-.topic-divider .hint{font-size:11px;color:var(--dim);margin-top:36px;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.25}50%{opacity:.6}}
+/* ─── Topic divider ─── */
+.topic-divider{height:100vh;height:100dvh;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden}
+.topic-divider::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;filter:blur(100px);opacity:.05;pointer-events:none}
+.topic-divider .check{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;border:2px solid}
+.topic-divider h2{font-size:20px;font-weight:700;letter-spacing:-.2px;margin-bottom:6px}
+.topic-divider .done{color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.topic-divider .nxt-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-top:32px}
+.topic-divider .nxt-name{font-size:17px;font-weight:600;margin-top:8px}
+.topic-divider .hint{font-size:11px;color:var(--dim);margin-top:40px;animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.55}}
 
-/* Splash */
-#splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);z-index:100;transition:opacity .5s}
+/* ─── Splash ─── */
+#splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);z-index:100;transition:opacity .6s ease}
 #splash.hide{opacity:0;pointer-events:none}
-#splash h1{font-size:30px;font-weight:800;background:linear-gradient(135deg,#e040fb,#00e5ff,#76ff03);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-#splash p{color:var(--dim);margin-top:6px;font-size:13px}
-#splash .spinner{width:22px;height:22px;border:2px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .7s linear infinite;margin-top:20px}
+#splash h1{font-size:36px;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,#a78bfa,#06b6d4,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#splash p{color:var(--dim);margin-top:8px;font-size:13px;letter-spacing:.5px}
+.loader{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;margin-top:24px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Stats bar at bottom */
-#stats{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:540px;padding:6px 16px 8px;background:linear-gradient(transparent,var(--bg) 40%);z-index:10;display:flex;justify-content:center;gap:16px;font-size:10px;color:var(--dim);pointer-events:none}
+/* ─── Stats bar ─── */
+#stats{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:var(--max-w);padding:8px 16px 12px;background:linear-gradient(transparent,var(--bg) 30%);z-index:10;display:flex;justify-content:center;gap:16px;font-size:10px;color:var(--dim);pointer-events:none;letter-spacing:.3px;font-weight:500}
 
+/* ─── Responsive ─── */
 @media(min-width:768px){
-  #app{max-width:620px}
-  #cat-bar{max-width:620px}
-  #stats{max-width:620px}
-  .card-header{padding:48px 28px 0}
-  .card-scroll{padding:0 28px 24px}
+  :root{--max-w:600px}
+  .card-header{padding:56px 28px 0}
+  .card-scroll{padding:0 28px 80px}
   .card-title{font-size:22px}
   .card-body{font-size:14.5px}
 }
@@ -92,8 +110,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 </head>
 <body>
 <div id="app">
-  <div id="splash"><h1>DoomScroll</h1><p>Learn while you scroll</p><div class="spinner"></div></div>
-  <div id="cat-bar"></div>
+  <div id="splash"><h1>DoomScroll</h1><p>Learn while you scroll</p><div class="loader"></div></div>
+  <div id="topbar">
+    <div id="topbar-inner">
+      <span id="logo">DoomScroll</span>
+      <a class="nav-btn" href="library.html"><svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/></svg>Library</a>
+    </div>
+    <div id="cat-bar"></div>
+  </div>
   <div id="feed"></div>
   <div id="stats"></div>
 </div>
@@ -109,14 +133,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
   const stats=document.getElementById('stats');
   const splash=document.getElementById('splash');
 
-  // Load manifest + all content in parallel
   let manifest;
-  try{
-    manifest=await fetch('content/manifest.json').then(r=>r.json());
-  }catch(e){
-    splash.innerHTML='<h1>DoomScroll</h1><p style="color:#f44">Failed to load content</p>';
-    return;
-  }
+  try{manifest=await fetch('content/manifest.json').then(r=>r.json())}
+  catch(e){splash.innerHTML='<h1>DoomScroll</h1><p style="color:#f44">Failed to load</p>';return}
 
   const results=await Promise.allSettled(
     manifest.categories.map(cat=>
@@ -128,22 +147,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
   const catColors={};
   results.forEach(r=>{
     if(r.status!=='fulfilled')return;
-    const {data,cat}=r.value;
+    const{data,cat}=r.value;
     catColors[cat.label]=cat.color;
     data.topics.forEach(t=>{
-      if(t.cards&&t.cards.length>0){
-        allTopics.push({...t,cat:cat.label,color:cat.color});
-      }
+      if(t.cards&&t.cards.length>0)allTopics.push({...t,cat:cat.label,color:cat.color});
     });
   });
 
-  // Build category bar
+  // Category bar
   const allPill=mk('span','cat-pill active');
   allPill.textContent='All';
-  allPill.style.background='#555';
+  allPill.style.background='#333';
   allPill.onclick=()=>filterCat(null);
   bar.appendChild(allPill);
-
   manifest.categories.forEach(cat=>{
     const pill=mk('span','cat-pill');
     pill.textContent=cat.label;
@@ -153,36 +169,22 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     bar.appendChild(pill);
   });
 
-  // Shuffle
   function shuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
   function mk(tag,cls){const e=document.createElement(tag);if(cls)e.className=cls;return e}
 
-  let activeCat=null;
-  let queue=[];
-  let topicsSeen=0;
-  let cardsSeen=0;
+  let activeCat=null,queue=[],topicsSeen=0,cardsSeen=0;
 
-  function getPool(){
-    return activeCat?allTopics.filter(t=>t.cat===activeCat):allTopics;
-  }
-
-  function refillQueue(){
-    queue=shuffle([...getPool()]);
-  }
-
-  function nextTopic(){
-    if(!queue.length)refillQueue();
-    return queue.shift();
-  }
+  function getPool(){return activeCat?allTopics.filter(t=>t.cat===activeCat):allTopics}
+  function refillQueue(){queue=shuffle([...getPool()])}
+  function nextTopic(){if(!queue.length)refillQueue();return queue.shift()}
 
   function filterCat(cat){
     activeCat=cat;
     bar.querySelectorAll('.cat-pill').forEach(p=>{
-      if(!cat) p.classList.toggle('active',!p.dataset.cat);
+      if(!cat)p.classList.toggle('active',!p.dataset.cat);
       else p.classList.toggle('active',p.dataset.cat===cat);
     });
-    feed.innerHTML='';
-    topicsSeen=0;cardsSeen=0;
+    feed.innerHTML='';topicsSeen=0;cardsSeen=0;
     refillQueue();
     for(let i=0;i<3;i++)renderTopic();
     feed.scrollTop=0;
@@ -198,6 +200,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     topic.cards.forEach((card,i)=>{
       cardsSeen++;
       const el=mk('div','card');
+
+      // Ambient glow
+      const glow=mk('div','card-glow');
+      glow.style.background=topic.color;
+      el.appendChild(glow);
+
       const progress=mk('div','card-progress');
       const fill=mk('div','card-progress-fill');
       fill.style.cssText=`width:${(i+1)/n*100}%;background:${topic.color}`;
@@ -206,9 +214,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
       const header=mk('div','card-header');
       header.innerHTML=`
         <div class="card-meta">
-          <span class="card-badge" style="background:${topic.color}">${esc(topic.cat)}</span>
+          <span class="card-badge" style="background:${topic.color}22;color:${topic.color};border:1px solid ${topic.color}44">${esc(topic.cat)}</span>
           <span class="card-topic">${esc(topic.name)}</span>
-          <span class="card-counter">${i+1}/${n}</span>
+          <span class="card-counter">${i+1} / ${n}</span>
         </div>
         <h2 class="card-title">${esc(card.title)}</h2>`;
 
@@ -216,7 +224,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
       const body=mk('div','card-body');
       body.innerHTML=md(card.content);
       scroll.appendChild(body);
-
       const fade=mk('div','card-fade');
 
       el.appendChild(progress);
@@ -225,28 +232,27 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
       el.appendChild(fade);
       feed.appendChild(el);
 
-      // Prevent feed snap-scroll when scrolling inside card body
       scroll.addEventListener('touchstart',onScrollTouchStart,{passive:true});
       scroll.addEventListener('touchmove',onScrollTouch,{passive:false});
     });
 
-    // Transition divider
+    // Topic divider
     const peek=queue[0]||getPool()[0]||allTopics[0];
     const d=mk('div','topic-divider');
+    d.style.setProperty('--tc',topic.color);
     d.innerHTML=`
-      <div class="check" style="background:${topic.color}20;color:${topic.color}">&#10003;</div>
+      <div class="check" style="background:${topic.color}15;color:${topic.color};border-color:${topic.color}40">&#10003;</div>
       <h2>${esc(topic.name)}</h2>
       <p class="done">Topic complete</p>
-      ${peek?`<p class="nxt-label">Up next</p>
-      <p class="nxt-name" style="color:${peek.color}">${esc(peek.name)}</p>`:''}
+      ${peek?`<p class="nxt-label">Up next</p><p class="nxt-name" style="color:${peek.color}">${esc(peek.name)}</p>`:''}
       <p class="hint">&darr; keep scrolling</p>`;
+    d.querySelector('::before')
     feed.appendChild(d);
 
     try{Prism.highlightAllUnder(feed)}catch(e){}
     updateStats();
   }
 
-  // Touch handling: let card body scroll internally before feed scrolls
   let touchStartY=0;
   function onScrollTouchStart(e){touchStartY=e.touches[0].clientY}
   function onScrollTouch(e){
@@ -254,11 +260,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     const dy=touchStartY-e.touches[0].clientY;
     const atTop=el.scrollTop<=0;
     const atBottom=el.scrollTop+el.clientHeight>=el.scrollHeight-1;
-    // If scrollable content and not at boundary, prevent feed scroll
     if(el.scrollHeight>el.clientHeight){
-      if((dy>0&&!atBottom)||(dy<0&&!atTop)){
-        e.stopPropagation();
-      }
+      if((dy>0&&!atBottom)||(dy<0&&!atTop))e.stopPropagation();
     }
   }
 
@@ -267,10 +270,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
     stats.innerHTML=`<span>${pool.length} topics</span><span>${pool.reduce((a,t)=>a+t.cards.length,0)} cards</span>`;
   }
 
-  // Markdown renderer — line-based for robust list/paragraph handling
+  // Markdown renderer
   function md(txt){
     if(!txt)return'';
-    // Split preserving code blocks
     return txt.split(/(```[\s\S]*?```)/).map(part=>{
       if(part.startsWith('```')){
         const nl=part.indexOf('\n');
@@ -284,147 +286,75 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 
   function renderLines(txt){
     const lines=txt.split('\n');
-    let html='';
-    let inList=false;
-    let listTag='ul';
-    let paraLines=[];
-
-    function flushPara(){
-      if(!paraLines.length)return;
-      const t=paraLines.join('\n').trim();
-      if(t) html+='<p>'+il(t)+'</p>';
-      paraLines=[];
-    }
-
-    function closeList(){
-      if(inList){html+='</li></'+listTag+'>';inList=false}
-    }
+    let html='',inList=false,listTag='ul',paraLines=[];
+    function flushPara(){if(!paraLines.length)return;const t=paraLines.join('\n').trim();if(t)html+='<p>'+il(t)+'</p>';paraLines=[]}
+    function closeList(){if(inList){html+='</li></'+listTag+'>';inList=false}}
 
     for(let i=0;i<lines.length;i++){
-      const line=lines[i];
-      const trimmed=line.trim();
-
-      // Empty line — flush paragraph
+      const line=lines[i],trimmed=line.trim();
       if(!trimmed){flushPara();closeList();continue}
-
-      // Heading
-      if(trimmed.startsWith('### ')){
-        flushPara();closeList();
-        html+='<h3>'+il(trimmed.slice(4))+'</h3>';
-        continue;
-      }
-
-      // Horizontal rule
-      if(/^-{3,}$/.test(trimmed)){
-        flushPara();closeList();
-        html+='<hr>';
-        continue;
-      }
-
-      // Blockquote
+      if(trimmed.startsWith('### ')){flushPara();closeList();html+='<h3>'+il(trimmed.slice(4))+'</h3>';continue}
+      if(/^-{3,}$/.test(trimmed)){flushPara();closeList();html+='<hr>';continue}
       if(trimmed.startsWith('> ')){
         flushPara();closeList();
         let bq=trimmed.slice(2);
-        while(i+1<lines.length&&lines[i+1].trim().startsWith('> ')){
-          i++;bq+='<br>'+lines[i].trim().slice(2);
-        }
-        html+='<blockquote>'+il(bq)+'</blockquote>';
-        continue;
+        while(i+1<lines.length&&lines[i+1].trim().startsWith('> ')){i++;bq+='<br>'+lines[i].trim().slice(2)}
+        html+='<blockquote>'+il(bq)+'</blockquote>';continue;
       }
-
-      // List item: - text, * text, 1. text, 1) text
       const lm=trimmed.match(/^([-*]|\d+[.)])\s+(.*)/);
       if(lm){
         flushPara();
-        const ordered=/^\d/.test(lm[1]);
-        const tag=ordered?'ol':'ul';
-        const text=lm[2];
-        if(!inList){
-          html+='<'+tag+'>';
-          listTag=tag;
-          inList=true;
-        }else if(listTag!==tag){
-          html+='</li></'+listTag+'><'+tag+'>';
-          listTag=tag;
-        }else{
-          html+='</li>';
-        }
+        const ordered=/^\d/.test(lm[1]),tag=ordered?'ol':'ul',text=lm[2];
+        if(!inList){html+='<'+tag+'>';listTag=tag;inList=true}
+        else if(listTag!==tag){html+='</li></'+listTag+'><'+tag+'>';listTag=tag}
+        else html+='</li>';
         html+='<li>'+il(text);
-
-        // Sub-list items (indented)
         let hasSubList=false;
         while(i+1<lines.length){
-          const next=lines[i+1];
-          const sm=next.match(/^\s{2,}([-*]|\d+[.)])\s+(.*)/);
-          if(sm){
-            if(!hasSubList){html+='<ul>';hasSubList=true}
-            else html+='</li>';
-            html+='<li>'+il(sm[2]);
-            i++;
-          }else break;
+          const next=lines[i+1],sm=next.match(/^\s{2,}([-*]|\d+[.)])\s+(.*)/);
+          if(sm){if(!hasSubList){html+='<ul>';hasSubList=true}else html+='</li>';html+='<li>'+il(sm[2]);i++}else break;
         }
         if(hasSubList)html+='</li></ul>';
         continue;
       }
-
-      // Display math block
       if(trimmed.startsWith('$$')){
         flushPara();closeList();
         let math=trimmed;
-        while(!math.endsWith('$$')||math==='$$'){
-          if(i+1>=lines.length)break;
-          i++;math+='\n'+lines[i].trim();
-        }
+        while(!math.endsWith('$$')||math==='$$'){if(i+1>=lines.length)break;i++;math+='\n'+lines[i].trim()}
         try{html+=katex.renderToString(math.slice(2,-2).trim(),{displayMode:true,throwOnError:false})}
         catch(e){html+='<p>'+esc(math)+'</p>'}
         continue;
       }
-
-      // Regular text — accumulate for paragraph
-      if(inList){
-        // Continuation of list item
-        html+='<br>'+il(trimmed);
-      }else{
-        paraLines.push(trimmed);
-      }
+      if(inList){html+='<br>'+il(trimmed)}else{paraLines.push(trimmed)}
     }
-
-    flushPara();
-    closeList();
+    flushPara();closeList();
     return html;
   }
 
-  // Inline formatting
   function il(s){
     s=s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
     s=s.replace(/`([^`]+)`/g,'<code>$1</code>');
-    s=s.replace(/\$([^$\n]+?)\$/g,(_,m)=>{
-      try{return katex.renderToString(m,{throwOnError:false})}catch(e){return m}
-    });
+    s=s.replace(/\$([^$\n]+?)\$/g,(_,m)=>{try{return katex.renderToString(m,{throwOnError:false})}catch(e){return m}});
     s=s.replace(/\n/g,'<br>');
     return s;
   }
 
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-  // Initial render
   refillQueue();
   for(let i=0;i<3;i++)renderTopic();
   updateStats();
 
-  // Infinite scroll
   feed.addEventListener('scroll',()=>{
     if(feed.scrollTop+feed.clientHeight>feed.scrollHeight-2000)renderTopic();
   });
 
-  // Keyboard nav
   document.addEventListener('keydown',e=>{
     const h=window.innerHeight;
     if(e.key==='ArrowDown'||e.key===' '){feed.scrollBy({top:h,behavior:'smooth'});e.preventDefault()}
     if(e.key==='ArrowUp'){feed.scrollBy({top:-h,behavior:'smooth'});e.preventDefault()}
   });
 
-  // Hide splash
   setTimeout(()=>splash.classList.add('hide'),500);
 })();
 </script>

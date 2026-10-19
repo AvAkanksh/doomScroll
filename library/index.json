@@ -1,0 +1,4493 @@
+[
+  {
+    "id": "01-ml-system-design",
+    "label": "Ml System Design",
+    "repos": [
+      {
+        "dir": "alirezadir-ml-interviews",
+        "github": "https://github.com/alirezadir/Machine-Learning-Interviews",
+        "description": "ML System Design Cases",
+        "files": [
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/ml-companies.md",
+            "name": "ml-companies.md",
+            "size": 7149,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/ml-system-design.md",
+            "name": "ml-system-design.md",
+            "size": 21309,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-ads-ranking.md",
+            "name": "mlsd-ads-ranking.md",
+            "size": 6923,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-av.md",
+            "name": "mlsd-av.md",
+            "size": 15320,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-event-recom.md",
+            "name": "mlsd-event-recom.md",
+            "size": 4333,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-feature-eng.md",
+            "name": "mlsd-feature-eng.md",
+            "size": 3855,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-game-recom.md",
+            "name": "mlsd-game-recom.md",
+            "size": 11943,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-harmful-content.md",
+            "name": "mlsd-harmful-content.md",
+            "size": 5232,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-image-search.md",
+            "name": "mlsd-image-search.md",
+            "size": 5541,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-metrics.md",
+            "name": "mlsd-metrics.md",
+            "size": 7374,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-mm-video-search.md",
+            "name": "mlsd-mm-video-search.md",
+            "size": 4007,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-modeling-popular-archs.md",
+            "name": "mlsd-modeling-popular-archs.md",
+            "size": 486,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-newsfeed.md",
+            "name": "mlsd-newsfeed.md",
+            "size": 6879,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-prediction.md",
+            "name": "mlsd-prediction.md",
+            "size": 445,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-preprocessing.md",
+            "name": "mlsd-preprocessing.md",
+            "size": 271,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-pymk.md",
+            "name": "mlsd-pymk.md",
+            "size": 4262,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-search.md",
+            "name": "mlsd-search.md",
+            "size": 10189,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-template.md",
+            "name": "mlsd-template.md",
+            "size": 981,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-typeahead.md",
+            "name": "mlsd-typeahead.md",
+            "size": 0,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd-video-recom.md",
+            "name": "mlsd-video-recom.md",
+            "size": 11436,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/alirezadir-ml-interviews/mlsd_obj_detection.md",
+            "name": "mlsd_obj_detection.md",
+            "size": 3032,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 21,
+        "total_size": 130967
+      },
+      {
+        "dir": "chiphuyen-ml-systems-design",
+        "github": "https://github.com/chiphuyen/machine-learning-systems-design",
+        "description": "ML Systems Design Book",
+        "files": [
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/README.md",
+            "name": "README.md",
+            "size": 2865,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q1.md",
+            "name": "q1.md",
+            "size": 344,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q10.md",
+            "name": "q10.md",
+            "size": 142,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q11.md",
+            "name": "q11.md",
+            "size": 228,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q12.md",
+            "name": "q12.md",
+            "size": 127,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q13.md",
+            "name": "q13.md",
+            "size": 286,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q14.md",
+            "name": "q14.md",
+            "size": 173,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q15.md",
+            "name": "q15.md",
+            "size": 243,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q16.md",
+            "name": "q16.md",
+            "size": 290,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q17.md",
+            "name": "q17.md",
+            "size": 115,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q18.md",
+            "name": "q18.md",
+            "size": 201,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q19.md",
+            "name": "q19.md",
+            "size": 230,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q2.md",
+            "name": "q2.md",
+            "size": 202,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q20.md",
+            "name": "q20.md",
+            "size": 123,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q21.md",
+            "name": "q21.md",
+            "size": 222,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q22.md",
+            "name": "q22.md",
+            "size": 98,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q23.md",
+            "name": "q23.md",
+            "size": 187,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q24.md",
+            "name": "q24.md",
+            "size": 170,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q25.md",
+            "name": "q25.md",
+            "size": 375,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q26.md",
+            "name": "q26.md",
+            "size": 151,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q27.md",
+            "name": "q27.md",
+            "size": 170,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q3.md",
+            "name": "q3.md",
+            "size": 209,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q4.md",
+            "name": "q4.md",
+            "size": 230,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q5.md",
+            "name": "q5.md",
+            "size": 202,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q6.md",
+            "name": "q6.md",
+            "size": 133,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q7.md",
+            "name": "q7.md",
+            "size": 122,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q8.md",
+            "name": "q8.md",
+            "size": 211,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/answers/q9.md",
+            "name": "q9.md",
+            "size": 178,
+            "ext": ".md",
+            "dir": "answers"
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/case-studies.md",
+            "name": "case-studies.md",
+            "size": 7759,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/design-a-machine-learning-system.md",
+            "name": "design-a-machine-learning-system.md",
+            "size": 31757,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/exercises.md",
+            "name": "exercises.md",
+            "size": 4560,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/chiphuyen-ml-systems-design/research-vs-production.md",
+            "name": "research-vs-production.md",
+            "size": 8237,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 32,
+        "total_size": 60540
+      },
+      {
+        "dir": "khangich-ml-interview",
+        "github": "https://github.com/khangich/machine-learning-interview",
+        "description": "ML Interview Guide",
+        "files": [
+          {
+            "path": "01-ml-system-design/khangich-ml-interview/README.md",
+            "name": "README.md",
+            "size": 16550,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "01-ml-system-design/khangich-ml-interview/design.md",
+            "name": "design.md",
+            "size": 5155,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 2,
+        "total_size": 21705
+      }
+    ]
+  },
+  {
+    "id": "02-ml-coding",
+    "label": "Ml Coding",
+    "repos": [
+      {
+        "dir": "alirezadir-ml-coding",
+        "github": "https://github.com/alirezadir/Machine-Learning-Interviews",
+        "description": "PyTorch ML Coding Problems",
+        "files": [
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/ml-coding.md",
+            "name": "ml-coding.md",
+            "size": 15081,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/__init__.py",
+            "name": "__init__.py",
+            "size": 65,
+            "ext": ".py",
+            "dir": "problems"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/__init__.py",
+            "name": "__init__.py",
+            "size": 34,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/bounded_agent_loop.py",
+            "name": "bounded_agent_loop.py",
+            "size": 1612,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/planner_executor.py",
+            "name": "planner_executor.py",
+            "size": 1220,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/retry_with_idempotency.py",
+            "name": "retry_with_idempotency.py",
+            "size": 1524,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/sliding_window_memory.py",
+            "name": "sliding_window_memory.py",
+            "size": 1493,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/tool_argument_validation.py",
+            "name": "tool_argument_validation.py",
+            "size": 1948,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/agentic_ai/tool_registry.py",
+            "name": "tool_registry.py",
+            "size": 1506,
+            "ext": ".py",
+            "dir": "problems/agentic_ai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/__init__.py",
+            "name": "__init__.py",
+            "size": 48,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/binary_metrics_roc_auc.py",
+            "name": "binary_metrics_roc_auc.py",
+            "size": 2948,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/categorical_preprocessing.py",
+            "name": "categorical_preprocessing.py",
+            "size": 2010,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/conv2d.py",
+            "name": "conv2d.py",
+            "size": 1388,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/dataset_split.py",
+            "name": "dataset_split.py",
+            "size": 2698,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/decision_tree_split.py",
+            "name": "decision_tree_split.py",
+            "size": 1904,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/feature_standardization.py",
+            "name": "feature_standardization.py",
+            "size": 1362,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/gradient_boosting_step.py",
+            "name": "gradient_boosting_step.py",
+            "size": 2073,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/kmeans.py",
+            "name": "kmeans.py",
+            "size": 2014,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/knn.py",
+            "name": "knn.py",
+            "size": 1696,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/linear_regression.py",
+            "name": "linear_regression.py",
+            "size": 1300,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/logistic_regression.py",
+            "name": "logistic_regression.py",
+            "size": 1733,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/matrix_factorization.py",
+            "name": "matrix_factorization.py",
+            "size": 1547,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/multiclass_metrics.py",
+            "name": "multiclass_metrics.py",
+            "size": 2211,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/multinomial_naive_bayes.py",
+            "name": "multinomial_naive_bayes.py",
+            "size": 2310,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/pca.py",
+            "name": "pca.py",
+            "size": 1173,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/reservoir_sampling.py",
+            "name": "reservoir_sampling.py",
+            "size": 832,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/sampling_strategies.py",
+            "name": "sampling_strategies.py",
+            "size": 1873,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/softmax_cross_entropy.py",
+            "name": "softmax_cross_entropy.py",
+            "size": 1530,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/classic_ml/streaming_weighted_mean.py",
+            "name": "streaming_weighted_mean.py",
+            "size": 1154,
+            "ext": ".py",
+            "dir": "problems/classic_ml"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/__init__.py",
+            "name": "__init__.py",
+            "size": 37,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/classifier_free_guidance.py",
+            "name": "classifier_free_guidance.py",
+            "size": 914,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/contrastive_loss.py",
+            "name": "contrastive_loss.py",
+            "size": 1578,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/dpo_loss.py",
+            "name": "dpo_loss.py",
+            "size": 1182,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/lora_linear.py",
+            "name": "lora_linear.py",
+            "size": 1066,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/genai/rag_retrieval.py",
+            "name": "rag_retrieval.py",
+            "size": 1243,
+            "ext": ".py",
+            "dir": "problems/genai"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/__init__.py",
+            "name": "__init__.py",
+            "size": 46,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/byte_pair_encoding.py",
+            "name": "byte_pair_encoding.py",
+            "size": 2118,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/causal_attention_mask.py",
+            "name": "causal_attention_mask.py",
+            "size": 896,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/kv_cache.py",
+            "name": "kv_cache.py",
+            "size": 1548,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/padded_batches.py",
+            "name": "padded_batches.py",
+            "size": 953,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/scaled_dot_product_attention.py",
+            "name": "scaled_dot_product_attention.py",
+            "size": 1772,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/sinusoidal_position_encoding.py",
+            "name": "sinusoidal_position_encoding.py",
+            "size": 917,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/tfidf.py",
+            "name": "tfidf.py",
+            "size": 1425,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/problems/language_models/top_k_top_p_sampling.py",
+            "name": "top_k_top_p_sampling.py",
+            "size": 1940,
+            "ext": ".py",
+            "dir": "problems/language_models"
+          },
+          {
+            "path": "02-ml-coding/alirezadir-ml-coding/pytorch-ml-coding.md",
+            "name": "pytorch-ml-coding.md",
+            "size": 66914,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 45,
+        "total_size": 142836
+      },
+      {
+        "dir": "eriklindernoren-ml-from-scratch",
+        "github": "https://github.com/eriklindernoren/ML-From-Scratch",
+        "description": "ML Algorithms From Scratch",
+        "files": [
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/README.md",
+            "name": "README.md",
+            "size": 13780,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/__init__.py",
+            "name": "__init__.py",
+            "size": 0,
+            "ext": ".py",
+            "dir": "mlfromscratch"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/data/TempLinkoping2016.txt",
+            "name": "TempLinkoping2016.txt",
+            "size": 6024,
+            "ext": ".txt",
+            "dir": "mlfromscratch/data"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/__init__.py",
+            "name": "__init__.py",
+            "size": 42,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/activation_functions.py",
+            "name": "activation_functions.py",
+            "size": 1992,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/layers.py",
+            "name": "layers.py",
+            "size": 27518,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/loss_functions.py",
+            "name": "loss_functions.py",
+            "size": 1045,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/neural_network.py",
+            "name": "neural_network.py",
+            "size": 4750,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/deep_learning/optimizers.py",
+            "name": "optimizers.py",
+            "size": 4774,
+            "ext": ".py",
+            "dir": "mlfromscratch/deep_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/adaboost.py",
+            "name": "adaboost.py",
+            "size": 1139,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/apriori.py",
+            "name": "apriori.py",
+            "size": 1178,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/bayesian_regression.py",
+            "name": "bayesian_regression.py",
+            "size": 2472,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/convolutional_neural_network.py",
+            "name": "convolutional_neural_network.py",
+            "size": 2904,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/dbscan.py",
+            "name": "dbscan.py",
+            "size": 642,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/decision_tree_classifier.py",
+            "name": "decision_tree_classifier.py",
+            "size": 956,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/decision_tree_regressor.py",
+            "name": "decision_tree_regressor.py",
+            "size": 1599,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/deep_q_network.py",
+            "name": "deep_q_network.py",
+            "size": 1117,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/demo.py",
+            "name": "demo.py",
+            "size": 4677,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/elastic_net.py",
+            "name": "elastic_net.py",
+            "size": 1999,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/fp_growth.py",
+            "name": "fp_growth.py",
+            "size": 1119,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/gaussian_mixture_model.py",
+            "name": "gaussian_mixture_model.py",
+            "size": 565,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/genetic_algorithm.py",
+            "name": "genetic_algorithm.py",
+            "size": 1333,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/gradient_boosting_classifier.py",
+            "name": "gradient_boosting_classifier.py",
+            "size": 985,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/gradient_boosting_regressor.py",
+            "name": "gradient_boosting_regressor.py",
+            "size": 1849,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/k_means.py",
+            "name": "k_means.py",
+            "size": 572,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/k_nearest_neighbors.py",
+            "name": "k_nearest_neighbors.py",
+            "size": 851,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/lasso_regression.py",
+            "name": "lasso_regression.py",
+            "size": 1988,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/linear_discriminant_analysis.py",
+            "name": "linear_discriminant_analysis.py",
+            "size": 929,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/linear_regression.py",
+            "name": "linear_regression.py",
+            "size": 1610,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/logistic_regression.py",
+            "name": "logistic_regression.py",
+            "size": 1062,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/multi_class_lda.py",
+            "name": "multi_class_lda.py",
+            "size": 486,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/multilayer_perceptron.py",
+            "name": "multilayer_perceptron.py",
+            "size": 2441,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/naive_bayes.py",
+            "name": "naive_bayes.py",
+            "size": 789,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/neuroevolution.py",
+            "name": "neuroevolution.py",
+            "size": 2167,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/particle_swarm_optimization.py",
+            "name": "particle_swarm_optimization.py",
+            "size": 2569,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/partitioning_around_medoids.py",
+            "name": "partitioning_around_medoids.py",
+            "size": 540,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/perceptron.py",
+            "name": "perceptron.py",
+            "size": 1253,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/polynomial_regression.py",
+            "name": "polynomial_regression.py",
+            "size": 2985,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/principal_component_analysis.py",
+            "name": "principal_component_analysis.py",
+            "size": 1201,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/random_forest.py",
+            "name": "random_forest.py",
+            "size": 738,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/recurrent_neural_network.py",
+            "name": "recurrent_neural_network.py",
+            "size": 3225,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/restricted_boltzmann_machine.py",
+            "name": "restricted_boltzmann_machine.py",
+            "size": 1821,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/ridge_regression.py",
+            "name": "ridge_regression.py",
+            "size": 2967,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/support_vector_machine.py",
+            "name": "support_vector_machine.py",
+            "size": 969,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/examples/xgboost.py",
+            "name": "xgboost.py",
+            "size": 897,
+            "ext": ".py",
+            "dir": "mlfromscratch/examples"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/reinforcement_learning/__init__.py",
+            "name": "__init__.py",
+            "size": 40,
+            "ext": ".py",
+            "dir": "mlfromscratch/reinforcement_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/reinforcement_learning/deep_q_network.py",
+            "name": "deep_q_network.py",
+            "size": 5304,
+            "ext": ".py",
+            "dir": "mlfromscratch/reinforcement_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/__init__.py",
+            "name": "__init__.py",
+            "size": 895,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/adaboost.py",
+            "name": "adaboost.py",
+            "size": 5633,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/bayesian_regression.py",
+            "name": "bayesian_regression.py",
+            "size": 4595,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/decision_tree.py",
+            "name": "decision_tree.py",
+            "size": 11134,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/gradient_boosting.py",
+            "name": "gradient_boosting.py",
+            "size": 4281,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/k_nearest_neighbors.py",
+            "name": "k_nearest_neighbors.py",
+            "size": 1265,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/linear_discriminant_analysis.py",
+            "name": "linear_discriminant_analysis.py",
+            "size": 1395,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/logistic_regression.py",
+            "name": "logistic_regression.py",
+            "size": 2059,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/multi_class_lda.py",
+            "name": "multi_class_lda.py",
+            "size": 2627,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/multilayer_perceptron.py",
+            "name": "multilayer_perceptron.py",
+            "size": 4390,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/naive_bayes.py",
+            "name": "naive_bayes.py",
+            "size": 3363,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/neuroevolution.py",
+            "name": "neuroevolution.py",
+            "size": 6006,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/particle_swarm_optimization.py",
+            "name": "particle_swarm_optimization.py",
+            "size": 5985,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/perceptron.py",
+            "name": "perceptron.py",
+            "size": 2679,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/random_forest.py",
+            "name": "random_forest.py",
+            "size": 3683,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/regression.py",
+            "name": "regression.py",
+            "size": 10499,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/support_vector_machine.py",
+            "name": "support_vector_machine.py",
+            "size": 4024,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/supervised_learning/xgboost.py",
+            "name": "xgboost.py",
+            "size": 3726,
+            "ext": ".py",
+            "dir": "mlfromscratch/supervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/__init__.py",
+            "name": "__init__.py",
+            "size": 358,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/apriori.py",
+            "name": "apriori.py",
+            "size": 7906,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/autoencoder.py",
+            "name": "autoencoder.py",
+            "size": 4017,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/dbscan.py",
+            "name": "dbscan.py",
+            "size": 4067,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/dcgan.py",
+            "name": "dcgan.py",
+            "size": 6384,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/fp_growth.py",
+            "name": "fp_growth.py",
+            "size": 7664,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/gaussian_mixture_model.py",
+            "name": "gaussian_mixture_model.py",
+            "size": 4723,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/generative_adversarial_network.py",
+            "name": "generative_adversarial_network.py",
+            "size": 5842,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/genetic_algorithm.py",
+            "name": "genetic_algorithm.py",
+            "size": 4227,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/k_means.py",
+            "name": "k_means.py",
+            "size": 3530,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/partitioning_around_medoids.py",
+            "name": "partitioning_around_medoids.py",
+            "size": 4900,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/principal_component_analysis.py",
+            "name": "principal_component_analysis.py",
+            "size": 1247,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/unsupervised_learning/restricted_boltzmann_machine.py",
+            "name": "restricted_boltzmann_machine.py",
+            "size": 3357,
+            "ext": ".py",
+            "dir": "mlfromscratch/unsupervised_learning"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/utils/__init__.py",
+            "name": "__init__.py",
+            "size": 85,
+            "ext": ".py",
+            "dir": "mlfromscratch/utils"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/utils/data_manipulation.py",
+            "name": "data_manipulation.py",
+            "size": 5089,
+            "ext": ".py",
+            "dir": "mlfromscratch/utils"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/utils/data_operation.py",
+            "name": "data_operation.py",
+            "size": 2240,
+            "ext": ".py",
+            "dir": "mlfromscratch/utils"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/utils/kernels.py",
+            "name": "kernels.py",
+            "size": 398,
+            "ext": ".py",
+            "dir": "mlfromscratch/utils"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/mlfromscratch/utils/misc.py",
+            "name": "misc.py",
+            "size": 3773,
+            "ext": ".py",
+            "dir": "mlfromscratch/utils"
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/requirements.txt",
+            "name": "requirements.txt",
+            "size": 78,
+            "ext": ".txt",
+            "dir": ""
+          },
+          {
+            "path": "02-ml-coding/eriklindernoren-ml-from-scratch/setup.py",
+            "name": "setup.py",
+            "size": 1078,
+            "ext": ".py",
+            "dir": ""
+          }
+        ],
+        "file_count": 85,
+        "total_size": 271065
+      }
+    ]
+  },
+  {
+    "id": "03-llm-deep-learning",
+    "label": "Llm Deep Learning",
+    "repos": [
+      {
+        "dir": "arogozhnikov-einops",
+        "github": "https://github.com/arogozhnikov/einops",
+        "description": "Tensor Operations",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/README.md",
+            "name": "README.md",
+            "size": 13187,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/_backends.py",
+            "name": "_backends.py",
+            "size": 22654,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/_torch_specific.py",
+            "name": "_torch_specific.py",
+            "size": 4476,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/array_api.py",
+            "name": "array_api.py",
+            "size": 6885,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/convert_readme.py",
+            "name": "convert_readme.py",
+            "size": 939,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/einops.py",
+            "name": "einops.py",
+            "size": 38622,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/packing.py",
+            "name": "packing.py",
+            "size": 7669,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/parsing.py",
+            "name": "parsing.py",
+            "size": 6762,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/arogozhnikov-einops/test_notebooks.py",
+            "name": "test_notebooks.py",
+            "size": 2091,
+            "ext": ".py",
+            "dir": ""
+          }
+        ],
+        "file_count": 9,
+        "total_size": 103285
+      },
+      {
+        "dir": "johnma2006-mamba-minimal",
+        "github": "https://github.com/johnma2006/mamba-minimal",
+        "description": "Mamba SSM Implementation",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/johnma2006-mamba-minimal/README.md",
+            "name": "README.md",
+            "size": 1504,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/johnma2006-mamba-minimal/demo.ipynb",
+            "name": "demo.ipynb",
+            "size": 6188,
+            "ext": ".ipynb",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/johnma2006-mamba-minimal/model.py",
+            "name": "model.py",
+            "size": 12940,
+            "ext": ".py",
+            "dir": ""
+          }
+        ],
+        "file_count": 3,
+        "total_size": 20632
+      },
+      {
+        "dir": "karpathy-micrograd",
+        "github": "https://github.com/karpathy/micrograd",
+        "description": "Autograd Engine",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/README.md",
+            "name": "README.md",
+            "size": 3009,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/demo.ipynb",
+            "name": "demo.ipynb",
+            "size": 57550,
+            "ext": ".ipynb",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/micrograd/__init__.py",
+            "name": "__init__.py",
+            "size": 0,
+            "ext": ".py",
+            "dir": "micrograd"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/micrograd/engine.py",
+            "name": "engine.py",
+            "size": 2730,
+            "ext": ".py",
+            "dir": "micrograd"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/micrograd/nn.py",
+            "name": "nn.py",
+            "size": 1613,
+            "ext": ".py",
+            "dir": "micrograd"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/setup.py",
+            "name": "setup.py",
+            "size": 717,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/test/test_engine.py",
+            "name": "test_engine.py",
+            "size": 1470,
+            "ext": ".py",
+            "dir": "test"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-micrograd/trace_graph.ipynb",
+            "name": "trace_graph.ipynb",
+            "size": 2934,
+            "ext": ".ipynb",
+            "dir": ""
+          }
+        ],
+        "file_count": 8,
+        "total_size": 70023
+      },
+      {
+        "dir": "karpathy-nanogpt",
+        "github": "https://github.com/karpathy/nanoGPT",
+        "description": "GPT Training",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/README.md",
+            "name": "README.md",
+            "size": 13850,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/bench.py",
+            "name": "bench.py",
+            "size": 4815,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/eval_gpt2.py",
+            "name": "eval_gpt2.py",
+            "size": 208,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/eval_gpt2_large.py",
+            "name": "eval_gpt2_large.py",
+            "size": 215,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/eval_gpt2_medium.py",
+            "name": "eval_gpt2_medium.py",
+            "size": 216,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/eval_gpt2_xl.py",
+            "name": "eval_gpt2_xl.py",
+            "size": 213,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/finetune_shakespeare.py",
+            "name": "finetune_shakespeare.py",
+            "size": 645,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/train_gpt2.py",
+            "name": "train_gpt2.py",
+            "size": 681,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/config/train_shakespeare_char.py",
+            "name": "train_shakespeare_char.py",
+            "size": 1132,
+            "ext": ".py",
+            "dir": "config"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/configurator.py",
+            "name": "configurator.py",
+            "size": 1758,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/openwebtext/prepare.py",
+            "name": "prepare.py",
+            "size": 3167,
+            "ext": ".py",
+            "dir": "data/openwebtext"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/openwebtext/readme.md",
+            "name": "readme.md",
+            "size": 489,
+            "ext": ".md",
+            "dir": "data/openwebtext"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/shakespeare/prepare.py",
+            "name": "prepare.py",
+            "size": 1132,
+            "ext": ".py",
+            "dir": "data/shakespeare"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/shakespeare/readme.md",
+            "name": "readme.md",
+            "size": 161,
+            "ext": ".md",
+            "dir": "data/shakespeare"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/shakespeare_char/prepare.py",
+            "name": "prepare.py",
+            "size": 2344,
+            "ext": ".py",
+            "dir": "data/shakespeare_char"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/data/shakespeare_char/readme.md",
+            "name": "readme.md",
+            "size": 209,
+            "ext": ".md",
+            "dir": "data/shakespeare_char"
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/model.py",
+            "name": "model.py",
+            "size": 16345,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/sample.py",
+            "name": "sample.py",
+            "size": 3942,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/scaling_laws.ipynb",
+            "name": "scaling_laws.ipynb",
+            "size": 268519,
+            "ext": ".ipynb",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/train.py",
+            "name": "train.py",
+            "size": 14857,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/karpathy-nanogpt/transformer_sizing.ipynb",
+            "name": "transformer_sizing.ipynb",
+            "size": 14579,
+            "ext": ".ipynb",
+            "dir": ""
+          }
+        ],
+        "file_count": 21,
+        "total_size": 349477
+      },
+      {
+        "dir": "labmlai-annotated-papers",
+        "github": "https://github.com/labmlai/annotated_deep_learning_paper_implementations",
+        "description": "Annotated Paper Implementations",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/evaluate.py",
+            "name": "evaluate.py",
+            "size": 11879,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/experiment.py",
+            "name": "experiment.py",
+            "size": 7381,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/latent_diffusion.py",
+            "name": "latent_diffusion.py",
+            "size": 5447,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/unet.py",
+            "name": "unet.py",
+            "size": 14850,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/util.py",
+            "name": "util.py",
+            "size": 4997,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/diffusion/utils.py",
+            "name": "utils.py",
+            "size": 372,
+            "ext": ".py",
+            "dir": "diffusion"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/gan/experiment.py",
+            "name": "experiment.py",
+            "size": 7773,
+            "ext": ".py",
+            "dir": "gan"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/adam_fp16.py",
+            "name": "adam_fp16.py",
+            "size": 5522,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/adam_warmup.py",
+            "name": "adam_warmup.py",
+            "size": 2301,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/adam_warmup_cosine_decay.py",
+            "name": "adam_warmup_cosine_decay.py",
+            "size": 3675,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/amsgrad.py",
+            "name": "amsgrad.py",
+            "size": 7847,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/configs.py",
+            "name": "configs.py",
+            "size": 5117,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/mnist_experiment.py",
+            "name": "mnist_experiment.py",
+            "size": 3729,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/noam.py",
+            "name": "noam.py",
+            "size": 3380,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/performance_test.py",
+            "name": "performance_test.py",
+            "size": 1615,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/radam.py",
+            "name": "radam.py",
+            "size": 11257,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/optimizers/sophia.py",
+            "name": "sophia.py",
+            "size": 7283,
+            "ext": ".py",
+            "dir": "optimizers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/database.py",
+            "name": "database.py",
+            "size": 5971,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/dataset.py",
+            "name": "dataset.py",
+            "size": 4107,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/experiment.py",
+            "name": "experiment.py",
+            "size": 2999,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/model.py",
+            "name": "model.py",
+            "size": 22234,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/relative_mha.py",
+            "name": "relative_mha.py",
+            "size": 6381,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/train.py",
+            "name": "train.py",
+            "size": 7120,
+            "ext": ".py",
+            "dir": "transformers"
+          },
+          {
+            "path": "03-llm-deep-learning/labmlai-annotated-papers/transformers/utils.py",
+            "name": "utils.py",
+            "size": 538,
+            "ext": ".py",
+            "dir": "transformers"
+          }
+        ],
+        "file_count": 24,
+        "total_size": 153775
+      },
+      {
+        "dir": "rasbt-llms-from-scratch",
+        "github": "https://github.com/rasbt/LLMs-from-scratch",
+        "description": "Build LLM From Scratch",
+        "files": [
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/LICENSE.txt",
+            "name": "LICENSE.txt",
+            "size": 11505,
+            "ext": ".txt",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/README.md",
+            "name": "README.md",
+            "size": 19004,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/DDP-script-torchrun.py",
+            "name": "DDP-script-torchrun.py",
+            "size": 7113,
+            "ext": ".py",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/DDP-script.py",
+            "name": "DDP-script.py",
+            "size": 6963,
+            "ext": ".py",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 1214,
+            "ext": ".md",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/code-part1.ipynb",
+            "name": "code-part1.ipynb",
+            "size": 31619,
+            "ext": ".ipynb",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/code-part2.ipynb",
+            "name": "code-part2.ipynb",
+            "size": 12760,
+            "ext": ".ipynb",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 5090,
+            "ext": ".ipynb",
+            "dir": "appendix-A/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/02_setup-recommendations/README.md",
+            "name": "README.md",
+            "size": 193,
+            "ext": ".md",
+            "dir": "appendix-A/02_setup-recommendations"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-A/README.md",
+            "name": "README.md",
+            "size": 284,
+            "ext": ".md",
+            "dir": "appendix-A"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-B/README.md",
+            "name": "README.md",
+            "size": 74,
+            "ext": ".md",
+            "dir": "appendix-B"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-C/README.md",
+            "name": "README.md",
+            "size": 563,
+            "ext": ".md",
+            "dir": "appendix-C"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-D/01_main-chapter-code/appendix-D.ipynb",
+            "name": "appendix-D.ipynb",
+            "size": 131693,
+            "ext": ".ipynb",
+            "dir": "appendix-D/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-D/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 11489,
+            "ext": ".py",
+            "dir": "appendix-D/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-D/01_main-chapter-code/the-verdict.txt",
+            "name": "the-verdict.txt",
+            "size": 20479,
+            "ext": ".txt",
+            "dir": "appendix-D/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-D/README.md",
+            "name": "README.md",
+            "size": 140,
+            "ext": ".md",
+            "dir": "appendix-D"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-E/01_main-chapter-code/appendix-E.ipynb",
+            "name": "appendix-E.ipynb",
+            "size": 81327,
+            "ext": ".ipynb",
+            "dir": "appendix-E/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-E/01_main-chapter-code/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 6025,
+            "ext": ".py",
+            "dir": "appendix-E/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-E/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 20536,
+            "ext": ".py",
+            "dir": "appendix-E/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/appendix-E/README.md",
+            "name": "README.md",
+            "size": 134,
+            "ext": ".md",
+            "dir": "appendix-E"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch01/README.md",
+            "name": "README.md",
+            "size": 753,
+            "ext": ".md",
+            "dir": "ch01"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch01/reading-recommendations.md",
+            "name": "reading-recommendations.md",
+            "size": 5044,
+            "ext": ".md",
+            "dir": "ch01"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 283,
+            "ext": ".md",
+            "dir": "ch02/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/01_main-chapter-code/ch02.ipynb",
+            "name": "ch02.ipynb",
+            "size": 59032,
+            "ext": ".ipynb",
+            "dir": "ch02/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/01_main-chapter-code/dataloader.ipynb",
+            "name": "dataloader.ipynb",
+            "size": 5837,
+            "ext": ".ipynb",
+            "dir": "ch02/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 9604,
+            "ext": ".ipynb",
+            "dir": "ch02/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/01_main-chapter-code/the-verdict.txt",
+            "name": "the-verdict.txt",
+            "size": 20479,
+            "ext": ".txt",
+            "dir": "ch02/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/02_bonus_bytepair-encoder/README.md",
+            "name": "README.md",
+            "size": 249,
+            "ext": ".md",
+            "dir": "ch02/02_bonus_bytepair-encoder"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/02_bonus_bytepair-encoder/bpe_openai_gpt2.py",
+            "name": "bpe_openai_gpt2.py",
+            "size": 6634,
+            "ext": ".py",
+            "dir": "ch02/02_bonus_bytepair-encoder"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/02_bonus_bytepair-encoder/compare-bpe-tiktoken.ipynb",
+            "name": "compare-bpe-tiktoken.ipynb",
+            "size": 15983,
+            "ext": ".ipynb",
+            "dir": "ch02/02_bonus_bytepair-encoder"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/02_bonus_bytepair-encoder/gpt2_model/encoder.json",
+            "name": "encoder.json",
+            "size": 1042301,
+            "ext": ".json",
+            "dir": "ch02/02_bonus_bytepair-encoder/gpt2_model"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/02_bonus_bytepair-encoder/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 35,
+            "ext": ".txt",
+            "dir": "ch02/02_bonus_bytepair-encoder"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/03_bonus_embedding-vs-matmul/README.md",
+            "name": "README.md",
+            "size": 254,
+            "ext": ".md",
+            "dir": "ch02/03_bonus_embedding-vs-matmul"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/03_bonus_embedding-vs-matmul/embeddings-and-linear-layers.ipynb",
+            "name": "embeddings-and-linear-layers.ipynb",
+            "size": 13731,
+            "ext": ".ipynb",
+            "dir": "ch02/03_bonus_embedding-vs-matmul"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/04_bonus_dataloader-intuition/README.md",
+            "name": "README.md",
+            "size": 209,
+            "ext": ".md",
+            "dir": "ch02/04_bonus_dataloader-intuition"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/04_bonus_dataloader-intuition/dataloader-intuition.ipynb",
+            "name": "dataloader-intuition.ipynb",
+            "size": 9819,
+            "ext": ".ipynb",
+            "dir": "ch02/04_bonus_dataloader-intuition"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/05_bpe-from-scratch/README.md",
+            "name": "README.md",
+            "size": 533,
+            "ext": ".md",
+            "dir": "ch02/05_bpe-from-scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/05_bpe-from-scratch/bpe-from-scratch-simple.ipynb",
+            "name": "bpe-from-scratch-simple.ipynb",
+            "size": 36194,
+            "ext": ".ipynb",
+            "dir": "ch02/05_bpe-from-scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/05_bpe-from-scratch/bpe-from-scratch.ipynb",
+            "name": "bpe-from-scratch.ipynb",
+            "size": 55974,
+            "ext": ".ipynb",
+            "dir": "ch02/05_bpe-from-scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/05_bpe-from-scratch/tests.py",
+            "name": "tests.py",
+            "size": 9831,
+            "ext": ".py",
+            "dir": "ch02/05_bpe-from-scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/06_bonus_simple-tokenizer-v3/README.md",
+            "name": "README.md",
+            "size": 481,
+            "ext": ".md",
+            "dir": "ch02/06_bonus_simple-tokenizer-v3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/06_bonus_simple-tokenizer-v3/simple-tokenizer-v3.ipynb",
+            "name": "simple-tokenizer-v3.ipynb",
+            "size": 5321,
+            "ext": ".ipynb",
+            "dir": "ch02/06_bonus_simple-tokenizer-v3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch02/README.md",
+            "name": "README.md",
+            "size": 1098,
+            "ext": ".md",
+            "dir": "ch02"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 307,
+            "ext": ".md",
+            "dir": "ch03/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/01_main-chapter-code/ch03.ipynb",
+            "name": "ch03.ipynb",
+            "size": 72133,
+            "ext": ".ipynb",
+            "dir": "ch03/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 9431,
+            "ext": ".ipynb",
+            "dir": "ch03/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/01_main-chapter-code/multihead-attention.ipynb",
+            "name": "multihead-attention.ipynb",
+            "size": 12977,
+            "ext": ".ipynb",
+            "dir": "ch03/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/01_main-chapter-code/small-text-sample.txt",
+            "name": "small-text-sample.txt",
+            "size": 1962,
+            "ext": ".txt",
+            "dir": "ch03/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/02_bonus_efficient-multihead-attention/README.md",
+            "name": "README.md",
+            "size": 938,
+            "ext": ".md",
+            "dir": "ch03/02_bonus_efficient-multihead-attention"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/02_bonus_efficient-multihead-attention/mha-implementations.ipynb",
+            "name": "mha-implementations.ipynb",
+            "size": 347002,
+            "ext": ".ipynb",
+            "dir": "ch03/02_bonus_efficient-multihead-attention"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/02_bonus_efficient-multihead-attention/tests/test_mha_implementations.py",
+            "name": "test_mha_implementations.py",
+            "size": 2339,
+            "ext": ".py",
+            "dir": "ch03/02_bonus_efficient-multihead-attention/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/03_understanding-buffers/README.md",
+            "name": "README.md",
+            "size": 409,
+            "ext": ".md",
+            "dir": "ch03/03_understanding-buffers"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/03_understanding-buffers/understanding-buffers.ipynb",
+            "name": "understanding-buffers.ipynb",
+            "size": 27660,
+            "ext": ".ipynb",
+            "dir": "ch03/03_understanding-buffers"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch03/README.md",
+            "name": "README.md",
+            "size": 759,
+            "ext": ".md",
+            "dir": "ch03"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 545,
+            "ext": ".md",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/ch04.ipynb",
+            "name": "ch04.ipynb",
+            "size": 90355,
+            "ext": ".ipynb",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 14715,
+            "ext": ".ipynb",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/gpt.py",
+            "name": "gpt.py",
+            "size": 9675,
+            "ext": ".py",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 4199,
+            "ext": ".py",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/01_main-chapter-code/tests.py",
+            "name": "tests.py",
+            "size": 1353,
+            "ext": ".py",
+            "dir": "ch04/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/02_performance-analysis/README.md",
+            "name": "README.md",
+            "size": 363,
+            "ext": ".md",
+            "dir": "ch04/02_performance-analysis"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/02_performance-analysis/flops-analysis.ipynb",
+            "name": "flops-analysis.ipynb",
+            "size": 19103,
+            "ext": ".ipynb",
+            "dir": "ch04/02_performance-analysis"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/02_performance-analysis/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 4,
+            "ext": ".txt",
+            "dir": "ch04/02_performance-analysis"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/03_kv-cache/README.md",
+            "name": "README.md",
+            "size": 13671,
+            "ext": ".md",
+            "dir": "ch04/03_kv-cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/03_kv-cache/gpt_ch04.py",
+            "name": "gpt_ch04.py",
+            "size": 8974,
+            "ext": ".py",
+            "dir": "ch04/03_kv-cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/03_kv-cache/gpt_with_kv_cache.py",
+            "name": "gpt_with_kv_cache.py",
+            "size": 13554,
+            "ext": ".py",
+            "dir": "ch04/03_kv-cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/03_kv-cache/gpt_with_kv_cache_optimized.py",
+            "name": "gpt_with_kv_cache_optimized.py",
+            "size": 16068,
+            "ext": ".py",
+            "dir": "ch04/03_kv-cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/03_kv-cache/tests.py",
+            "name": "tests.py",
+            "size": 6047,
+            "ext": ".py",
+            "dir": "ch04/03_kv-cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/04_gqa/README.md",
+            "name": "README.md",
+            "size": 5346,
+            "ext": ".md",
+            "dir": "ch04/04_gqa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/04_gqa/gpt_with_kv_gqa.py",
+            "name": "gpt_with_kv_gqa.py",
+            "size": 13966,
+            "ext": ".py",
+            "dir": "ch04/04_gqa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/04_gqa/gpt_with_kv_mha.py",
+            "name": "gpt_with_kv_mha.py",
+            "size": 13014,
+            "ext": ".py",
+            "dir": "ch04/04_gqa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/04_gqa/memory_estimator_gqa.py",
+            "name": "memory_estimator_gqa.py",
+            "size": 3109,
+            "ext": ".py",
+            "dir": "ch04/04_gqa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/04_gqa/plot_memory_estimates_gqa.py",
+            "name": "plot_memory_estimates_gqa.py",
+            "size": 2455,
+            "ext": ".py",
+            "dir": "ch04/04_gqa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/05_mla/README.md",
+            "name": "README.md",
+            "size": 6214,
+            "ext": ".md",
+            "dir": "ch04/05_mla"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/05_mla/gpt_with_kv_mha.py",
+            "name": "gpt_with_kv_mha.py",
+            "size": 13015,
+            "ext": ".py",
+            "dir": "ch04/05_mla"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/05_mla/gpt_with_kv_mla.py",
+            "name": "gpt_with_kv_mla.py",
+            "size": 13330,
+            "ext": ".py",
+            "dir": "ch04/05_mla"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/05_mla/memory_estimator_mla.py",
+            "name": "memory_estimator_mla.py",
+            "size": 4202,
+            "ext": ".py",
+            "dir": "ch04/05_mla"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/05_mla/plot_memory_estimates_mla.py",
+            "name": "plot_memory_estimates_mla.py",
+            "size": 2821,
+            "ext": ".py",
+            "dir": "ch04/05_mla"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/README.md",
+            "name": "README.md",
+            "size": 6074,
+            "ext": ".md",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/gpt_with_kv_mha.py",
+            "name": "gpt_with_kv_mha.py",
+            "size": 13014,
+            "ext": ".py",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/gpt_with_kv_swa.py",
+            "name": "gpt_with_kv_swa.py",
+            "size": 15525,
+            "ext": ".py",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/memory_estimator_swa.py",
+            "name": "memory_estimator_swa.py",
+            "size": 5781,
+            "ext": ".py",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/plot_memory_estimates_swa.py",
+            "name": "plot_memory_estimates_swa.py",
+            "size": 7144,
+            "ext": ".py",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/06_swa/tests.py",
+            "name": "tests.py",
+            "size": 2434,
+            "ext": ".py",
+            "dir": "ch04/06_swa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/07_moe/README.md",
+            "name": "README.md",
+            "size": 7937,
+            "ext": ".md",
+            "dir": "ch04/07_moe"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/07_moe/gpt_with_kv_ffn.py",
+            "name": "gpt_with_kv_ffn.py",
+            "size": 15606,
+            "ext": ".py",
+            "dir": "ch04/07_moe"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/07_moe/gpt_with_kv_moe.py",
+            "name": "gpt_with_kv_moe.py",
+            "size": 18340,
+            "ext": ".py",
+            "dir": "ch04/07_moe"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/07_moe/memory_estimator_moe.py",
+            "name": "memory_estimator_moe.py",
+            "size": 4275,
+            "ext": ".py",
+            "dir": "ch04/07_moe"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/07_moe/plot_memory_estimates_moe.py",
+            "name": "plot_memory_estimates_moe.py",
+            "size": 3911,
+            "ext": ".py",
+            "dir": "ch04/07_moe"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/08_deltanet/README.md",
+            "name": "README.md",
+            "size": 18132,
+            "ext": ".md",
+            "dir": "ch04/08_deltanet"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/08_deltanet/plot_memory_estimates_gated_deltanet.py",
+            "name": "plot_memory_estimates_gated_deltanet.py",
+            "size": 3528,
+            "ext": ".py",
+            "dir": "ch04/08_deltanet"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/09_dsa/README.md",
+            "name": "README.md",
+            "size": 6754,
+            "ext": ".md",
+            "dir": "ch04/09_dsa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/09_dsa/gpt_with_kv_dsa.py",
+            "name": "gpt_with_kv_dsa.py",
+            "size": 19422,
+            "ext": ".py",
+            "dir": "ch04/09_dsa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/09_dsa/test_dsa.py",
+            "name": "test_dsa.py",
+            "size": 6635,
+            "ext": ".py",
+            "dir": "ch04/09_dsa"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/README.md",
+            "name": "README.md",
+            "size": 5491,
+            "ext": ".md",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/gpt_with_kv_mha.py",
+            "name": "gpt_with_kv_mha.py",
+            "size": 13036,
+            "ext": ".py",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/gpt_with_kv_sharing.py",
+            "name": "gpt_with_kv_sharing.py",
+            "size": 14194,
+            "ext": ".py",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/memory_estimator_kv_sharing.py",
+            "name": "memory_estimator_kv_sharing.py",
+            "size": 4132,
+            "ext": ".py",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/plot_memory_estimates_kv_sharing.py",
+            "name": "plot_memory_estimates_kv_sharing.py",
+            "size": 6827,
+            "ext": ".py",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/10_kv-sharing/tests.py",
+            "name": "tests.py",
+            "size": 3126,
+            "ext": ".py",
+            "dir": "ch04/10_kv-sharing"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch04/README.md",
+            "name": "README.md",
+            "size": 2090,
+            "ext": ".md",
+            "dir": "ch04"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 1022,
+            "ext": ".md",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/ch05.ipynb",
+            "name": "ch05.ipynb",
+            "size": 140311,
+            "ext": ".ipynb",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 34046,
+            "ext": ".ipynb",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 5972,
+            "ext": ".py",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/gpt_generate.py",
+            "name": "gpt_generate.py",
+            "size": 11272,
+            "ext": ".py",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/gpt_train.py",
+            "name": "gpt_train.py",
+            "size": 8362,
+            "ext": ".py",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 9905,
+            "ext": ".py",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/01_main-chapter-code/tests.py",
+            "name": "tests.py",
+            "size": 3275,
+            "ext": ".py",
+            "dir": "ch05/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/02_alternative_weight_loading/README.md",
+            "name": "README.md",
+            "size": 792,
+            "ext": ".md",
+            "dir": "ch05/02_alternative_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/02_alternative_weight_loading/weight-loading-hf-safetensors.ipynb",
+            "name": "weight-loading-hf-safetensors.ipynb",
+            "size": 11404,
+            "ext": ".ipynb",
+            "dir": "ch05/02_alternative_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/02_alternative_weight_loading/weight-loading-hf-transformers.ipynb",
+            "name": "weight-loading-hf-transformers.ipynb",
+            "size": 10773,
+            "ext": ".ipynb",
+            "dir": "ch05/02_alternative_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/02_alternative_weight_loading/weight-loading-pytorch.ipynb",
+            "name": "weight-loading-pytorch.ipynb",
+            "size": 10833,
+            "ext": ".ipynb",
+            "dir": "ch05/02_alternative_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/03_bonus_pretraining_on_gutenberg/README.md",
+            "name": "README.md",
+            "size": 9709,
+            "ext": ".md",
+            "dir": "ch05/03_bonus_pretraining_on_gutenberg"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/03_bonus_pretraining_on_gutenberg/prepare_dataset.py",
+            "name": "prepare_dataset.py",
+            "size": 3612,
+            "ext": ".py",
+            "dir": "ch05/03_bonus_pretraining_on_gutenberg"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/03_bonus_pretraining_on_gutenberg/pretraining_simple.py",
+            "name": "pretraining_simple.py",
+            "size": 9547,
+            "ext": ".py",
+            "dir": "ch05/03_bonus_pretraining_on_gutenberg"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/03_bonus_pretraining_on_gutenberg/tests.py",
+            "name": "tests.py",
+            "size": 902,
+            "ext": ".py",
+            "dir": "ch05/03_bonus_pretraining_on_gutenberg"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/04_learning_rate_schedulers/README.md",
+            "name": "README.md",
+            "size": 506,
+            "ext": ".md",
+            "dir": "ch05/04_learning_rate_schedulers"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/05_bonus_hparam_tuning/README.md",
+            "name": "README.md",
+            "size": 488,
+            "ext": ".md",
+            "dir": "ch05/05_bonus_hparam_tuning"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/05_bonus_hparam_tuning/hparam_search.py",
+            "name": "hparam_search.py",
+            "size": 7881,
+            "ext": ".py",
+            "dir": "ch05/05_bonus_hparam_tuning"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/05_bonus_hparam_tuning/the-verdict.txt",
+            "name": "the-verdict.txt",
+            "size": 20479,
+            "ext": ".txt",
+            "dir": "ch05/05_bonus_hparam_tuning"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/06_user_interface/README.md",
+            "name": "README.md",
+            "size": 1523,
+            "ext": ".md",
+            "dir": "ch05/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/06_user_interface/app_orig.py",
+            "name": "app_orig.py",
+            "size": 2825,
+            "ext": ".py",
+            "dir": "ch05/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/06_user_interface/app_own.py",
+            "name": "app_own.py",
+            "size": 2618,
+            "ext": ".py",
+            "dir": "ch05/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/06_user_interface/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 15,
+            "ext": ".txt",
+            "dir": "ch05/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/README.md",
+            "name": "README.md",
+            "size": 9396,
+            "ext": ".md",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/config.json",
+            "name": "config.json",
+            "size": 123,
+            "ext": ".json",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/converting-gpt-to-llama2.ipynb",
+            "name": "converting-gpt-to-llama2.ipynb",
+            "size": 57752,
+            "ext": ".ipynb",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/converting-llama2-to-llama3.ipynb",
+            "name": "converting-llama2-to-llama3.ipynb",
+            "size": 137088,
+            "ext": ".ipynb",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 2607,
+            "ext": ".py",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 99,
+            "ext": ".txt",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/standalone-llama32.ipynb",
+            "name": "standalone-llama32.ipynb",
+            "size": 67750,
+            "ext": ".ipynb",
+            "dir": "ch05/07_gpt_to_llama"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/tests/test-requirements-extra.txt",
+            "name": "test-requirements-extra.txt",
+            "size": 35,
+            "ext": ".txt",
+            "dir": "ch05/07_gpt_to_llama/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/tests/test_llama32_nb.py",
+            "name": "test_llama32_nb.py",
+            "size": 3751,
+            "ext": ".py",
+            "dir": "ch05/07_gpt_to_llama/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/07_gpt_to_llama/tests/tests_rope_and_parts.py",
+            "name": "tests_rope_and_parts.py",
+            "size": 13629,
+            "ext": ".py",
+            "dir": "ch05/07_gpt_to_llama/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/08_memory_efficient_weight_loading/README.md",
+            "name": "README.md",
+            "size": 291,
+            "ext": ".md",
+            "dir": "ch05/08_memory_efficient_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/08_memory_efficient_weight_loading/memory-efficient-state-dict.ipynb",
+            "name": "memory-efficient-state-dict.ipynb",
+            "size": 29377,
+            "ext": ".ipynb",
+            "dir": "ch05/08_memory_efficient_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/08_memory_efficient_weight_loading/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 6166,
+            "ext": ".py",
+            "dir": "ch05/08_memory_efficient_weight_loading"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/09_extending-tokenizers/README.md",
+            "name": "README.md",
+            "size": 256,
+            "ext": ".md",
+            "dir": "ch05/09_extending-tokenizers"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/09_extending-tokenizers/extend-tiktoken.ipynb",
+            "name": "extend-tiktoken.ipynb",
+            "size": 24198,
+            "ext": ".ipynb",
+            "dir": "ch05/09_extending-tokenizers"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/10_llm-training-speed/00_orig.py",
+            "name": "00_orig.py",
+            "size": 18978,
+            "ext": ".py",
+            "dir": "ch05/10_llm-training-speed"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/10_llm-training-speed/01_opt_single_gpu.py",
+            "name": "01_opt_single_gpu.py",
+            "size": 17858,
+            "ext": ".py",
+            "dir": "ch05/10_llm-training-speed"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/10_llm-training-speed/02_opt_multi_gpu_ddp.py",
+            "name": "02_opt_multi_gpu_ddp.py",
+            "size": 21936,
+            "ext": ".py",
+            "dir": "ch05/10_llm-training-speed"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/10_llm-training-speed/README.md",
+            "name": "README.md",
+            "size": 10261,
+            "ext": ".md",
+            "dir": "ch05/10_llm-training-speed"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/README.md",
+            "name": "README.md",
+            "size": 17008,
+            "ext": ".md",
+            "dir": "ch05/11_qwen3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/qwen3-chat-interface/README.md",
+            "name": "README.md",
+            "size": 1588,
+            "ext": ".md",
+            "dir": "ch05/11_qwen3/qwen3-chat-interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/qwen3-chat-interface/qwen3-chat-interface-multiturn.py",
+            "name": "qwen3-chat-interface-multiturn.py",
+            "size": 6071,
+            "ext": ".py",
+            "dir": "ch05/11_qwen3/qwen3-chat-interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/qwen3-chat-interface/qwen3-chat-interface.py",
+            "name": "qwen3-chat-interface.py",
+            "size": 4696,
+            "ext": ".py",
+            "dir": "ch05/11_qwen3/qwen3-chat-interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/qwen3-chat-interface/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 136,
+            "ext": ".txt",
+            "dir": "ch05/11_qwen3/qwen3-chat-interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/standalone-qwen3-moe-plus-kvcache.ipynb",
+            "name": "standalone-qwen3-moe-plus-kvcache.ipynb",
+            "size": 47083,
+            "ext": ".ipynb",
+            "dir": "ch05/11_qwen3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/standalone-qwen3-moe.ipynb",
+            "name": "standalone-qwen3-moe.ipynb",
+            "size": 43097,
+            "ext": ".ipynb",
+            "dir": "ch05/11_qwen3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/standalone-qwen3-plus-kvcache.ipynb",
+            "name": "standalone-qwen3-plus-kvcache.ipynb",
+            "size": 49614,
+            "ext": ".ipynb",
+            "dir": "ch05/11_qwen3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/standalone-qwen3.ipynb",
+            "name": "standalone-qwen3.ipynb",
+            "size": 46231,
+            "ext": ".ipynb",
+            "dir": "ch05/11_qwen3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/tests/test_qwen3_kvcache_nb.py",
+            "name": "test_qwen3_kvcache_nb.py",
+            "size": 5524,
+            "ext": ".py",
+            "dir": "ch05/11_qwen3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/11_qwen3/tests/test_qwen3_nb.py",
+            "name": "test_qwen3_nb.py",
+            "size": 3819,
+            "ext": ".py",
+            "dir": "ch05/11_qwen3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/README.md",
+            "name": "README.md",
+            "size": 2665,
+            "ext": ".md",
+            "dir": "ch05/12_gemma3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/standalone-gemma3-plus-kvcache.ipynb",
+            "name": "standalone-gemma3-plus-kvcache.ipynb",
+            "size": 52391,
+            "ext": ".ipynb",
+            "dir": "ch05/12_gemma3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/standalone-gemma3.ipynb",
+            "name": "standalone-gemma3.ipynb",
+            "size": 45741,
+            "ext": ".ipynb",
+            "dir": "ch05/12_gemma3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/tests/gemma3-transformers-ref.ipynb",
+            "name": "gemma3-transformers-ref.ipynb",
+            "size": 4708,
+            "ext": ".ipynb",
+            "dir": "ch05/12_gemma3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/tests/gemma3_layer_debugger.py",
+            "name": "gemma3_layer_debugger.py",
+            "size": 8311,
+            "ext": ".py",
+            "dir": "ch05/12_gemma3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/tests/gemma3_layer_debugger_detailed.py",
+            "name": "gemma3_layer_debugger_detailed.py",
+            "size": 13430,
+            "ext": ".py",
+            "dir": "ch05/12_gemma3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/tests/test_gemma3_kv_nb.py",
+            "name": "test_gemma3_kv_nb.py",
+            "size": 3894,
+            "ext": ".py",
+            "dir": "ch05/12_gemma3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/12_gemma3/tests/test_gemma3_nb.py",
+            "name": "test_gemma3_nb.py",
+            "size": 3881,
+            "ext": ".py",
+            "dir": "ch05/12_gemma3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/README.md",
+            "name": "README.md",
+            "size": 2796,
+            "ext": ".md",
+            "dir": "ch05/13_olmo3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/standalone-olmo3-plus-kv-cache.ipynb",
+            "name": "standalone-olmo3-plus-kv-cache.ipynb",
+            "size": 50977,
+            "ext": ".ipynb",
+            "dir": "ch05/13_olmo3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/standalone-olmo3.ipynb",
+            "name": "standalone-olmo3.ipynb",
+            "size": 45783,
+            "ext": ".ipynb",
+            "dir": "ch05/13_olmo3"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/tests/olmo3_layer_debugger.py",
+            "name": "olmo3_layer_debugger.py",
+            "size": 9472,
+            "ext": ".py",
+            "dir": "ch05/13_olmo3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/tests/test_olmo3_kvcache_nb.py",
+            "name": "test_olmo3_kvcache_nb.py",
+            "size": 4387,
+            "ext": ".py",
+            "dir": "ch05/13_olmo3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/13_olmo3/tests/test_olmo3_nb.py",
+            "name": "test_olmo3_nb.py",
+            "size": 4373,
+            "ext": ".py",
+            "dir": "ch05/13_olmo3/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/14_ch05_with_other_llms/README.md",
+            "name": "README.md",
+            "size": 151,
+            "ext": ".md",
+            "dir": "ch05/14_ch05_with_other_llms"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/14_ch05_with_other_llms/ch05-llama32.ipynb",
+            "name": "ch05-llama32.ipynb",
+            "size": 92283,
+            "ext": ".ipynb",
+            "dir": "ch05/14_ch05_with_other_llms"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/14_ch05_with_other_llms/ch05-qwen3.ipynb",
+            "name": "ch05-qwen3.ipynb",
+            "size": 91824,
+            "ext": ".ipynb",
+            "dir": "ch05/14_ch05_with_other_llms"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/README.md",
+            "name": "README.md",
+            "size": 4310,
+            "ext": ".md",
+            "dir": "ch05/15_tiny-aya"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/standalone-tiny-aya-plus-kv-cache.ipynb",
+            "name": "standalone-tiny-aya-plus-kv-cache.ipynb",
+            "size": 71505,
+            "ext": ".ipynb",
+            "dir": "ch05/15_tiny-aya"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/standalone-tiny-aya.ipynb",
+            "name": "standalone-tiny-aya.ipynb",
+            "size": 67769,
+            "ext": ".ipynb",
+            "dir": "ch05/15_tiny-aya"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/tests/test_tiny_aya_kvcache_nb.py",
+            "name": "test_tiny_aya_kvcache_nb.py",
+            "size": 3874,
+            "ext": ".py",
+            "dir": "ch05/15_tiny-aya/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/tests/test_tiny_aya_nb.py",
+            "name": "test_tiny_aya_nb.py",
+            "size": 3859,
+            "ext": ".py",
+            "dir": "ch05/15_tiny-aya/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/15_tiny-aya/tests/tiny_aya_layer_debugger.py",
+            "name": "tiny_aya_layer_debugger.py",
+            "size": 7950,
+            "ext": ".py",
+            "dir": "ch05/15_tiny-aya/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/README.md",
+            "name": "README.md",
+            "size": 1435,
+            "ext": ".md",
+            "dir": "ch05/16_qwen3.5"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/qwen3.5-plus-kv-cache.ipynb",
+            "name": "qwen3.5-plus-kv-cache.ipynb",
+            "size": 69008,
+            "ext": ".ipynb",
+            "dir": "ch05/16_qwen3.5"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/qwen3.5.ipynb",
+            "name": "qwen3.5.ipynb",
+            "size": 63961,
+            "ext": ".ipynb",
+            "dir": "ch05/16_qwen3.5"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/qwen3_5_transformers.py",
+            "name": "qwen3_5_transformers.py",
+            "size": 15501,
+            "ext": ".py",
+            "dir": "ch05/16_qwen3.5"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/tests/qwen3_5_layer_debugger.py",
+            "name": "qwen3_5_layer_debugger.py",
+            "size": 9657,
+            "ext": ".py",
+            "dir": "ch05/16_qwen3.5/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/16_qwen3.5/tests/test_qwen3_5_nb.py",
+            "name": "test_qwen3_5_nb.py",
+            "size": 5649,
+            "ext": ".py",
+            "dir": "ch05/16_qwen3.5/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/README.md",
+            "name": "README.md",
+            "size": 399,
+            "ext": ".md",
+            "dir": "ch05/17_gemma4"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/standalone-gemma4-plus-kvcache.ipynb",
+            "name": "standalone-gemma4-plus-kvcache.ipynb",
+            "size": 68592,
+            "ext": ".ipynb",
+            "dir": "ch05/17_gemma4"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/standalone-gemma4.ipynb",
+            "name": "standalone-gemma4.ipynb",
+            "size": 65309,
+            "ext": ".ipynb",
+            "dir": "ch05/17_gemma4"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/tests/test_e2b/gemma4-e2b-transformers-ref.ipynb",
+            "name": "gemma4-e2b-transformers-ref.ipynb",
+            "size": 5942,
+            "ext": ".ipynb",
+            "dir": "ch05/17_gemma4/tests/test_e2b"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/tests/test_e2b/gemma4_e2b_layer_debugger.py",
+            "name": "gemma4_e2b_layer_debugger.py",
+            "size": 10577,
+            "ext": ".py",
+            "dir": "ch05/17_gemma4/tests/test_e2b"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/tests/test_e4b/gemma4-e4b-transformers-ref.ipynb",
+            "name": "gemma4-e4b-transformers-ref.ipynb",
+            "size": 3832,
+            "ext": ".ipynb",
+            "dir": "ch05/17_gemma4/tests/test_e4b"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/tests/test_e4b/gemma4_e4b_layer_debugger.py",
+            "name": "gemma4_e4b_layer_debugger.py",
+            "size": 10220,
+            "ext": ".py",
+            "dir": "ch05/17_gemma4/tests/test_e4b"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/17_gemma4/tests/test_gemma4_nb.py",
+            "name": "test_gemma4_nb.py",
+            "size": 14668,
+            "ext": ".py",
+            "dir": "ch05/17_gemma4/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/18_muon/README.md",
+            "name": "README.md",
+            "size": 15431,
+            "ext": ".md",
+            "dir": "ch05/18_muon"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/18_muon/gpt_train.py",
+            "name": "gpt_train.py",
+            "size": 8362,
+            "ext": ".py",
+            "dir": "ch05/18_muon"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/18_muon/gpt_train_muon.py",
+            "name": "gpt_train_muon.py",
+            "size": 10568,
+            "ext": ".py",
+            "dir": "ch05/18_muon"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/18_muon/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 9905,
+            "ext": ".py",
+            "dir": "ch05/18_muon"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/19_cpu_mps_differences/1_cpu_mps_random_generator.ipynb",
+            "name": "1_cpu_mps_random_generator.ipynb",
+            "size": 5432,
+            "ext": ".ipynb",
+            "dir": "ch05/19_cpu_mps_differences"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/19_cpu_mps_differences/README.md",
+            "name": "README.md",
+            "size": 115,
+            "ext": ".md",
+            "dir": "ch05/19_cpu_mps_differences"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch05/README.md",
+            "name": "README.md",
+            "size": 2706,
+            "ext": ".md",
+            "dir": "ch05"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 952,
+            "ext": ".md",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/ch06.ipynb",
+            "name": "ch06.ipynb",
+            "size": 147635,
+            "ext": ".ipynb",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 5129,
+            "ext": ".ipynb",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/gpt_class_finetune.py",
+            "name": "gpt_class_finetune.py",
+            "size": 15578,
+            "ext": ".py",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 6025,
+            "ext": ".py",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/load-finetuned-model.ipynb",
+            "name": "load-finetuned-model.ipynb",
+            "size": 8258,
+            "ext": ".ipynb",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 12067,
+            "ext": ".py",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/01_main-chapter-code/tests.py",
+            "name": "tests.py",
+            "size": 597,
+            "ext": ".py",
+            "dir": "ch06/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/02_bonus_additional-experiments/README.md",
+            "name": "README.md",
+            "size": 11689,
+            "ext": ".md",
+            "dir": "ch06/02_bonus_additional-experiments"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/02_bonus_additional-experiments/additional_experiments.py",
+            "name": "additional_experiments.py",
+            "size": 26745,
+            "ext": ".py",
+            "dir": "ch06/02_bonus_additional-experiments"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/02_bonus_additional-experiments/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 6025,
+            "ext": ".py",
+            "dir": "ch06/02_bonus_additional-experiments"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/02_bonus_additional-experiments/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 13790,
+            "ext": ".py",
+            "dir": "ch06/02_bonus_additional-experiments"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/README.md",
+            "name": "README.md",
+            "size": 8541,
+            "ext": ".md",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/download_prepare_dataset.py",
+            "name": "download_prepare_dataset.py",
+            "size": 3338,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 6025,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 12102,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 40,
+            "ext": ".txt",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/sklearn-baseline.ipynb",
+            "name": "sklearn-baseline.ipynb",
+            "size": 8092,
+            "ext": ".ipynb",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/train_bert_hf.py",
+            "name": "train_bert_hf.py",
+            "size": 17245,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/train_bert_hf_spam.py",
+            "name": "train_bert_hf_spam.py",
+            "size": 18841,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/train_gpt.py",
+            "name": "train_gpt.py",
+            "size": 15993,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/train_gpt_muon.py",
+            "name": "train_gpt_muon.py",
+            "size": 17732,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/03_bonus_imdb-classification/train_sklearn_logreg.py",
+            "name": "train_sklearn_logreg.py",
+            "size": 2916,
+            "ext": ".py",
+            "dir": "ch06/03_bonus_imdb-classification"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/04_user_interface/README.md",
+            "name": "README.md",
+            "size": 1390,
+            "ext": ".md",
+            "dir": "ch06/04_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/04_user_interface/app.py",
+            "name": "app.py",
+            "size": 2559,
+            "ext": ".py",
+            "dir": "ch06/04_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/04_user_interface/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 15,
+            "ext": ".txt",
+            "dir": "ch06/04_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch06/README.md",
+            "name": "README.md",
+            "size": 775,
+            "ext": ".md",
+            "dir": "ch06"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/README.md",
+            "name": "README.md",
+            "size": 3444,
+            "ext": ".md",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/ch07.ipynb",
+            "name": "ch07.ipynb",
+            "size": 134680,
+            "ext": ".ipynb",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/exercise-solutions.ipynb",
+            "name": "exercise-solutions.ipynb",
+            "size": 40877,
+            "ext": ".ipynb",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/exercise_experiments.py",
+            "name": "exercise_experiments.py",
+            "size": 20141,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/gpt_download.py",
+            "name": "gpt_download.py",
+            "size": 4687,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/gpt_instruction_finetuning.py",
+            "name": "gpt_instruction_finetuning.py",
+            "size": 11380,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/instruction-data-with-response.json",
+            "name": "instruction-data-with-response.json",
+            "size": 29279,
+            "ext": ".json",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/instruction-data.json",
+            "name": "instruction-data.json",
+            "size": 203524,
+            "ext": ".json",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/load-finetuned-model.ipynb",
+            "name": "load-finetuned-model.ipynb",
+            "size": 6155,
+            "ext": ".ipynb",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/ollama_evaluate.py",
+            "name": "ollama_evaluate.py",
+            "size": 3696,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 18236,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/01_main-chapter-code/tests.py",
+            "name": "tests.py",
+            "size": 605,
+            "ext": ".py",
+            "dir": "ch07/01_main-chapter-code"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/README.md",
+            "name": "README.md",
+            "size": 2216,
+            "ext": ".md",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/config.json",
+            "name": "config.json",
+            "size": 115,
+            "ext": ".json",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/create-passive-voice-entries.ipynb",
+            "name": "create-passive-voice-entries.ipynb",
+            "size": 12268,
+            "ext": ".ipynb",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/find-near-duplicates.py",
+            "name": "find-near-duplicates.py",
+            "size": 5259,
+            "ext": ".py",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/instruction-examples-modified.json",
+            "name": "instruction-examples-modified.json",
+            "size": 54836,
+            "ext": ".json",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/instruction-examples.json",
+            "name": "instruction-examples.json",
+            "size": 39348,
+            "ext": ".json",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/02_dataset-utilities/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 47,
+            "ext": ".txt",
+            "dir": "ch07/02_dataset-utilities"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/README.md",
+            "name": "README.md",
+            "size": 1043,
+            "ext": ".md",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/config.json",
+            "name": "config.json",
+            "size": 115,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/eval-example-data.json",
+            "name": "eval-example-data.json",
+            "size": 36874,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/llm-instruction-eval-ollama.ipynb",
+            "name": "llm-instruction-eval-ollama.ipynb",
+            "size": 23260,
+            "ext": ".ipynb",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/llm-instruction-eval-openai.ipynb",
+            "name": "llm-instruction-eval-openai.ipynb",
+            "size": 20597,
+            "ext": ".ipynb",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 28,
+            "ext": ".txt",
+            "dir": "ch07/03_model-evaluation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/scores/correlation-analysis.ipynb",
+            "name": "correlation-analysis.ipynb",
+            "size": 34611,
+            "ext": ".ipynb",
+            "dir": "ch07/03_model-evaluation/scores"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/scores/gpt4-model-1-response.json",
+            "name": "gpt4-model-1-response.json",
+            "size": 445,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation/scores"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/scores/gpt4-model-2-response.json",
+            "name": "gpt4-model-2-response.json",
+            "size": 408,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation/scores"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/scores/llama3-8b-model-1-response.json",
+            "name": "llama3-8b-model-1-response.json",
+            "size": 402,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation/scores"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/03_model-evaluation/scores/llama3-8b-model-2-response.json",
+            "name": "llama3-8b-model-2-response.json",
+            "size": 393,
+            "ext": ".json",
+            "dir": "ch07/03_model-evaluation/scores"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/04_preference-tuning-with-dpo/README.md",
+            "name": "README.md",
+            "size": 366,
+            "ext": ".md",
+            "dir": "ch07/04_preference-tuning-with-dpo"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/04_preference-tuning-with-dpo/create-preference-data-ollama.ipynb",
+            "name": "create-preference-data-ollama.ipynb",
+            "size": 21335,
+            "ext": ".ipynb",
+            "dir": "ch07/04_preference-tuning-with-dpo"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/04_preference-tuning-with-dpo/dpo-from-scratch.ipynb",
+            "name": "dpo-from-scratch.ipynb",
+            "size": 181812,
+            "ext": ".ipynb",
+            "dir": "ch07/04_preference-tuning-with-dpo"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/04_preference-tuning-with-dpo/instruction-data-with-preference.json",
+            "name": "instruction-data-with-preference.json",
+            "size": 386968,
+            "ext": ".json",
+            "dir": "ch07/04_preference-tuning-with-dpo"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/04_preference-tuning-with-dpo/previous_chapters.py",
+            "name": "previous_chapters.py",
+            "size": 18313,
+            "ext": ".py",
+            "dir": "ch07/04_preference-tuning-with-dpo"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/README.md",
+            "name": "README.md",
+            "size": 437,
+            "ext": ".md",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/config.json",
+            "name": "config.json",
+            "size": 111,
+            "ext": ".json",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/instruction-data-llama3-7b.json",
+            "name": "instruction-data-llama3-7b.json",
+            "size": 10242,
+            "ext": ".json",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/llama3-ollama.ipynb",
+            "name": "llama3-ollama.ipynb",
+            "size": 29871,
+            "ext": ".ipynb",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/reflection-gpt4.ipynb",
+            "name": "reflection-gpt4.ipynb",
+            "size": 42859,
+            "ext": ".ipynb",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/05_dataset-generation/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 28,
+            "ext": ".txt",
+            "dir": "ch07/05_dataset-generation"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/06_user_interface/README.md",
+            "name": "README.md",
+            "size": 1375,
+            "ext": ".md",
+            "dir": "ch07/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/06_user_interface/app.py",
+            "name": "app.py",
+            "size": 3064,
+            "ext": ".py",
+            "dir": "ch07/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/06_user_interface/requirements-extra.txt",
+            "name": "requirements-extra.txt",
+            "size": 15,
+            "ext": ".txt",
+            "dir": "ch07/06_user_interface"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/ch07/README.md",
+            "name": "README.md",
+            "size": 1009,
+            "ext": ".md",
+            "dir": "ch07"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/conftest.py",
+            "name": "conftest.py",
+            "size": 1748,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/README.md",
+            "name": "README.md",
+            "size": 4124,
+            "ext": ".md",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/__init__.py",
+            "name": "__init__.py",
+            "size": 263,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/appendix_a.py",
+            "name": "appendix_a.py",
+            "size": 1148,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/appendix_d.py",
+            "name": "appendix_d.py",
+            "size": 3982,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/appendix_e.py",
+            "name": "appendix_e.py",
+            "size": 1536,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch02.py",
+            "name": "ch02.py",
+            "size": 1673,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch03.py",
+            "name": "ch03.py",
+            "size": 7690,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch04.py",
+            "name": "ch04.py",
+            "size": 7350,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch05.py",
+            "name": "ch05.py",
+            "size": 14268,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch06.py",
+            "name": "ch06.py",
+            "size": 9730,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/ch07.py",
+            "name": "ch07.py",
+            "size": 7866,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/generate.py",
+            "name": "generate.py",
+            "size": 866,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/__init__.py",
+            "name": "__init__.py",
+            "size": 264,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/generate.py",
+            "name": "generate.py",
+            "size": 2570,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/gpt2.py",
+            "name": "gpt2.py",
+            "size": 7310,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/llama3.py",
+            "name": "llama3.py",
+            "size": 20791,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/qwen3.py",
+            "name": "qwen3.py",
+            "size": 12972,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache/utils.py",
+            "name": "utils.py",
+            "size": 646,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache_batched/__init__.py",
+            "name": "__init__.py",
+            "size": 264,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache_batched"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache_batched/generate.py",
+            "name": "generate.py",
+            "size": 2061,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache_batched"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache_batched/qwen3.py",
+            "name": "qwen3.py",
+            "size": 11491,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache_batched"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/kv_cache_batched/utils.py",
+            "name": "utils.py",
+            "size": 821,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/kv_cache_batched"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/llama3.py",
+            "name": "llama3.py",
+            "size": 24244,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/qwen3.py",
+            "name": "qwen3.py",
+            "size": 25583,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_appendix_a.py",
+            "name": "test_appendix_a.py",
+            "size": 1836,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_appendix_d.py",
+            "name": "test_appendix_d.py",
+            "size": 4005,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_appendix_e.py",
+            "name": "test_appendix_e.py",
+            "size": 4759,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch02.py",
+            "name": "test_ch02.py",
+            "size": 1708,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch03.py",
+            "name": "test_ch03.py",
+            "size": 843,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch04.py",
+            "name": "test_ch04.py",
+            "size": 2326,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch05.py",
+            "name": "test_ch05.py",
+            "size": 3539,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch06.py",
+            "name": "test_ch06.py",
+            "size": 4633,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_ch07.py",
+            "name": "test_ch07.py",
+            "size": 3394,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_generate.py",
+            "name": "test_generate.py",
+            "size": 1584,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_kv_cache_context_limits.py",
+            "name": "test_kv_cache_context_limits.py",
+            "size": 3971,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_kv_cache_gpt2.py",
+            "name": "test_kv_cache_gpt2.py",
+            "size": 5711,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_llama3.py",
+            "name": "test_llama3.py",
+            "size": 10934,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/tests/test_qwen3.py",
+            "name": "test_qwen3.py",
+            "size": 28663,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch/tests"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/pkg/llms_from_scratch/utils.py",
+            "name": "utils.py",
+            "size": 5367,
+            "ext": ".py",
+            "dir": "pkg/llms_from_scratch"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/requirements.txt",
+            "name": "requirements.txt",
+            "size": 752,
+            "ext": ".txt",
+            "dir": ""
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/.vscode/extensions.json",
+            "name": "extensions.json",
+            "size": 292,
+            "ext": ".json",
+            "dir": "setup/.vscode"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/01_optional-python-setup-preferences/README.md",
+            "name": "README.md",
+            "size": 13615,
+            "ext": ".md",
+            "dir": "setup/01_optional-python-setup-preferences"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/01_optional-python-setup-preferences/native-pixi.md",
+            "name": "native-pixi.md",
+            "size": 3447,
+            "ext": ".md",
+            "dir": "setup/01_optional-python-setup-preferences"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/01_optional-python-setup-preferences/native-uv.md",
+            "name": "native-uv.md",
+            "size": 5889,
+            "ext": ".md",
+            "dir": "setup/01_optional-python-setup-preferences"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/02_installing-python-libraries/README.md",
+            "name": "README.md",
+            "size": 3918,
+            "ext": ".md",
+            "dir": "setup/02_installing-python-libraries"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/02_installing-python-libraries/python_environment_check.ipynb",
+            "name": "python_environment_check.ipynb",
+            "size": 1729,
+            "ext": ".ipynb",
+            "dir": "setup/02_installing-python-libraries"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/02_installing-python-libraries/python_environment_check.py",
+            "name": "python_environment_check.py",
+            "size": 5079,
+            "ext": ".py",
+            "dir": "setup/02_installing-python-libraries"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/02_installing-python-libraries/tests.py",
+            "name": "tests.py",
+            "size": 454,
+            "ext": ".py",
+            "dir": "setup/02_installing-python-libraries"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/03_optional-docker-environment/.devcontainer/README.md",
+            "name": "README.md",
+            "size": 282,
+            "ext": ".md",
+            "dir": "setup/03_optional-docker-environment/.devcontainer"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/03_optional-docker-environment/.devcontainer/devcontainer.json",
+            "name": "devcontainer.json",
+            "size": 433,
+            "ext": ".json",
+            "dir": "setup/03_optional-docker-environment/.devcontainer"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/03_optional-docker-environment/README.md",
+            "name": "README.md",
+            "size": 7260,
+            "ext": ".md",
+            "dir": "setup/03_optional-docker-environment"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/04_optional-aws-sagemaker-notebook/README.md",
+            "name": "README.md",
+            "size": 2100,
+            "ext": ".md",
+            "dir": "setup/04_optional-aws-sagemaker-notebook"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/setup/README.md",
+            "name": "README.md",
+            "size": 6723,
+            "ext": ".md",
+            "dir": "setup"
+          },
+          {
+            "path": "03-llm-deep-learning/rasbt-llms-from-scratch/troubleshooting.md",
+            "name": "troubleshooting.md",
+            "size": 4496,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 326,
+        "total_size": 6659271
+      }
+    ]
+  },
+  {
+    "id": "04-interview-qa",
+    "label": "Interview Qa",
+    "repos": [
+      {
+        "dir": "alexeygrigorev-ds-interviews",
+        "github": "https://github.com/alexeygrigorev/data-science-interviews",
+        "description": "Data Science Interviews",
+        "files": [
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/README.md",
+            "name": "README.md",
+            "size": 1704,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/awesome.md",
+            "name": "awesome.md",
+            "size": 4254,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/contrib/probability.md",
+            "name": "probability.md",
+            "size": 2439,
+            "ext": ".md",
+            "dir": "contrib"
+          },
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/contributors.md",
+            "name": "contributors.md",
+            "size": 1777,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/technical.md",
+            "name": "technical.md",
+            "size": 25720,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alexeygrigorev-ds-interviews/theory.md",
+            "name": "theory.md",
+            "size": 81344,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 6,
+        "total_size": 117238
+      },
+      {
+        "dir": "alirezadir-ml-fundamentals",
+        "github": "https://github.com/alirezadir/Machine-Learning-Interviews",
+        "description": "ML Fundamentals",
+        "files": [
+          {
+            "path": "04-interview-qa/alirezadir-ml-fundamentals/genai-resources.md",
+            "name": "genai-resources.md",
+            "size": 3112,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alirezadir-ml-fundamentals/ml-depth.md",
+            "name": "ml-depth.md",
+            "size": 1059,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/alirezadir-ml-fundamentals/ml-fundamental.md",
+            "name": "ml-fundamental.md",
+            "size": 16614,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 3,
+        "total_size": 20785
+      },
+      {
+        "dir": "andrewekhalel-mlquestions",
+        "github": "https://github.com/andrewekhalel/MLQuestions",
+        "description": "ML Questions",
+        "files": [
+          {
+            "path": "04-interview-qa/andrewekhalel-mlquestions/NLP/README.md",
+            "name": "README.md",
+            "size": 10672,
+            "ext": ".md",
+            "dir": "NLP"
+          },
+          {
+            "path": "04-interview-qa/andrewekhalel-mlquestions/README.md",
+            "name": "README.md",
+            "size": 44544,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/andrewekhalel-mlquestions/scripts/build_site.py",
+            "name": "build_site.py",
+            "size": 13997,
+            "ext": ".py",
+            "dir": "scripts"
+          }
+        ],
+        "file_count": 3,
+        "total_size": 69213
+      },
+      {
+        "dir": "devinterview-llm-questions",
+        "github": "https://github.com/Devinterview-io/llms-interview-questions",
+        "description": "LLM Interview Questions",
+        "files": [
+          {
+            "path": "04-interview-qa/devinterview-llm-questions/README.md",
+            "name": "README.md",
+            "size": 67814,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 1,
+        "total_size": 67814
+      },
+      {
+        "dir": "kojino-120-ds-questions",
+        "github": "https://github.com/kojino/120-Data-Science-Interview-Questions",
+        "description": "120 DS Questions",
+        "files": [
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/README.md",
+            "name": "README.md",
+            "size": 505,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/communication.md",
+            "name": "communication.md",
+            "size": 966,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/data-analysis.md",
+            "name": "data-analysis.md",
+            "size": 12238,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/predictive-modeling.md",
+            "name": "predictive-modeling.md",
+            "size": 12845,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/probability.md",
+            "name": "probability.md",
+            "size": 6535,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/product-metrics.md",
+            "name": "product-metrics.md",
+            "size": 5243,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/programming.md",
+            "name": "programming.md",
+            "size": 3811,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/kojino-120-ds-questions/statistical-inference.md",
+            "name": "statistical-inference.md",
+            "size": 7723,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 8,
+        "total_size": 49866
+      },
+      {
+        "dir": "youssefhosni-ds-interview-qa",
+        "github": "https://github.com/youssefHosni/Data-Science-Interview-Questions-Answers",
+        "description": "DS Interview Q&A",
+        "files": [
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Deep Learning Questions & Answers for Data Scientists.md",
+            "name": "Deep Learning Questions & Answers for Data Scientists.md",
+            "size": 67136,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Machine Learning Interview Questions & Answers for Data Scientists.md",
+            "name": "Machine Learning Interview Questions & Answers for Data Scientists.md",
+            "size": 55919,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Probability Interview Questions & Answers for Data Scientists.md",
+            "name": "Probability Interview Questions & Answers for Data Scientists.md",
+            "size": 24002,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Python Interview Questions & Answers for Data Scientists.md",
+            "name": "Python Interview Questions & Answers for Data Scientists.md",
+            "size": 16767,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/README.md",
+            "name": "README.md",
+            "size": 5568,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Resume Based Questions.md",
+            "name": "Resume Based Questions.md",
+            "size": 241,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/SQL & DB Interview Questions & Answers for Data Scientists.md",
+            "name": "SQL & DB Interview Questions & Answers for Data Scientists.md",
+            "size": 18366,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "04-interview-qa/youssefhosni-ds-interview-qa/Statistics Interview Questions & Answers for Data Scientists.md",
+            "name": "Statistics Interview Questions & Answers for Data Scientists.md",
+            "size": 29499,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 8,
+        "total_size": 217498
+      }
+    ]
+  },
+  {
+    "id": "05-puzzles-exercises",
+    "label": "Puzzles Exercises",
+    "repos": [
+      {
+        "dir": "srush-tensor-puzzles",
+        "github": "https://github.com/srush/Tensor-Puzzles",
+        "description": "Tensor Puzzles",
+        "files": [
+          {
+            "path": "05-puzzles-exercises/srush-tensor-puzzles/README.md",
+            "name": "README.md",
+            "size": 15872,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "05-puzzles-exercises/srush-tensor-puzzles/Tensor Puzzlers.ipynb",
+            "name": "Tensor Puzzlers.ipynb",
+            "size": 681027,
+            "ext": ".ipynb",
+            "dir": ""
+          },
+          {
+            "path": "05-puzzles-exercises/srush-tensor-puzzles/lib.py",
+            "name": "lib.py",
+            "size": 7241,
+            "ext": ".py",
+            "dir": ""
+          },
+          {
+            "path": "05-puzzles-exercises/srush-tensor-puzzles/requirements.txt",
+            "name": "requirements.txt",
+            "size": 76,
+            "ext": ".txt",
+            "dir": ""
+          }
+        ],
+        "file_count": 4,
+        "total_size": 704216
+      }
+    ]
+  },
+  {
+    "id": "06-resources",
+    "label": "Resources",
+    "repos": [
+      {
+        "dir": "rbhatia46-ds-resources",
+        "github": "https://github.com/rbhatia46/Data-Science-Interview-Resources",
+        "description": "DS Interview Resources",
+        "files": [
+          {
+            "path": "06-resources/rbhatia46-ds-resources/Contribution.md",
+            "name": "Contribution.md",
+            "size": 864,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "06-resources/rbhatia46-ds-resources/How_To_Contribute.md",
+            "name": "How_To_Contribute.md",
+            "size": 1008,
+            "ext": ".md",
+            "dir": ""
+          },
+          {
+            "path": "06-resources/rbhatia46-ds-resources/README.md",
+            "name": "README.md",
+            "size": 36541,
+            "ext": ".md",
+            "dir": ""
+          }
+        ],
+        "file_count": 3,
+        "total_size": 38413
+      }
+    ]
+  }
+]
