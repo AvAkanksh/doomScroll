@@ -52,8 +52,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-
 #splash .spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .8s linear infinite;margin-top:24px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-#cat-bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:540px;display:flex;gap:6px;padding:10px 16px;background:linear-gradient(var(--bg),transparent);z-index:10;pointer-events:none}
-.cat-pill{font-size:10px;padding:4px 10px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:#fff;opacity:.7}
+#cat-bar{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:540px;display:flex;gap:4px;padding:8px 12px;background:linear-gradient(var(--bg) 60%,transparent);z-index:10;pointer-events:none;overflow-x:auto;scrollbar-width:none;flex-wrap:wrap}
+#cat-bar::-webkit-scrollbar{display:none}
+.cat-pill{font-size:9px;padding:3px 8px;border-radius:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:#fff;opacity:.6;white-space:nowrap;flex-shrink:0}
 
 @media(min-width:768px){
   #app{max-width:620px}
