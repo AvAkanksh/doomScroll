@@ -1,0 +1,528 @@
+{
+  "topics": [
+    {
+      "id": "communication",
+      "name": "Communication",
+      "cards": [
+        {
+          "title": "How would you explain an A/B test to an engineer with no statistics background? ",
+          "content": "**Q: How would you explain an A/B test to an engineer with no statistics background? A linear regression?**\n\n- A/B testing, or more broadly, multivariate testing, is the testing of different elements of a user's experience to determine which variation helps the business achieve its goal more effectively (i.e. increasing conversions, etc..)  This can be copy on a web site, button colors, different user interfaces, different email subject lines, calls to action, offers, etc."
+        }
+      ]
+    },
+    {
+      "id": "data-analysis",
+      "name": "Data Analysis",
+      "cards": [
+        {
+          "title": "What is R2? What are some other metrics that could be better than R2 and why?",
+          "content": "**Q: What is R2? What are some other metrics that could be better than R2 and why?**\n\n- goodness of fit measure. variance explained by the regression / total variance\n  - the more predictors you add the higher R^2 becomes.\n    - hence use adjusted R^2 which adjusts for the degrees of freedom \n    - or train error metrics"
+        },
+        {
+          "title": "What is the curse of dimensionality?",
+          "content": "**Q: What is the curse of dimensionality?**\n\n- High dimensionality makes clustering hard, because having lots of dimensions means that everything is \"far away\" from each other.\n  - For example, to cover a fraction of the volume of the data we need to capture a very wide range for each variable as the number of variables increases\n  - All samples are close to the edge of the sample. And this is a bad news because prediction is much more difficult near the edges of the training sample.\n  - The sampling density decreases exponentially as p increases and hence the data becomes much more sparse without significantly more data. \n  - We should conduct PCA to reduce dimensionality"
+        },
+        {
+          "title": "Is more data always better?",
+          "content": "**Q: Is more data always better?**\n\n- Statistically,\n    - It depends on the quality of your data, for example, if your data is biased, just getting more data won’t help.\n    - It depends on your model. If your model suffers from high bias, getting more data won’t improve your test results beyond a point. You’d need to add more features, etc.\n  - Practically,\n    - Also there’s a tradeoff between having more data and the additional storage, computational power, memory it requires. Hence, always think about the cost of having more data."
+        },
+        {
+          "title": "What are advantages of plotting your data before per- forming analysis?",
+          "content": "**Q: What are advantages of plotting your data before per- forming analysis?**\n\n- 1) Data sets have errors.  You won't find them all but you might find some. That 212 year old man. That 9 foot tall woman.  \n\n2) Variables can have skewness, outliers etc.  Then the arithmetic mean might not be useful. Which means the standard deviation isn't useful.  \n\n3) Variables can be multimodal!  If a variable is multimodal then anything based on its mean or median is going to be suspect."
+        },
+        {
+          "title": "How can you make sure that you don’t analyze something that ends up meaningless?",
+          "content": "**Q: How can you make sure that you don’t analyze something that ends up meaningless?**\n\n- Proper exploratory data analysis.  \n\nIn every data analysis task, there's the exploratory phase where you're just graphing things, testing things on small sets of the data, summarizing simple statistics, and getting rough ideas of what hypotheses you might want to pursue further.  \n\nThen there's the exploitatory phase, where you look deeply into a set of hypotheses.   \n\nThe exploratory phase will generate lots of possible hypotheses, and the exploitatory phase will let you really understand a few of them. Balance the two and you'll prevent yourself from wasting time on many things that end up meaningless, although not all."
+        },
+        {
+          "title": "What is the role of trial and error in data analysis? What is the the role of ma",
+          "content": "**Q: What is the role of trial and error in data analysis? What is the the role of making a hypothesis before diving in?**\n\n- data analysis is a repetition of setting up a new hypothesis and trying to refute the null hypothesis.\n  - The scientific method is eminently inductive: we elaborate a hypothesis, test it and refute it or not. As a result, we come up with new hypotheses which are in turn tested and so on. This is an iterative process, as science always is."
+        },
+        {
+          "title": "How can you determine which features are the most im- portant in your model?",
+          "content": "**Q: How can you determine which features are the most im- portant in your model?**\n\n- run the features though a Gradient Boosting Machine or Random Forest to generate plots of relative importance and information gain for each feature in the ensembles.\n  - Look at the variables added in forward variable selection"
+        },
+        {
+          "title": "How do you deal with some of your predictors being missing?",
+          "content": "**Q: How do you deal with some of your predictors being missing?**\n\n- Remove rows with missing values - This works well if 1) the values are missing randomly (see Vinay Prabhu's answer for more details on this) 2) if you don't lose too much of the dataset after doing so.\n  - Build another predictive model to predict the missing values - This could be a whole project in itself, so simple techniques are usually used here.\n  - Use a model that can incorporate missing data \\- Like a random forest, or any tree-based method."
+        },
+        {
+          "title": "You have several variables that are positively correlated with your response, an",
+          "content": "**Q: You have several variables that are positively correlated with your response, and you think combining all of the variables could give you a good prediction of your response. However, you see that in the multiple linear regression, one of the weights on the predictors is negative. What could be the issue?**\n\n- Multicollinearity refers to a situation in which two or more explanatory variables in a multiple regression model are highly linearly related. \n  - Leave the model as is, despite multicollinearity. The presence of multicollinearity doesn't affect the efficiency of extrapolating the fitted model to new data provided that the predictor variables follow the same pattern of multicollinearity in the new data as in the data on which the regression model is based.\n  - principal component regression"
+        },
+        {
+          "title": "Now you have a feasible amount of predictors, but you’re fairly sure that you do",
+          "content": "**Q: Now you have a feasible amount of predictors, but you’re fairly sure that you don’t need all of them. How would you perform feature selection on the dataset?**\n\n- ridge / lasso / elastic net regression\n  - Univariate Feature Selection where a statistical test is applied to each feature individually. You retain only the best features according to the test outcome scores\n  - \"Recursive Feature Elimination\":  \n    - First, train a model with all the feature and evaluate its performance on held out data.\n    - Then drop let say the 10% weakest features (e.g. the feature with least absolute coefficients in a linear model) and retrain on the remaining features.\n    - Iterate until you observe a sharp drop in the predictive accuracy of the model."
+        },
+        {
+          "title": "Your linear regression didn’t run and communicates that there are an infinite nu",
+          "content": "**Q: Your linear regression didn’t run and communicates that there are an infinite number of best estimates for the regression coefficients. What could be wrong?**\n\n- p > n.\n  - If some of the explanatory variables are perfectly correlated (positively or negatively) then the coefficients would not be unique."
+        },
+        {
+          "title": "You run your regression on different subsets of your data, and find that in each",
+          "content": "**Q: You run your regression on different subsets of your data, and find that in each subset, the beta value for a certain variable varies wildly. What could be the issue here?**\n\n- The dataset might be heterogeneous. In which case, it is recommended to cluster datasets into different subsets wisely, and then draw different models for different subsets. Or, use models like non parametric models (trees) which can deal with heterogeneity quite nicely."
+        },
+        {
+          "title": "What is the main idea behind ensemble learning? If I had many different models t",
+          "content": "**Q: What is the main idea behind ensemble learning? If I had many different models that predicted the same response variable, what might I want to do to incorporate all of the models? Would you expect this to perform better than an individual model or worse?**"
+        },
+        {
+          "title": "What is the main idea behind ensemble learning? If I had many different models t (cont.)",
+          "content": "- The assumption is that a group of weak learners can be combined to form a strong learner.\n  - Hence the combined model is expected to perform better than an individual model.\n  - Assumptions:\n    - average out biases\n    - reduce variance\n  - Bagging works because some underlying learning algorithms are unstable: slightly different inputs leads to very different outputs. If you can take advantage of this instability by running multiple instances, it can be shown that the reduced instability leads to lower error. If you want to understand why, the original bagging paper( http://www.springerlink.com/cont...) has a section called \"why bagging works\"\n  - Boosting works because of the focus on better defining the \"decision edge\". By reweighting examples near the margin (the positive and negative examples) you get a reduced error (see http://citeseerx.ist.psu.edu/vie...)\n  - Use the outputs of your models as inputs to a meta-model.   \n\nFor example, if you're doing binary classification, you can use all the probability outputs of your individual models as inputs to a final logistic regression (or any model, really) that can combine the probability estimates."
+        },
+        {
+          "title": "What is the main idea behind ensemble learning? If I had many different models t (cont.)",
+          "content": "One very important point is to make sure that the output of your models are out-of-sample predictions. This means that the predicted value for any row in your dataframe should NOT depend on the actual value for that row."
+        },
+        {
+          "title": "Given that you have wi  data in your o ce, how would you determine which rooms a",
+          "content": "**Q: Given that you have wi  data in your o ce, how would you determine which rooms and areas are underutilized and overutilized?**\n\n- If the data is more used in one room, then that one is over utilized! Maybe account for the room capacity and normalize the data."
+        },
+        {
+          "title": "How would you quantify the influence of a Twitter user?",
+          "content": "**Q: How would you quantify the influence of a Twitter user?**\n\n- like page rank with each user corresponding to the webpages and linking to the page equivalent to following."
+        },
+        {
+          "title": "You have 100 mathletes and 100 math problems. Each mathlete gets to choose 10 pr",
+          "content": "**Q: You have 100 mathletes and 100 math problems. Each mathlete gets to choose 10 problems to solve. Given data on who got what problem correct, how would you rank the problems in terms of di culty?**\n\n- One way you could do this is by storing a \"skill level\" for each user and a \"difficulty level\" for each problem.  We assume that the probability that a user solves a problem only depends on the skill of the user and the difficulty of the problem.*  Then we maximize the likelihood of the data to find the hidden skill and difficulty levels.\n  - The Rasch model for dichotomous data takes the form:  \n{\\displaystyle \\Pr\\\\{X_{ni}=1\\\\}={\\frac {\\exp({\\beta _{n}}-{\\delta _{i}})}{1+\\exp({\\beta _{n}}-{\\delta _{i}})}},}  \nwhere  is the ability of person  and  is the difficulty of item}."
+        },
+        {
+          "title": "You have 5000 people that rank 10 sushis in terms of saltiness. How would you ag",
+          "content": "**Q: You have 5000 people that rank 10 sushis in terms of saltiness. How would you aggregate this data to estimate the true saltiness rank in each sushi?**\n\n- Some people would take the mean rank of each sushi.  If I wanted something simple, I would use the median, since ranks are (strictly speaking) ordinal and not interval, so adding them is a bit risque (but people do it all the time and you probably won't be far wrong)."
+        },
+        {
+          "title": "Given data on congressional bills and which congressional representatives co-spo",
+          "content": "**Q: Given data on congressional bills and which congressional representatives co-sponsored the bills, how would you determine which other representatives are most similar to yours in voting behavior? How would you evaluate who is the most liberal? Most republican? Most bipartisan?**\n\n- collaborative filtering. you have your votes and we can calculate the similarity for each representatives and select the most similar representative\n  - for liberal and republican parties, find the mean vector and find the representative closest to the center point"
+        }
+      ]
+    },
+    {
+      "id": "predictive-modeling",
+      "name": "Predictive Modeling",
+      "cards": [
+        {
+          "title": "(Given a Dataset) Analyze this dataset and give me a model that can predict this",
+          "content": "**Q: (Given a Dataset) Analyze this dataset and give me a model that can predict this response variable.**\n\n- Start by fitting a simple model (multivariate regression, logistic regression), do some feature engineering accordingly, and then try some complicated models. Always split the dataset into train, validation, test dataset and use cross validation to check their performance.\n- Determine if the problem is classification or regression\n- Favor simple models that run quickly and you can easily explain.\n- Mention cross validation as a means to evaluate the model.\n- Plot and visualize the data."
+        },
+        {
+          "title": "What could be some issues if the distribution of the test data is significantly ",
+          "content": "**Q: What could be some issues if the distribution of the test data is significantly different than the distribution of the training data?**\n\n- The model that has high training accuracy might have low test accuracy. Without further knowledge, it is hard to know which dataset represents the population data and thus the generalizability of the algorithm is hard to measure. This should be mitigated by repeated splitting of train vs test dataset (as in cross validation).\n- When there is a change in data distribution, this is called the dataset shift. If the train and test data has a different distribution, then the classifier would likely overfit to the train data.\n- This issue can be overcome by using a more general learning method.\n- This can occur when:\n  - P(y|x) are the same but P(x) are different. (covariate shift)\n  - P(y|x) are different. (concept shift)\n- The causes can be:\n  - Training samples are obtained in a biased way. (sample selection bias)\n  - Train is different from test because of temporal, spatial changes. (non-stationary environments)\n- Solution to covariate shift\n  - importance weighted cv"
+        },
+        {
+          "title": "What are some ways I can make my model more robust to outliers?",
+          "content": "**Q: What are some ways I can make my model more robust to outliers?**\n\n- We can have regularization such as L1 or L2 to reduce variance (increase bias).\n- Changes to the algorithm:\n  - Use tree-based methods instead of regression methods as they are more resistant to outliers. For statistical tests, use non parametric tests instead of parametric ones.\n  - Use robust error metrics such as MAE or Huber Loss instead of MSE.\n- Changes to the data:\n  - Winsorizing the data\n  - Transforming the data (e.g. log)\n  - Remove them only if you’re certain they’re anomalies not worth predicting"
+        },
+        {
+          "title": "What are some differences you would expect in a model that minimizes squared err",
+          "content": "**Q: What are some differences you would expect in a model that minimizes squared error, versus a model that minimizes absolute error? In which cases would each error metric be appropriate?**\n\n- MSE is more strict to having outliers. MAE is more robust in that sense, but is harder to fit the model for because it cannot be numerically optimized. So when there are less variability in the model and the model is computationally easy to fit, we should use MAE, and if that’s not the case, we should use MSE.\n- MSE: easier to compute the gradient, MAE: linear programming needed to compute the gradient\n- MAE more robust to outliers. If the consequences of large errors are great, use MSE\n- MSE corresponds to maximizing likelihood of Gaussian random variables"
+        },
+        {
+          "title": "What error metric would you use to evaluate how good a binary classifier is? Wha",
+          "content": "**Q: What error metric would you use to evaluate how good a binary classifier is? What if the classes are imbalanced? What if there are more than 2 groups?**\n\n- Accuracy: proportion of instances you predict correctly. Pros: intuitive, easy to explain, Cons: works poorly when the class labels are imbalanced and the signal from the data is weak\n- AUROC: plot fpr on the x axis and tpr on the y axis for different threshold. Given a random positive instance and a random negative instance, the AUC is the probability that you can identify who's who. Pros: Works well when testing the ability of distinguishing the two classes, Cons: can’t interpret predictions as probabilities (because AUC is determined by rankings), so can’t explain the uncertainty of the model\n- logloss/deviance: Pros: error metric based on probabilities, Cons: very sensitive to false positives, negatives\n- When there are more than 2 groups, we can have k binary classifications and add them up for logloss. Some metrics like AUC is only applicable in the binary case."
+        },
+        {
+          "title": "What are various ways to predict a binary response variable? Can you compare two",
+          "content": "**Q: What are various ways to predict a binary response variable? Can you compare two of them and tell me when one would be more appropriate? What’s the difference between these? (SVM, Logistic Regression, Naive Bayes, Decision Tree, etc.)**"
+        },
+        {
+          "title": "What are various ways to predict a binary response variable? Can you compare two (cont.)",
+          "content": "- Things to look at: N, P, linearly seperable?, features independent?, likely to overfit?, speed, performance, memory usage\n- Logistic Regression\n  - features roughly linear, problem roughly linearly separable\n  - robust to noise, use l1,l2 regularization for model selection, avoid overfitting\n  - the output come as probabilities\n  - efficient and the computation can be distributed\n  - can be used as a baseline for other algorithms\n  - (-) can hardly handle categorical features\n- SVM\n  - with a nonlinear kernel, can deal with problems that are not linearly separable\n  - (-) slow to train, for most industry scale applications, not really efficient\n- Naive Bayes\n  - computationally efficient when P is large by alleviating the curse of dimensionality\n  - works surprisingly well for some cases even if the condition doesn’t hold\n  - with word frequencies as features, the independence assumption can be seen reasonable. So the algorithm can be used in text categorization\n  - (-) conditional independence of every other feature should be met\n- Tree Ensembles\n  - good for large N and large P, can deal with categorical features very well\n  - non parametric, so no need to worry about outliers\n  - GBT’s work better but the parameters are harder to tune\n  - RF works out of the box, but usually performs worse than GBT\n- Deep Learning\n  - works well for some classification tasks (e.g. image)\n  - used to squeeze something out of the problem"
+        },
+        {
+          "title": "What is regularization and where might it be helpful? What is an example of usin",
+          "content": "**Q: What is regularization and where might it be helpful? What is an example of using regularization in a model?**\n\n- Regularization is useful for reducing variance in the model, meaning avoiding overfitting . For example, we can use L1 regularization in Lasso regression to penalize large coefficients."
+        },
+        {
+          "title": "Why might it be preferable to include fewer predictors over many?",
+          "content": "**Q: Why might it be preferable to include fewer predictors over many?**\n\n- When we add irrelevant features, it increases model's tendency to overfit because those features introduce more noise. When two variables are correlated, they might be harder to interpret in case of regression, etc.\n- curse of dimensionality\n- adding random noise makes the model more complicated but useless\n- computational cost\n- Ask someone for more details."
+        },
+        {
+          "title": "Given training data on tweets and their retweets, how would you predict the numb",
+          "content": "**Q: Given training data on tweets and their retweets, how would you predict the number of retweets of a given tweet after 7 days after only observing 2 days worth of data?**\n\n- Build a time series model with the training data with a seven day cycle and then use that for a new data with only 2 days data.\n- Ask someone for more details.\n- Build a regression function to estimate the number of retweets as a function of time t\n- to determine if one regression function can be built, see if there are clusters in terms of the trends in the number of retweets\n- if not, we have to add features to the regression function\n- features + # of retweets on the first and the second day -> predict the seventh day\n- https://en.wikipedia.org/wiki/Dynamic_time_warping"
+        },
+        {
+          "title": "How could you collect and analyze data to use social media to predict the weathe",
+          "content": "**Q: How could you collect and analyze data to use social media to predict the weather?**\n\n- We can collect social media data using twitter, Facebook, instagram API’s. Then, for example, for twitter, we can construct features from each tweet, e.g. the tweeted date, number of favorites, retweets, and of course, the features created from the tweeted content itself. Then use a multi variate time series model to predict the weather.\n- Ask someone for more details."
+        },
+        {
+          "title": "How would you construct a feed to show relevant content for a site that involves",
+          "content": "**Q: How would you construct a feed to show relevant content for a site that involves user interactions with items?**\n\n- We can do so using building a recommendation engine. The easiest we can do is to show contents that are popular other users, which is still a valid strategy if for example the contents are news articles. To be more accurate, we can build a content based filtering or collaborative filtering. If there’s enough user usage data, we can try collaborative filtering and recommend contents other similar users have consumed. If there isn’t, we can recommend similar items based on vectorization of items (content based filtering)."
+        },
+        {
+          "title": "How would you design the people you may know feature on LinkedIn or Facebook?",
+          "content": "**Q: How would you design the people you may know feature on LinkedIn or Facebook?**\n\n- Find strong unconnected people in weighted connection graph\n  - Define similarity as how strong the two people are connected\n  - Given a certain feature, we can calculate the similarity based on\n    - friend connections (neighbors)\n    - Check-in’s people being at the same location all the time.\n    - same college, workplace\n    - Have randomly dropped graphs test the performance of the algorithm\n- ref. News Feed Optimization\n  - Affinity score: how close the content creator and the users are\n  - Weight: weight for the edge type (comment, like, tag, etc.). Emphasis on features the company wants to promote\n  - Time decay: the older the less important"
+        },
+        {
+          "title": "How would you predict who someone may want to send a Snapchat or Gmail to?",
+          "content": "**Q: How would you predict who someone may want to send a Snapchat or Gmail to?**\n\n- for each user, assign a score of how likely someone would send an email to\n- the rest is feature engineering:\n  - number of past emails, how many responses, the last time they exchanged an email, whether the last email ends with a question mark, features about the other users, etc.\n- Ask someone for more details.\n- People who someone sent emails the most in the past, conditioning on time decay."
+        },
+        {
+          "title": "How would you suggest to a franchise where to open a new store?",
+          "content": "**Q: How would you suggest to a franchise where to open a new store?**\n\n- build a master dataset with local demographic information available for each location.\n  - local income levels, proximity to traffic, weather, population density, proximity to other businesses\n  - a reference dataset on local, regional, and national macroeconomic conditions (e.g. unemployment, inflation, prime interest rate, etc.)\n  - any data on the local franchise owner-operators, to the degree the manager\n- identify a set of KPIs acceptable to the management that had requested the analysis concerning the most desirable factors surrounding a franchise\n  - quarterly operating profit, ROI, EVA, pay-down rate, etc.\n- run econometric models to understand the relative significance of each variable\n- run machine learning algorithms to predict the performance of each location candidate"
+        },
+        {
+          "title": "In a search engine, given partial data on what the user has typed, how would you",
+          "content": "**Q: In a search engine, given partial data on what the user has typed, how would you predict the user’s eventual search query?**\n\n- Based on the past frequencies of words shown up given a sequence of words, we can construct conditional probabilities of the set of next sequences of words that can show up (n-gram). The sequences with highest conditional probabilities can show up as top candidates.\n- To further improve this algorithm,\n  - we can put more weight on past sequences which showed up more recently and near your location to account for trends\n  - show your recent searches given partial data"
+        },
+        {
+          "title": "Given a database of all previous alumni donations to your university, how would ",
+          "content": "**Q: Given a database of all previous alumni donations to your university, how would you predict which recent alumni are most likely to donate?**\n\n- Based on frequency and amount of donations, graduation year, major, etc, construct a supervised regression (or binary classification) algorithm."
+        },
+        {
+          "title": "You’re Uber and you want to design a heatmap to recommend to drivers where to wa",
+          "content": "**Q: You’re Uber and you want to design a heatmap to recommend to drivers where to wait for a passenger. How would you approach this?**\n\n- Based on the past pickup location of passengers around the same time of the day, day of the week (month, year), construct\n- Ask someone for more details.\n- Based on the number of past pickups\n  - account for periodicity (seasonal, monthly, weekly, daily, hourly)\n  - special events (concerts, festivals, etc.) from tweets"
+        },
+        {
+          "title": "How would you build a model to predict a March Madness bracket?",
+          "content": "**Q: How would you build a model to predict a March Madness bracket?**\n\n- One vector each for team A and B. Take the difference of the two vectors and use that as an input to predict the probability that team A would win by training the model. Train the models using past tournament data and make a prediction for the new tournament by running the trained model for each round of the tournament\n- Some extensions:\n  - Experiment with different ways of consolidating the 2 team vectors into one (e.g concantenating, averaging, etc)\n  - Consider using a RNN type model that looks at time series data."
+        },
+        {
+          "title": "You want to run a regression to predict the probability of a flight delay, but t",
+          "content": "**Q: You want to run a regression to predict the probability of a flight delay, but there are flights with delays of up to 12 hours that are really messing up your model. How can you address this?**\n\n- This is equivalent to making the model more robust to outliers.\n- See Q3."
+        }
+      ]
+    },
+    {
+      "id": "probability",
+      "name": "Probability",
+      "cards": [
+        {
+          "title": "Bobo the amoeba has a 25%, 25%, and 50% chance of producing 0, 1, or 2 offspring",
+          "content": "**Q: Bobo the amoeba has a 25%, 25%, and 50% chance of producing 0, 1, or 2 offspring, respectively. Each of Bobo’s descendants also have the same probabilities. What is the probability that Bobo’s lineage dies out?**\n\n- p=1/4+1/4*p+1/2*p^2 => p=1/2"
+        },
+        {
+          "title": "In any 15-minute interval, there is a 20% probability that you will see at least",
+          "content": "**Q: In any 15-minute interval, there is a 20% probability that you will see at least one shooting star. What is the proba- bility that you see at least one shooting star in the period of an hour?**\n\n- 1-(0.8)^4. Or, we can use Poisson processes"
+        },
+        {
+          "title": "How can you generate a random number between 1 - 7 with only a die?",
+          "content": "**Q: How can you generate a random number between 1 - 7 with only a die?**\n\n* Launch it 3 times: each throw sets the nth bit of the result. \n* For each launch, if the value is 1-3, record a 0, else 1.\nThe result is between 0 (000) and 7 (111), evenly spread (3 independent throw). Repeat the throws if 0 was obtained: the process stops on evenly spread values."
+        },
+        {
+          "title": "How can you get a fair coin toss if someone hands you a coin that is weighted to",
+          "content": "**Q: How can you get a fair coin toss if someone hands you a coin that is weighted to come up heads more often than tails?**\n\n- Flip twice and if HT then H, TH then T."
+        },
+        {
+          "title": "You have an 50-50 mixture of two normal distributions with the same standard dev",
+          "content": "**Q: You have an 50-50 mixture of two normal distributions with the same standard deviation. How far apart do the means need to be in order for this distribution to be bimodal?**\n\n- more than two standard deviations"
+        },
+        {
+          "title": "Given draws from a normal distribution with known parameters, how can you simula",
+          "content": "**Q: Given draws from a normal distribution with known parameters, how can you simulate draws from a uniform distribution?**\n\n- plug in the value to the CDF of the same random variable"
+        },
+        {
+          "title": "You have a group of couples that decide to have children until they have their f",
+          "content": "**Q: You have a group of couples that decide to have children until they have their first girl, after which they stop having children. What is the expected gender ratio of the children that are born? What is the expected number of children each couple will have?**\n\n- gender ratio is 1:1. Expected number of children is 2. let X be the number of children until getting a female (happens with prob 1/2). this follows a geometric distribution with probability 1/2"
+        },
+        {
+          "title": "How many ways can you split 12 people into 3 teams of 4?",
+          "content": "**Q: How many ways can you split 12 people into 3 teams of 4?**\n\n- the outcome follows a multinomial distribution with n=12 and k=3. but the classes are indistinguishable"
+        },
+        {
+          "title": "Your hash function assigns each object to a number between 1:10, each with equal",
+          "content": "**Q: Your hash function assigns each object to a number between 1:10, each with equal probability. With 10 objects, what is the probability of a hash collision? What is the expected number of hash collisions? What is the expected number of hashes that are unused.**\n\n- the probability of a hash collision: 1-(10!/10^10)\n  - the expected number of hash collisions: 1-10*(9/10)^10\n  - the expected number of hashes that are unused: 10*(9/10)^10"
+        },
+        {
+          "title": "You call 2 UberX’s and 3 Lyfts. If the time that each takes to reach you is IID,",
+          "content": "**Q: You call 2 UberX’s and 3 Lyfts. If the time that each takes to reach you is IID, what is the probability that all the Lyfts arrive first? What is the probability that all the UberX’s arrive first?**\n\n- All Lyft's first\n  \n    * probability that the first car is Lyft = 3/5\n    * probability that the second car is Lyft = 2/4\n    * probability that the third car is Lyft = 1/3\n    Therefore, probability that all the Lyfts arrive first = (3/5) * (2/4) * (1/3) = 1/10\n  - All Uber's first\n  \n    * probability that the first car is Uber = 2/5\n    * probability that the second car is Uber = 1/4\n    Therefore, probability that all the Ubers arrive first = (2/5) * (1/4) = 1/10"
+        },
+        {
+          "title": "On a dating site, users can select 5 out of 24 adjectives to describe themselves",
+          "content": "**Q: On a dating site, users can select 5 out of 24 adjectives to describe themselves. A match is declared between two users if they match on at least 4 adjectives. If Alice and Bob randomly pick adjectives, what is the probability that they form a match?**\n\n- 24C5*(1+5(24-5))/24C5*24C5 = 4/1771"
+        },
+        {
+          "title": "Let’s say you have a very tall father. On average, what would you expect the hei",
+          "content": "**Q: Let’s say you have a very tall father. On average, what would you expect the height of his son to be? Taller, equal, or shorter? What if you had a very short father?**\n\n- Shorter. Regression to the mean"
+        },
+        {
+          "title": "What’s the expected number of coin flips until you get two heads in a row? What’",
+          "content": "**Q: What’s the expected number of coin flips until you get two heads in a row? What’s the expected number of coin flips until you get two tails in a row?**\n\n- After the first two flips, you can see this problem as a Markov chain, with states HH, HT, TH, TT. \n  - HH is the final state. You can than define the expected number of steps N before reaching HH: E(N) = 2 + 0.25nHH, 0.25nHT, 0.25nTH, 0.25nTT. nXX represents the expected number of steps before reaching HH starting from state XX.\n  - Solve linear equation:\n  * nHH = 0\n  * nHT = 1 + 0.5nTT + 0.5nTH\n  * nTH = 1 + 0.5nHH + 0.5nHT\n  * nTT = 1 + 0.5nTH + 0.5nTT\n  - Result gives E(N) = 6."
+        },
+        {
+          "title": "You have a 0.1% chance of picking up a coin with both heads, and a 99.9% chance ",
+          "content": "**Q: You have a 0.1% chance of picking up a coin with both heads, and a 99.9% chance that you pick up a fair coin. You flip your coin and it comes up heads 10 times. What’s the chance that you picked up the fair coin, given the information that you observed?**\n\n* Events: F = \"picked a fair coin\", T = \"10 heads in a row\"\n  * (1) P(F|T) = P(T|F)P(F)/P(T) (Bayes formula)\n  * (2) P(T) = P(T|F)P(F) + P(T|¬F)P(¬F) (total probabilities formula)\n  * Injecting (2) in (1): P(F|T) = P(T|F)P(F)/(P(T|F)P(F) + P(T|¬F)P(¬F)) = 1 / (1 + P(T|¬F)P(¬F)/(P(T|F)P(F)))\n  * Numerically: 1/(1 + 0.001 * 2^10 /0.999).\n  * With 2^10 ≈ 1000 and 0.999 ≈ 1 this simplifies to 1/2"
+        },
+        {
+          "title": "What is a P-Value ?",
+          "content": "**Q: What is a P-Value ?**\n\n* The probability to obtain a similar or more extreme result than observed when the null hypothesis is assumed.\n  * ⇒ If the p-value is small, the null hypothesis is unlikely"
+        }
+      ]
+    },
+    {
+      "id": "product-metrics",
+      "name": "Product Metrics",
+      "cards": [
+        {
+          "title": "What would be good metrics of success for an advertising-driven consumer product",
+          "content": "**Q: What would be good metrics of success for an advertising-driven consumer product? (Buzzfeed, YouTube, Google Search, etc.) A service-driven consumer product? (Uber, Flickr, Venmo, etc.)**\n\n* advertising-driven: Pageviews and daily actives, CTR, CPC (cost per click)\n    * click-ads  \n    * display-ads  \n  * service-driven: number of purchases, conversion rate"
+        },
+        {
+          "title": "What would be good metrics of success for a productiv- ity tool? (Evernote, Asan",
+          "content": "**Q: What would be good metrics of success for a productiv- ity tool? (Evernote, Asana, Google Docs, etc.) A MOOC? (edX, Coursera, Udacity, etc.)**\n\n* productivity tool: same as premium subscriptions\n  * MOOC: same as premium subscriptions, completion rate"
+        },
+        {
+          "title": "What would be good metrics of success for an e-commerce product? (Etsy, Groupon,",
+          "content": "**Q: What would be good metrics of success for an e-commerce product? (Etsy, Groupon, Birchbox, etc.) A subscrip- tion product? (Net ix, Birchbox, Hulu, etc.) Premium subscriptions? (OKCupid, LinkedIn, Spotify, etc.)**\n\n* e-commerce: number of purchases, conversion rate, Hourly, daily, weekly, monthly, quarterly, and annual sales, Cost of goods sold, Inventory levels, Site traffic, Unique visitors versus returning visitors, Customer service phone call count, Average resolution time\n  * subscription\n    * churn, CoCA, ARPU, MRR, LTV\n  * premium subscriptions:"
+        },
+        {
+          "title": "What would be good metrics of success for a consumer product that relies heavily",
+          "content": "**Q: What would be good metrics of success for a consumer product that relies heavily on engagement and interac- tion? (Snapchat, Pinterest, Facebook, etc.) A messaging product? (GroupMe, Hangouts, Snapchat, etc.)**\n\n* heavily on engagement and interaction: uses AU ratios, email summary by type, and push notification summary by type, resurrection ratio\n  * messaging product:"
+        },
+        {
+          "title": "What would be good metrics of success for a product that o ered in-app purchases",
+          "content": "**Q: What would be good metrics of success for a product that o ered in-app purchases? (Zynga, Angry Birds, other gaming apps)**\n\n* Average Revenue Per Paid User\n  * Average Revenue Per User"
+        },
+        {
+          "title": "A certain metric is violating your expectations by going down or up more than yo",
+          "content": "**Q: A certain metric is violating your expectations by going down or up more than you expect. How would you try to identify the cause of the change?**\n\n* breakdown the KPI’s into what consists them and find where the change is\n  * then further breakdown that basic KPI by channel, user cluster, etc. and relate them with any campaigns, changes in user behaviors in that segment"
+        },
+        {
+          "title": "Growth for total number of tweets sent has been slow this month. What data would",
+          "content": "**Q: Growth for total number of tweets sent has been slow this month. What data would you look at to determine the cause of the problem?**\n\n* look at competitors' tweet growth\n  * look at your social media engagement on other platforms\n  * look at your sales data"
+        },
+        {
+          "title": "You’re a restaurant and are approached by Groupon to run a deal. What data would",
+          "content": "**Q: You’re a restaurant and are approached by Groupon to run a deal. What data would you ask from them in order to determine whether or not to do the deal?**\n\n* for similar restaurants (they should define similarity), average increase in revenue gain per coupon, average increase in customers per coupon, number of meals sold"
+        },
+        {
+          "title": "You are tasked with improving the e ciency of a subway system. Where would you s",
+          "content": "**Q: You are tasked with improving the e ciency of a subway system. Where would you start?**\n\n* define efficiency"
+        },
+        {
+          "title": "Say you are working on Facebook News Feed. What would be some metrics that you t",
+          "content": "**Q: Say you are working on Facebook News Feed. What would be some metrics that you think are important? How would you make the news each person gets more relevant?**\n\n* rate for each action, duration users stay, CTR for sponsor feed posts\n  * ref. News Feed Optimization\n    * Affinity score: how close the content creator and the users are\n    * Weight: weight for the edge type (comment, like, tag, etc.). Emphasis on features the company wants to promote\n    * Time decay: the older the less important"
+        },
+        {
+          "title": "How would you measure the impact that sponsored stories on Facebook News Feed ha",
+          "content": "**Q: How would you measure the impact that sponsored stories on Facebook News Feed have on user engagement? How would you determine the optimum balance between sponsored stories and organic content on a user’s News Feed?**\n\n* AB test on different balance ratio and see"
+        },
+        {
+          "title": "You are on the data science team at Uber and you are asked to start thinking abo",
+          "content": "**Q: You are on the data science team at Uber and you are asked to start thinking about surge pricing. What would be the objectives of such a product and how would you start looking into this?**\n\n*  there is a gradual step-function type scaling mechanism until that imbalance of requests-to-drivers is alleviated and then vice versa as too many drivers come online enticed by the surge pricing structure. \n  * I would bet the algorithm is custom tailored and calibrated to each location as price elasticities almost certainly vary across different cities depending on a huge multitude of variables: income, distance/sprawl, traffic patterns, car ownership, etc. With the massive troves of user data that Uber probably has collected, they most likely have tweaked the algos for each city to adjust for these varying sensitivities to surge pricing. Throw in some machine learning and incredibly rich data and you've got yourself an incredible, constantly-evolving algorithm."
+        },
+        {
+          "title": "Say that you are Netflix. How would you determine what original series you shoul",
+          "content": "**Q: Say that you are Netflix. How would you determine what original series you should invest in and create?**\n\n* Netflix uses data to estimate the potential market size for an original series before giving it the go-ahead."
+        },
+        {
+          "title": "What kind of services would  nd churn (metric that tracks how many customers lea",
+          "content": "**Q: What kind of services would  nd churn (metric that tracks how many customers leave the service) helpful? How would you calculate churn?**\n\n* subscription based services"
+        }
+      ]
+    },
+    {
+      "id": "programming",
+      "name": "Programming",
+      "cards": [
+        {
+          "title": "Write a function to calculate all possible assignment vectors of 2n users, where",
+          "content": "**Q: Write a function to calculate all possible assignment vectors of 2n users, where n users are assigned to group 0 (control), and n users are assigned to group 1 (treatment).**\n\n- Recursive programming (sol in code)"
+        },
+        {
+          "title": "Given a list of tweets, determine the top 10 most used hashtags.",
+          "content": "**Q: Given a list of tweets, determine the top 10 most used hashtags.**\n\n- Store all the hashtags in a dictionary and get the top 10 values"
+        },
+        {
+          "title": "Program an algorithm to find the best approximate solution to the knapsack probl",
+          "content": "**Q: Program an algorithm to find the best approximate solution to the knapsack problem1 in a given time.**\n\n- Greedy solution (add the best v/w as much as possible and move on to the next)"
+        },
+        {
+          "title": "You have a stream of data coming in of size n, but you don’t know what n is ahea",
+          "content": "**Q: You have a stream of data coming in of size n, but you don’t know what n is ahead of time. Write an algorithm that will take a random sample of k elements. Can you write one that takes O(k) space?**\n\n- https://en.wikipedia.org/wiki/Reservoir_sampling"
+        },
+        {
+          "title": "Write an algorithm that can calculate the square root of a number.",
+          "content": "**Q: Write an algorithm that can calculate the square root of a number.**\n\n- <https://www.quora.com/What-is-the-method-to-calculate-a-square-root-by-hand?redirected_qid=664405>\n  - https://en.wikipedia.org/wiki/Newton's_method#Square_root_of_a_number"
+        },
+        {
+          "title": "Given a list of numbers, can you return the outliers?",
+          "content": "**Q: Given a list of numbers, can you return the outliers?**\n\n- sort then select the highest and the lowest 2.5%"
+        },
+        {
+          "title": "When can parallelism make your algorithms run faster?",
+          "content": "**Q: When can parallelism make your algorithms run faster?**\n\nWhen could it make your algorithms run slower?\n\n  - Ask someone for more details.\n  - compute in parallel when communication cost < computation cost\n    - ensemble trees\n    - minibatch\n    - cross validation\n    - forward propagation\n    - minibatch\n    - not suitable for online learning"
+        },
+        {
+          "title": "What are the different types of joins? What are the differences between them?",
+          "content": "**Q: What are the different types of joins? What are the differences between them?**\n\n- (INNER) JOIN: Returns records that have matching values in both tables\n    LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table\n    RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table\n    FULL (OUTER) JOIN: Return all records when there is a match in either left or right table"
+        },
+        {
+          "title": "Why might a join on a subquery be slow? How might you speed it up?",
+          "content": "**Q: Why might a join on a subquery be slow? How might you speed it up?**\n\n- Change the subquery to a join."
+        },
+        {
+          "title": "Describe the difference between primary keys and foreign keys in a SQL database.",
+          "content": "**Q: Describe the difference between primary keys and foreign keys in a SQL database.**\n\n- Primary keys are columns whose value combinations must be unique in a specific table so that each row can be referenced uniquely. Foreign keys are columns that references columns (often primary keys) in other tables."
+        },
+        {
+          "title": "Given a COURSES table with columns course_id and course_name, a FACULTY table wi",
+          "content": "**Q: Given a COURSES table with columns course_id and course_name, a FACULTY table with columns faculty_id and faculty_name, and a COURSE_FACULTY table with columns faculty_id and course_id, how would you return a list of faculty who teach a course given the name of a course?**\n\n- select faculty_name from faculty_id c join (select faculty_id from (select course_id from COURSES where course_name=xxx) as a join COURSE_FACULTY b on a.course_id = b.course_id) d on c.faculty_id = d.faculty_id"
+        },
+        {
+          "title": "Given a IMPRESSIONS table with ad_id, click (an indicator that the ad was clicke",
+          "content": "**Q: Given a IMPRESSIONS table with ad_id, click (an indicator that the ad was clicked), and date, write a SQL query that will tell me the click-through-rate of each ad by month.**\n\n- select id, average(click) from (select count(click) as click from IMPRESSIONS group by id,month(date)) group by id"
+        },
+        {
+          "title": "Write a query that returns the name of each department and a count of the number",
+          "content": "**Q: Write a query that returns the name of each department and a count of the number of employees in each:**\n\nEMPLOYEES containing: Emp_ID (Primary key) and Emp_Name  \nEMPLOYEE_DEPT containing: Emp_ID (Foreign key) and Dept_ID (Foreign key)  \nDEPTS containing: Dept_ID (Primary key) and Dept_Name\n\n  - select Dept_Name, count(1) from DEPTS a right join EMPLOYEE_DEPT b on a.Dept_id = b.Dept_id group by Dept_Name"
+        }
+      ]
+    },
+    {
+      "id": "statistical-inference",
+      "name": "Statistical Inference",
+      "cards": [
+        {
+          "title": "In an A/B test, how can you check if assignment to the various buckets was truly",
+          "content": "**Q: In an A/B test, how can you check if assignment to the various buckets was truly random?**\n\n- Plot the distributions of multiple features for both A and B and make sure that they have the same shape. More rigorously, we can conduct a permutation test to see if the distributions are the same.\n  - MANOVA to compare different means"
+        },
+        {
+          "title": "What might be the benefits of running an A/A test, where you have two buckets wh",
+          "content": "**Q: What might be the benefits of running an A/A test, where you have two buckets who are exposed to the exact same product?**\n\n- Verify the sampling algorithm is random."
+        },
+        {
+          "title": "What would be the hazards of letting users sneak a peek at the other bucket in a",
+          "content": "**Q: What would be the hazards of letting users sneak a peek at the other bucket in an A/B test?**\n\n- The user might not act the same suppose had they not seen the other bucket. You are essentially adding additional variables of whether the user peeked the other bucket, which are not random across groups."
+        },
+        {
+          "title": "What would be some issues if blogs decide to cover one of your experimental grou",
+          "content": "**Q: What would be some issues if blogs decide to cover one of your experimental groups?**\n\n- Same as the previous question. The above problem can happen in larger scale."
+        },
+        {
+          "title": "How would you conduct an A/B test on an opt-in feature?",
+          "content": "**Q: How would you conduct an A/B test on an opt-in feature?**\n\n- Ask someone for more details."
+        },
+        {
+          "title": "How would you run an A/B test for many variants, say 20 or more?",
+          "content": "**Q: How would you run an A/B test for many variants, say 20 or more?**\n\n- one control, 20 treatment, if the sample size for each group is big enough.\n  - Ways to attempt to correct for this include changing your confidence level (e.g. Bonferroni Correction) or doing family-wide tests before you dive in to the individual metrics (e.g. Fisher's Protected LSD)."
+        },
+        {
+          "title": "How would you run an A/B test if the observations are extremely right-skewed?",
+          "content": "**Q: How would you run an A/B test if the observations are extremely right-skewed?**\n\n- lower the variability by modifying the KPI\n  - cap values\n  - percentile metrics\n  - log transform\n  - <https://www.quora.com/How-would-you-run-an-A-B-test-if-the-observations-are-extremely-right-skewed>"
+        },
+        {
+          "title": "I have two different experiments that both change the sign-up button to my websi",
+          "content": "**Q: I have two different experiments that both change the sign-up button to my website. I want to test them at the same time. What kinds of things should I keep in mind?**\n\n- exclusive -> ok"
+        },
+        {
+          "title": "What is a p-value? What is the difference between type-1 and type-2 error?",
+          "content": "**Q: What is a p-value? What is the difference between type-1 and type-2 error?**\n\n- A p-value is defined such that under the null hypothesis less than the fraction p of events have parameter values more extreme than the observed parameter. It is not the probability that the null hypothesis is wrong. \n  - type-1 error: rejecting Ho when Ho is true\n  - type-2 error: not rejecting Ho when Ha is true"
+        },
+        {
+          "title": "You are AirBnB and you want to test the hypothesis that a greater number of phot",
+          "content": "**Q: You are AirBnB and you want to test the hypothesis that a greater number of photographs increases the chances that a buyer selects the listing. How would you test this hypothesis?**\n\n- For randomly selected listings with more than 1 pictures, hide 1 random picture for group A, and show all for group B. Compare the booking rate for the two groups.\n  - Ask someone for more details."
+        },
+        {
+          "title": "How would you design an experiment to determine the impact of latency on user en",
+          "content": "**Q: How would you design an experiment to determine the impact of latency on user engagement?**\n\n- The best way I know to quantify the impact of performance is to isolate just that factor using a slowdown experiment, i.e., add a delay in an A/B test."
+        },
+        {
+          "title": "What is maximum likelihood estimation? Could there be any case where it doesn’t ",
+          "content": "**Q: What is maximum likelihood estimation? Could there be any case where it doesn’t exist?**\n\n- A method for parameter optimization (fitting a model). We choose parameters so as to maximize the likelihood function (how likely the outcome would happen given the current data and our model).\n  - maximum likelihood estimation (MLE) is a method of estimating the parameters of a statistical model given observations, by finding the parameter values that maximize the likelihood of making the observations given the parameters. MLE can be seen as a special case of the maximum a posteriori estimation (MAP) that assumes a uniform \"Uniform distribution \\(continuous\\)\") prior distribution of the parameters, or as a variant of the MAP that ignores the prior and which therefore is unregularized \"Regularization \\(mathematics\\)\").\n  - for gaussian mixtures, non parametric models, it doesn’t exist"
+        },
+        {
+          "title": "What’s the difference between a MAP, MOM, MLE estima\\- tor? In which cases would",
+          "content": "**Q: What’s the difference between a MAP, MOM, MLE estima\\- tor? In which cases would you want to use each?**\n\n- MAP estimates the posterior distribution given the prior distribution and data which maximizes the likelihood function. MLE is a special case of MAP where the prior is uninformative uniform distribution.\n  - MOM sets moment values and solves for the parameters. MOM is not used much anymore because maximum likelihood estimators have higher probability of being close to the quantities to be estimated and are more often unbiased."
+        },
+        {
+          "title": "What is a confidence interval and how do you interpret it?",
+          "content": "**Q: What is a confidence interval and how do you interpret it?**\n\n- For example, 95% confidence interval is an interval that when constructed for a set of samples each sampled in the same way, the constructed intervals include the true mean 95% of the time.\n  - if confidence intervals are constructed using a given confidence level in an infinite number of independent experiments, the proportion of those intervals that contain the true value of the parameter will match the confidence level.\n  - confidence intervals refresher from khanacademy"
+        },
+        {
+          "title": "What is unbiasedness as a property of an estimator? Is this always a desirable p",
+          "content": "**Q: What is unbiasedness as a property of an estimator? Is this always a desirable property when performing inference? What about in data analysis or predictive modeling?**\n\n- Unbiasedness means that the expectation of the estimator is equal to the population value we are estimating. This is desirable in inference because the goal is to explain the dataset as accurately as possible. However, this is not always desirable for data analysis or predictive modeling as there is the bias variance tradeoff. We sometimes want to prioritize the generalizability and avoid overfitting by reducing variance and thus increasing bias."
+        },
+        {
+          "title": "What is Selection Bias? (cont.)",
+          "content": "- Selection bias is a kind of error that occurs when the researcher decides who is going to be studied. It is usually associated with research where the selection of participants isn’t random. It is sometimes referred to as the selection effect. It is the distortion of statistical analysis, resulting from the method of collecting samples. If the selection bias is not taken into account, then some conclusions of the study may not be accurate.\n  - The types of selection bias include:\n  - Sampling bias:  It is a systematic error due to a non-random sample of a population causing some members of the population to be less likely to be included than others resulting in a biased sample.\n  - Time Interval bias: A trial may be terminated early at an extreme value (often for ethical reasons), but the extreme value is likely to be reached by the variable with the largest variance, even if all variables have a similar mean.\n  - Data: When specific subsets of data are chosen to support a conclusion or rejection of bad data on arbitrary grounds, instead of according to previously stated or generally agreed criteria.\n  - Attrition: Attrition bias is a kind of selection bias caused by attrition (loss of participants) discounting trial subjects/tests that did not run to completion."
+        }
+      ]
+    },
+    {
+      "id": "data-science-resources",
+      "name": "Data Science Resources",
+      "cards": [
+        {
+          "title": "How to get an interview ? (cont.)",
+          "content": "* First and foremost, **develop the necessary skills and be sound with the fundamentals**, these are some of the horizons you should be extremely comfortable with - \n  - Business Understanding(this is extremely critical across all seniority levels, but specifically for people with more than 3 years of experience)\n  - SQL and Databases(very crucial)\n  - Programming Skills(preferably in Python, if you know Scala, extra brownie points for some specific roles)\n  - Mathematics(Probability, Statistics, Linear Algebra and Calculus) - https://medium.com/@rbhatia46/essential-probability-statistics-concepts-before-data-science-bb787b7a5aef \n  - Machine Learning(this includes Deep Learning) and Model building\n  - Data Structures and Algorithms(must and mandatory for top product based companies like FAANG)\n  - Domain Understanding(Optional for most openings, though very critical for some roles based on company's requirement)\n  - Literature Review(must for Research based roles) : Being able to read and understand a new research paper is one of the most essential and demanding skills needed in the industry today, as the culture of Research and Development, and innovation grows across most good organizations.\n  - Communication Skills - Being able to explain the analysis and results to business stakeholders and executives is becoming a really important skill for Data Scientists these days\n  - Some Engineering knowledge(Not mandatory, but good to have) - Being able to develop a RESTful API, writing clean and elegant code, Object Oriented programming are some of the things you can focus on for some extra brownie points.\n  - Big data knowledge(not mandatory for most openings, but good to have) - Spark, Hive, Hadoop, Sqoop."
+        },
+        {
+          "title": "How to get an interview ? (cont.)",
+          "content": "* **Build a personal Brand** \n  - Develop a good GitHub/portfolio of use-cases you have solved, always strive for solving end-to-end use cases, which demonstrate the entire Data Science lifecycle, from business understanding to model deployment. \n  - Write blogs, start a YouTube channel if you enjoy teaching, write a book.\n  - Work on a digital, easy-to-open, easy-to-read, clean, concise and easily customizable Resume/CV, always include your demo links and source code of every use-case you have solved.\n  - Participate in Kaggle competitions, build a good Kaggle profile and send them to potential employers for increasing the chances of getting an interview call real-quick.\n\n* **Develop good connections**, through LinkedIn, by attending conferences, and doing everything you can, it's very important to land referrals and get yourself started with the interview process through good connections. Connect regularly with Data Scientists working at top product-based organizations, fast-growing startups, build a network, slowly and steadily, it's very important.`"
+        },
+        {
+          "title": "Some Tips on Resume/CV:",
+          "content": "**Some Tips on Resume/CV:**\n\n* Describe past roles and an impact you made in a **quantifiable** way, be concise and I repeat, **quantify** the impact, rather than talking with facts that have no relevance. According to Google Recruiters, use the XYZ formula - \n```Accomplished [X] as measured by [Y], by doing [Z]```\n\n* Keep it short, ideally not more than 2 pages, as you might know, an average recruiter scans your resume only for 6 seconds, and makes a decision based on that.\n\n* If you are a fresher and don't have experience, try to solve end-to-end use-cases and mention them in your CV, preferably with the demo link(makes it easy for the recruiter) and the link to source code on GitHub.\n\n* Avoid too much technical jargon, and this goes without saying, do not mention anything you are not confident about, this might become a major bottleneck during your interview.\n\n* Some helpful links :\n  * Advice on building Data Portfolio Projects 📘\n  * How to write a killer Software Engineering Resume 📘\n  * Get your Data Science Resume past the ATS 📘\n  * How to write a developer résumé that hiring managers will actually read 📘\n\n***"
+        },
+        {
+          "title": "Some Tips on Resume/CV: (cont.)",
+          "content": "* If you want to quickly revise your math basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFzFmR919-Erw/feedshare-document-pdf-analyzed/0/1655384106479?e=1656547200&v=beta&t=9bm4OUyWfM1dQR8LWXsLrGDqYz_Yr_e7TJxHXLXe36I\n\n* If you want to quick revise you Stats and ML basics, follow this : https://media-exp2.licdn.com/dms/document/C4D1FAQFLvzVgVxYAAA/feedshare-document-pdf-analyzed/0/1656265480370?e=1657152000&v=beta&t=RD90ZEx3x2VLUGSthO-1uYKadzwTRixKRg3s8j2nvOc"
+        },
+        {
+          "title": "Probability, Statistics and Linear Algebra",
+          "content": "**Probability, Statistics and Linear Algebra**\n\n* Understand the basics of Descriptive Statistics(Really Important for an interview) 📘\n* 40 Question on **probability** for a Data Science Interview 📘\n* 40 Statistics Interview Problems and Answers for Data Scientists 📘\n* Probability and Statistics in the context of Deep Learning 📘\n* Probability v/s Likelihood 📹\n* Bootstrap Methods - The Swiss Army Knife of any Data Scientist 📘\n* Confidence Intervals Explained Simply for Data Scientists 📘\n* P-value Explained Simply for Data Scientists 📘\n* PDF is not a probability 📘\n* 5 Sampling algorithms every Data Scientist should know 📘\n* The 10 Statistical Techniques Data Scientists Need to Master 📘\n* Crash Course in Applied Linear Algebra 📹\n\n***"
+        },
+        {
+          "title": "SQL and Data Acquisition",
+          "content": "**SQL and Data Acquisition**\n\nThis is probably the entry point of your Data Science project, SQL is one of the most important skills for any Data Scientist.\n\n* 5 Common SQL Interview Problems for Data Scientists 📘\n* 46 Questions to test a Data Scientist on SQL 📘\n* 30 SQL Interview Questions curated for FAANG by an Ex-Facebook Data Scientist 📘\n* SQL Interview Questions 📘\n* How to ace Data Science Interviews - SQL 📘\n* 3 Must Know SQL Questions to pass your Data Science Interview 📘\n* 10 frequently asked SQL Queries in Interviews 📘\n* Technical Data Science Interview Questions: SQL and Coding 📘\n* How to optimize SQL Queries - Datacamp 📘\n* Ten SQL Concepts You Should Know for Data Science Interviews 📘\n\n***"
+        },
+        {
+          "title": "Data Preparation and Visualization",
+          "content": "**Data Preparation and Visualization**\n\n* 5 Feature Selection Algorithms every Data Scientist should know 📘 \n* 6 Different Ways to Compensate for Missing Values In a Dataset  📘 \n* A Brief Overview of Outlier Detection Techniques 📘 \n* Cleaning and Prepping Data with Python for Data Science — Best Practices and Helpful Packages 📘 \n* When to use which plot for visualization 📘\n* Ways to detect and remove Outliers 📘\n* Dealing with Class Imbalances in Machine Learning 📘\n* Smarter ways to encode categorical data\n* Numpy and Pandas Cheatsheet 📘\n* 3 Methods to deal with outliers 📘\n* Feature Selection Techniques 📘\n* Why, how and When to scale your features 📘\n* Everything you need to know about Scatter plots 📘\n* How to Select Features for Machine Learning 📹\n* 10 ways for Feature Selection 📹\n\n***"
+        },
+        {
+          "title": "Classic Machine Learning Algorithms",
+          "content": "**Classic Machine Learning Algorithms**\n\n* All Learning Algorithms Explained in 14 Minutes\n\n### 1. Logistic Regression\n\n* All about Logistic Regression in one article 📘 \n* Understanding Logistic Regression step-by-step 📘 \n* Logistic Regression - Short and Clear Explanation - 9 Mins 📹\n* Linear Regression vs Logistic Regression 📹\n* 30 Questions to test a Data Scientist on Logistic Regression 📘 \n* Logistic Regression - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n* Lasso, Ridge and Logistic Regression all in one video 📹\n\n### 2. Linear Regression\n\n* 30 Questions to test a Data Scientist on Linear Regression 📘 \n* Linear Regression - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n* 5 Types of Regression and their properties 📘\n* Ridge Regression - Clearly Explained 📹\n* Lasso Regression - Clearly Explained 📹\n\n### 3. Tree Based/Ensemble Algorithms"
+        },
+        {
+          "title": "Classic Machine Learning Algorithms (cont.)",
+          "content": "* 30 Questions to test a Data Scientist on Tree based models 📘\n* Gini-index v/s Information Entropy 📘\n* Decision Tree vs. Random Forest – Which Algorithm Should you Use? 📘\n* Why Random Forest doesn't work well for Time-Series? 📘\n* Comprehensive guide to Ensemble Models 📘\n* The Simple Math behind 3 Decision Tree Splitting criterions 📘\n\n### 4. K-Nearest-Neighbors\n\n* Fundamental Interview Questions on KNN - A Quick refresh 📘\n* 30 Questions to test a Data Scientist on KNN 📘\n* Pros and Cons of KNN 📘\n* KNN Algorithm - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n\n### 5. Support Vector Machines\n\n* All about SVMs - Math, Terminology, Intuition, Kernels in one article 📘\n* 25 Questions to test a Data Scientist on SVMs 📘\n\n### 6. Naive Bayes\n\n* 12 tips to make most out of Naive Bayes 📘\n* Naive Bayes - Understand Everything (Theory + Maths + Coding) in 1 video 📹\n* 6 easy steps to learn Naive Bayes 📘\n\n***"
+        },
+        {
+          "title": "Time Series",
+          "content": "**Time Series**\n\n* 40 Questions to test a Data Scientist on Time Series 📘\n* 11 Classical Time Series Forecasting Methods 📘\n* Interview Questions on ARIMA 📹\n\n***"
+        },
+        {
+          "title": "Unsupervised Learning",
+          "content": "**Unsupervised Learning**\n\n* The DOs and DONTs of PCA(Principal Component Analysis) 📘\n* An introduction to t-SNE : DataCamp 📘\n* Dimensionally Reducing Squeezing out the good stuff 📘\n* Dimensionality Reduction for Dummies : Part 1 - Intuition 📘\n* In-depth Explanation of DBSCAN Algorithm 📘\n\n***"
+        },
+        {
+          "title": "Deep Learning",
+          "content": "**Deep Learning**\n\n* Why Regularization reduces overfitting in Deep Neural Networks 📹\n* Pros and Cons of Neural Networks 📘\n* When not to use Neural Networks 📘\n* 40 Questions to test a Data Scientist on Deep learning 📘\n* 21 Popular Deep Learning Interview Questions 📘\n* Deep Learning Interview Questions - Edureka 📹\n* Activation Functions in a Neural Network - Explained 📘\n* Vanishing and Exploding Gradient - Clearly Explained 📹\n* Bias and Variance - Very clearly explained 📹\n* Why use ReLU over Sigmoid 📘\n* 25 Deep Learning Interview Qurstions to test your knowledge 📘\n* 10 Deep Learning Best Practices to Keep in Mind in 2020 📘\n\n***"
+        },
+        {
+          "title": "GenAI and LLMs",
+          "content": "**GenAI and LLMs**\n\n* LoRA Explained 📹\n* RAG v/s Fine-tuning v/s Prompt Engineering📹\n* Cross-encoders vs Bi-encoders : A deep-dive into text encoding methods📘\n* RAG 101\n* Generative AI in a Nutshell📹\n* BERT Theory in-depth explanation in one video📹\n* Transformers Theory in-depth explanation in one video📹\n* The math behind Attention: Keys, Queries, and Values matrices📹\n  \n\n***"
+        },
+        {
+          "title": "Machine Learning Interpretability",
+          "content": "**Machine Learning Interpretability**\n\n* Four Questions on Deciphering the World of Machine Learning Models 📘\n* Machine Learning Explanaibility - Crash Course by Kaggle 📘\n* SHAP Values explained simply 📹\n\n***"
+        },
+        {
+          "title": "Case Studies",
+          "content": "**Case Studies**\n\nCase studies are extremely important for interviews, below are some resources to practice, think first before looking at the solutions.\n* Dawn of Taxi Aggregators 📘\n* Optimizing product prices for an online vendor 📘\n* Tips for a Case-Study Interview 📘\n* Mercari Price Prediction 📘\n* End-to-End multiclass Text Classification pipeline 📘\n* End-to-End multiclass Image Classification pipeline 📘\n* Large Scale Forecasting for 1000+ products - Nagarro 📹\n* Clustering and Classification in E-Commerce 📘\n* The ABCs of Learning to Rank 📘\n* Data Science Case Study: Optimizing Product Placement in Retail  📘\n\n***"
+        },
+        {
+          "title": "NLP",
+          "content": "**NLP**\n\n* 30 Questions to test a Data Scientist on NLP\n* 11 Most Commonly Asked NLP Interview Questions For Beginners\n* How to solve 90% of NLP Problems\n* Questions asked for NLP Roles at Companies\n* Vector-based Methods for Similarity Search (TF-IDF, BM25, SBERT) 📹\n* Understanding BERT in detail - one of the best playlist's to understand the fundamentals and inner workings of BERT, huge shoutout to Chris McCormick\n 📹\n* Word Embeddings, CBoW and Skipgram 📹\n* CBoW v/s Skipgram : Data Science Interview Question 📹\n\n***"
+        },
+        {
+          "title": "Data Science Interviews at FAANG and Similar Companies",
+          "content": "**Data Science Interviews at FAANG and Similar Companies**\n\n* Amazon’s Data Scientist Interview Practice Problems 📘\n* Microsoft Data Science Interview Questions and Answers 📘\n* Problem Solving Questions for Data Science interview at Google 📘\n\n***"
+        },
+        {
+          "title": "Becoming a Rockstar Data Scientist(read if you have extra ti",
+          "content": "**Becoming a Rockstar Data Scientist(read if you have extra time)**\n\nGoing through these will definately add extra brownie points, so don't miss these if you got time.\n\n* Top 13 Skills To Become a Rockstar Data Scientist 📘 \n* Understand these 4 ML concepts to sound like a master 📘\n* 12 things I wish I knew before starting as a Data Scientist 📘\n* Understand the Data Science pipeline 📘\n* Kaggle Data Science Glossary 📘\n* Google Machine Learning Glossary 📘\n* Running your ML Predictions 50 times faster - Hummingbird 📘\n* 3 Mistakes you should not make in a Data Science Interview 📘\n* How to find Feature importances for BlackBox Models? 📘\n\n***"
+        },
+        {
+          "title": "Data Structures and Algorithms(Optional)",
+          "content": "**Data Structures and Algorithms(Optional)**\n\nAlthough this might be optional, but do not miss this if the Job Description explicitly asks for this, and especially never miss this if you are interviewing at FAANG and similar organizations, or if you have a CS Background. You don't have to be as good as an SDE at this, but at least know the basics.\n\n* A Data Scientist's guide to Data Structures and Algorithms 📘\n* Handling Trees in Data Science Algorithmic Interview 📘\n* A simple introduction to Linked Lists for Data Scientists 📘\n* Dynamic Programming for Data Scientists 📘\n* 3 Programming concepts for Data Scientists 📘\n* Data Scientists, The 5 Graph Algorithms that you should know 📘\n\n***"
+        },
+        {
+          "title": "Engineering and Deployment",
+          "content": "**Engineering and Deployment**\n\n* A Layman’s Guide for Data Scientists to create APIs in minutes 📘\n* Take your Machine Learning Models to Production with these 5 simple steps 📘\n* 2 way to deploy your ML models 📘\n* How to deploy a Keras model as a web app through Flask 📘\n* How to write Web apps using simple Python for Data Scientists? 📘\n\n***"
+        }
+      ]
+    }
+  ]
+}

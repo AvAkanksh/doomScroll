@@ -1,9 +1,22 @@
 {
   "generated_at": "2026-10-19",
   "categories": {
+    "annotated-papers": {
+      "file": "annotated-papers.json",
+      "topics": [
+        "Transformer Implementations",
+        "Optimizers",
+        "LoRA Implementation",
+        "Sampling Methods",
+        "RWKV Architecture",
+        "Multi-Head Attention (labml)",
+        "Positional Encoding (labml)",
+        "Feed Forward Network (labml)"
+      ],
+      "total_cards": 49
+    },
     "deep-learning-qa": {
       "file": "deep-learning-qa.json",
-      "label": "Deep Learning Q&A",
       "topics": [
         "Deep Learning: Deep Neural Networks",
         "Deep Learning: Natural Language Processing",
@@ -15,9 +28,32 @@
       ],
       "total_cards": 31
     },
+    "ds-interview-120": {
+      "file": "ds-interview-120.json",
+      "topics": [
+        "Communication",
+        "Data Analysis",
+        "Predictive Modeling",
+        "Probability",
+        "Product Metrics",
+        "Programming",
+        "Statistical Inference",
+        "Data Science Resources"
+      ],
+      "total_cards": 119
+    },
+    "karpathy-code": {
+      "file": "karpathy-code.json",
+      "topics": [
+        "Micrograd: Autograd Engine",
+        "nanoGPT: GPT Implementation",
+        "nanoGPT: Training Loop",
+        "Mamba: Selective State Space Model"
+      ],
+      "total_cards": 27
+    },
     "llm-from-scratch": {
       "file": "llm-from-scratch.json",
-      "label": "LLM From Scratch",
       "topics": [
         "Chapter 1: Understanding Large Language Models",
         "Chapter 2: Working with Text Data",
@@ -29,9 +65,61 @@
       ],
       "total_cards": 16
     },
+    "llm-interview-qa": {
+      "file": "llm-interview-qa.json",
+      "topics": [
+        "Prompt Engineering & Basics of LLM",
+        "Retrieval Augmented Generation (RAG)",
+        "Document digitization & Chunking",
+        "Embedding Models",
+        "Internal Working of Vector Databases",
+        "Advanced Search Algorithms",
+        "Language Models Internal Working",
+        "Supervised Fine-Tuning of LLM",
+        "Preference Alignment (RLHF/DPO)",
+        "Evaluation of LLM System",
+        "Hallucination Control Techniques",
+        "Deployment of LLM",
+        "Agent-Based System",
+        "Prompt Hacking",
+        "Miscellaneous",
+        "Case Studies",
+        "LLM Basics & Architecture",
+        "LLM Training & Fine-tuning",
+        "LLM Inference & Deployment",
+        "LLM Prompting & RAG",
+        "LLM Advanced Concepts",
+        "LLM Evaluation & Safety",
+        "LLM Tokenization & Embeddings",
+        "LLM Scaling & Optimization",
+        "LLM Applications & Tools"
+      ],
+      "total_cards": 103
+    },
+    "ml-architectures": {
+      "file": "ml-architectures.json",
+      "topics": [
+        "The Transformer Architecture",
+        "Attention Mechanisms Deep Dive",
+        "Modern LLM Building Blocks",
+        "LoRA & Parameter-Efficient Fine-Tuning",
+        "LLM Inference Optimization"
+      ],
+      "total_cards": 31
+    },
+    "ml-coding": {
+      "file": "ml-coding.json",
+      "topics": [
+        "Linear Regression from Scratch",
+        "Logistic Regression from Scratch",
+        "K-Means Clustering from Scratch",
+        "Neural Network Forward & Backward",
+        "PCA from Scratch"
+      ],
+      "total_cards": 28
+    },
     "ml-from-scratch-code": {
       "file": "ml-from-scratch-code.json",
-      "label": "ML From Scratch",
       "topics": [
         "Layers",
         "Neural Network",
@@ -69,7 +157,6 @@
     },
     "ml-fundamentals-qa": {
       "file": "ml-fundamentals-qa.json",
-      "label": "ML Fundamentals Q&A",
       "topics": [
         "Machine Learning Fundamentals",
         "Algorithms and Ensembles",
@@ -99,13 +186,13 @@
         "Dimensionality reduction",
         "Ranking and search",
         "Recommender systems",
-        "Time series"
+        "Time series",
+        "Python: Answer:"
       ],
-      "total_cards": 211
+      "total_cards": 215
     },
     "ml-interview-qa": {
       "file": "ml-interview-qa.json",
-      "label": "ML Interview Q&A",
       "topics": [
         "Machine Learning: Similarities:",
         "Machine Learning: Answer:",
@@ -118,7 +205,6 @@
     },
     "ml-system-design": {
       "file": "ml-system-design.json",
-      "label": "ML System Design",
       "topics": [
         "Ad Click Prediction for Social Networks",
         "Ads Click Prediction",
@@ -168,9 +254,19 @@
       ],
       "total_cards": 122
     },
+    "ml-theory": {
+      "file": "ml-theory.json",
+      "topics": [
+        "Bias-Variance Tradeoff",
+        "Regularization: L1, L2 & Beyond",
+        "Gradient Descent & Optimization",
+        "Ensemble Methods",
+        "Evaluation Metrics & Cross-Validation"
+      ],
+      "total_cards": 32
+    },
     "probability-stats": {
       "file": "probability-stats.json",
-      "label": "Probability & Statistics",
       "topics": [
         "Probability: Answer:",
         "Probability: The right answer is 11/216",
@@ -181,17 +277,8 @@
       ],
       "total_cards": 26
     },
-    "python-coding": {
-      "file": "python-coding.json",
-      "label": "Python Coding",
-      "topics": [
-        "Python: Answer:"
-      ],
-      "total_cards": 4
-    },
     "sql-databases": {
       "file": "sql-databases.json",
-      "label": "SQL & Databases",
       "topics": [
         "SQL & DB: A JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.",
         "SQL & DB: **Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column",
@@ -199,41 +286,13 @@
       ],
       "total_cards": 15
     },
-    "ml-theory": {
-      "file": "ml-theory.json",
-      "label": "Ml Theory",
+    "tensor-puzzles": {
+      "file": "tensor-puzzles.json",
       "topics": [
-        "Bias-Variance Tradeoff",
-        "Regularization: L1, L2 & Beyond",
-        "Gradient Descent & Optimization",
-        "Ensemble Methods",
-        "Evaluation Metrics & Cross-Validation"
-      ],
-      "total_cards": 32
-    },
-    "ml-coding": {
-      "file": "ml-coding.json",
-      "label": "Ml Coding",
-      "topics": [
-        "Linear Regression from Scratch",
-        "Logistic Regression from Scratch",
-        "K-Means Clustering from Scratch",
-        "Neural Network Forward & Backward",
-        "PCA from Scratch"
+        "Tensor Puzzles (Sasha Rush)",
+        "Einops: Tensor Operations"
       ],
       "total_cards": 28
-    },
-    "ml-architectures": {
-      "file": "ml-architectures.json",
-      "label": "Ml Architectures",
-      "topics": [
-        "The Transformer Architecture",
-        "Attention Mechanisms Deep Dive",
-        "Modern LLM Building Blocks",
-        "LoRA & Parameter-Efficient Fine-Tuning",
-        "LLM Inference Optimization"
-      ],
-      "total_cards": 31
     }
   }
 }

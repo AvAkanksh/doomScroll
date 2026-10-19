@@ -54,6 +54,31 @@
       "file": "sql-databases.json",
       "label": "SQL & Databases",
       "color": "#81c784"
+    },
+    {
+      "file": "annotated-papers.json",
+      "label": "Annotated DL Papers",
+      "color": "#ff80ab"
+    },
+    {
+      "file": "ds-interview-120.json",
+      "label": "Data Science 120 Q&A",
+      "color": "#ffab40"
+    },
+    {
+      "file": "karpathy-code.json",
+      "label": "Karpathy From Scratch",
+      "color": "#ea80fc"
+    },
+    {
+      "file": "llm-interview-qa.json",
+      "label": "LLM Interview Q&A",
+      "color": "#7c4dff"
+    },
+    {
+      "file": "tensor-puzzles.json",
+      "label": "Tensor Puzzles",
+      "color": "#b388ff"
     }
   ]
 }

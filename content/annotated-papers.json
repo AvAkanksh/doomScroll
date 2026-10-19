@@ -1,0 +1,248 @@
+{
+  "topics": [
+    {
+      "id": "transformer-implementations",
+      "name": "Transformer Implementations",
+      "cards": [
+        {
+          "title": "FeedForwardConfigs",
+          "content": "**FeedForwardConfigs** — `labml_nn/transformers/configs.py`\n\n<a id=\"FFN\"></a>\n\n    ## FFN Configurations\n\n    Creates a Position-wise FeedForward Network defined in\n    [`feed_forward.py`](feed_forward.html).\n\n```python\n# Position-wise feedforward layer\n    ffn: FeedForward\n    # Number of features in the embedding\n    d_model: int\n    # Number of features in in the hidden layer\n    d_ff: int = 2048\n    # Dropout probability\n    dropout: float = 0.1\n    # Activation in position-wise feedforward layer\n    activation: nn.Module = 'ReLU'\n    # Whether the FFN layer should be gated\n    is_gated: bool = False\n    # Whether the first fully connected layer should have a learnable bias\n    bias1: bool = True\n    # Whether the second fully connected layer should have a learnable bias\n    bias2: bool = True\n    # Whether the fully connected layer for the gate should have a learnable bias\n    bias_gate: bool = False\n    # Predefined GLU variants\n    glu_variant: str = 'none'\n```"
+        },
+        {
+          "title": "TransformerConfigs",
+          "content": "**TransformerConfigs** — `labml_nn/transformers/configs.py`\n\n<a id=\"TransformerConfigs\"></a>\n\n    ## Transformer Configurations\n\n    This defines configurations for a transformer.\n    The configurations are calculate using option functions.\n    These are lazy loaded and therefore only the necessary modules\n    are calculated.\n\n```python\n# Number of attention heads\n    n_heads: int = 8\n    # Transformer embedding size\n    d_model: int = 512\n    # Number of layers\n    n_layers: int = 6\n    # Dropout probability\n    dropout: float = 0.1\n    # Number of tokens in the source vocabulary (for token embeddings)\n    n_src_vocab: int\n    # Number of tokens in the target vocabulary (to generate logits for prediction)\n    n_tgt_vocab: int\n\n    # The encoder self attention\n    encoder_attn: MultiHeadAttention = 'mha'\n    # The decoder self attention\n    decoder_attn: MultiHeadAttention = 'mha'\n    # The decoder memory attention\n    decoder_mem_attn: MultiHeadAttention = 'mha'\n\n```"
+        },
+        {
+          "title": "FeedForward",
+          "content": "**FeedForward** — `labml_nn/transformers/feed_forward.py`\n\n## FFN module\n\n```python\ndef __init__(self, d_model: int, d_ff: int,\n                 dropout: float = 0.1,\n                 activation=nn.ReLU(),\n                 is_gated: bool = False,\n                 bias1: bool = True,\n                 bias2: bool = True,\n                 bias_gate: bool = True):\n        \"\"\"\n        * `d_model` is the number of features in a token embedding\n        * `d_ff` is the number of features in the hidden layer of the FFN\n        * `dropout` is dropout probability for the hidden layer\n        * `is_gated` specifies whether the hidden layer is gated\n        * `bias1` specified whether the first fully connected layer should have a learnable bias\n        * `bias2` specified whether the second fully connected layer should have a learnable bias\n        * `bias_gate` specified whether the fully connected layer for the gate should have a learnable bias\n        \"\"\"\n        super().__init__()\n        # Layer one parameterized by weight $W_1$ and bias $b_1$\n        self.layer1 = nn.Linear(d_model, d_ff, bias=bias1)\n        # Layer one parameterized by weight $W_1$ and bias $b_1$\n```"
+        },
+        {
+          "title": "PrepareForMultiHeadAttention",
+          "content": "**PrepareForMultiHeadAttention** — `labml_nn/transformers/mha.py`\n\n<a id=\"PrepareMHA\"></a>\n\n    ## Prepare for multi-head attention\n\n    This module does a linear transformation and splits the vector into given\n    number of heads for multi-head attention.\n    This is used to transform **key**, **query**, and **value** vectors.\n\n```python\ndef __init__(self, d_model: int, heads: int, d_k: int, bias: bool):\n        super().__init__()\n        # Linear layer for linear transform\n        self.linear = nn.Linear(d_model, heads * d_k, bias=bias)\n        # Number of heads\n        self.heads = heads\n        # Number of dimensions in vectors in each head\n        self.d_k = d_k\n\n    def forward(self, x: torch.Tensor):\n        # Input has shape `[seq_len, batch_size, d_model]` or `[batch_size, d_model]`.\n        # We apply the linear transformation to the last dimension and split that into\n        # the heads.\n        head_shape = x.shape[:-1]\n\n        # Linear transform\n        x = self.linear(x)\n\n        # Split last dimension into heads\n        x = x.view(*head_shape, self.heads, self.d_k)\n```"
+        },
+        {
+          "title": "EmbeddingsWithPositionalEncoding",
+          "content": "**EmbeddingsWithPositionalEncoding** — `labml_nn/transformers/models.py`\n\n<a id=\"EmbeddingsWithPositionalEncoding\"></a>\n\n    ## Embed tokens and add [fixed positional encoding](positional_encoding.html)\n\n```python\ndef __init__(self, d_model: int, n_vocab: int, max_len: int = 5000):\n        super().__init__()\n        self.linear = nn.Embedding(n_vocab, d_model)\n        self.d_model = d_model\n        self.register_buffer('positional_encodings', get_positional_encoding(d_model, max_len))\n\n    def forward(self, x: torch.Tensor):\n        pe = self.positional_encodings[:x.shape[0]].requires_grad_(False)\n        return self.linear(x) * math.sqrt(self.d_model) + pe\n\n\nclass EmbeddingsWithLearnedPositionalEncoding(nn.Module):\n    \"\"\"\n    <a id=\"EmbeddingsWithLearnedPositionalEncoding\"></a>\n\n    ## Embed tokens and add parameterized positional encodings\n    \"\"\"\n\n    def __init__(self, d_model: int, n_vocab: int, max_len: int = 5000):\n        super().__init__()\n```"
+        },
+        {
+          "title": "EmbeddingsWithLearnedPositionalEncoding",
+          "content": "**EmbeddingsWithLearnedPositionalEncoding** — `labml_nn/transformers/models.py`\n\n<a id=\"EmbeddingsWithLearnedPositionalEncoding\"></a>\n\n    ## Embed tokens and add parameterized positional encodings\n\n```python\ndef __init__(self, d_model: int, n_vocab: int, max_len: int = 5000):\n        super().__init__()\n        self.linear = nn.Embedding(n_vocab, d_model)\n        self.d_model = d_model\n        self.positional_encodings = nn.Parameter(torch.zeros(max_len, 1, d_model), requires_grad=True)\n\n    def forward(self, x: torch.Tensor):\n        pe = self.positional_encodings[:x.shape[0]]\n        return self.linear(x) * math.sqrt(self.d_model) + pe\n\n\nclass TransformerLayer(nn.Module):\n    \"\"\"\n    <a id=\"TransformerLayer\"></a>\n\n    ## Transformer Layer\n\n    This can act as an encoder layer or a decoder layer. We use pre-norm.\n    \"\"\"\n\n```"
+        },
+        {
+          "title": "TransformerLayer",
+          "content": "**TransformerLayer** — `labml_nn/transformers/models.py`\n\n<a id=\"TransformerLayer\"></a>\n\n    ## Transformer Layer\n\n    This can act as an encoder layer or a decoder layer. We use pre-norm.\n\n```python\ndef __init__(self, *,\n                 d_model: int,\n                 self_attn: MultiHeadAttention,\n                 src_attn: MultiHeadAttention = None,\n                 feed_forward: FeedForward,\n                 dropout_prob: float):\n        \"\"\"\n        * `d_model` is the token embedding size\n        * `self_attn` is the self attention module\n        * `src_attn` is the source attention module (when this is used in a decoder)\n        * `feed_forward` is the feed forward module\n        * `dropout_prob` is the probability of dropping out after self attention and FFN\n        \"\"\"\n        super().__init__()\n        self.size = d_model\n        self.self_attn = self_attn\n        self.src_attn = src_attn\n        self.feed_forward = feed_forward\n        self.dropout = nn.Dropout(dropout_prob)\n        self.norm_self_attn = nn.LayerNorm([d_model])\n```"
+        },
+        {
+          "title": "Encoder",
+          "content": "**Encoder** — `labml_nn/transformers/models.py`\n\n<a id=\"Encoder\"></a>\n\n    ## Transformer Encoder\n\n```python\ndef __init__(self, layer: TransformerLayer, n_layers: int):\n        super().__init__()\n        # Make copies of the transformer layer\n        self.layers = clone_module_list(layer, n_layers)\n        # Final normalization layer\n        self.norm = nn.LayerNorm([layer.size])\n\n    def forward(self, x: torch.Tensor, mask: torch.Tensor):\n        # Run through each transformer layer\n        for layer in self.layers:\n            x = layer(x=x, mask=mask)\n        # Finally, normalize the vectors\n        return self.norm(x)\n\n\nclass Decoder(nn.Module):\n    \"\"\"\n    <a id=\"Decoder\"></a>\n\n    ## Transformer Decoder\n```"
+        },
+        {
+          "title": "Decoder",
+          "content": "**Decoder** — `labml_nn/transformers/models.py`\n\n<a id=\"Decoder\"></a>\n\n    ## Transformer Decoder\n\n```python\ndef __init__(self, layer: TransformerLayer, n_layers: int):\n        super().__init__()\n        # Make copies of the transformer layer\n        self.layers = clone_module_list(layer, n_layers)\n        # Final normalization layer\n        self.norm = nn.LayerNorm([layer.size])\n\n    def forward(self, x: torch.Tensor, memory: torch.Tensor, src_mask: torch.Tensor, tgt_mask: torch.Tensor):\n        # Run through each transformer layer\n        for layer in self.layers:\n            x = layer(x=x, mask=tgt_mask, src=memory, src_mask=src_mask)\n        # Finally, normalize the vectors\n        return self.norm(x)\n\n\nclass Generator(nn.Module):\n    \"\"\"\n    <a id=\"Generator\"></a>\n\n    ## Generator\n```"
+        },
+        {
+          "title": "Generator",
+          "content": "**Generator** — `labml_nn/transformers/models.py`\n\n<a id=\"Generator\"></a>\n\n    ## Generator\n\n    This predicts the tokens and gives the lof softmax of those.\n    You don't need this if you are using `nn.CrossEntropyLoss`.\n\n```python\ndef __init__(self, n_vocab: int, d_model: int):\n        super().__init__()\n        self.projection = nn.Linear(d_model, n_vocab)\n\n    def forward(self, x):\n        return self.projection(x)\n\n\nclass EncoderDecoder(nn.Module):\n    \"\"\"\n    <a id=\"EncoderDecoder\"></a>\n\n    ## Combined Encoder-Decoder\n    \"\"\"\n\n    def __init__(self, encoder: Encoder, decoder: Decoder, src_embed: nn.Module, tgt_embed: nn.Module, generator: nn.Module):\n        super().__init__()\n        self.encoder = encoder\n        self.decoder = decoder\n        self.src_embed = src_embed\n```"
+        },
+        {
+          "title": "EncoderDecoder",
+          "content": "**EncoderDecoder** — `labml_nn/transformers/models.py`\n\n<a id=\"EncoderDecoder\"></a>\n\n    ## Combined Encoder-Decoder\n\n```python\ndef __init__(self, encoder: Encoder, decoder: Decoder, src_embed: nn.Module, tgt_embed: nn.Module, generator: nn.Module):\n        super().__init__()\n        self.encoder = encoder\n        self.decoder = decoder\n        self.src_embed = src_embed\n        self.tgt_embed = tgt_embed\n        self.generator = generator\n\n        # This was important from their code.\n        # Initialize parameters with Glorot / fan_avg.\n        for p in self.parameters():\n            if p.dim() > 1:\n                nn.init.xavier_uniform_(p)\n\n    def forward(self, src: torch.Tensor, tgt: torch.Tensor, src_mask: torch.Tensor, tgt_mask: torch.Tensor):\n        # Run the source through encoder\n        enc = self.encode(src, src_mask)\n        # Run encodings and targets through decoder\n        return self.decode(enc, src_mask, tgt, tgt_mask)\n\n```"
+        },
+        {
+          "title": "subsequent_mask",
+          "content": "**subsequent_mask** — `labml_nn/transformers/utils.py`\n\n## Subsequent mask to mask out data from future (subsequent) time steps"
+        }
+      ]
+    },
+    {
+      "id": "optimizers",
+      "name": "Optimizers",
+      "cards": [
+        {
+          "title": "AdaBelief",
+          "content": "**AdaBelief** — `labml_nn/optimizers/ada_belief.py`\n\n## AdaBelief Optimizer\n\n    This class extends from RAdam optimizer defined in [`radam.py`](radam.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-16,\n                 weight_decay: WeightDecay = WeightDecay(), amsgrad=False,\n                 degenerate_to_sgd=True,\n                 rectify=True, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "AdaBelief (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * `optimized_update` is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `amsgrad` is a flag indicating whether to use AMSGrad or fallback to plain Adam\n        * `degenerate_to_sgd` whether to use sgd when the rectification term $r_t$ is intractable\n        * `rectify` is whether to use RAdam update\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `AdaBelief`.\n        \"\"\"\n```"
+        },
+        {
+          "title": "Adam",
+          "content": "**Adam** — `labml_nn/optimizers/adam.py`\n\n## Adam Optimizer\n\n    We extend the class `GenericAdaptiveOptimizer` defined in [`__init__.py`](index.html)\n    to implement the Adam optimizer.\n\n```python\ndef __init__(self, params,\n                 lr: float = 1e-3, betas: Tuple[float, float] = (0.9, 0.999), eps: float = 1e-16,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 defaults: Optional[Dict[str, Any]] = None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "Adam (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * `optimized_update` is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `Adam`.\n        \"\"\"\n        defaults = {} if defaults is None else defaults\n        defaults.update(weight_decay.defaults())\n```"
+        },
+        {
+          "title": "AdamFP16",
+          "content": "**AdamFP16** — `labml_nn/optimizers/adam_fp16.py`\n\n## Adam Optimizer for Half Precision Training\n\n    We extend [Adam Optimizer](adam.html) but use FP32 to store gradients and moments.\n\n```python\ndef __init__(self, params, lr: float = 1e-3, betas: Tuple[float, float] = (0.9, 0.999), eps: float = 1e-16,\n                 weight_decay: WeightDecay = WeightDecay(), optimized_update: bool = True,\n                 defaults: Optional[Dict[str, Any]] = None):\n        # Parameter to store 32 bit gradients. This get populated by the `GradScaler` defined below.\n        self.grad_fp32 = {}\n        # Call the [Adam Optimizer](adam.html) initializer\n        super().__init__(params, lr, betas, eps, weight_decay, optimized_update, defaults)\n\n    def init_state(self, state: Dict[str, any], group: Dict[str, any], param: nn.Parameter):\n        \"\"\"\n        ### Initialize a parameter state\n\n        * `state` is the optimizer state of the parameter (tensor)\n        * `group` stores optimizer attributes of the parameter group\n        * `param` is the parameter tensor $\\theta_{t-1}$\n\n        All the state tensors use FP32.\n        \"\"\""
+        },
+        {
+          "title": "AdamFP16 (cont.)",
+          "content": "# This is the number of optimizer steps taken on the parameter, $t$\n```"
+        },
+        {
+          "title": "GradScalerFP16",
+          "content": "**GradScalerFP16** — `labml_nn/optimizers/adam_fp16.py`\n\n## Gradient Scaler with half precision gradients\n\n    We extend PyTorch gradient scaler to use FP32 gradients.\n\n```python\ndef _unscale_grads_(self, optimizer: Optimizer, inv_scale: torch.Tensor, found_inf: torch.Tensor,\n                        allow_fp16: bool) -> Dict[torch.device, torch.Tensor]:\n        per_device_inv_scale = grad_scaler._MultiDeviceReplicator(inv_scale)\n        per_device_found_inf = grad_scaler._MultiDeviceReplicator(found_inf)\n\n        per_device_and_dtype_grads = defaultdict(lambda: defaultdict(list))  # type: ignore[var-annotated]\n\n        with torch.no_grad():\n            # Loop through parameters\n            for group in optimizer.param_groups:\n                for param in group[\"params\"]:\n                    # Skip non-trainable parameters\n                    if param.grad is None:\n                        continue\n                    # Not implemented for sparse tensors\n                    if param.grad.is_sparse:\n                        raise NotImplementedError"
+        },
+        {
+          "title": "GradScalerFP16 (cont.)",
+          "content": "# If we are using the `AdamFP16` optimizer set `optimizer.grad_fp32[param]` to the FP32 gradients\n                    if isinstance(optimizer, AdamFP16):\n```"
+        },
+        {
+          "title": "AdamWarmup",
+          "content": "**AdamWarmup** — `labml_nn/optimizers/adam_warmup.py`\n\n## Adam Optimizer with Warmup\n\n    This class extends from AMSGrad optimizer defined in [`amsgrad.py`](amsgrad.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-16,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 amsgrad=False, warmup=0, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "AdamWarmup (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * 'optimized_update' is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `amsgrad` is a flag indicating whether to use AMSGrad or fallback to plain Adam\n        * `warmup` number of warmup steps\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `AdamWarmup`.\n        \"\"\"\n\n```"
+        },
+        {
+          "title": "AdamWarmupCosineDecay",
+          "content": "**AdamWarmupCosineDecay** — `labml_nn/optimizers/adam_warmup_cosine_decay.py`\n\n<a id=\"EmbeddingsWithPositionalEncoding\"></a>\n\n    ## Adam Optimizer with Warmup and Cosine Decay\n\n    This class extends from AMSGrad optimizer defined in [`amsgrad.py`](amsgrad.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-16,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 amsgrad=False, warmup=0, total_steps=1e10, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "AdamWarmupCosineDecay (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * 'optimized_update' is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `amsgrad` is a flag indicating whether to use AMSGrad or fallback to plain Adam\n        * `warmup` number of warmup steps\n        * `total_steps` total number of steps. Cosine decay reaches 0 at this,\n        but stays at 10% of `lr` because we take $\\alpha * \\max(0.1, decay)$\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `AdamWarmup`.\n```"
+        },
+        {
+          "title": "AMSGrad",
+          "content": "**AMSGrad** — `labml_nn/optimizers/amsgrad.py`\n\n## AMSGrad Optimizer\n\n    This class extends from Adam optimizer defined in [`adam.py`](adam.html).\n    Adam optimizer is extending the class `GenericAdaptiveOptimizer`\n    defined in [`__init__.py`](index.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-16,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 amsgrad=True, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "AMSGrad (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * 'optimized_update' is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `amsgrad` is a flag indicating whether to use AMSGrad or fallback to plain Adam\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `Adam`.\n        \"\"\"\n        defaults = {} if defaults is None else defaults\n        defaults.update(dict(amsgrad=amsgrad))\n```"
+        },
+        {
+          "title": "OptimizerConfigs",
+          "content": "**OptimizerConfigs** — `labml_nn/optimizers/configs.py`\n\n<a id=\"OptimizerConfigs\"></a>\n\n    ## Optimizer Configurations\n\n```python\n# Optimizer\n    optimizer: torch.optim.Adam\n\n    # Weight decay\n    weight_decay_obj: WeightDecay\n    # Whether weight decay is decoupled;\n    # i.e. weight decay is not added to gradients\n    weight_decouple: bool = True\n    # Weight decay\n    weight_decay: float = 0.0\n    # Whether weight decay is absolute or should be multiplied by learning rate\n    weight_decay_absolute: bool = False\n\n    # Whether the adam update is optimized (different epsilon)\n    optimized_adam_update: bool = True\n\n    # Parameters to be optimized\n    parameters: any\n\n    # Learning rate $\\alpha$\n```"
+        },
+        {
+          "title": "Model",
+          "content": "**Model** — `labml_nn/optimizers/mnist_experiment.py`\n\n## The model\n\n```python\ndef __init__(self):\n        super().__init__()\n        self.conv1 = nn.Conv2d(1, 20, 5, 1)\n        self.pool1 = nn.MaxPool2d(2)\n        self.conv2 = nn.Conv2d(20, 50, 5, 1)\n        self.pool2 = nn.MaxPool2d(2)\n        self.fc1 = nn.Linear(16 * 50, 500)\n        self.fc2 = nn.Linear(500, 10)\n        self.activation = nn.ReLU()\n\n    def forward(self, x):\n        x = self.activation(self.conv1(x))\n        x = self.pool1(x)\n        x = self.activation(self.conv2(x))\n        x = self.pool2(x)\n        x = self.activation(self.fc1(x.view(-1, 16 * 50)))\n        return self.fc2(x)\n\n\nclass Configs(MNISTConfigs, TrainValidConfigs):\n```"
+        },
+        {
+          "title": "Configs",
+          "content": "**Configs** — `labml_nn/optimizers/mnist_experiment.py`\n\n## Configurable Experiment Definition\n\n```python\noptimizer: torch.optim.Adam\n    model: nn.Module\n    device: torch.device = DeviceConfigs()\n    epochs: int = 10\n\n    is_save_models = True\n    model: nn.Module\n    inner_iterations = 10\n\n    accuracy_func = Accuracy()\n    loss_func = nn.CrossEntropyLoss()\n\n    def init(self):\n        tracker.set_queue(\"loss.*\", 20, True)\n        tracker.set_scalar(\"accuracy.*\", True)\n        self.state_modules = [self.accuracy_func]\n\n    def step(self, batch: any, batch_idx: BatchIndex):\n        # Get the batch\n        data, target = batch[0].to(self.device), batch[1].to(self.device)\n```"
+        },
+        {
+          "title": "Noam",
+          "content": "**Noam** — `labml_nn/optimizers/noam.py`\n\n## Noam Optimizer\n\n    This class extends from Adam optimizer defined in [`adam.py`](adam.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-16,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 amsgrad=False,\n                 warmup=0, d_model=512, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        },
+        {
+          "title": "Noam (cont.)",
+          "content": "* `params` is the list of parameters\n        * `lr` is the learning rate $\\alpha$\n        * `betas` is a tuple of ($\\beta_1$, $\\beta_2$)\n        * `eps` is $\\hat{\\epsilon}$ or $\\epsilon$ based on `optimized_update`\n        * `weight_decay` is an instance of class `WeightDecay` defined in [`__init__.py`](index.html)\n        * 'optimized_update' is a flag whether to optimize the bias correction of the second moment\n          by doing it after adding $\\epsilon$\n        * `amsgrad` is a flag indicating whether to use AMSGrad or fallback to plain Adam\n        * `warmup` number of warmup steps\n        * `d_model` model size; i.e. number of dimensions in the transformer\n        * `defaults` is a dictionary of default for group values.\n         This is useful when you want to extend the class `AdamWarmup`.\n```"
+        },
+        {
+          "title": "RAdam",
+          "content": "**RAdam** — `labml_nn/optimizers/radam.py`\n\n## Rectified Adam Optimizer\n\n    This class extends from AMSAdam optimizer defined in [`amsadam.py`](amsadam.html).\n\n```python\ndef __init__(self, params, lr=1e-3, betas=(0.9, 0.999), eps=1e-8,\n                 weight_decay: WeightDecay = WeightDecay(),\n                 optimized_update: bool = True,\n                 amsgrad=False,\n                 degenerated_to_sgd=True, defaults=None):\n        \"\"\"\n        ### Initialize the optimizer"
+        }
+      ]
+    },
+    {
+      "id": "lora-implementation",
+      "name": "LoRA Implementation",
+      "cards": [
+        {
+          "title": "FFN",
+          "content": "**FFN** — `labml_nn/lora/gpt2.py`\n\n### Feedforward Network\n\n```python\ndef __init__(self, d_model: int, d_ff: int, r: int):\n        \"\"\"\n        :param d_model: is the number of dimensions\n        :param d_ff: is the size of the hidden dimension\n        :param r: is the lora rank\n        \"\"\"\n        super().__init__()\n\n        # The linear layers and the activation\n        self.linear_in = Linear(d_model, d_ff, r=r, bias=True)\n        self.linear_out = Linear(d_ff, d_model, r=r, bias=True)\n        self.act = nn.GELU()\n\n    def forward(self, x: torch.Tensor) -> torch.Tensor:\n        \"\"\"\n        :param x: is the embeddings tensor with shape `[batch_size, seq_len, d_model]`\n        \"\"\"\n        x = self.linear_in(x)\n        x = self.act(x)\n        x = self.linear_out(x)\n```"
+        },
+        {
+          "title": "MultiHeadAttention",
+          "content": "**MultiHeadAttention** — `labml_nn/lora/gpt2.py`\n\n### Multi-Head Attention\n\n```python\ndef __init__(self, d_model: int, n_heads: int, r: int):\n        \"\"\"\n        :param d_model: is the number of dimensions in the embeddings\n        :param n_heads: is the number of heads\n        :param r: is the lora rank\n        \"\"\"\n        super().__init__()\n        self.d_model = d_model\n        self.n_heads = n_heads\n        self.d_head = d_model // n_heads\n\n        # Linear transformation for QKV\n        self.qkv_projection = Linear(d_model, d_model * 3, r=r, bias=True)\n        # Output projection\n        self.output_projection = Linear(d_model, d_model, r=r, bias=True)\n\n    def _split_heads(self, x: torch.Tensor):\n        \"\"\"\n        :param x: is the tensor with shape `[batch_size, seq_len, d_model]`\n        \"\"\"\n```"
+        },
+        {
+          "title": "Block",
+          "content": "**Block** — `labml_nn/lora/gpt2.py`\n\n### Decoder block\n\n```python\ndef __init__(self, d_model: int, n_heads: int, layer_norm_epsilon: float, r: int):\n        \"\"\"\n        :param d_model: is the number of dimensions in the embeddings\n        :param n_heads: is the number of heads\n        :param layer_norm_epsilon: is the layer norm epsilon\n        :param r: is the lora rank\n        \"\"\"\n        super().__init__()\n        # Attention pre-normalization layer\n        self.attn_norm = nn.LayerNorm(d_model, eps=layer_norm_epsilon)\n        # Attention layer\n        self.attn = MultiHeadAttention(d_model, n_heads, r)\n        # FFN pre-normalization layer\n        self.ffn_norm = nn.LayerNorm(d_model, eps=layer_norm_epsilon)\n        # Feed-forward network\n        self.ffn = FFN(d_model, d_model * 4, r)\n\n    def forward(self, x: torch.Tensor) -> torch.Tensor:\n        \"\"\"\n        :param x: is the embeddings tensor with shape `[batch_size, seq_len, d_model]`\n```"
+        },
+        {
+          "title": "GPTModel",
+          "content": "**GPTModel** — `labml_nn/lora/gpt2.py`\n\n## GPT2 Model\n\n```python\ndef __init__(self, *, d_model: int,\n                 n_heads: int, n_layers: int,\n                 n_positions: int,\n                 layer_norm_epsilon: float,\n                 vocab_size: int, r: int):\n        \"\"\"\n        :param d_model: is the number of dimensions in the embeddings\n        :param n_heads: is the number of attention heads\n        :param n_layers: is the number of decoder layers\n        :param n_positions: is the number of positional embeddings\n        :param layer_norm_epsilon: is the layer norm epsilon\n        :param vocab_size: is the vocabulary size\n        :param r: is the lora rank\n        \"\"\"\n        super().__init__()\n\n        # Token and absolute positional embeddings\n        self.token_embedding = Embedding(vocab_size, d_model, r=r)\n        self.position_embedding = Embedding(n_positions, d_model, r=r)\n\n```"
+        }
+      ]
+    },
+    {
+      "id": "sampling-methods",
+      "name": "Sampling Methods",
+      "cards": [
+        {
+          "title": "NucleusSampler",
+          "content": "**NucleusSampler** — `labml_nn/sampling/nucleus.py`\n\n## Nucleus Sampler\n\n```python\ndef __init__(self, p: float, sampler: Sampler):\n        \"\"\"\n        :param p: is the sum of probabilities of tokens to pick $p$\n        :param sampler: is the sampler to use for the selected tokens\n        \"\"\"\n        self.p = p\n        self.sampler = sampler\n        # Softmax to compute $P(x_i | x_{1:i-1})$ from the logits\n        self.softmax = nn.Softmax(dim=-1)\n\n    def __call__(self, logits: torch.Tensor):\n        \"\"\"\n        Sample from logits with Nucleus Sampling\n        \"\"\"\n\n        # Get probabilities $P(x_i | x_{1:i-1})$\n        probs = self.softmax(logits)\n\n        # Sort probabilities in descending order\n        sorted_probs, indices = torch.sort(probs, dim=-1, descending=True)\n```"
+        },
+        {
+          "title": "TemperatureSampler",
+          "content": "**TemperatureSampler** — `labml_nn/sampling/temperature.py`\n\n## Sampler with Temperature\n\n```python\ndef __init__(self, temperature: float = 1.0):\n        \"\"\"\n        :param temperature: is the temperature to sample with\n        \"\"\"\n        self.temperature = temperature\n\n    def __call__(self, logits: torch.Tensor):\n        \"\"\"\n        Sample from logits\n        \"\"\"\n\n        # Create a categorical distribution with temperature adjusted logits\n        dist = Categorical(logits=logits / self.temperature)\n\n        # Sample\n        return dist.sample()\n```"
+        },
+        {
+          "title": "TopKSampler",
+          "content": "**TopKSampler** — `labml_nn/sampling/top_k.py`\n\n## Top-k Sampler\n\n```python\ndef __init__(self, k: int, sampler: Sampler):\n        \"\"\"\n        :param k: is the number of tokens to pick\n        :param sampler: is the sampler to use for the top-k tokens\n\n        `sampler` can be any sampler that takes a logits tensor as input and returns a token tensor;\n         e.g. [`TemperatureSampler'](temperature.html).\n        \"\"\"\n        self.k = k\n        self.sampler = sampler\n\n    def __call__(self, logits: torch.Tensor):\n        \"\"\"\n        Sample from logits\n        \"\"\"\n        # New logits filled with $-\\infty$; i.e. zero probability\n        zeros = logits.new_ones(logits.shape) * float('-inf')\n        # Pick the largest $k$ logits and their indices\n        values, indices = torch.topk(logits, self.k, dim=-1)\n        # Set the values of the top-k selected indices to actual logits.\n```"
+        }
+      ]
+    },
+    {
+      "id": "rwkv-architecture",
+      "name": "RWKV Architecture",
+      "cards": [
+        {
+          "title": "RWKVConfigs",
+          "content": "**RWKVConfigs** — `labml_nn/rwkv/configs.py`\n\n## Transformer Configurations\n\n    This defines configurations for a transformer.\n    The configurations are calculate using option functions.\n    These are lazy loaded and therefore only the necessary modules\n    are calculated.\n\n```python\n# Number of attention heads\n    n_heads: int = 8\n    # Transformer embedding size\n    d_model: int = 512\n    # Number of layers\n    n_layers: int = 6\n    # Dropout probability\n    dropout: float = 0.1\n    # Number of tokens in the source vocabulary (for token embeddings)\n    n_src_vocab: int\n    # Number of tokens in the target vocabulary (to generate logits for prediction)\n    n_tgt_vocab: int\n```"
+        }
+      ]
+    },
+    {
+      "id": "multi-head-attention-labml",
+      "name": "Multi-Head Attention (labml)",
+      "cards": [
+        {
+          "title": "PrepareForMultiHeadAttention",
+          "content": "**PrepareForMultiHeadAttention** from `labmlai/annotated_deep_learning_paper_implementations`\n\n<a id=\"PrepareMHA\"></a>\n\n    ## Prepare for multi-head attention\n\n    This module does a linear transformation and splits the vector into given\n    number of heads for multi-head attention.\n    This i\n\n```python\nclass PrepareForMultiHeadAttention(nn.Module):\n    \"\"\"\n    <a id=\"PrepareMHA\"></a>\n\n    ## Prepare for multi-head attention\n\n    This module does a linear transformation and splits the vector into given\n    number of heads for multi-head attention.\n    This is used to transform **key**, **query**, and **value** vectors.\n    \"\"\"\n\n    def __init__(self, d_model: int, heads: int, d_k: int, bias: bool):\n        super().__init__()\n        # Linear layer for linear transform\n        self.linear = nn.Linear(d_model, heads * d_k, bias=bias)\n        # Number of heads\n        self.heads = heads\n        # Number of dimensions in vectors in each head\n        self.d_k = d_k"
+        },
+        {
+          "title": "PrepareForMultiHeadAttention (cont.)",
+          "content": "def forward(self, x: torch.Tensor):\n        # Input has shape `[seq_len, batch_size, d_model]` or `[batch_size, d_model]`.\n        # We apply the linear transformation to the last dimension and split that into\n        # the heads.\n        head_shape = x.shape[:-1]\n\n        # Linear transform\n        x = self.linear(x)\n\n        # Split last dimension into heads\n        x = x.view(*head_shape, self.heads, self.d_k)\n\n        # Output has shape `[seq_len, batch_size, heads, d_k]` or `[batch_size, heads, d_model]`\n        return x\n```"
+        },
+        {
+          "title": "MultiHeadAttention",
+          "content": "**MultiHeadAttention** from `labmlai/annotated_deep_learning_paper_implementations`\n\n<a id=\"MHA\"></a>\n\n    ## Multi-Head Attention Module\n\n    This computes scaled multi-headed attention for given `query`, `key` and `value` vectors.\n\n    $$\\mathop{Attention}(Q, K, V) = \\underset{seq}{\n\n```python\nclass MultiHeadAttention(nn.Module):\n    r\"\"\"\n    <a id=\"MHA\"></a>\n\n    ## Multi-Head Attention Module\n\n    This computes scaled multi-headed attention for given `query`, `key` and `value` vectors.\n\n    $$\\mathop{Attention}(Q, K, V) = \\underset{seq}{\\mathop{softmax}}\\Bigg(\\frac{Q K^\\top}{\\sqrt{d_k}}\\Bigg)V$$\n\n    In simple terms, it finds keys that matches the query, and gets the values of\n     those keys.\n\n    It uses dot-product of query and key as the indicator of how matching they are.\n    Before taking the $softmax$ the dot-products are scaled by $\\frac{1}{\\sqrt{d_k}}$.\n    This is done to avoid large dot-product values causing softmax to\n    give very small gradients when $d_k$ is large.\n\n    Softmax is calculated along the axis of of the sequence (or time).\n    \"\"\""
+        },
+        {
+          "title": "MultiHeadAttention (cont.)",
+          "content": "def __init__(self, heads: int, d_model: int, dropout_prob: float = 0.1, bias: bool = True):\n        \"\"\"\n        * `heads` is the number of heads.\n        * `d_model` is the number of features in the `query`, `key` and `value` vectors.\n        \"\"\"\n\n        super().__init__()\n\n        # Number of features per head\n        self.d_k = d_model // heads\n        # Number of heads\n        self.heads = heads\n\n        # These transform the `query`, `key` and `value` vectors for multi-headed attention.\n        self.query = PrepareForMultiHeadAttention(d_model, heads, self.d_k, bias=bias)\n        self.key = PrepareForMultiHeadAttention(d_model, heads, self.d_k, bias=bias)\n        self.value = PrepareForMultiHeadAttention(d_model, heads, self.d_k, bias=True)\n\n        # Softmax for attention along the time dimension of `key`\n```"
+        }
+      ]
+    },
+    {
+      "id": "positional-encoding-labml",
+      "name": "Positional Encoding (labml)",
+      "cards": [
+        {
+          "title": "PositionalEncoding",
+          "content": "**PositionalEncoding** from `labmlai/annotated_deep_learning_paper_implementations`\n\n```python\nclass PositionalEncoding(nn.Module):\n    def __init__(self, d_model: int, dropout_prob: float, max_len: int = 5000):\n        super().__init__()\n        self.dropout = nn.Dropout(dropout_prob)\n\n        self.register_buffer('positional_encodings', get_positional_encoding(d_model, max_len), False)\n\n    def forward(self, x: torch.Tensor):\n        pe = self.positional_encodings[:x.shape[0]].detach().requires_grad_(False)\n        x = x + pe\n        x = self.dropout(x)\n        return x"
+        },
+        {
+          "title": "PositionalEncoding (cont.)",
+          "content": "def get_positional_encoding(d_model: int, max_len: int = 5000):\n    # Empty encodings vectors\n    encodings = torch.zeros(max_len, d_model)\n    # Position indexes\n    position = torch.arange(0, max_len, dtype=torch.float32).unsqueeze(1)\n    # $2 * i$\n    two_i = torch.arange(0, d_model, 2, dtype=torch.float32)\n    # $10000^{\\frac{2i}{d_{model}}}$\n    div_term = torch.exp(two_i * -(math.log(10000.0) / d_model))\n    # $PE_{p,2i} = sin\\Bigg(\\frac{p}{10000^{\\frac{2i}{d_{model}}}}\\Bigg)$\n    encodings[:, 0::2] = torch.sin(position * div_term)\n    # $PE_{p,2i + 1} = cos\\Bigg(\\frac{p}{10000^{\\frac{2i}{d_{model}}}}\\Bigg)$\n    encodings[:, 1::2] = torch.cos(position * div_term)\n\n    # Add batch dimension\n    encodings = encodings.unsqueeze(1).requires_grad_(False)\n\n    return encodings\n\n\ndef _test_positional_encoding():\n    import matplotlib.pyplot as plt\n\n    plt.figure(figsize=(15, 5))\n    pe = get_positional_encoding(20, 100)\n    plt.plot(np.arange(100), pe[:, 0, 4:8].numpy())\n```"
+        }
+      ]
+    },
+    {
+      "id": "feed-forward-network-labml",
+      "name": "Feed Forward Network (labml)",
+      "cards": [
+        {
+          "title": "FeedForward",
+          "content": "**FeedForward** from `labmlai/annotated_deep_learning_paper_implementations`\n\n## FFN module\n\n```python\nclass FeedForward(nn.Module):\n    \"\"\"\n    ## FFN module\n    \"\"\""
+        },
+        {
+          "title": "FeedForward (cont.)",
+          "content": "def __init__(self, d_model: int, d_ff: int,\n                 dropout: float = 0.1,\n                 activation=nn.ReLU(),\n                 is_gated: bool = False,\n                 bias1: bool = True,\n                 bias2: bool = True,\n                 bias_gate: bool = True):\n        \"\"\"\n        * `d_model` is the number of features in a token embedding\n        * `d_ff` is the number of features in the hidden layer of the FFN\n        * `dropout` is dropout probability for the hidden layer\n        * `is_gated` specifies whether the hidden layer is gated\n        * `bias1` specified whether the first fully connected layer should have a learnable bias\n        * `bias2` specified whether the second fully connected layer should have a learnable bias\n        * `bias_gate` specified whether the fully connected layer for the gate should have a learnable bias\n        \"\"\"\n        super().__init__()\n        # Layer one parameterized by weight $W_1$ and bias $b_1$\n        self.layer1 = nn.Linear(d_model, d_ff, bias=bias1)\n        # Layer one parameterized by weight $W_1$ and bias $b_1$\n        self.layer2 = nn.Linear(d_ff, d_model, bias=bias2)\n        # Hidden layer dropout\n        self.dropout = nn.Dropout(dropout)\n        # Activation function $f$\n        self.activation = activation\n        # Whether there is a gate\n        self.is_gated = is_gated\n        if is_gated:\n            # If there is a gate the linear layer to transform inputs to\n            # be multiplied by the gate, parameterized by weight $V$ and bias $c$\n            self.linear_v = nn.Linear(d_model, d_ff, bias=bias_gate)"
+        },
+        {
+          "title": "FeedForward (cont.)",
+          "content": "def forward(self, x: torch.Tensor):\n        # $f(x W_1 + b_1)$\n        g = self.activation(self.layer1(x))\n```"
+        }
+      ]
+    }
+  ]
+}
