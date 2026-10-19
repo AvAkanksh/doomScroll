@@ -79,16 +79,6 @@
       ]
     },
     {
-      "id": "deep-learning-answer",
-      "name": "Deep Learning: Answer:",
-      "cards": [
-        {
-          "title": "What is a depthwise Separable layer and what are its advantages? (cont.)",
-          "content": "## Q44: Discuss some popular deep learning frameworks or libraries used for computer vision tasks.\nAnswer:"
-        }
-      ]
-    },
-    {
       "id": "deep-learning-to-reduce-overfitting-in-a-deep-neural-network",
       "name": "Deep Learning: To reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:",
       "cards": [

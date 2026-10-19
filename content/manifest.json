@@ -79,6 +79,11 @@
       "file": "tensor-puzzles.json",
       "label": "Tensor Puzzles",
       "color": "#b388ff"
+    },
+    {
+      "file": "pytorch-ml-coding.json",
+      "label": "PyTorch ML Coding",
+      "color": "#40c4ff"
     }
   ]
 }

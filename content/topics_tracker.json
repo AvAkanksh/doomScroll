@@ -1,255 +1,660 @@
 {
-  "generated_at": "2026-10-19",
-  "categories": {
-    "annotated-papers": {
-      "file": "annotated-papers.json",
-      "topics": [
-        "Transformer Implementations",
-        "Optimizers",
-        "LoRA Implementation",
-        "Sampling Methods",
-        "RWKV Architecture",
-        "Multi-Head Attention (labml)",
-        "Positional Encoding (labml)",
-        "Feed Forward Network (labml)"
-      ],
-      "total_cards": 44
+  "annotated-papers": [
+    {
+      "name": "Transformer Implementations",
+      "cards": 12
     },
-    "deep-learning-qa": {
-      "file": "deep-learning-qa.json",
-      "topics": [
-        "Deep Learning: Deep Neural Networks",
-        "Deep Learning: Natural Language Processing",
-        "Deep Learning: Computer Vision",
-        "Deep Learning: Answer:",
-        "Deep Learning: To reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:",
-        "Deep Learning: Batch normalization is a technique for training very deep neural networks that standardizes the inputs to a layer for each mini-batch.",
-        "Deep Learning: By taking incremental steps towards the minimal value, the gradient descent algorithm aims to minimize the error. The weights and biases in a neural network are updated using these processes. However, at times, the steps grow excessively large, resulting in increased updates to weights and bias terms to the point where the weights overflow (or become NaN, that is, Not a Number). An exploding gradient is the result of this, and it is an unstable method."
-      ],
-      "total_cards": 31
+    {
+      "name": "Optimizers",
+      "cards": 18
     },
-    "ds-interview-120": {
-      "file": "ds-interview-120.json",
-      "topics": [
-        "Communication",
-        "Data Analysis",
-        "Predictive Modeling",
-        "Probability",
-        "Product Metrics",
-        "Programming",
-        "Statistical Inference",
-        "Data Science Resources"
-      ],
-      "total_cards": 116
+    {
+      "name": "LoRA Implementation",
+      "cards": 4
     },
-    "karpathy-code": {
-      "file": "karpathy-code.json",
-      "topics": [
-        "Micrograd: Autograd Engine",
-        "nanoGPT: GPT Implementation",
-        "Mamba: Selective State Space Model"
-      ],
-      "total_cards": 17
+    {
+      "name": "Sampling Methods",
+      "cards": 3
     },
-    "llm-from-scratch": {
-      "file": "llm-from-scratch.json",
-      "topics": [
-        "Chapter 1: Understanding Large Language Models",
-        "Chapter 2: Working with Text Data",
-        "Chapter 3: Coding Attention Mechanisms",
-        "Chapter 4: Implementing a GPT Model from Scratch to Generate Text",
-        "Chapter 5: Pretraining on Unlabeled Data",
-        "Chapter 6: Finetuning for Classification",
-        "Chapter 7: Finetuning to Follow Instructions"
-      ],
-      "total_cards": 10
+    {
+      "name": "RWKV Architecture",
+      "cards": 1
     },
-    "llm-interview-qa": {
-      "file": "llm-interview-qa.json",
-      "topics": [
-        "LLM Basics & Architecture",
-        "LLM Training & Fine-tuning",
-        "LLM Inference & Deployment",
-        "LLM Prompting & RAG",
-        "LLM Advanced Concepts",
-        "LLM Evaluation & Safety",
-        "LLM Tokenization & Embeddings",
-        "LLM Scaling & Optimization",
-        "LLM Applications & Tools",
-        "LLM Interview Deep Dives"
-      ],
-      "total_cards": 73
+    {
+      "name": "Multi-Head Attention (labml)",
+      "cards": 4
     },
-    "ml-architectures": {
-      "file": "ml-architectures.json",
-      "topics": [
-        "The Transformer Architecture",
-        "Attention Mechanisms Deep Dive",
-        "Modern LLM Building Blocks",
-        "LoRA & Parameter-Efficient Fine-Tuning",
-        "LLM Inference Optimization"
-      ],
-      "total_cards": 31
+    {
+      "name": "Positional Encoding (labml)",
+      "cards": 1
     },
-    "ml-coding": {
-      "file": "ml-coding.json",
-      "topics": [
-        "Linear Regression from Scratch",
-        "Logistic Regression from Scratch",
-        "K-Means Clustering from Scratch",
-        "Neural Network Forward & Backward",
-        "PCA from Scratch"
-      ],
-      "total_cards": 28
-    },
-    "ml-from-scratch-code": {
-      "file": "ml-from-scratch-code.json",
-      "topics": [
-        "Layers",
-        "Neural Network",
-        "Deep Q Network",
-        "Adaboost",
-        "Bayesian Regression",
-        "Decision Tree",
-        "Gradient Boosting",
-        "K Nearest Neighbors",
-        "Linear Discriminant Analysis",
-        "Logistic Regression",
-        "Multi Class Lda",
-        "Multilayer Perceptron",
-        "Naive Bayes",
-        "Neuroevolution",
-        "Particle Swarm Optimization",
-        "Perceptron",
-        "Random Forest",
-        "Regression",
-        "Support Vector Machine",
-        "Xgboost",
-        "Apriori",
-        "Autoencoder",
-        "Dbscan",
-        "Fp Growth",
-        "Gaussian Mixture Model",
-        "Generative Adversarial Network",
-        "Genetic Algorithm",
-        "K Means",
-        "Partitioning Around Medoids",
-        "Principal Component Analysis",
-        "Restricted Boltzmann Machine"
-      ],
-      "total_cards": 80
-    },
-    "ml-fundamentals-qa": {
-      "file": "ml-fundamentals-qa.json",
-      "topics": [
-        "Machine Learning Fundamentals",
-        "Algorithms and Ensembles",
-        "Data Preprocessing and Feature Engineering",
-        "Optimization and Training",
-        "Deep Learning and Neural Networks",
-        "Computer Vision",
-        "Dimensionality Reduction",
-        "Model Evaluation and Validation",
-        "Probability and Statistics",
-        "Coding and Implementation",
-        "Supervised machine learning",
-        "Linear regression",
-        "Validation",
-        "Classification",
-        "Regularization",
-        "Feature selection",
-        "Decision trees",
-        "Random forest",
-        "Gradient boosting",
-        "Parameter tuning",
-        "Neural networks",
-        "Optimization in neural networks",
-        "Neural networks for computer vision",
-        "Text classification",
-        "Clustering",
-        "Dimensionality reduction",
-        "Ranking and search",
-        "Recommender systems",
-        "Time series",
-        "Python: Answer:"
-      ],
-      "total_cards": 215
-    },
-    "ml-interview-qa": {
-      "file": "ml-interview-qa.json",
-      "topics": [
-        "Machine Learning: Similarities:",
-        "Machine Learning: Answer:",
-        "Machine Learning: Gradient descent is a generic optimization algorithm cable for finding optimal solutions to a wide range of problems. The general idea of gradient descent is to tweak parameters iteratively in order to minimize a cost function.",
-        "Machine Learning: Entropy and Information Gain are two key metrics used in determining the relevance of decision-making when constructing a decision tree model and determining the nodes and the best way to split.",
-        "Machine Learning: Linear regression is a supervised statistical model to predict dependent variable quantity based on independent variables.",
-        "Machine Learning: Both mean square error (MSE) and mean absolute error (MAE) measures the distances between vectors and express average model prediction in units of the target variable. Both can range from 0 to infinity, the lower they are the better the model."
-      ],
-      "total_cards": 30
-    },
-    "ml-system-design": {
-      "file": "ml-system-design.json",
-      "topics": [
-        "Ad Click Prediction for Social Networks",
-        "Ads Click Prediction",
-        "Self-driving cars",
-        "Design an event recommendation system",
-        "Feature preprocessing",
-        "Design a game recommendation engine",
-        "Harmful content detection on social media",
-        "Image Search System (Pinterest)",
-        "Offline Metrics",
-        "Multimodal Video Search System",
-        "Popular Neural Network Architectures",
-        "News Feed System",
-        "Prediction Service",
-        "Preprocessing",
-        "Friends/Follower recommendation (People you may know)",
-        "Search System",
-        "The 9 Step ML System Design Formula Template",
-        "Design a video recommendation system"
-      ],
-      "total_cards": 94
-    },
-    "ml-theory": {
-      "file": "ml-theory.json",
-      "topics": [
-        "Bias-Variance Tradeoff",
-        "Regularization: L1, L2 & Beyond",
-        "Gradient Descent & Optimization",
-        "Ensemble Methods",
-        "Evaluation Metrics & Cross-Validation"
-      ],
-      "total_cards": 32
-    },
-    "probability-stats": {
-      "file": "probability-stats.json",
-      "topics": [
-        "Probability: Answer:",
-        "Probability: The right answer is 11/216",
-        "Probability: The right answer is 5/32 or 0.156. There are different methods to solve it:",
-        "Statistics: A/B testing helps us to determine whether a change in something will cause a change in performance significantly or not. So in other words you aim to statistically estimate the impact of a given change within your digital product (for example). You measure success and counter metrics on at least 1 treatment vs 1 control group (there can be more than 1 XP group for multivariate tests).",
-        "Statistics: In Layman's terms:",
-        "Statistics: Answer:"
-      ],
-      "total_cards": 26
-    },
-    "sql-databases": {
-      "file": "sql-databases.json",
-      "topics": [
-        "SQL & DB: A JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.",
-        "SQL & DB: **Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column",
-        "SQL & DB: Answer:"
-      ],
-      "total_cards": 15
-    },
-    "tensor-puzzles": {
-      "file": "tensor-puzzles.json",
-      "topics": [
-        "Tensor Puzzles (Sasha Rush)",
-        "Einops: Tensor Operations"
-      ],
-      "total_cards": 28
+    {
+      "name": "Feed Forward Network (labml)",
+      "cards": 1
     }
+  ],
+  "deep-learning-qa": [
+    {
+      "name": "Deep Learning: Deep Neural Networks",
+      "cards": 5
+    },
+    {
+      "name": "Deep Learning: Natural Language Processing",
+      "cards": 5
+    },
+    {
+      "name": "Deep Learning: Computer Vision",
+      "cards": 5
+    },
+    {
+      "name": "Deep Learning: To reduce overfitting in a deep neural network changes can be made in three places/stages: The input data to the network, the network architecture, and the training process:",
+      "cards": 5
+    },
+    {
+      "name": "Deep Learning: Batch normalization is a technique for training very deep neural networks that standardizes the inputs to a layer for each mini-batch.",
+      "cards": 5
+    },
+    {
+      "name": "Deep Learning: By taking incremental steps towards the minimal value, the gradient descent algorithm aims to minimize the error. The weights and biases in a neural network are updated using these processes. However, at times, the steps grow excessively large, resulting in increased updates to weights and bias terms to the point where the weights overflow (or become NaN, that is, Not a Number). An exploding gradient is the result of this, and it is an unstable method.",
+      "cards": 5
+    }
+  ],
+  "ds-interview-120": [
+    {
+      "name": "Communication",
+      "cards": 1
+    },
+    {
+      "name": "Data Analysis",
+      "cards": 19
+    },
+    {
+      "name": "Predictive Modeling",
+      "cards": 19
+    },
+    {
+      "name": "Probability",
+      "cards": 15
+    },
+    {
+      "name": "Product Metrics",
+      "cards": 14
+    },
+    {
+      "name": "Programming",
+      "cards": 13
+    },
+    {
+      "name": "Statistical Inference",
+      "cards": 15
+    },
+    {
+      "name": "Data Science Resources",
+      "cards": 20
+    }
+  ],
+  "karpathy-code": [
+    {
+      "name": "Micrograd: Autograd Engine",
+      "cards": 5
+    },
+    {
+      "name": "nanoGPT: GPT Implementation",
+      "cards": 7
+    },
+    {
+      "name": "Mamba: Selective State Space Model",
+      "cards": 5
+    }
+  ],
+  "LLM From Scratch": [
+    {
+      "name": "Data Loading & Tokenization",
+      "cards": 3
+    },
+    {
+      "name": "GPT Model Architecture",
+      "cards": 10
+    },
+    {
+      "name": "GPT Pretraining Loop",
+      "cards": 4
+    },
+    {
+      "name": "Classification Finetuning",
+      "cards": 3
+    },
+    {
+      "name": "Instruction Finetuning",
+      "cards": 2
+    },
+    {
+      "name": "GPT Core Components",
+      "cards": 5
+    }
+  ],
+  "llm-interview-qa": [
+    {
+      "name": "LLM Basics & Architecture",
+      "cards": 8
+    },
+    {
+      "name": "LLM Training & Fine-tuning",
+      "cards": 8
+    },
+    {
+      "name": "LLM Inference & Deployment",
+      "cards": 8
+    },
+    {
+      "name": "LLM Prompting & RAG",
+      "cards": 8
+    },
+    {
+      "name": "LLM Advanced Concepts",
+      "cards": 8
+    },
+    {
+      "name": "LLM Evaluation & Safety",
+      "cards": 8
+    },
+    {
+      "name": "LLM Tokenization & Embeddings",
+      "cards": 8
+    },
+    {
+      "name": "LLM Scaling & Optimization",
+      "cards": 8
+    },
+    {
+      "name": "LLM Applications & Tools",
+      "cards": 8
+    },
+    {
+      "name": "LLM Interview Deep Dives",
+      "cards": 1
+    }
+  ],
+  "ml-architectures": [
+    {
+      "name": "The Transformer Architecture",
+      "cards": 7
+    },
+    {
+      "name": "Attention Mechanisms Deep Dive",
+      "cards": 6
+    },
+    {
+      "name": "Modern LLM Building Blocks",
+      "cards": 6
+    },
+    {
+      "name": "LoRA & Parameter-Efficient Fine-Tuning",
+      "cards": 6
+    },
+    {
+      "name": "LLM Inference Optimization",
+      "cards": 6
+    }
+  ],
+  "ml-coding": [
+    {
+      "name": "Linear Regression from Scratch",
+      "cards": 6
+    },
+    {
+      "name": "Logistic Regression from Scratch",
+      "cards": 5
+    },
+    {
+      "name": "K-Means Clustering from Scratch",
+      "cards": 5
+    },
+    {
+      "name": "Neural Network Forward & Backward",
+      "cards": 7
+    },
+    {
+      "name": "PCA from Scratch",
+      "cards": 5
+    }
+  ],
+  "ml-from-scratch-code": [
+    {
+      "name": "Layers",
+      "cards": 6
+    },
+    {
+      "name": "Neural Network",
+      "cards": 3
+    },
+    {
+      "name": "Deep Q Network",
+      "cards": 1
+    },
+    {
+      "name": "Adaboost",
+      "cards": 3
+    },
+    {
+      "name": "Bayesian Regression",
+      "cards": 3
+    },
+    {
+      "name": "Decision Tree",
+      "cards": 6
+    },
+    {
+      "name": "Gradient Boosting",
+      "cards": 4
+    },
+    {
+      "name": "K Nearest Neighbors",
+      "cards": 2
+    },
+    {
+      "name": "Linear Discriminant Analysis",
+      "cards": 4
+    },
+    {
+      "name": "Logistic Regression",
+      "cards": 3
+    },
+    {
+      "name": "Multi Class Lda",
+      "cards": 2
+    },
+    {
+      "name": "Multilayer Perceptron",
+      "cards": 3
+    },
+    {
+      "name": "Naive Bayes",
+      "cards": 3
+    },
+    {
+      "name": "Neuroevolution",
+      "cards": 1
+    },
+    {
+      "name": "Particle Swarm Optimization",
+      "cards": 1
+    },
+    {
+      "name": "Perceptron",
+      "cards": 3
+    },
+    {
+      "name": "Random Forest",
+      "cards": 3
+    },
+    {
+      "name": "Regression",
+      "cards": 6
+    },
+    {
+      "name": "Support Vector Machine",
+      "cards": 3
+    },
+    {
+      "name": "Xgboost",
+      "cards": 3
+    },
+    {
+      "name": "Apriori",
+      "cards": 1
+    },
+    {
+      "name": "Autoencoder",
+      "cards": 1
+    },
+    {
+      "name": "Dbscan",
+      "cards": 2
+    },
+    {
+      "name": "Fp Growth",
+      "cards": 1
+    },
+    {
+      "name": "Gaussian Mixture Model",
+      "cards": 2
+    },
+    {
+      "name": "Generative Adversarial Network",
+      "cards": 1
+    },
+    {
+      "name": "Genetic Algorithm",
+      "cards": 1
+    },
+    {
+      "name": "K Means",
+      "cards": 2
+    },
+    {
+      "name": "Partitioning Around Medoids",
+      "cards": 2
+    },
+    {
+      "name": "Principal Component Analysis",
+      "cards": 2
+    },
+    {
+      "name": "Restricted Boltzmann Machine",
+      "cards": 2
+    }
+  ],
+  "ml-fundamentals-qa": [
+    {
+      "name": "Machine Learning Fundamentals",
+      "cards": 7
+    },
+    {
+      "name": "Algorithms and Ensembles",
+      "cards": 3
+    },
+    {
+      "name": "Data Preprocessing and Feature Engineering",
+      "cards": 4
+    },
+    {
+      "name": "Optimization and Training",
+      "cards": 6
+    },
+    {
+      "name": "Deep Learning and Neural Networks",
+      "cards": 12
+    },
+    {
+      "name": "Computer Vision",
+      "cards": 12
+    },
+    {
+      "name": "Dimensionality Reduction",
+      "cards": 7
+    },
+    {
+      "name": "Model Evaluation and Validation",
+      "cards": 9
+    },
+    {
+      "name": "Probability and Statistics",
+      "cards": 3
+    },
+    {
+      "name": "Coding and Implementation",
+      "cards": 5
+    },
+    {
+      "name": "Supervised machine learning",
+      "cards": 1
+    },
+    {
+      "name": "Linear regression",
+      "cards": 12
+    },
+    {
+      "name": "Validation",
+      "cards": 6
+    },
+    {
+      "name": "Classification",
+      "cards": 12
+    },
+    {
+      "name": "Regularization",
+      "cards": 12
+    },
+    {
+      "name": "Feature selection",
+      "cards": 5
+    },
+    {
+      "name": "Decision trees",
+      "cards": 6
+    },
+    {
+      "name": "Random forest",
+      "cards": 9
+    },
+    {
+      "name": "Gradient boosting",
+      "cards": 7
+    },
+    {
+      "name": "Parameter tuning",
+      "cards": 4
+    },
+    {
+      "name": "Neural networks",
+      "cards": 9
+    },
+    {
+      "name": "Optimization in neural networks",
+      "cards": 12
+    },
+    {
+      "name": "Neural networks for computer vision",
+      "cards": 12
+    },
+    {
+      "name": "Text classification",
+      "cards": 12
+    },
+    {
+      "name": "Clustering",
+      "cards": 7
+    },
+    {
+      "name": "Dimensionality reduction",
+      "cards": 3
+    },
+    {
+      "name": "Ranking and search",
+      "cards": 1
+    },
+    {
+      "name": "Recommender systems",
+      "cards": 6
+    },
+    {
+      "name": "Time series",
+      "cards": 7
+    },
+    {
+      "name": "Python: Answer:",
+      "cards": 4
+    }
+  ],
+  "ml-interview-qa": [
+    {
+      "name": "Machine Learning: Similarities:",
+      "cards": 5
+    },
+    {
+      "name": "Machine Learning: Answer:",
+      "cards": 5
+    },
+    {
+      "name": "Machine Learning: Gradient descent is a generic optimization algorithm cable for finding optimal solutions to a wide range of problems. The general idea of gradient descent is to tweak parameters iteratively in order to minimize a cost function.",
+      "cards": 5
+    },
+    {
+      "name": "Machine Learning: Entropy and Information Gain are two key metrics used in determining the relevance of decision-making when constructing a decision tree model and determining the nodes and the best way to split.",
+      "cards": 5
+    },
+    {
+      "name": "Machine Learning: Linear regression is a supervised statistical model to predict dependent variable quantity based on independent variables.",
+      "cards": 5
+    },
+    {
+      "name": "Machine Learning: Both mean square error (MSE) and mean absolute error (MAE) measures the distances between vectors and express average model prediction in units of the target variable. Both can range from 0 to infinity, the lower they are the better the model.",
+      "cards": 5
+    }
+  ],
+  "ml-system-design": [
+    {
+      "name": "Ad Click Prediction for Social Networks",
+      "cards": 4
+    },
+    {
+      "name": "Ads Click Prediction",
+      "cards": 5
+    },
+    {
+      "name": "Self-driving cars",
+      "cards": 13
+    },
+    {
+      "name": "Design an event recommendation system",
+      "cards": 4
+    },
+    {
+      "name": "Feature preprocessing",
+      "cards": 4
+    },
+    {
+      "name": "Design a game recommendation engine",
+      "cards": 10
+    },
+    {
+      "name": "Harmful content detection on social media",
+      "cards": 6
+    },
+    {
+      "name": "Image Search System (Pinterest)",
+      "cards": 5
+    },
+    {
+      "name": "Offline Metrics",
+      "cards": 7
+    },
+    {
+      "name": "Multimodal Video Search System",
+      "cards": 4
+    },
+    {
+      "name": "News Feed System",
+      "cards": 7
+    },
+    {
+      "name": "Friends/Follower recommendation (People you may know)",
+      "cards": 4
+    },
+    {
+      "name": "Search System",
+      "cards": 10
+    },
+    {
+      "name": "The 9 Step ML System Design Formula Template",
+      "cards": 1
+    },
+    {
+      "name": "Design a video recommendation system",
+      "cards": 10
+    },
+    {
+      "name": "2D Object Detection",
+      "cards": 4
+    }
+  ],
+  "ml-theory": [
+    {
+      "name": "Bias-Variance Tradeoff",
+      "cards": 7
+    },
+    {
+      "name": "Regularization: L1, L2 & Beyond",
+      "cards": 6
+    },
+    {
+      "name": "Gradient Descent & Optimization",
+      "cards": 7
+    },
+    {
+      "name": "Ensemble Methods",
+      "cards": 6
+    },
+    {
+      "name": "Evaluation Metrics & Cross-Validation",
+      "cards": 6
+    }
+  ],
+  "probability-stats": [
+    {
+      "name": "Probability: Answer:",
+      "cards": 5
+    },
+    {
+      "name": "Probability: The right answer is 11/216",
+      "cards": 5
+    },
+    {
+      "name": "Probability: The right answer is 5/32 or 0.156. There are different methods to solve it:",
+      "cards": 4
+    },
+    {
+      "name": "Statistics: A/B testing helps us to determine whether a change in something will cause a change in performance significantly or not. So in other words you aim to statistically estimate the impact of a given change within your digital product (for example). You measure success and counter metrics on at least 1 treatment vs 1 control group (there can be more than 1 XP group for multivariate tests).",
+      "cards": 5
+    },
+    {
+      "name": "Statistics: In Layman's terms:",
+      "cards": 5
+    },
+    {
+      "name": "Statistics: Answer:",
+      "cards": 2
+    }
+  ],
+  "PyTorch ML Coding": [
+    {
+      "name": "Mock interview: 60-minute session",
+      "cards": 9
+    },
+    {
+      "name": "Practice question bank with reference responses",
+      "cards": 20
+    },
+    {
+      "name": "Supplemental PyTorch core and advanced questions",
+      "cards": 21
+    },
+    {
+      "name": "Quick drill: general Python and PyTorch ML utilities",
+      "cards": 6
+    },
+    {
+      "name": "Broader discussion questions with reference responses",
+      "cards": 4
+    }
+  ],
+  "sql-databases": [
+    {
+      "name": "SQL & DB: A JOIN clause is used to combine rows from two or more tables, based on a related column between them. It is used to merge two tables or retrieve data from there. There are 4 types of joins: inner join left join, right join, and full join.",
+      "cards": 5
+    },
+    {
+      "name": "SQL & DB: **Primary key:** Is a key that is used to uniquely identify each row or record in the table, it can be a single column or composite pk that contains more than one column",
+      "cards": 5
+    },
+    {
+      "name": "SQL & DB: Answer:",
+      "cards": 5
+    }
+  ],
+  "tensor-puzzles": [
+    {
+      "name": "Tensor Puzzles (Sasha Rush)",
+      "cards": 20
+    },
+    {
+      "name": "Einops: Tensor Operations",
+      "cards": 8
+    }
+  ],
+  "_summary": {
+    "total_topics": 155,
+    "total_cards": 950
   }
 }

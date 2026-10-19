@@ -1,84 +1,141 @@
 {
+  "category": "LLM From Scratch",
   "topics": [
     {
-      "id": "chapter-1-understanding-large-language-models",
-      "name": "Chapter 1: Understanding Large Language Models",
+      "name": "Data Loading & Tokenization",
       "cards": [
         {
-          "title": "Bonus Materials",
-          "content": "Recommendations for Getting the Most Out of This Book\n\nIn the video below, I share my personal approach to setting up a Python environment on my computer:\n\n[](https://www.youtube.com/watch?v=yAcWnfsZhzo)\n\nAs an optional bonus, the following video tutorial provides an overview of the LLM development lifecycle covered in this book:\n\n[](https://www.youtube.com/watch?v=kPGTx4wcm_w)"
-        }
-      ]
-    },
-    {
-      "id": "chapter-2-working-with-text-data",
-      "name": "Chapter 2: Working with Text Data",
-      "cards": [
-        {
-          "title": "Bonus Materials",
-          "content": "- 02_bonus_bytepair-encoder contains optional code to benchmark different byte pair encoder implementations\n\n- 03_bonus_embedding-vs-matmul contains optional (bonus) code to explain that embedding layers and fully connected layers applied to one-hot encoded vectors are equivalent.\n\n- 04_bonus_dataloader-intuition contains optional (bonus) code to explain the data loader more intuitively with simple numbers rather than text.\n\n- 05_bpe-from-scratch contains (bonus) code that implements and trains a GPT-2 BPE tokenizer from scratch.\n\nIn the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.\n\n[](https://www.youtube.com/watch?v=341Rb8fJxY0)"
-        }
-      ]
-    },
-    {
-      "id": "chapter-3-coding-attention-mechanisms",
-      "name": "Chapter 3: Coding Attention Mechanisms",
-      "cards": [
-        {
-          "title": "Bonus Materials",
-          "content": "- 02_bonus_efficient-multihead-attention implements and compares different implementation variants of multihead-attention\n- 03_understanding-buffers explains the idea behind PyTorch buffers, which are used to implement the causal attention mechanism in chapter 3\n\nIn the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.\n\n[](https://www.youtube.com/watch?v=-Ll8DtpNtvk)"
-        }
-      ]
-    },
-    {
-      "id": "chapter-4-implementing-a-gpt-model-from-scratch-to-generate-",
-      "name": "Chapter 4: Implementing a GPT Model from Scratch to Generate Text",
-      "cards": [
-        {
-          "title": "Bonus Materials",
-          "content": "- 02_performance-analysis contains optional code analyzing the performance of the GPT model(s) implemented in the main chapter\n- 03_kv-cache implements a KV cache to speed up the text generation during inference\n- 07_moe explanation and implementation of Mixture-of-Experts (MoE)\n- ch05/07_gpt_to_llama contains a step-by-step guide for converting a GPT architecture implementation to Llama 3.2 and loads pretrained weights from Meta AI (it might be interesting to look at alternative architectures after completing chapter 4, but you can also save that for after reading chapter 5)\n\n&nbsp;"
+          "title": "GPTDatasetV1",
+          "content": "**GPTDatasetV1**\n\n```python\nclass GPTDatasetV1(Dataset):\n    def __init__(self, txt, tokenizer, max_length, stride):\n        self.input_ids = []\n        self.target_ids = []\n\n        # Tokenize the entire text\n        token_ids = tokenizer.encode(txt, allowed_special={\"<|endoftext|>\"})\n\n        # Use a sliding window to chunk the book into overlapping sequences of max_length\n        for i in range(0, len(token_ids) - max_length, stride):\n            input_chunk = token_ids[i:i + max_length]\n            target_chunk = token_ids[i + 1: i + max_length + 1]\n            self.input_ids.append(torch.tensor(input_chunk))\n            self.target_ids.append(torch.tensor(target_chunk))\n\n    def __len__(self):\n        return len(self.input_ids)\n\n    def __getitem__(self, idx):\n        return self.input_ids[idx], self.target_ids[idx]\n```"
         },
         {
-          "title": "Attention Alternatives",
-          "content": "&nbsp;\n\n&nbsp;\n\n- 04_gqa contains an introduction to Grouped-Query Attention (GQA), which is used by most modern LLMs (Llama 4, gpt-oss, Qwen3, Gemma 3, and many more) as alternative to regular Multi-Head Attention (MHA)\n- 05_mla contains an introduction to Multi-Head Latent Attention (MLA), which is used by DeepSeek V3, as alternative to regular Multi-Head Attention (MHA)\n- 06_swa contains an introduction to Sliding Window Attention (SWA), which is used by Gemma 3 and others\n- 08_deltanet explanation of Gated DeltaNet as a popular linear attention variant (used in Qwen3-Next and Kimi Linear)\n- 10_kv-sharing contains an introduction to cross-layer KV sharing, which is used by Gemma 4 E2B and E4B to reduce KV-cache memory\n\n&nbsp;"
+          "title": "create_dataloader_v1",
+          "content": "**create_dataloader_v1**\n\n```python\ndef create_dataloader_v1(txt, batch_size=4, max_length=256,\n                         stride=128, shuffle=True, drop_last=True, num_workers=0):\n    # Initialize the tokenizer\n    tokenizer = tiktoken.get_encoding(\"gpt2\")\n\n    # Create dataset\n    dataset = GPTDatasetV1(txt, tokenizer, max_length, stride)\n\n    # Create dataloader\n    dataloader = DataLoader(\n        dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)\n\n    return dataloader\n```"
         },
         {
-          "title": "More",
-          "content": "In the video below, I provide a code-along session that covers some of the chapter contents as supplementary material.\n\n[](https://www.youtube.com/watch?v=YSAkgEarBGE)"
+          "title": "MultiHeadAttention",
+          "content": "**MultiHeadAttention**\n\n```python\nclass MultiHeadAttention(nn.Module):\n    def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):\n        super().__init__()\n        assert d_out % num_heads == 0, \"d_out must be divisible by num_heads\"\n\n        self.d_out = d_out\n        self.num_heads = num_heads\n        self.head_dim = d_out // num_heads  # Reduce the projection dim to match desired output dim\n\n        self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.out_proj = nn.Linear(d_out, d_out)  # Linear layer to combine head outputs\n        self.dropout = nn.Dropout(dropout)\n        self.register_buffer(\"mask\", torch.triu(torch.ones(context_length, context_length), diagonal=1))\n\n    def forward(self, x):\n        b, num_tokens, d_in = x.shape\n\n        keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)\n        queries = self.W_query(x)\n        values = self.W_value(x)\n\n        # We implicitly split the matrix by adding a `num_heads` dimension\n        # Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)\n        keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)\n        values = values.view(b, num_tokens, self.num_heads, self.head_dim)\n        queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)\n\n        # Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)\n        keys = keys.transpose(1, 2)\n        queries = queries.transpose(1, 2)\n        values = values.transpose(1, 2)\n\n        # Compute scaled dot-product attention (aka self-attention) with a causal mask\n        attn_scores = queries @ keys.transpose(2, 3)  # Dot product for each head\n\n        # Original mask truncated to the number of tokens and converted to boolean\n        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]\n\n        # Use the mask to fill attention scores\n        attn_scores.masked_fill_(mask_bool, -torch.inf)\n\n        attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\n        attn_weights = self.dropout(attn_weights)\n\n        # Shape: (b, num_tokens, num_heads, head_dim)\n        context_vec = (attn_weights @ values).transpose(1, 2)\n\n        # Combine heads, where self.d_out = self.num_heads * self.head_dim\n    # ... (truncated)\n```**"
         }
       ]
     },
     {
-      "id": "chapter-5-pretraining-on-unlabeled-data",
-      "name": "Chapter 5: Pretraining on Unlabeled Data",
+      "name": "GPT Model Architecture",
       "cards": [
         {
-          "title": "Bonus Materials",
-          "content": "- 02_alternative_weight_loading contains code to load the GPT model weights from alternative places in case the model weights become unavailable from OpenAI\n- 03_bonus_pretraining_on_gutenberg contains code to pretrain the LLM longer on the whole corpus of books from Project Gutenberg\n- 04_learning_rate_schedulers contains code implementing a more sophisticated training function including learning rate schedulers and gradient clipping\n- 05_bonus_hparam_tuning contains an optional hyperparameter tuning script\n- 06_user_interface implements an interactive user interface to interact with the pretrained LLM\n- 08_memory_efficient_weight_loading contains a bonus notebook showing how to load model weights via PyTorch's `load_state_dict` method more efficiently\n- 09_extending-tokenizers contains a from-scratch implementation of the GPT-2 BPE tokenizer\n- 10_llm-training-speed shows PyTorch performance tips to improve the LLM training speed\n- 18_muon explains how to use the Muon optimizer with the GPT model training setup\n- 19_cpu_mps_differences collects examples where CPU and MPS devices behave differently\n\n&nbsp;"
+          "title": "GPTDatasetV1",
+          "content": "**GPTDatasetV1**\n\n```python\nclass GPTDatasetV1(Dataset):\n    def __init__(self, txt, tokenizer, max_length, stride):\n        self.input_ids = []\n        self.target_ids = []\n\n        # Tokenize the entire text\n        token_ids = tokenizer.encode(txt, allowed_special={\"<|endoftext|>\"})\n\n        # Use a sliding window to chunk the book into overlapping sequences of max_length\n        for i in range(0, len(token_ids) - max_length, stride):\n            input_chunk = token_ids[i:i + max_length]\n            target_chunk = token_ids[i + 1: i + max_length + 1]\n            self.input_ids.append(torch.tensor(input_chunk))\n            self.target_ids.append(torch.tensor(target_chunk))\n\n    def __len__(self):\n        return len(self.input_ids)\n\n    def __getitem__(self, idx):\n        return self.input_ids[idx], self.target_ids[idx]\n```"
         },
         {
-          "title": "LLM Architectures From Scratch",
-          "content": "&nbsp;\n\n- 07_gpt_to_llama contains a step-by-step guide for converting a GPT architecture implementation to Llama 3.2 and loads pretrained weights from Meta AI\n- 11_qwen3 A from-scratch implementation of Qwen3 0.6B and Qwen3 30B-A3B (Mixture-of-Experts) including code to load the pretrained weights of the base, reasoning, and coding model variants\n- 12_gemma3 A from-scratch implementation of Gemma 3 270M and alternative with KV cache, including code to load the pretrained weights\n- 13_olmo3 A from-scratch implementation of Olmo 3 7B and 32B (Base, Instruct, and Think variants) and alternative with KV cache, including code to load the pretrained weights\n- 17_gemma4 A from-scratch implementation of the E2B and E4B dense variants of Gemma 4\n\n&nbsp;"
+          "title": "create_dataloader_v1",
+          "content": "**create_dataloader_v1**\n\n```python\ndef create_dataloader_v1(txt, batch_size=4, max_length=256,\n                         stride=128, shuffle=True, drop_last=True, num_workers=0):\n    # Initialize the tokenizer\n    tokenizer = tiktoken.get_encoding(\"gpt2\")\n\n    # Create dataset\n    dataset = GPTDatasetV1(txt, tokenizer, max_length, stride)\n\n    # Create dataloader\n    dataloader = DataLoader(\n        dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)\n\n    return dataloader\n\n\n#####################################\n# Chapter 3\n#####################################\n```"
+        },
+        {
+          "title": "MultiHeadAttention",
+          "content": "**MultiHeadAttention**\n\n```python\nclass MultiHeadAttention(nn.Module):\n    def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):\n        super().__init__()\n        assert d_out % num_heads == 0, \"d_out must be divisible by num_heads\"\n\n        self.d_out = d_out\n        self.num_heads = num_heads\n        self.head_dim = d_out // num_heads  # Reduce the projection dim to match desired output dim\n\n        self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)\n        self.out_proj = nn.Linear(d_out, d_out)  # Linear layer to combine head outputs\n        self.dropout = nn.Dropout(dropout)\n        self.register_buffer(\"mask\", torch.triu(torch.ones(context_length, context_length), diagonal=1))\n\n    def forward(self, x):\n        b, num_tokens, d_in = x.shape\n\n        keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)\n        queries = self.W_query(x)\n        values = self.W_value(x)\n\n        # We implicitly split the matrix by adding a `num_heads` dimension\n        # Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)\n        keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)\n        values = values.view(b, num_tokens, self.num_heads, self.head_dim)\n        queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)\n\n        # Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)\n        keys = keys.transpose(1, 2)\n        queries = queries.transpose(1, 2)\n        values = values.transpose(1, 2)\n\n        # Compute scaled dot-product attention (aka self-attention) with a causal mask\n        attn_scores = queries @ keys.transpose(2, 3)  # Dot product for each head\n\n        # Original mask truncated to the number of tokens and converted to boolean\n        mask_bool = self.mask.bool()[:num_tokens, :num_tokens]\n\n        # Use the mask to fill attention scores\n        attn_scores.masked_fill_(mask_bool, -torch.inf)\n\n        attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\n        attn_weights = self.dropout(attn_weights)\n\n        # Shape: (b, num_tokens, num_heads, head_dim)\n        context_vec = (attn_weights @ values).transpose(1, 2)\n\n        # Combine heads, where self.d_out = self.num_heads * self.head_dim\n    # ... (truncated)\n```**"
+        },
+        {
+          "title": "LayerNorm",
+          "content": "**LayerNorm**\n\n```python\nclass LayerNorm(nn.Module):\n    def __init__(self, emb_dim):\n        super().__init__()\n        self.eps = 1e-5\n        self.scale = nn.Parameter(torch.ones(emb_dim))\n        self.shift = nn.Parameter(torch.zeros(emb_dim))\n\n    def forward(self, x):\n        mean = x.mean(dim=-1, keepdim=True)\n        var = x.var(dim=-1, keepdim=True, unbiased=False)\n        norm_x = (x - mean) / torch.sqrt(var + self.eps)\n        return self.scale * norm_x + self.shift\n```"
+        },
+        {
+          "title": "GELU",
+          "content": "**GELU**\n\n```python\nclass GELU(nn.Module):\n    def __init__(self):\n        super().__init__()\n\n    def forward(self, x):\n        return 0.5 * x * (1 + torch.tanh(\n            torch.sqrt(torch.tensor(2.0 / torch.pi)) *\n            (x + 0.044715 * torch.pow(x, 3))\n        ))\n```"
+        },
+        {
+          "title": "FeedForward",
+          "content": "**FeedForward**\n\n```python\nclass FeedForward(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.layers = nn.Sequential(\n            nn.Linear(cfg[\"emb_dim\"], 4 * cfg[\"emb_dim\"]),\n            GELU(),\n            nn.Linear(4 * cfg[\"emb_dim\"], cfg[\"emb_dim\"]),\n        )\n\n    def forward(self, x):\n        return self.layers(x)\n```"
+        },
+        {
+          "title": "TransformerBlock",
+          "content": "**TransformerBlock**\n\n```python\nclass TransformerBlock(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.att = MultiHeadAttention(\n            d_in=cfg[\"emb_dim\"],\n            d_out=cfg[\"emb_dim\"],\n            context_length=cfg[\"context_length\"],\n            num_heads=cfg[\"n_heads\"],\n            dropout=cfg[\"drop_rate\"],\n            qkv_bias=cfg[\"qkv_bias\"])\n        self.ff = FeedForward(cfg)\n        self.norm1 = LayerNorm(cfg[\"emb_dim\"])\n        self.norm2 = LayerNorm(cfg[\"emb_dim\"])\n        self.drop_shortcut = nn.Dropout(cfg[\"drop_rate\"])\n\n    def forward(self, x):\n        # Shortcut connection for attention block\n        shortcut = x\n        x = self.norm1(x)\n        x = self.att(x)   # Shape [batch_size, num_tokens, emb_size]\n        x = self.drop_shortcut(x)\n        x = x + shortcut  # Add the original input back\n\n        # Shortcut connection for feed-forward block\n        shortcut = x\n        x = self.norm2(x)\n        x = self.ff(x)\n        x = self.drop_shortcut(x)\n        x = x + shortcut  # Add the original input back\n\n        return x\n```"
+        },
+        {
+          "title": "GPTModel",
+          "content": "**GPTModel**\n\n```python\nclass GPTModel(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.tok_emb = nn.Embedding(cfg[\"vocab_size\"], cfg[\"emb_dim\"])\n        self.pos_emb = nn.Embedding(cfg[\"context_length\"], cfg[\"emb_dim\"])\n        self.drop_emb = nn.Dropout(cfg[\"drop_rate\"])\n\n        self.trf_blocks = nn.Sequential(\n            *[TransformerBlock(cfg) for _ in range(cfg[\"n_layers\"])])\n\n        self.final_norm = LayerNorm(cfg[\"emb_dim\"])\n        self.out_head = nn.Linear(cfg[\"emb_dim\"], cfg[\"vocab_size\"], bias=False)\n\n    def forward(self, in_idx):\n        batch_size, seq_len = in_idx.shape\n        tok_embeds = self.tok_emb(in_idx)\n        pos_embeds = self.pos_emb(torch.arange(seq_len, device=in_idx.device))\n        x = tok_embeds + pos_embeds  # Shape [batch_size, num_tokens, emb_size]\n        x = self.drop_emb(x)\n        x = self.trf_blocks(x)\n        x = self.final_norm(x)\n        logits = self.out_head(x)\n        return logits\n```"
+        },
+        {
+          "title": "generate_text_simple",
+          "content": "**generate_text_simple**\n\n```python\ndef generate_text_simple(model, idx, max_new_tokens, context_size):\n    # idx is (B, T) array of indices in the current context\n    for _ in range(max_new_tokens):\n\n        # Crop current context if it exceeds the supported context size\n        # E.g., if LLM supports only 5 tokens, and the context size is 10\n        # then only the last 5 tokens are used as context\n        idx_cond = idx[:, -context_size:]\n\n        # Get the predictions\n        with torch.no_grad():\n            logits = model(idx_cond)\n\n        # Focus only on the last time step\n        # (batch, n_token, vocab_size) becomes (batch, vocab_size)\n        logits = logits[:, -1, :]\n\n        # Get the idx of the vocab entry with the highest logits value\n        idx_next = torch.argmax(logits, dim=-1, keepdim=True)  # (batch, 1)\n\n        # Append sampled index to the running sequence\n        idx = torch.cat((idx, idx_next), dim=1)  # (batch, n_tokens+1)\n\n    return idx\n```"
+        },
+        {
+          "title": "main",
+          "content": "**main**\n\n```python\ndef main():\n    GPT_CONFIG_124M = {\n        \"vocab_size\": 50257,     # Vocabulary size\n        \"context_length\": 1024,  # Context length\n        \"emb_dim\": 768,          # Embedding dimension\n        \"n_heads\": 12,           # Number of attention heads\n        \"n_layers\": 12,          # Number of layers\n        \"drop_rate\": 0.1,        # Dropout rate\n        \"qkv_bias\": False        # Query-Key-Value bias\n    }\n\n    torch.manual_seed(123)\n    model = GPTModel(GPT_CONFIG_124M)\n    model.eval()  # disable dropout\n\n    start_context = \"Hello, I am\"\n\n    tokenizer = tiktoken.get_encoding(\"gpt2\")\n    encoded = tokenizer.encode(start_context)\n    encoded_tensor = torch.tensor(encoded).unsqueeze(0)\n\n    print(f\"\\n{50*'='}\\n{22*' '}IN\\n{50*'='}\")\n    print(\"\\nInput text:\", start_context)\n    print(\"Encoded input text:\", encoded)\n    print(\"encoded_tensor.shape:\", encoded_tensor.shape)\n\n    out = generate_text_simple(\n        model=model,\n        idx=encoded_tensor,\n        max_new_tokens=10,\n        context_size=GPT_CONFIG_124M[\"context_length\"]\n    )\n    decoded_text = tokenizer.decode(out.squeeze(0).tolist())\n\n    print(f\"\\n\\n{50*'='}\\n{22*' '}OUT\\n{50*'='}\")\n    print(\"\\nOutput:\", out)\n    print(\"Output length:\", len(out[0]))\n    print(\"Output text:\", decoded_text)\n\n\nif __name__ == \"__main__\":\n    main()\n```"
         }
       ]
     },
     {
-      "id": "chapter-6-finetuning-for-classification",
-      "name": "Chapter 6: Finetuning for Classification",
+      "name": "GPT Pretraining Loop",
       "cards": [
         {
-          "title": "Bonus Materials",
-          "content": "- 02_bonus_additional-experiments includes additional experiments (e.g., training the last vs first token, extending the input length, etc.)\n- 03_bonus_imdb-classification compares the LLM from chapter 6 with other models on a 50k IMDb movie review sentiment classification dataset\n- 04_user_interface implements an interactive user interface to interact with the pretrained LLM\n\n[](https://www.youtube.com/watch?v=5PFXJYme4ik)"
+          "title": "calc_loss_batch",
+          "content": "**calc_loss_batch**\n\n```python\ndef calc_loss_batch(input_batch, target_batch, model, device):\n    input_batch, target_batch = input_batch.to(device), target_batch.to(device)\n    logits = model(input_batch)\n    loss = torch.nn.functional.cross_entropy(logits.flatten(0, 1), target_batch.flatten())\n    return loss\n```"
+        },
+        {
+          "title": "calc_loss_loader",
+          "content": "**calc_loss_loader**\n\n```python\ndef calc_loss_loader(data_loader, model, device, num_batches=None):\n    total_loss = 0.\n    if len(data_loader) == 0:\n        return float(\"nan\")\n    elif num_batches is None:\n        num_batches = len(data_loader)\n    else:\n        num_batches = min(num_batches, len(data_loader))\n    for i, (input_batch, target_batch) in enumerate(data_loader):\n        if i < num_batches:\n            loss = calc_loss_batch(input_batch, target_batch, model, device)\n            total_loss += loss.item()\n        else:\n            break\n    return total_loss / num_batches\n```"
+        },
+        {
+          "title": "evaluate_model",
+          "content": "**evaluate_model**\n\n```python\ndef evaluate_model(model, train_loader, val_loader, device, eval_iter):\n    model.eval()\n    with torch.no_grad():\n        train_loss = calc_loss_loader(train_loader, model, device, num_batches=eval_iter)\n        val_loss = calc_loss_loader(val_loader, model, device, num_batches=eval_iter)\n    model.train()\n    return train_loss, val_loss\n```"
+        },
+        {
+          "title": "train_model_simple",
+          "content": "**train_model_simple**\n\n```python\ndef train_model_simple(model, train_loader, val_loader, optimizer, device, num_epochs,\n                       eval_freq, eval_iter, start_context, tokenizer):\n    # Initialize lists to track losses and tokens seen\n    train_losses, val_losses, track_tokens_seen = [], [], []\n    tokens_seen = 0\n    global_step = -1\n\n    # Main training loop\n    for epoch in range(num_epochs):\n        model.train()  # Set model to training mode\n\n        for input_batch, target_batch in train_loader:\n            optimizer.zero_grad()  # Reset loss gradients from previous batch iteration\n            loss = calc_loss_batch(input_batch, target_batch, model, device)\n            loss.backward()  # Calculate loss gradients\n            optimizer.step()  # Update model weights using loss gradients\n            tokens_seen += input_batch.numel()\n            global_step += 1\n\n            # Optional evaluation step\n            if global_step % eval_freq == 0:\n                train_loss, val_loss = evaluate_model(\n                    model, train_loader, val_loader, device, eval_iter)\n                train_losses.append(train_loss)\n                val_losses.append(val_loss)\n                track_tokens_seen.append(tokens_seen)\n                print(f\"Ep {epoch+1} (Step {global_step:06d}): \"\n                      f\"Train loss {train_loss:.3f}, Val loss {val_loss:.3f}\")\n\n        # Print a sample text after each epoch\n        generate_and_print_sample(\n            model, tokenizer, device, start_context\n        )\n\n    return train_losses, val_losses, track_tokens_seen\n```"
         }
       ]
     },
     {
-      "id": "chapter-7-finetuning-to-follow-instructions",
-      "name": "Chapter 7: Finetuning to Follow Instructions",
+      "name": "Classification Finetuning",
       "cards": [
         {
-          "title": "Bonus Materials",
-          "content": "- 02_dataset-utilities contains utility code that can be used for preparing an instruction dataset\n- 03_model-evaluation contains utility code for evaluating instruction responses using a local Llama 3 model and the GPT-4 API\n- 04_preference-tuning-with-dpo implements code for preference finetuning with Direct Preference Optimization (DPO)\n- 05_dataset-generation contains code to generate and improve synthetic datasets for instruction finetuning\n- 06_user_interface implements an interactive user interface to interact with the pretrained LLM\n\n[](https://www.youtube.com/watch?v=4yNswvhPWCQ)"
+          "title": "calc_accuracy_loader",
+          "content": "**calc_accuracy_loader**\n\n```python\ndef calc_accuracy_loader(data_loader, model, device, num_batches=None):\n    model.eval()\n    correct_predictions, num_examples = 0, 0\n\n    if num_batches is None:\n        num_batches = len(data_loader)\n    else:\n        num_batches = min(num_batches, len(data_loader))\n    for i, (input_batch, target_batch) in enumerate(data_loader):\n        if i < num_batches:\n            input_batch, target_batch = input_batch.to(device), target_batch.to(device)\n\n            with torch.no_grad():\n                logits = model(input_batch)[:, -1, :]  # Logits of last output token\n            predicted_labels = torch.argmax(logits, dim=-1)\n\n            num_examples += predicted_labels.shape[0]\n            correct_predictions += (predicted_labels == target_batch).sum().item()\n        else:\n            break\n    return correct_predictions / num_examples\n```"
+        },
+        {
+          "title": "calc_loss_batch",
+          "content": "**calc_loss_batch**\n\n```python\ndef calc_loss_batch(input_batch, target_batch, model, device):\n    input_batch, target_batch = input_batch.to(device), target_batch.to(device)\n    logits = model(input_batch)[:, -1, :]  # Logits of last output token\n    loss = torch.nn.functional.cross_entropy(logits, target_batch)\n    return loss\n```"
+        },
+        {
+          "title": "train_classifier_simple",
+          "content": "**train_classifier_simple**\n\n```python\ndef train_classifier_simple(model, train_loader, val_loader, optimizer, device, num_epochs,\n                            eval_freq, eval_iter):\n    # Initialize lists to track losses and tokens seen\n    train_losses, val_losses, train_accs, val_accs = [], [], [], []\n    examples_seen, global_step = 0, -1\n\n    # Main training loop\n    for epoch in range(num_epochs):\n        model.train()  # Set model to training mode\n\n        for input_batch, target_batch in train_loader:\n            optimizer.zero_grad()  # Reset loss gradients from previous batch iteration\n            loss = calc_loss_batch(input_batch, target_batch, model, device)\n            loss.backward()  # Calculate loss gradients\n            optimizer.step()  # Update model weights using loss gradients\n            examples_seen += input_batch.shape[0]  # New: track examples instead of tokens\n            global_step += 1\n\n            # Optional evaluation step\n            if global_step % eval_freq == 0:\n                train_loss, val_loss = evaluate_model(\n                    model, train_loader, val_loader, device, eval_iter)\n                train_losses.append(train_loss)\n                val_losses.append(val_loss)\n                print(f\"Ep {epoch+1} (Step {global_step:06d}): \"\n                      f\"Train loss {train_loss:.3f}, Val loss {val_loss:.3f}\")\n\n        # Calculate accuracy after each epoch\n        train_accuracy = calc_accuracy_loader(train_loader, model, device, num_batches=eval_iter)\n        val_accuracy = calc_accuracy_loader(val_loader, model, device, num_batches=eval_iter)\n        print(f\"Training accuracy: {train_accuracy*100:.2f}% | \", end=\"\")\n        print(f\"Validation accuracy: {val_accuracy*100:.2f}%\")\n        train_accs.append(train_accuracy)\n        val_accs.append(val_accuracy)\n\n    return train_losses, val_losses, train_accs, val_accs, examples_seen\n```"
+        }
+      ]
+    },
+    {
+      "name": "Instruction Finetuning",
+      "cards": [
+        {
+          "title": "custom_collate_fn",
+          "content": "**custom_collate_fn**\n\n```python\ndef custom_collate_fn(\n    batch,\n    pad_token_id=50256,\n    ignore_index=-100,\n    allowed_max_length=None,\n    device=\"cpu\"\n):\n    # Find the longest sequence in the batch\n    batch_max_length = max(len(item)+1 for item in batch)\n\n    # Pad and prepare inputs and targets\n    inputs_lst, targets_lst = [], []\n\n    for item in batch:\n        new_item = item.copy()\n        # Add an <|endoftext|> token\n        new_item += [pad_token_id]\n        # Pad sequences to max_length\n        padded = new_item + [pad_token_id] * (batch_max_length - len(new_item))\n        inputs = torch.tensor(padded[:-1])  # Truncate the last token for inputs\n        targets = torch.tensor(padded[1:])  # Shift +1 to the right for targets\n\n        # New: Replace all but the first padding tokens in targets by ignore_index\n        mask = targets == pad_token_id\n        indices = torch.nonzero(mask).squeeze()\n        if indices.numel() > 1:\n            targets[indices[1:]] = ignore_index\n\n        # New: Optionally truncate to maximum sequence length\n        if allowed_max_length is not None:\n            inputs = inputs[:allowed_max_length]\n            targets = targets[:allowed_max_length]\n\n        inputs_lst.append(inputs)\n        targets_lst.append(targets)\n\n    # Convert list of inputs and targets to tensors and transfer to target device\n    inputs_tensor = torch.stack(inputs_lst).to(device)\n    targets_tensor = torch.stack(targets_lst).to(device)\n\n    return inputs_tensor, targets_tensor\n```"
+        },
+        {
+          "title": "format_input",
+          "content": "**format_input**\n\n```python\ndef format_input(entry):\n    instruction_text = (\n        f\"Below is an instruction that describes a task. \"\n        f\"Write a response that appropriately completes the request.\"\n        f\"\\n\\n### Instruction:\\n{entry['instruction']}\"\n    )\n\n    input_text = f\"\\n\\n### Input:\\n{entry['input']}\" if entry[\"input\"] else \"\"\n\n    return instruction_text + input_text\n```"
+        }
+      ]
+    },
+    {
+      "name": "GPT Core Components",
+      "cards": [
+        {
+          "title": "LayerNorm",
+          "content": "**LayerNorm** - Core building block\n\n```python\nclass LayerNorm(nn.Module):\n    def __init__(self, emb_dim):\n        super().__init__()\n        self.eps = 1e-5\n        self.scale = nn.Parameter(torch.ones(emb_dim))\n        self.shift = nn.Parameter(torch.zeros(emb_dim))\n\n    def forward(self, x):\n        mean = x.mean(dim=-1, keepdim=True)\n        var = x.var(dim=-1, keepdim=True, unbiased=False)\n        norm_x = (x - mean) / torch.sqrt(var + self.eps)\n        return self.scale * norm_x + self.shift\n```"
+        },
+        {
+          "title": "GELU",
+          "content": "**GELU** - Core building block\n\n```python\nclass GELU(nn.Module):\n    def __init__(self):\n        super().__init__()\n\n    def forward(self, x):\n        return 0.5 * x * (1 + torch.tanh(\n            torch.sqrt(torch.tensor(2.0 / torch.pi)) *\n            (x + 0.044715 * torch.pow(x, 3))\n        ))\n```"
+        },
+        {
+          "title": "FeedForward",
+          "content": "**FeedForward** - Core building block\n\n```python\nclass FeedForward(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.layers = nn.Sequential(\n            nn.Linear(cfg[\"emb_dim\"], 4 * cfg[\"emb_dim\"]),\n            GELU(),\n            nn.Linear(4 * cfg[\"emb_dim\"], cfg[\"emb_dim\"]),\n        )\n\n    def forward(self, x):\n        return self.layers(x)\n```"
+        },
+        {
+          "title": "TransformerBlock",
+          "content": "**TransformerBlock** - Core building block\n\n```python\nclass TransformerBlock(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.att = MultiHeadAttention(\n            d_in=cfg[\"emb_dim\"],\n            d_out=cfg[\"emb_dim\"],\n            context_length=cfg[\"context_length\"],\n            num_heads=cfg[\"n_heads\"],\n            dropout=cfg[\"drop_rate\"],\n            qkv_bias=cfg[\"qkv_bias\"])\n        self.ff = FeedForward(cfg)\n        self.norm1 = LayerNorm(cfg[\"emb_dim\"])\n        self.norm2 = LayerNorm(cfg[\"emb_dim\"])\n        self.drop_shortcut = nn.Dropout(cfg[\"drop_rate\"])\n\n    def forward(self, x):\n        # Shortcut connection for attention block\n        shortcut = x\n        x = self.norm1(x)\n        x = self.att(x)   # Shape [batch_size, num_tokens, emb_size]\n        x = self.drop_shortcut(x)\n        x = x + shortcut  # Add the original input back\n\n        # Shortcut connection for feed-forward block\n        shortcut = x\n        x = self.norm2(x)\n        x = self.ff(x)\n        x = self.drop_shortcut(x)\n        x = x + shortcut  # Add the original input back\n\n        return x\n```"
+        },
+        {
+          "title": "GPTModel",
+          "content": "**GPTModel** - Core building block\n\n```python\nclass GPTModel(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.tok_emb = nn.Embedding(cfg[\"vocab_size\"], cfg[\"emb_dim\"])\n        self.pos_emb = nn.Embedding(cfg[\"context_length\"], cfg[\"emb_dim\"])\n        self.drop_emb = nn.Dropout(cfg[\"drop_rate\"])\n\n        self.trf_blocks = nn.Sequential(\n            *[TransformerBlock(cfg) for _ in range(cfg[\"n_layers\"])])\n\n        self.final_norm = LayerNorm(cfg[\"emb_dim\"])\n        self.out_head = nn.Linear(cfg[\"emb_dim\"], cfg[\"vocab_size\"], bias=False)\n\n    def forward(self, in_idx):\n        batch_size, seq_len = in_idx.shape\n        tok_embeds = self.tok_emb(in_idx)\n        pos_embeds = self.pos_emb(torch.arange(seq_len, device=in_idx.device))\n        x = tok_embeds + pos_embeds  # Shape [batch_size, num_tokens, emb_size]\n        x = self.drop_emb(x)\n        x = self.trf_blocks(x)\n        x = self.final_norm(x)\n        logits = self.out_head(x)\n        return logits\n```"
         }
       ]
     }
